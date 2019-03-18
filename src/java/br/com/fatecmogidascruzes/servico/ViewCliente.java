@@ -62,8 +62,8 @@ public class ViewCliente implements IViewHelper{
         
 
         // SEPARANDO DDD DO TELEFONE
-        String ddd = numTelefone.substring(1, 4);
-        numTelefone = numTelefone.substring(5);
+        String ddd = "123";
+        numTelefone = "321321";
                 
 
         
@@ -104,29 +104,23 @@ public class ViewCliente implements IViewHelper{
     @Override
         public void setEntidade(Resultado resultado, HttpServletRequest request,HttpServletResponse response) 
 			throws IOException {
+            System.out.println("Entidade: " + resultado.getEntidades());
 		try {
 			if(resultado != null && !resultado.getMensagem().isEmpty()) {
 				request.setAttribute("resultado", resultado);
-				
+                                resultado.setEntidades(null);
+				System.out.println("SETEI ENTIDADE PARA NULL");
 				if(resultado.getAcao() != null) {
-					if(resultado.getAcao().equals("visualizarpre"))
-						request.getRequestDispatcher("alterarCliente.jsp").forward(request, response);
-					else if(resultado.getAcao().equals("salvar"))
-						request.getRequestDispatcher("addUsuario.jsp").forward(request, response);
-					else if(resultado.getAcao().equals("preAlterarSenha")) 
-						request.getRequestDispatcher("preAlterarSenha.jsp").forward(request, response);
+					if(resultado.getAcao().equals("inserir"))
+                                            request.getRequestDispatcher("cadastro_cliente.jsp").forward(request, response);
 					else 
 						//request.getRequestDispatcher("index.html").forward(request, response);
-                                            System.out.println("1");
-                                        					response.sendRedirect("index.html");
-
+                                            request.getRequestDispatcher("index.html").forward(request, response);
 				} else {
-                                    System.out.println("1");
-					response.sendRedirect("index.html");
-                                        
+                                    request.getRequestDispatcher("index.html").forward(request, response);
+
 				}
 			}
-					
     } catch(Exception e) {
             e.printStackTrace();
 		}

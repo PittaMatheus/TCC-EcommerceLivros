@@ -12,7 +12,7 @@ import java.util.List;
  * @author matheus
  */
 public class Resultado {
-    private String mensagem;
+    private String mensagem = null;
     private boolean status;
     private String acao;
     private List<EntidadeDominio> entidades;

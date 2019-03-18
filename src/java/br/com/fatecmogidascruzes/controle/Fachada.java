@@ -38,15 +38,10 @@ public class Fachada implements IFachada{
     public Resultado inserir(EntidadeDominio entidade) {
         resultado.setEntidades(new ArrayList<EntidadeDominio>());
         try {
-            if(null == (resultado.getMensagem())) {
+            
                     resultado = dao.get(entidade.getClass().getName()).inserir(entidade);
                     resultado.setStatus(true);
-                    resultado.setAcao("inserir");
-                    
-            } else {
-                    resultado.setStatus(false);
-                    resultado.setAcao("inserir");
-            }			
+			
         } catch(Exception e) {
                 resultado.setStatus(false);
                 resultado.setAcao("inserir");
