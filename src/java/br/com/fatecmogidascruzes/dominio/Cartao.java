@@ -18,7 +18,7 @@ public class Cartao extends EntidadeDominio {
     private Date dtVencimento;
     private Bandeira bandeira;
     private Cliente cliente;
-    
+        
     
     public Cartao(String numeroCartao, String nome,  Date dtVencimento, String codSeguranca, Bandeira bandeira) {
     super();

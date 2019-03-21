@@ -33,6 +33,8 @@ public class Control extends HttpServlet {
          viewHelper = new HashMap<String,IViewHelper>();
          viewHelper.put("/Ecommerce/InserirCliente", new ViewCliente());
          viewHelper.put("/Ecommerce/InserirEndereco", new ViewEndereco());
+         viewHelper.put("/Ecommerce/InserirCartao", new ViewEndereco());
+
 
     }
     
