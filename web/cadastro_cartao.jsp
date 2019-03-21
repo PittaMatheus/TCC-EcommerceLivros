@@ -17,27 +17,27 @@
         <form action="InserirCartao" name="acao" value="inserir" method="POST">
             <label for="bandeira" data-error="Informe a Bandeira"  >Bandeira do cartão: </label>
             <select id="bandeira" name="bandeira"class="validate" value="${param['bandeira']}">
-                <option value="" disabled selected>Bandeira</option>
-                <option value="vila">MasterCard</option>
+                <option value="" disabled>Bandeira</option>
+                <option value="vila" selected >MasterCard</option>
                 <option value="estrada">Visa</option>
                 <option value="fazenda">Elo</option>
                 
             </select>
                 <br>
             <label for="id" >ID do cliente</label>                            
-            <input type="text" value="${param['id']}" name="id" id="id" required>    
+            <input type="text" value="3" name="id" id="id" required>    
                 
             <label for="numeroCartao" >Numero do cartão</label>                            
-            <input type="text" value="${param['numeroCartao']}" name="numeroCartao" id="numeroCartao" required>
+            <input type="text" value="2321321" name="numeroCartao" id="numeroCartao" required>
 
             <label for="nomeCartao" data-error="Informe o nome do cartão!" >Nome do cartão:</label>
-            <input type="text" value="${param['nomeCartao']}" name="nomeCartao" id="nomeCartao"required>
+            <input type="text" value="JOAO DA SILVA" name="nomeCartao" id="nomeCartao"required>
             
             <label for="dtValidade" data-error="Informe a data de validade!" >Data de validade:</label>
-            <input type="text" value="${param['dtValidade']}" name="dtValidade" id="dtValidade"required>
+            <input type="text" value="2019-09-09" name="dtValidade" id="dtValidade"required>
             
              <label for="codSeguranca" data-error="Informe o código de segurança!" >Codigo de segurança</label>
-            <input type="text" value="${param['codSeguranca']}" name="codSeguranca" id="dtValidade"required>
+            <input type="text" value="033" name="codSeguranca" id="dtValidade"required>
             
             
             <input type="submit" name="acao" value="inserir" class="btn btn-success">                       

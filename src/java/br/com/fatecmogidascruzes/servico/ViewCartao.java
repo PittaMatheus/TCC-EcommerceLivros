@@ -67,7 +67,20 @@ public class ViewCartao implements IViewHelper{
 
     @Override
     public void setEntidade(Resultado resultado, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		try {	
+			request.setAttribute("resultado" ,resultado);
+			if(resultado.getAcao() != null) {
+                            System.out.println("teste1");    
+                            response.sendRedirect("index.html");
+			} else {
+                            System.out.println("teste12");    
+                            response.sendRedirect("index.html");
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
     }
     
-}
+

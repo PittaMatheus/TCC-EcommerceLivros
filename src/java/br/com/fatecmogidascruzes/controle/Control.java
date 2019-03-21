@@ -7,6 +7,7 @@ import br.com.fatecmogidascruzes.dominio.EntidadeDominio;
 import br.com.fatecmogidascruzes.dominio.Resultado;
 import br.com.fatecmogidascruzes.dominio.Telefone;
 import br.com.fatecmogidascruzes.excecao.ExcecaoAcessoDados;
+import br.com.fatecmogidascruzes.servico.ViewCartao;
 import br.com.fatecmogidascruzes.servico.ViewCliente;
 import br.com.fatecmogidascruzes.servico.ViewEndereco;
 import java.io.IOException;
@@ -28,12 +29,13 @@ public class Control extends HttpServlet {
         //Mapa dos commands
         commands = new HashMap<String, ICommand>();
         commands.put("inserir", new CommandInserir());
+        System.out.println("TESTE");    
         
         // Mapa das views
          viewHelper = new HashMap<String,IViewHelper>();
          viewHelper.put("/Ecommerce/InserirCliente", new ViewCliente());
          viewHelper.put("/Ecommerce/InserirEndereco", new ViewEndereco());
-         viewHelper.put("/Ecommerce/InserirCartao", new ViewEndereco());
+         viewHelper.put("/Ecommerce/InserirCartao", new ViewCartao());
 
 
     }
