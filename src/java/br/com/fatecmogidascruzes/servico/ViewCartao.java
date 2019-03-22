@@ -42,20 +42,12 @@ public class ViewCartao implements IViewHelper{
         
         // Preenche objeto cartao
         cartao.setNumeroCartao(numCartao);
-        // data
-            SimpleDateFormat formato = new SimpleDateFormat("yyyy-dd-mm");
-            Date dataFormatada;
-            try {
-                dataFormatada = formato.parse(dtVencimento);
-                 cartao.setDtVencimento(dataFormatada);
-
-            } catch (ParseException ex) {
-                Logger.getLogger(ViewCartao.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        cartao.setDtVencimento(dtVencimento);
         cartao.setNome(nomeCartao);
         cartao.setCodSeguranca(codSeguranca);
-        cartao.setNumeroCartao(nomeCartao);
+        cartao.setNome(nomeCartao);
         bandeira.setNome(idBandeira);
+        cartao.setBandeira(bandeira);
         cartao.getCliente().setId(Integer.parseInt(idCliente));
         
        

@@ -120,6 +120,7 @@ public class ViewCliente implements IViewHelper{
                                     request.getRequestDispatcher("index.html").forward(request, response);
 
 				}
+                                // ELSE AUTENTICAR FAZER VERIFICAÇÕES
 			}
     } catch(Exception e) {
             e.printStackTrace();

@@ -30,11 +30,11 @@ public class CartaoDAO extends AbstractDAO{
             Connection conexao = BancoDadosOracle.getConexao();
             Cartao cartao = (Cartao) entidade;
             PreparedStatement declaracao = conexao.prepareStatement("INSERT INTO cartao "
-                    + "(nome, dt_validade, bandeira, numero, codSeguranca, id_cliente)"
+                    + "(nome, dtVencimento, bandeira, numero, codSeguranca, id_cliente)"
                                     + " VALUES(?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
                     declaracao.setString(1, cartao.getNome());
-                    declaracao.setDate(2, (Date) cartao.getDtVencimento());
+                    declaracao.setString(2, cartao.getDtVencimento());
                     declaracao.setString(3, cartao.getBandeira().getNome());
                     declaracao.setString(4, cartao.getNumeroCartao());
                     declaracao.setString(5, cartao.getCodSeguranca());
@@ -58,6 +58,11 @@ public class CartaoDAO extends AbstractDAO{
             erro.printStackTrace();   
         }
           return resultado;
+    }
+
+    @Override
+    public Resultado autenticar(EntidadeDominio entidade) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

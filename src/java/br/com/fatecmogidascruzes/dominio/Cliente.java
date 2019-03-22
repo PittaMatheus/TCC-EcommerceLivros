@@ -26,7 +26,9 @@ public class Cliente extends EntidadeDominio{
     private String confirmarSenha;
     private String cpf;
     private String rg;
-    
+    private String papel;
+
+
     
     public Cliente(String nome, String sobrenome, boolean status, String sexo, String data_nascimento, double ranking){
         super();
@@ -155,6 +157,14 @@ public class Cliente extends EntidadeDominio{
 
     public void setRg(String rg) {
         this.rg = rg;
+    }
+    
+    public String getPapel() {
+        return papel;
+    }
+
+    public void setPapel(String papel) {
+        this.papel = papel;
     }
 
 }

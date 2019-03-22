@@ -5,6 +5,7 @@
  */
 package br.com.fatecmogidascruzes.controle;
 
+import br.com.fatecmogidascruzes.dados.CartaoDAO;
 import br.com.fatecmogidascruzes.dados.ClienteDAO;
 import br.com.fatecmogidascruzes.dados.EnderecoDAO;
 import br.com.fatecmogidascruzes.dominio.Cliente;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import br.com.fatecmogidascruzes.dados.IDAO;
+import br.com.fatecmogidascruzes.dominio.Cartao;
+
 
 /**
  *
@@ -30,6 +33,7 @@ public class Fachada implements IFachada{
         dao = new HashMap<String, IDAO>(); 
         dao.put(Cliente.class.getName(),new ClienteDAO());
         dao.put(Endereco.class.getName(),new EnderecoDAO());
+        dao.put(Cartao.class.getName(),new CartaoDAO());
         // Regras de negocio
         
     }
@@ -38,16 +42,28 @@ public class Fachada implements IFachada{
     public Resultado inserir(EntidadeDominio entidade) {
         resultado.setEntidades(new ArrayList<EntidadeDominio>());
         try {
-            
-                    resultado = dao.get(entidade.getClass().getName()).inserir(entidade);
-                    resultado.setStatus(true);
-			
+            resultado = dao.get(entidade.getClass().getName()).inserir(entidade);
+            resultado.setStatus(true);
+
         } catch(Exception e) {
+            resultado.setStatus(false);
+            resultado.setAcao("inserir");
+            e.printStackTrace();
+        }
+    return resultado;
+    }
+    
+    
+    public Resultado autenticar(EntidadeDominio entidade){
+        resultado.setEntidades(new ArrayList<EntidadeDominio>());
+        try{
+            resultado = dao.get(entidade.getClass().getName()).autenticar(entidade);
+        }  catch(Exception e) {
                 resultado.setStatus(false);
                 resultado.setAcao("inserir");
                 e.printStackTrace();
         }
-    return resultado;
+        return resultado;
     }
 }
 

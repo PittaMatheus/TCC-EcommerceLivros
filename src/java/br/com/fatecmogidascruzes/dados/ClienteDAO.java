@@ -4,6 +4,8 @@ import br.com.fatecmogidascruzes.dominio.Cliente;
 import br.com.fatecmogidascruzes.dominio.Endereco;
 import br.com.fatecmogidascruzes.dominio.EntidadeDominio;
 import br.com.fatecmogidascruzes.dominio.Resultado;
+import br.com.fatecmogidascruzes.excecao.ExcecaoAcessoDados;
+import br.com.fatecmogidascruzes.excecao.ExcecaoLimiteTentativas;
 import br.com.fatecmogidascruzes.util.BancoDadosOracle;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -49,7 +51,7 @@ public class ClienteDAO extends AbstractDAO {
                     declaracao.setString(18, cliente.getEndereco().getComplemento());
                
             declaracao.execute();
-            System.out.print("EXECUTEI A QUERY");
+            System.out.print("EXECUTEI A QUERY CLIENTE");
             ResultSet rs = declaracao.getGeneratedKeys();
             // Seta o ID cliente com o ID autoincrement que foi gerado no banco de dados
             cliente.setId((rs.next())?rs.getInt(1):0);                
@@ -65,6 +67,40 @@ public class ClienteDAO extends AbstractDAO {
             erro.printStackTrace();   
         }
           return resultado;
+    }
+
+    
+    
+    
+    @Override
+    public Resultado autenticar(EntidadeDominio entidade) {
+       List<EntidadeDominio> ListEntidades = new ArrayList<EntidadeDominio>();
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Cliente cliente = (Cliente) entidade;
+            PreparedStatement declaracao = conexao.prepareStatement("select id, email, senha, from cliente where cliente=?");
+            declaracao.setString(1, cliente.getEmail());
+            ResultSet rs = declaracao.executeQuery();
+            if (rs.next()) {
+                if(cliente.getSenha().equals(rs.getString("senha"))) {
+                    cliente = new Cliente();
+                    cliente.setId(rs.getInt("id"));
+                    cliente.setEmail(rs.getString("email"));
+                    cliente.setSenha(rs.getString("senha"));
+                }
+            }
+                   conexao.close();
+                resultado.setStatus(true);
+            } catch (ClassNotFoundException erro) {
+                erro.printStackTrace();     
+                resultado.setStatus(false);
+                resultado.setMensagem("Houve algum erro ao autenticar o cliente");
+            } catch (SQLException erro) {
+                erro.printStackTrace();   
+            }
+          return resultado;
+        
     }
 }
     

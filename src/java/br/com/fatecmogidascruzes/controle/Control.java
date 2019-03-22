@@ -1,5 +1,6 @@
 package br.com.fatecmogidascruzes.controle;
 
+import br.com.fatecmogidascruzes.dados.ClienteDAO;
 import br.com.fatecmogidascruzes.servico.IViewHelper;
 import br.com.fatecmogidascruzes.dominio.Cliente;
 import br.com.fatecmogidascruzes.dominio.Endereco;
@@ -7,16 +8,20 @@ import br.com.fatecmogidascruzes.dominio.EntidadeDominio;
 import br.com.fatecmogidascruzes.dominio.Resultado;
 import br.com.fatecmogidascruzes.dominio.Telefone;
 import br.com.fatecmogidascruzes.excecao.ExcecaoAcessoDados;
+import br.com.fatecmogidascruzes.excecao.ExcecaoLimiteTentativas;
 import br.com.fatecmogidascruzes.servico.ViewCartao;
 import br.com.fatecmogidascruzes.servico.ViewCliente;
 import br.com.fatecmogidascruzes.servico.ViewEndereco;
+import br.com.fatecmogidascruzes.servico.ViewLogin;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class Control extends HttpServlet {
     
@@ -29,13 +34,15 @@ public class Control extends HttpServlet {
         //Mapa dos commands
         commands = new HashMap<String, ICommand>();
         commands.put("inserir", new CommandInserir());
-        System.out.println("TESTE");    
+        commands.put("autenticar", new CommandAutenticar());
+
         
         // Mapa das views
          viewHelper = new HashMap<String,IViewHelper>();
          viewHelper.put("/Ecommerce/InserirCliente", new ViewCliente());
          viewHelper.put("/Ecommerce/InserirEndereco", new ViewEndereco());
          viewHelper.put("/Ecommerce/InserirCartao", new ViewCartao());
+         viewHelper.put("/Ecommerce/AutenticarUsuario", new ViewLogin());
 
 
     }
@@ -51,8 +58,29 @@ public class Control extends HttpServlet {
 
         EntidadeDominio entidade = viewHelper.get(uri).getEntidade(request);
         Resultado resultado = commands.get(acao).executar(entidade);
-                System.out.println("URL: " + uri + "  ACAO: " + acao);
+        System.out.println("URL: " + uri + "  ACAO: " + acao);
         viewHelper.get(uri).setEntidade(resultado, request, response);
         
     	}
+    
+    
+    
+     @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+
+
+                if (null != encontradoNoBanco) {
+                    request.setAttribute("usuarioLogado", encontradoNoBanco);
+                    // Armazena, na sessão, o objeto de usuário.
+                    HttpSession session = request.getSession();
+                    session.setAttribute("usuarioLogado", encontradoNoBanco);
+                    request.getRequestDispatcher("/admin/principal.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("mensagem", "Usuário ou senha inválida!");
+                    request.getRequestDispatcher("/erro.jsp").forward(request, response);
+                }
+
+    }
 }
