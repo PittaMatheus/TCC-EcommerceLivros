@@ -34,7 +34,6 @@ public class Control extends HttpServlet {
         //Mapa dos commands
         commands = new HashMap<String, ICommand>();
         commands.put("inserir", new CommandInserir());
-        commands.put("autenticar", new CommandAutenticar());
 
         
         // Mapa das views
@@ -42,7 +41,6 @@ public class Control extends HttpServlet {
          viewHelper.put("/Ecommerce/InserirCliente", new ViewCliente());
          viewHelper.put("/Ecommerce/InserirEndereco", new ViewEndereco());
          viewHelper.put("/Ecommerce/InserirCartao", new ViewCartao());
-         viewHelper.put("/Ecommerce/AutenticarUsuario", new ViewLogin());
 
 
     }
@@ -65,22 +63,5 @@ public class Control extends HttpServlet {
     
     
     
-     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
 
-
-
-                if (null != encontradoNoBanco) {
-                    request.setAttribute("usuarioLogado", encontradoNoBanco);
-                    // Armazena, na sessão, o objeto de usuário.
-                    HttpSession session = request.getSession();
-                    session.setAttribute("usuarioLogado", encontradoNoBanco);
-                    request.getRequestDispatcher("/admin/principal.jsp").forward(request, response);
-                } else {
-                    request.setAttribute("mensagem", "Usuário ou senha inválida!");
-                    request.getRequestDispatcher("/erro.jsp").forward(request, response);
-                }
-
-    }
 }

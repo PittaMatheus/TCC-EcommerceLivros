@@ -45,8 +45,8 @@
                        
                         <label for="sexo" data-error="Informe o sexo"  >Sexo:</label>
                         <select id="sexo" name="sexo"class="validate" value="${param['sexo']}">
-                            <option value="" disabled selected>Informe o sexo</option>
-                            <option value="M">Masculino</option>
+                            <option value="" disabled >Informe o sexo</option>
+                            <option value="M" selected>Masculino</option>
                             <option value="F">Feminino</option>
                         </select>
                             
@@ -56,15 +56,15 @@
                         
                         <label for="tipoEndereco" data-error="Informe o tipo do endereco"  >Endereço de: </label>
                         <select id="tipoEndereco" name="tipoEndereco"class="validate" value="${param['tipoEndereco']}">
-                            <option value="" disabled selected>Tipo de endereço</option>
-                            <option value="cobranca">Cobrança</option>
+                            <option value="" disabled >Tipo de endereço</option>
+                            <option value="cobranca"selected>Cobrança</option>
                             <option value="entrega">Entrega</option>
                         </select>
                             
                         <label for="tipoLogradouro" data-error="Informe o tipo do endereco"  >Endereço de: </label>
                         <select id="tipoLogradouro" name="tipoLogradouro"class="validate" value="${param['tipoLogradouro']}">
-                            <option value="" disabled selected>Tipo de logradouro</option>
-                            <option value="vila">Vila</option>
+                            <option value="" disabled >Tipo de logradouro</option>
+                            <option value="vila" selected>Vila</option>
                             <option value="estrada">Estrada</option>
                             <option value="fazenda">Fazenda</option>
                             <option value="sitio">Sitio</option>

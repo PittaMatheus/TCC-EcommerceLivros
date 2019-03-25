@@ -52,18 +52,6 @@ public class Fachada implements IFachada{
         }
     return resultado;
     }
-    
-    
-    public Resultado autenticar(EntidadeDominio entidade){
-        resultado.setEntidades(new ArrayList<EntidadeDominio>());
-        try{
-            resultado = dao.get(entidade.getClass().getName()).autenticar(entidade);
-        }  catch(Exception e) {
-                resultado.setStatus(false);
-                resultado.setAcao("inserir");
-                e.printStackTrace();
-        }
-        return resultado;
-    }
+
 }
 
