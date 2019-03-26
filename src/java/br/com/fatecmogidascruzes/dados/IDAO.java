@@ -7,7 +7,7 @@ public interface IDAO {
 
     public Resultado inserir(EntidadeDominio entidade);
 
-    public Resultado autenticar(EntidadeDominio entidade);
+    public Resultado listar(EntidadeDominio entidade);
     
    // public Resultado alterar(EntidadeDominio entidade);
 

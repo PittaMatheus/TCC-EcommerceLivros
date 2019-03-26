@@ -34,13 +34,17 @@ public class Control extends HttpServlet {
         //Mapa dos commands
         commands = new HashMap<String, ICommand>();
         commands.put("inserir", new CommandInserir());
+        commands.put("listar", new CommandListar());
 
         
         // Mapa das views
          viewHelper = new HashMap<String,IViewHelper>();
          viewHelper.put("/Ecommerce/InserirCliente", new ViewCliente());
+         viewHelper.put("/Ecommerce/ListarClientes", new ViewCliente());
+         
          viewHelper.put("/Ecommerce/InserirEndereco", new ViewEndereco());
          viewHelper.put("/Ecommerce/InserirCartao", new ViewCartao());
+         
 
 
     }

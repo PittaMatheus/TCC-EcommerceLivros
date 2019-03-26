@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 import br.com.fatecmogidascruzes.dados.IDAO;
 import br.com.fatecmogidascruzes.dominio.Cartao;
+import java.util.List;
 
 
 /**
@@ -48,6 +49,25 @@ public class Fachada implements IFachada{
         } catch(Exception e) {
             resultado.setStatus(false);
             resultado.setAcao("inserir");
+            e.printStackTrace();
+        }
+    return resultado;
+    }
+
+    @Override
+    public Resultado listar(EntidadeDominio entidade) {
+         resultado.setEntidades(new ArrayList<EntidadeDominio>());
+        try {
+            resultado = dao.get(entidade.getClass().getName()).listar(entidade);
+            resultado.setStatus(true);
+            resultado.setMensagem("Listado com sucesso");
+            resultado.setAcao("listar");
+
+
+
+        } catch(Exception e) {
+            resultado.setStatus(false);
+            resultado.setMensagem("Erro ao listar");
             e.printStackTrace();
         }
     return resultado;

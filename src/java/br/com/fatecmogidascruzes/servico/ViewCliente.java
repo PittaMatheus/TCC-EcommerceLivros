@@ -108,11 +108,14 @@ public class ViewCliente implements IViewHelper{
 		try {
 			if(resultado != null && !resultado.getMensagem().isEmpty()) {
 				request.setAttribute("resultado", resultado);
-                                resultado.setEntidades(null);
+                                
 				System.out.println("SETEI ENTIDADE PARA NULL");
 				if(resultado.getAcao() != null) {
 					if(resultado.getAcao().equals("inserir"))
                                             request.getRequestDispatcher("cadastro_cliente.jsp").forward(request, response);
+                                        if(resultado.getAcao().equals("listar")){
+                                            request.getRequestDispatcher("listar_clientes.jsp").forward(request, response);
+                                        }
 					else 
 						//request.getRequestDispatcher("index.html").forward(request, response);
                                             request.getRequestDispatcher("index.html").forward(request, response);
@@ -120,7 +123,7 @@ public class ViewCliente implements IViewHelper{
                                     request.getRequestDispatcher("index.html").forward(request, response);
 
 				}
-                                // ELSE AUTENTICAR FAZER VERIFICAÇÕES
+                                
 			}
     } catch(Exception e) {
             e.printStackTrace();

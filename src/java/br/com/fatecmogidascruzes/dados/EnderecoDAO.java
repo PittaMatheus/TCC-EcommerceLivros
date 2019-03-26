@@ -66,7 +66,7 @@ public class EnderecoDAO extends AbstractDAO {
     }
 
     @Override
-    public Resultado autenticar(EntidadeDominio entidade) {
+    public Resultado listar(EntidadeDominio entidade) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
