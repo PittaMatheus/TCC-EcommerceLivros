@@ -61,15 +61,24 @@ public class ViewEndereco implements IViewHelper{
     @Override
 	public void setEntidade(Resultado resultado, HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
-		try {	
-			request.setAttribute("resultado" ,resultado);
-			if(resultado.getAcao() != null) {
-					response.sendRedirect("index.html");
-			} else {
-                                        response.sendRedirect("index.html");
+		try {
+			if(resultado != null && !resultado.getMensagem().isEmpty()) {
+				request.setAttribute("resultado", resultado);
+				if(resultado.getAcao() != null) {
+					if(resultado.getAcao().equals("inserir"))
+                                            request.getRequestDispatcher("cadastro_endereco.jsp").forward(request, response);
+                                        if(resultado.getAcao().equals("listar")){
+                                            request.getRequestDispatcher("tipos_endereco.jsp").forward(request, response);
+                                        }
+					else 
+						//request.getRequestDispatcher("index.html").forward(request, response);
+                                            request.getRequestDispatcher("index.html").forward(request, response);
+				} else {
+                                    response.sendRedirect("index.html");
 
+				}
+                                
 			}
-			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

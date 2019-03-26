@@ -17,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import static java.sql.Statement.RETURN_GENERATED_KEYS;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -67,7 +68,44 @@ public class EnderecoDAO extends AbstractDAO {
 
     @Override
     public Resultado listar(EntidadeDominio entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Endereco endereco = (Endereco) entidade;
+            PreparedStatement declaracao = conexao.prepareStatement("SELECT e.id, e.logradouro, e.numero, e.bairro, e.cep, e.cidade, e.uf, "
+                    + "e.tipoLogradouro, e.nomeEndereco, e.complemento, e.referencia,"
+                    + "FROM endereco c WHERE c.id_cliente = ?");
+            declaracao.setInt(1, endereco.getClienteId());
+            ResultSet rs =  declaracao.executeQuery();
+            while(rs.next()) {
+                Endereco end = new Endereco();
+                end.setId(rs.getInt("id"));
+                end.setLogradouro(rs.getString("logradouro"));
+                end.setNumero(rs.getString("numero"));
+                end.setBairro(rs.getString("bairro"));
+                end.setCep(rs.getString("cep"));
+                end.setCidade(rs.getString("cidade"));
+                end.setUf(rs.getString("uf"));
+                end.setTipoLogradouro(rs.getString("tipoLogradouro"));
+                end.setNomeEndereco(rs.getString("nomeEndereco"));
+                end.setComplemento(rs.getString("complemento"));
+                end.setReferencia(rs.getString("referencia"));
+                
+
+                entidades.add(end);
+		resultado.setStatus(true);
+            }
+        }catch(ClassNotFoundException erro) {
+            erro.printStackTrace();     
+            resultado.setStatus(false);
+            resultado.setMensagem("Houve algum erro ao listar o endereco");
+        } catch (SQLException erro) {
+            erro.printStackTrace();   
+        }
+        resultado.setEntidades(entidades);
+       return resultado;
     }
+    
 
 }

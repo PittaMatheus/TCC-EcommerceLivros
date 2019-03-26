@@ -24,6 +24,10 @@
         <servlet-name>Control</servlet-name>
         <url-pattern>/ListarClientes</url-pattern>
     </servlet-mapping>    
+        <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/ListarEndereco</url-pattern>
+    </servlet-mapping>  
     <session-config>
         <session-timeout>
             30

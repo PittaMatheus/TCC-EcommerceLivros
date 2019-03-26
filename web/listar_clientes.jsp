@@ -22,7 +22,7 @@
 			return;
 		}
 	%>
-        <h3>Dados do clientes</h3>
+        <h3>Dados dos clientes</h3>
         
         <!--
             <th>Logradouro</th><th>Bairro</th><th>CEP</th><th>Numero</th><th>Cidade</th><th>UF</th><th>País</th>
@@ -37,12 +37,13 @@
                                 out.println("<td>" + cliente.getEndereco().getTipoLogradouro()+ "</td>");
                                 out.println("<td>" + cliente.getEndereco().getComplemento()+ "</td>");
         -->
-
+    <form action='ExcluirContato'>
+            <input type='submit' name='excluir' value=' Excluir ' />
         <table border='1'>
                 <thead>
                     <tr>
                         <th>#</th><th>Nome</th><th>Sobrenome</th><th>Data de nascimento</th><th>Ranking</th><th>EmaIl</th><th>CPF</th><th>RG</th>
-                        <th>Sexo</th>
+                        <th>Sexo</th><th>Endereços</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,7 +57,7 @@
                         } else {
                             for (Cliente cliente : clientes) {
                                 out.println("<tr>");
-                                out.println("<td><input type='radio' name='id' value=" + cliente.getId() + " /></td>");
+                                out.println("<td><input type='radio' required name='id' value=" + cliente.getId() + " /></td>");
                                 out.println("<td>" + cliente.getNome() + "</td>");
                                 out.println("<td>" + cliente.getSobrenome()+ "</td>");
                                 out.println("<td>" + cliente.getData_nascimento()+ "</td>");
@@ -65,6 +66,7 @@
                                 out.println("<td>" + cliente.getCpf()+ "</td>");
                                 out.println("<td>" + cliente.getRg()+ "</td>");
                                 if(cliente.getSexo().equals("M")){out.println("<td>Masculino</td>");}else out.println("<td>Feminino</td>");
+                                out.println("<td><a href='tipos_endereco.jsp?id=" + cliente.getId() + "'> Listar </a></td>");
                                 out.println("</tr>");
                             }
                          }                       
@@ -72,6 +74,7 @@
                
                 </tbody>
             </table>
+    </form>
             <a href='index.html'>Voltar</a>
     </body>
 </html>
