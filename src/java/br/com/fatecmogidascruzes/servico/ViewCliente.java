@@ -59,14 +59,10 @@ public class ViewCliente implements IViewHelper{
         String numero = request.getParameter("numero");
         String pais = request.getParameter("pais");
 
-        
-
         // SEPARANDO DDD DO TELEFONE
         String ddd = "123";
         numTelefone = "321321";
-                
 
-        
         //PREENCHE OBJETOS
         cliente.setNome(nome);
         cliente.setSobrenome(sobrenome);
@@ -96,7 +92,6 @@ public class ViewCliente implements IViewHelper{
         
         cliente.setTelefone(objTelefone);
         cliente.setEndereco(objEndereco);
-        System.out.println("nome:" + cliente.getNome());
         return cliente;
     }
 
@@ -108,8 +103,6 @@ public class ViewCliente implements IViewHelper{
 		try {
 			if(resultado != null && !resultado.getMensagem().isEmpty()) {
 				request.setAttribute("resultado", resultado);
-                                
-				System.out.println("SETEI ENTIDADE PARA NULL");
 				if(resultado.getAcao() != null) {
 					if(resultado.getAcao().equals("inserir"))
                                             request.getRequestDispatcher("cadastro_cliente.jsp").forward(request, response);
@@ -120,7 +113,7 @@ public class ViewCliente implements IViewHelper{
 						//request.getRequestDispatcher("index.html").forward(request, response);
                                             request.getRequestDispatcher("index.html").forward(request, response);
 				} else {
-                                    request.getRequestDispatcher("index.html").forward(request, response);
+                                    response.sendRedirect("index.html");
 
 				}
                                 

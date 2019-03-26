@@ -22,22 +22,27 @@
 			return;
 		}
 	%>
-        <h1>Lista de clientes</h1>
+        <h3>Dados do clientes</h3>
         
         <!--
-                    + "c.numeroCobranca, c.cidadeCobranca, c.ufCobranca, c.paisCobranca, c.tipoLogradouroCobranca, c.complementoCobranca "
-                    + "FROM cliente c WHERE c.status = 1");
-            ResultSet rs =  declaracao.executeQuery();
-        
-        
+            <th>Logradouro</th><th>Bairro</th><th>CEP</th><th>Numero</th><th>Cidade</th><th>UF</th><th>País</th>
+                        <th>Tipo de logradouro</th><th>Complemento</th>
+                                        out.println("<td>" + cliente.getEndereco().getLogradouro()+ "</td>");
+                                out.println("<td>" + cliente.getEndereco().getBairro()+ "</td>");
+                                out.println("<td>" + cliente.getEndereco().getCep()+ "</td>");
+                                out.println("<td>" + cliente.getEndereco().getNumero()+ "</td>");
+                                out.println("<td>" + cliente.getEndereco().getCidade()+ "</td>");
+                                out.println("<td>" + cliente.getEndereco().getUf()+ "</td>");
+                                out.println("<td>" + cliente.getEndereco().getPais()+ "</td>");
+                                out.println("<td>" + cliente.getEndereco().getTipoLogradouro()+ "</td>");
+                                out.println("<td>" + cliente.getEndereco().getComplemento()+ "</td>");
         -->
 
         <table border='1'>
                 <thead>
                     <tr>
                         <th>#</th><th>Nome</th><th>Sobrenome</th><th>Data de nascimento</th><th>Ranking</th><th>EmaIl</th><th>CPF</th><th>RG</th>
-                        <th>Sexo</th><th>Logradouro</th><th>Bairro</th><th>CEP</th><th>Numero</th><th>Cidade</th><th>UF</th><th>País</th>
-                        <th>Tipo de logradouro</th><th>Complemento</th>
+                        <th>Sexo</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,7 +56,7 @@
                         } else {
                             for (Cliente cliente : clientes) {
                                 out.println("<tr>");
-                                out.println("<td><input type='checkbox' name='id' value=" + cliente.getId() + " /></td>");
+                                out.println("<td><input type='radio' name='id' value=" + cliente.getId() + " /></td>");
                                 out.println("<td>" + cliente.getNome() + "</td>");
                                 out.println("<td>" + cliente.getSobrenome()+ "</td>");
                                 out.println("<td>" + cliente.getData_nascimento()+ "</td>");
@@ -59,18 +64,7 @@
                                 out.println("<td>" + cliente.getEmail()+ "</td>");
                                 out.println("<td>" + cliente.getCpf()+ "</td>");
                                 out.println("<td>" + cliente.getRg()+ "</td>");
-                                out.println("<td>" + cliente.getSexo()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getLogradouro()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getBairro()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getCep()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getNumero()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getCidade()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getUf()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getPais()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getTipoLogradouro()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getComplemento()+ "</td>");
-                                
-                                
+                                if(cliente.getSexo().equals("M")){out.println("<td>Masculino</td>");}else out.println("<td>Feminino</td>");
                                 out.println("</tr>");
                             }
                          }                       
