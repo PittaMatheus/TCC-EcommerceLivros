@@ -32,7 +32,7 @@ public class ViewCartao implements IViewHelper{
         Bandeira bandeira = new Bandeira();
         Cliente cliente = new Cliente();
         // PARAMETROS DA JSP
-        String idCliente = request.getParameter("id");
+        String id = request.getParameter("id");
         String numCartao = request.getParameter("numeroCartao");
         String dtVencimento = request.getParameter("dtVencimento");
         String codSeguranca = request.getParameter("codSeguranca");
@@ -41,6 +41,9 @@ public class ViewCartao implements IViewHelper{
         
         
         // Preenche objeto cartao
+        if(id != null){
+           cartao.getCliente().setId(Integer.parseInt(id));
+        }
         cartao.setNumeroCartao(numCartao);
         cartao.setDtVencimento(dtVencimento);
         cartao.setNome(nomeCartao);
@@ -48,27 +51,32 @@ public class ViewCartao implements IViewHelper{
         cartao.setNome(nomeCartao);
         bandeira.setNome(idBandeira);
         cartao.setBandeira(bandeira);
-        cartao.getCliente().setId(Integer.parseInt(idCliente));
-        
-       
-
-        
-        
         return cartao;
     }
 
     @Override
     public void setEntidade(Resultado resultado, HttpServletRequest request, HttpServletResponse response) throws IOException {
-		try {	
-			request.setAttribute("resultado" ,resultado);
-			if(resultado.getAcao() != null) {
-                            System.out.println("teste1");    
-                            response.sendRedirect("index.html");
-			} else {
-                            System.out.println("teste12");    
-                            response.sendRedirect("index.html");
+		try {
+			if(resultado != null && !resultado.getMensagem().isEmpty()) {
+				request.setAttribute("resultado", resultado);
+				if(resultado.getAcao() != null) {
+					if(resultado.getAcao().equals("inserir"))
+                                            request.getRequestDispatcher("cadastro_endereco.jsp").forward(request, response);
+                                        else if(resultado.getAcao().equals("listar")){
+                                            request.getRequestDispatcher("listar_endereco.jsp").forward(request, response);
+                                        }
+                                        else if(resultado.getAcao().equals("consultarPorID")){
+                                             request.getRequestDispatcher("listar_cartoes.jsp").forward(request, response);
+                                        }
+					else 
+						//request.getRequestDispatcher("index.html").forward(request, response);
+                                            request.getRequestDispatcher("index.html").forward(request, response);
+				} else {
+                                    response.sendRedirect("index.html");
+
+				}
+                                
 			}
-			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

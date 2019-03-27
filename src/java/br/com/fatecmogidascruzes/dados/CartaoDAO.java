@@ -5,6 +5,7 @@
  */
 package br.com.fatecmogidascruzes.dados;
 
+import br.com.fatecmogidascruzes.dominio.Bandeira;
 import br.com.fatecmogidascruzes.dominio.Cartao;
 import br.com.fatecmogidascruzes.dominio.Cliente;
 import br.com.fatecmogidascruzes.dominio.EntidadeDominio;
@@ -16,6 +17,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -67,11 +70,43 @@ public class CartaoDAO extends AbstractDAO{
 
 
     public Resultado consultarPorID(EntidadeDominio entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Cartao cartao = (Cartao) entidade;
+            PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome,c.dtVencimento, "
+                    + "bandeira, numero, codSeguranca "
+                    + "FROM cartao c WHERE c.id_cliente = ?");
+            declaracao.setInt(1, cartao.getCliente().getId());
+           ResultSet rs =  declaracao.executeQuery();
+            while(rs.next()) {
+                Cartao cart = new Cartao();
+                Bandeira bandeira = new Bandeira();
+                cart.setId(rs.getInt("id"));
+                cart.setNome(rs.getString("nome"));
+                cart.setDtVencimento(rs.getString("dt_vencimento"));
+                bandeira.setNome("bandeira");
+                cartao.setBandeira(bandeira);
+                cartao.setNumeroCartao("numero");
+                cartao.setCodSeguranca("cod_seguranca");
+                
+
+                
+                entidades.add(cart);
+                resultado.setEntidades(entidades);
+		resultado.setStatus(true);
+            }
+        }catch(ClassNotFoundException erro) {
+            erro.printStackTrace();     
+            resultado.setStatus(false);
+            resultado.setMensagem("Houve algum erro ao listar o endereco");
+        } catch (SQLException erro) {
+            erro.printStackTrace();   
+        }
+        resultado.setEntidades(entidades);
+       return resultado;
     }
-
-
-
-    
+        
     
 }

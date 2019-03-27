@@ -36,6 +36,7 @@ public class Control extends HttpServlet {
         commands.put("inserir", new CommandInserir());
         commands.put("listar", new CommandListar());
         commands.put("consultarPorID", new CommandConsultarPorID());
+
         
 
 
@@ -50,8 +51,7 @@ public class Control extends HttpServlet {
 
          
          viewHelper.put("/Ecommerce/InserirCartao", new ViewCartao());
-         
-
+         viewHelper.put("/Ecommerce/ListarCartao", new ViewCartao());
 
     }
     

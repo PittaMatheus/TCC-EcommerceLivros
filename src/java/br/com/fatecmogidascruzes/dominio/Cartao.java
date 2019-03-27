@@ -39,12 +39,7 @@ public class Cartao extends EntidadeDominio {
 	public void setNumeroCartao(String numeroCartao) {
 		this.numeroCartao = numeroCartao;
 	}
-	public String getNomeImp() {
-		return nome;
-	}
-	public void setNomeImp(String nome) {
-		this.nome = nome;
-	}
+
 	public String getCodSeguranca() {
 		return codSeguranca;
 	}
