@@ -20,7 +20,7 @@
                 String id = request.getParameter("id");    
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
 		if(resultado == null) {
-			response.sendRedirect(request.getContextPath() + "/ListarClientes?acao=consultarPorID&id=" + id);
+			response.sendRedirect(request.getContextPath() + "/Clientes/ListarClientes?acao=consultarPorID&id=" + id);
 			return;
 		}
 	%>

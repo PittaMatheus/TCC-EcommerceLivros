@@ -43,15 +43,15 @@ public class Control extends HttpServlet {
         
         // Mapa das views
          viewHelper = new HashMap<String,IViewHelper>();
-         viewHelper.put("/Ecommerce/InserirCliente", new ViewCliente());
-         viewHelper.put("/Ecommerce/ListarClientes", new ViewCliente());
+         viewHelper.put("/Ecommerce/Clientes/InserirCliente", new ViewCliente());
+         viewHelper.put("/Ecommerce/Clientes/ListarClientes", new ViewCliente());
          
-         viewHelper.put("/Ecommerce/InserirEndereco", new ViewEndereco());
-         viewHelper.put("/Ecommerce/ListarEndereco", new ViewEndereco());
+         viewHelper.put("/Ecommerce/Clientes/InserirEndereco", new ViewEndereco());
+         viewHelper.put("/Ecommerce/Clientes/ListarEndereco", new ViewEndereco());
 
          
-         viewHelper.put("/Ecommerce/InserirCartao", new ViewCartao());
-         viewHelper.put("/Ecommerce/ListarCartao", new ViewCartao());
+         viewHelper.put("/Ecommerce/Clientes/InserirCartao", new ViewCartao());
+         viewHelper.put("/Ecommerce/Clientes/ListarCartao", new ViewCartao());
 
     }
     

@@ -21,7 +21,7 @@
                 String id = request.getParameter("id");    
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
 		if(resultado == null) {
-			response.sendRedirect(request.getContextPath() + "/ListarEndereco?acao=listar&id=" + id);
+			response.sendRedirect(request.getContextPath() + "/Clientes/ListarEndereco?acao=listar&id=" + id);
 			return;
 		}
 	%>

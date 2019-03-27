@@ -10,27 +10,27 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Control</servlet-name>
-        <url-pattern>/InserirCliente</url-pattern>
+        <url-pattern>/Clientes/InserirCliente</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Control</servlet-name>
-        <url-pattern>/InserirEndereco</url-pattern>
+        <url-pattern>/Clientes/InserirEndereco</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Control</servlet-name>
-        <url-pattern>/InserirCartao</url-pattern>
+        <url-pattern>/Clientes/InserirCartao</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Control</servlet-name>
-        <url-pattern>/ListarClientes</url-pattern>
+        <url-pattern>/Clientes/ListarClientes</url-pattern>
     </servlet-mapping>    
         <servlet-mapping>
         <servlet-name>Control</servlet-name>
-        <url-pattern>/ListarEndereco</url-pattern>
+        <url-pattern>/Clientes/ListarEndereco</url-pattern>
     </servlet-mapping> 
     <servlet-mapping>
         <servlet-name>Control</servlet-name>
-        <url-pattern>/ListarCartao</url-pattern>
+        <url-pattern>/Clientes/ListarCartao</url-pattern>
     </servlet-mapping>   
     <session-config>
         <session-timeout>

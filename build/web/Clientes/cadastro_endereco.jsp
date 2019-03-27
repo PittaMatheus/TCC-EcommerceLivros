@@ -67,6 +67,6 @@
            <input type="submit" name="acao" value="inserir" class="btn btn-success">                       
 
         </form>
-        <div><a href="index.html">Voltar</a></div>  
+        <div><a href="../index.html">Voltar</a></div>  
     </body>
 </html>

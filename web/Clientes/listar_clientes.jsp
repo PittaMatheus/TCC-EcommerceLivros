@@ -18,15 +18,15 @@
         	<%
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
 		if(resultado == null) {
-			response.sendRedirect(request.getContextPath() + "/ListarClientes?acao=listar");
+			response.sendRedirect(request.getContextPath() + "/Clientes/ListarClientes?acao=listar");
 			return;
 		}
 	%>
         
     <h3>Dados dos clientes</h3>
     
-    <form action='ExcluirClientes'>
-            <input type='submit' name='excluir' value=' Excluir ' />
+    <form action='DesativarCliente'>
+            <input type='submit' acao="desativar" name="desativar" value="Desativar cliente" />
         <table border='1'>
                 <thead>
                     <tr>
@@ -64,25 +64,6 @@
                 </tbody>
         </table>
     </form>
-               <!--
-                    <tr>
-                        <th>#<th>Logradouro</th><th>Bairro</th><th>CEP</th><th>Numero</th><th>Cidade</th><th>UF</th><th>País</th>
-                        <th>Tipo de logradouro</th><th>Complemento</th>
-                    </tr>
-
-                                out.println("<tr>");
-                                out.println("<td><input type='radio' required name='id' value=" + cliente.getId() + " /></td>");
-                                out.println("<td>" + cliente.getEndereco().getLogradouro()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getBairro()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getCep()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getNumero()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getCidade()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getUf()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getPais()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getTipoLogradouro()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getComplemento()+ "</td>");
-                                out.println("</tr>");                   
-                  -->
-        <a href='index.html'>Voltar</a>
+        <a href='../index.html'>Voltar</a>
     </body>
 </html>

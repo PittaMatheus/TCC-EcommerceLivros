@@ -70,9 +70,9 @@ public class ViewCartao implements IViewHelper{
                                         }
 					else 
 						//request.getRequestDispatcher("index.html").forward(request, response);
-                                            request.getRequestDispatcher("index.html").forward(request, response);
+                                            request.getRequestDispatcher("../index.html").forward(request, response);
 				} else {
-                                    response.sendRedirect("index.html");
+                                    response.sendRedirect("../index.html");
 
 				}
                                 
