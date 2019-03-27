@@ -85,11 +85,11 @@ public class CartaoDAO extends AbstractDAO{
                 Bandeira bandeira = new Bandeira();
                 cart.setId(rs.getInt("id"));
                 cart.setNome(rs.getString("nome"));
-                cart.setDtVencimento(rs.getString("dt_vencimento"));
-                bandeira.setNome("bandeira");
-                cartao.setBandeira(bandeira);
-                cartao.setNumeroCartao("numero");
-                cartao.setCodSeguranca("cod_seguranca");
+                cart.setDtVencimento(rs.getString("dtVencimento"));
+                bandeira.setNome(rs.getString("bandeira"));
+                cart.setBandeira(bandeira);
+                cart.setNumeroCartao(rs.getString("numero"));
+                cart.setCodSeguranca(rs.getString("codSeguranca"));
                 
 
                 

@@ -24,29 +24,33 @@
 			return;
 		}
 	%>
+           
 
-       <table border='1'>
-            <thead>
-                <tr><h4>Cartões cadastrados</h4></tr>
-                <tr>
-                     <th>#</th><th>Logradouro</th> <th>Numero</th><th>Cep</th><th>Bairro</th><th>Cidade</th><th>Estado</th>
-                </tr>
-            </thead>
-            <tbody>
+       
  <%
                          List<Cartao> cartoes = (List) resultado.getEntidades();
                          
                          if(cartoes.size() == 0) {
-                            out.print("<tr");
-                            out.print("<td colspan='3'>Nenhum endereco cadastrado</td>");
-                            out.print("</tr>");
-                        } else {
+                            out.print("Nenhum cartão cadastrado");                   
+                        } else { %>
+                <table border='1'>
+                    <thead>
+                        <tr>
+                             <th>#</th><th>Bandeira</th> <th>Nome</th><th>Data de vencimento</th><th>Numero</th><th>Codigo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
                             for (Cartao cartao : cartoes) {
                                 out.println("<tr>");
                                 out.println("<td><input type='radio' required name='id' value=" + cartao.getId() + " /></td>");
-                                out.println("<td>" + cartao.getBandeira()+ "</td>");
+                                out.println("<td>" + cartao.getBandeira().getNome() + "</td>");
                                 out.println("<td>" + cartao.getNome()+ "</td>");
                                 out.println("<td>" + cartao.getDtVencimento()+ "</td>");
+                                out.println("<td>" + cartao.getNumeroCartao()+ "</td>");
+                                out.println("<td>" + cartao.getCodSeguranca()+ "</td>");
+                                
+                                
  
                                 
                                 out.println("</tr>");
@@ -57,7 +61,7 @@
         </table>
 
 
-            
+            <br><br><br>            
         <a href='listar_clientes.jsp'>Voltar</a>
     </body>
 </html>

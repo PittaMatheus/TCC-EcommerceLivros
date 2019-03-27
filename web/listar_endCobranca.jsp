@@ -25,24 +25,25 @@
 		}
 	%>
 
-       <table border='1'>
-            <thead>
-                <tr><h4>Endereços de entrega</h4></tr>
-               <tr>
-                        <th>#<th>Logradouro</th><th>Bairro</th><th>CEP</th><th>Numero</th><th>Cidade</th><th>UF</th><th>País</th>
-                        <th>Tipo de logradouro</th><th>Complemento</th>
-                </tr>
-            </thead>
-            <tbody>
+       
  <%
                          List<Cliente> clientes = (List) resultado.getEntidades();
                          
                          if(clientes.size() == 0) {
-                            out.print("<tr");
-                            out.print("<td colspan='3'>Nenhum endereco cadastrado</td>");
-                            out.print("</tr>");
+                            out.print("Nenhum endereco cadastrado");
                         } else {
                             for (Cliente cliente : clientes) {
+                                %>
+                <table border='1'>
+                    <thead>
+                        <tr><h4>Endereços de entrega</h4></tr>
+                       <tr>
+                                <th>#<th>Logradouro</th><th>Bairro</th><th>CEP</th><th>Numero</th><th>Cidade</th><th>UF</th><th>País</th>
+                                <th>Tipo de logradouro</th><th>Complemento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
                                 out.println("<tr>");
                                 out.println("<td><input type='radio' required name='id' value=" + cliente.getId() + " /></td>");
                                 out.println("<td>" + cliente.getEndereco().getLogradouro()+ "</td>");

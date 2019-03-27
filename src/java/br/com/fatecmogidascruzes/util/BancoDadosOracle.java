@@ -13,7 +13,7 @@ public class BancoDadosOracle {
         // Abre uma conexao com o banco.
         Connection conexao;
         // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/contato", "postgres", "123Fatec");
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/Ecommerce","root","root");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce_livros","root","root");
     }
 
         public void devolverConexao(Connection conexao) throws SQLException {

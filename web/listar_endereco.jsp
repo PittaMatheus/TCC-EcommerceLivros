@@ -16,6 +16,7 @@
         <title>Endereços do cliente</title>
     </head>
     <body>
+        <h1>Endereço de entrega</h1>
         	<%
                 String id = request.getParameter("id");    
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
@@ -25,14 +26,6 @@
 		}
 	%>
 
-       <table border='1'>
-            <thead>
-                <tr><h4>Endereços de entrega</h4></tr>
-                <tr>
-                     <th>#</th><th>Logradouro</th> <th>Numero</th><th>Cep</th><th>Bairro</th><th>Cidade</th><th>Estado</th>
-                </tr>
-            </thead>
-            <tbody>
  <%
                          List<Endereco> enderecos = (List) resultado.getEntidades();
                          
@@ -41,7 +34,17 @@
                             out.print("<td colspan='3'>Nenhum endereco cadastrado</td>");
                             out.print("</tr>");
                         } else {
-                            for (Endereco endereco : enderecos) {
+                             %>
+                        <table border='1'>
+                             <thead>
+                                 <tr><h4>Endereços de entrega</h4></tr>
+                                 <tr>
+                                      <th>#</th><th>Logradouro</th> <th>Numero</th><th>Cep</th><th>Bairro</th><th>Cidade</th><th>Estado</th>
+                                 </tr>
+                             </thead>
+                             <tbody>
+                            <%
+                                for (Endereco endereco : enderecos) {
                                 out.println("<tr>");
                                 out.println("<td><input type='radio' required name='id' value=" + endereco.getId() + " /></td>");
                                 out.println("<td>" + endereco.getLogradouro()+ "</td>");
@@ -59,8 +62,8 @@
         </table>
 
 
-            
+            <br><br><br>
+
         <a href='listar_clientes.jsp'>Voltar</a>
-        <br><br>
     </body>
 </html>
