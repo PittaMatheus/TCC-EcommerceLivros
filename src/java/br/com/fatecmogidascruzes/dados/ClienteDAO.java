@@ -116,7 +116,53 @@ public class ClienteDAO extends AbstractDAO {
        return resultado;
     }
 
-   
+    
+    public Resultado consultarPorID(EntidadeDominio entidade) {
+         List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Cliente cliente = (Cliente) entidade;
+            PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome,c.sobrenome, c.data_nascimento, "
+                    + "c.ranking, c.email, c.cpf, c.rg, c.sexo, c.logradouroCobranca, c.bairroCobranca, c.cepCobranca,"
+                    + "c.numeroCobranca, c.cidadeCobranca, c.ufCobranca, c.paisCobranca, c.tipoLogradouroCobranca, c.complementoCobranca "
+                    + "FROM cliente c WHERE c.status = 1 AND c.id = ?");
+            declaracao.setInt(1, cliente.getId());
+           ResultSet rs =  declaracao.executeQuery();
+            while(rs.next()) {
+                Cliente cli = new Cliente();
+                cli.setId(rs.getInt("id"));
+                cli.setNome(rs.getString("nome"));
+                cli.setSobrenome(rs.getString("sobrenome"));
+                cli.setData_nascimento(rs.getString("data_nascimento"));
+                cli.setRanking(rs.getDouble("ranking"));
+                cli.setEmail(rs.getString("email"));
+                cli.setCpf(rs.getString("cpf"));
+                cli.setRg(rs.getString("rg"));
+                cli.setSexo(rs.getString("sexo"));
+                cli.getEndereco().setLogradouro(rs.getString("logradouroCobranca"));
+                cli.getEndereco().setBairro(rs.getString("bairroCobranca"));
+                cli.getEndereco().setCep(rs.getString("cepCobranca"));
+                cli.getEndereco().setNumero(rs.getString("numeroCobranca"));
+                cli.getEndereco().setCidade(rs.getString("cidadeCobranca"));
+                cli.getEndereco().setUf(rs.getString("ufCobranca"));
+                cli.getEndereco().setPais(rs.getString("paisCobranca"));
+                cli.getEndereco().setTipoLogradouro(rs.getString("tipoLogradouroCobranca"));
+                cli.getEndereco().setComplemento(rs.getString("complementoCobranca"));
+
+                entidades.add(cli);
+		resultado.setStatus(true);
+            }
+        }catch(ClassNotFoundException erro) {
+            erro.printStackTrace();     
+            resultado.setStatus(false);
+            resultado.setMensagem("Houve algum erro ao listar o endereco");
+        } catch (SQLException erro) {
+            erro.printStackTrace();   
+        }
+        resultado.setEntidades(entidades);
+       return resultado;
+    }
         
 }
     

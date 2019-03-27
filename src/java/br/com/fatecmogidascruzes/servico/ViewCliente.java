@@ -33,6 +33,8 @@ public class ViewCliente implements IViewHelper{
         
         // RECEBE PARAMETROS DA JSP
         String acao = request.getParameter("acao");
+        String id = request.getParameter("id");
+
         //CLIENTE
         String nome = request.getParameter("nome");
         String sobrenome = request.getParameter("sobrenome");
@@ -62,8 +64,9 @@ public class ViewCliente implements IViewHelper{
         // SEPARANDO DDD DO TELEFONE
         String ddd = "123";
         numTelefone = "321321";
-
-        //PREENCHE OBJETOS
+        if(id != null){
+            cliente.setId(Integer.parseInt(id));
+        }
         cliente.setNome(nome);
         cliente.setSobrenome(sobrenome);
         cliente.setCpf(cpf);
@@ -101,23 +104,25 @@ public class ViewCliente implements IViewHelper{
 			throws IOException {
             System.out.println("Entidade: " + resultado.getEntidades());
 		try {
-			if(resultado != null && !resultado.getMensagem().isEmpty()) {
-				request.setAttribute("resultado", resultado);
-				if(resultado.getAcao() != null) {
-					if(resultado.getAcao().equals("inserir"))
-                                            request.getRequestDispatcher("cadastro_cliente.jsp").forward(request, response);
-                                        if(resultado.getAcao().equals("listar")){
-                                            request.getRequestDispatcher("listar_clientes.jsp").forward(request, response);
-                                        }
-					else 
-						//request.getRequestDispatcher("index.html").forward(request, response);
-                                            request.getRequestDispatcher("index.html").forward(request, response);
-				} else {
-                                    response.sendRedirect("index.html");
+                    if(resultado != null && !resultado.getMensagem().isEmpty()) {
+                        request.setAttribute("resultado", resultado);
+                        if(resultado.getAcao() != null) {
+                            if(resultado.getAcao().equals("inserir"))
+                                request.getRequestDispatcher("cadastro_cliente.jsp").forward(request, response);
+                            if(resultado.getAcao().equals("listar")){
+                                request.getRequestDispatcher("listar_clientes.jsp").forward(request, response);
+                            }
+                            if(resultado.getAcao().equals("consultarPorID")){
+                                request.getRequestDispatcher("listar_endCobranca.jsp").forward(request, response);
+                            }
+                            else 
+                                    //request.getRequestDispatcher("index.html").forward(request, response);
+                                request.getRequestDispatcher("index.html").forward(request, response);
+                        } else {
+                            response.sendRedirect("index.html");
+                        }
 
-				}
-                                
-			}
+                    }
     } catch(Exception e) {
             e.printStackTrace();
 		}

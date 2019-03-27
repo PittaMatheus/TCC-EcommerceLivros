@@ -35,6 +35,9 @@ public class Control extends HttpServlet {
         commands = new HashMap<String, ICommand>();
         commands.put("inserir", new CommandInserir());
         commands.put("listar", new CommandListar());
+        commands.put("consultarPorID", new CommandConsultarPorID());
+        
+
 
         
         // Mapa das views
@@ -44,6 +47,7 @@ public class Control extends HttpServlet {
          
          viewHelper.put("/Ecommerce/InserirEndereco", new ViewEndereco());
          viewHelper.put("/Ecommerce/ListarEndereco", new ViewEndereco());
+
          
          viewHelper.put("/Ecommerce/InserirCartao", new ViewCartao());
          

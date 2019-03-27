@@ -74,8 +74,8 @@ public class EnderecoDAO extends AbstractDAO {
             Connection conexao = BancoDadosOracle.getConexao();
             Endereco endereco = (Endereco) entidade;
             PreparedStatement declaracao = conexao.prepareStatement("SELECT e.id, e.logradouro, e.numero, e.bairro, e.cep, e.cidade, e.uf, "
-                    + "e.tipoLogradouro, e.nomeEndereco, e.complemento, e.referencia,"
-                    + "FROM endereco c WHERE c.id_cliente = ?");
+                    + "e.tipoLogradouro, e.nomeEndereco, e.complemento, e.referencia "
+                    + "FROM endereco e WHERE e.id_cliente = ?");
             declaracao.setInt(1, endereco.getClienteId());
             ResultSet rs =  declaracao.executeQuery();
             while(rs.next()) {
@@ -106,6 +106,14 @@ public class EnderecoDAO extends AbstractDAO {
         resultado.setEntidades(entidades);
        return resultado;
     }
+
+    @Override
+    public Resultado consultarPorID(EntidadeDominio entidade) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
+ 
     
 
 }

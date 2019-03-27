@@ -64,6 +64,14 @@ public class CartaoDAO extends AbstractDAO{
     public Resultado listar(EntidadeDominio entidade) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+
+    public Resultado consultarPorID(EntidadeDominio entidade) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
+
     
     
 }

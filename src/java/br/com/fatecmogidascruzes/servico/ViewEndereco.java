@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author matheus
+ * @author matheus 
  */
 public class ViewEndereco implements IViewHelper{
 
@@ -68,7 +68,7 @@ public class ViewEndereco implements IViewHelper{
 					if(resultado.getAcao().equals("inserir"))
                                             request.getRequestDispatcher("cadastro_endereco.jsp").forward(request, response);
                                         if(resultado.getAcao().equals("listar")){
-                                            request.getRequestDispatcher("tipos_endereco.jsp").forward(request, response);
+                                            request.getRequestDispatcher("listar_endereco.jsp").forward(request, response);
                                         }
 					else 
 						//request.getRequestDispatcher("index.html").forward(request, response);
