@@ -9,9 +9,9 @@ public interface IDAO {
 
     public Resultado listar(EntidadeDominio entidade);
     
-   public Resultado consultarPorID(EntidadeDominio entidade);
+    public Resultado consultarPorID(EntidadeDominio entidade);
 
-   // public Resultado alterar(EntidadeDominio entidade);
+    public Resultado alterar(EntidadeDominio entidade);
 
     //public Resultado excluir(EntidadeDominio entidade);
 

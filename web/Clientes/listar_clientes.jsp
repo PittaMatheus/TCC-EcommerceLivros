@@ -46,7 +46,7 @@
                             for (Cliente cliente : clientes) {
                                 out.println("<tr>");
                                 out.println("<td><input type='radio' required name='id' value=" + cliente.getId() + " /></td>");
-                                out.println("<td>" + cliente.getNome() + "</td>");
+                                out.println("<td><a href='preAlterar_cliente.jsp?id=" + cliente.getId() + "'> " + cliente.getNome()+ " </a></td>");                                
                                 out.println("<td>" + cliente.getSobrenome()+ "</td>");
                                 out.println("<td>" + cliente.getData_nascimento()+ "</td>");
                                 out.println("<td>" + cliente.getRanking()+ "</td>");

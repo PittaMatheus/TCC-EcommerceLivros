@@ -36,7 +36,7 @@
                                 %>
                 <table border='1'>
                     <thead>
-                        <tr><h4>Endereços de entrega</h4></tr>
+                        <tr><h4>Endereços de cobrança</h4></tr>
                        <tr>
                                 <th>#<th>Logradouro</th><th>Bairro</th><th>CEP</th><th>Numero</th><th>Cidade</th><th>UF</th><th>País</th>
                                 <th>Tipo de logradouro</th><th>Complemento</th>

@@ -5,7 +5,16 @@
         <title>Resultado da Operação</title>
     </head>
     <body>
-        <h1>A <%= request.getAttribute("operacao")%> foi realizada com sucesso!</h1>
-        <a href='${pageContext.request.contextPath}/Contatos'>Voltar</a>
+        <h1>A 
+            <%= 
+                
+               request.getAttribute("acao")
+            
+            
+            %> 
+            
+            
+            foi realizada com sucesso!</h1>
+        <a href='${pageContext.request.contextPath}/index.html'>Voltar</a>
     </body>
 </html>

@@ -106,14 +106,23 @@ public class ViewCliente implements IViewHelper{
 		try {
                     if(resultado != null && !resultado.getMensagem().isEmpty()) {
                         request.setAttribute("resultado", resultado);
+                        System.out.println(resultado.getEntidades());
                         if(resultado.getAcao() != null) {
-                            if(resultado.getAcao().equals("inserir"))
-                                request.getRequestDispatcher("cadastro_cliente.jsp").forward(request, response);
+                            if(resultado.getAcao().equals("inserir")){
+                                request.setAttribute("acao", "inserção");
+                                request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                            }
                             else if(resultado.getAcao().equals("listar")){
                                 request.getRequestDispatcher("listar_clientes.jsp").forward(request, response);
                             }
                             else if(resultado.getAcao().equals("consultarPorID")){
-                                request.getRequestDispatcher("listar_endCobranca.jsp").forward(request, response);
+                               // request.getRequestDispatcher("listar_endCobranca.jsp").forward(request, response);
+                                request.getRequestDispatcher("preAlterar_cliente.jsp").forward(request, response);
+                            }
+                            else if(resultado.getAcao().equals("alterar")){
+                                 request.setAttribute("acao", "alteração");
+                                 request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+
                             }
                             else 
                                     request.getRequestDispatcher("../index.html").forward(request, response);

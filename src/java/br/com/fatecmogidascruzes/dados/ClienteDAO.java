@@ -163,6 +163,53 @@ public class ClienteDAO extends AbstractDAO {
         resultado.setEntidades(entidades);
        return resultado;
     }
+
+    
+    public Resultado alterar(EntidadeDominio entidade) {
+         List<EntidadeDominio> ListEntidades = new ArrayList<EntidadeDominio>();
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Cliente cliente = (Cliente) entidade;
+            PreparedStatement declaracao = conexao.prepareStatement(""
+                                                + "UPDATE cliente SET nome = ?, sobrenome=?,data_nascimento=?"
+						+ ", email=?,cpf=?, rg=?, sexo=?, logradouroCobranca=?"
+						+ ", bairroCobranca=?, cepCobranca=?, numeroCobranca=?"
+						+ ", cidadeCobranca=?, ufCobranca=?, paisCobranca=?, complementoCobranca=?"
+						+ " WHERE id=?");
+            
+				declaracao.setString(1, cliente.getNome());
+                                declaracao.setString(2, cliente.getSobrenome());
+                                declaracao.setString(3, cliente.getData_nascimento());
+                                declaracao.setString(4, cliente.getEmail());
+                                declaracao.setString(5, cliente.getCpf());
+				declaracao.setString(6, cliente.getRg());
+				declaracao.setString(7, cliente.getSexo());
+                                declaracao.setString(8, cliente.getEndereco().getLogradouro());
+                                declaracao.setString(9, cliente.getEndereco().getBairro());
+                                declaracao.setString(10, cliente.getEndereco().getCep());
+                                declaracao.setString(11, cliente.getEndereco().getNumero());
+                                declaracao.setString(12, cliente.getEndereco().getCidade());
+                                declaracao.setString(13, cliente.getEndereco().getUf());
+                                declaracao.setString(14, cliente.getEndereco().getPais());
+                                declaracao.setString(15, cliente.getEndereco().getComplemento());
+				declaracao.setInt(16, cliente.getId());
+
+				declaracao.execute();
+            System.out.print("EXECUTEI A QUERY CLIENTE");
+            resultado.setStatus(true);
+            resultado.setMensagem("O Cliente foi inserido com sucesso!");   
+            // Fecha a conexao.
+            conexao.close();
+        } catch (ClassNotFoundException erro) {
+            erro.printStackTrace();     
+            resultado.setStatus(false);
+            resultado.setMensagem("Houve algum erro ao inserir o cliente");
+        } catch (SQLException erro) {
+            erro.printStackTrace();   
+        }
+          return resultado;
+    }
         
 }
     

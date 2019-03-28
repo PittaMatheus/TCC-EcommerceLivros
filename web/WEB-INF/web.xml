@@ -32,6 +32,14 @@
         <servlet-name>Control</servlet-name>
         <url-pattern>/Clientes/ListarCartao</url-pattern>
     </servlet-mapping>   
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Clientes/PreAlterarCliente</url-pattern>
+    </servlet-mapping> 
+        <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Clientes/AlterarCliente</url-pattern>
+    </servlet-mapping> 
     <session-config>
         <session-timeout>
             30

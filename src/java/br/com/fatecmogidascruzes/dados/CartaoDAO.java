@@ -107,6 +107,11 @@ public class CartaoDAO extends AbstractDAO{
         resultado.setEntidades(entidades);
        return resultado;
     }
+
+    @Override
+    public Resultado alterar(EntidadeDominio entidade) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
         
     
 }

@@ -44,6 +44,7 @@ public class Fachada implements IFachada{
         resultado.setEntidades(new ArrayList<EntidadeDominio>());
         try {
             resultado = dao.get(entidade.getClass().getName()).inserir(entidade);
+            resultado.setAcao("inserir");
             resultado.setStatus(true);
 
         } catch(Exception e) {
@@ -84,6 +85,22 @@ public class Fachada implements IFachada{
         } catch(Exception e) {
             resultado.setStatus(false);
             resultado.setMensagem("Erro ao consultar por ID");
+            e.printStackTrace();
+        }
+    return resultado;
+    }
+
+    @Override
+    public Resultado alterar(EntidadeDominio entidade) {
+        resultado.setEntidades(new ArrayList<EntidadeDominio>());
+        try {
+            resultado = dao.get(entidade.getClass().getName()).alterar(entidade);
+            resultado.setStatus(true);
+            resultado.setMensagem("Alterado com sucesso");
+            resultado.setAcao("alterar");
+        } catch(Exception e) {
+            resultado.setStatus(false);
+            resultado.setMensagem("Erro ao alterar");
             e.printStackTrace();
         }
     return resultado;
