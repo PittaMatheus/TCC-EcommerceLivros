@@ -51,6 +51,7 @@ public class EnderecoDAO extends AbstractDAO {
 
             declaracao.execute();
             resultado.setStatus(true);
+            
             resultado.setMensagem("O Endereco foi inserido com sucesso");
             // Fecha a conexao.
             conexao.close();

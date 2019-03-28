@@ -12,6 +12,7 @@ import java.util.Date;
  * @author matheus
  */
 public class Cliente extends EntidadeDominio{
+    private Integer id;
     private String nome;
     private String sobrenome;
     private String data_nascimento;
@@ -40,13 +41,20 @@ public class Cliente extends EntidadeDominio{
         this.ranking = ranking;
         
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
     
     public Cliente(){
         endereco = new Endereco();
         telefone = new Telefone();
     }
 
-    
     public String getNome() {
         return nome;
     }

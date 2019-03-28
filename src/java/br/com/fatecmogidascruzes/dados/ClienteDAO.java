@@ -26,10 +26,8 @@ public class ClienteDAO extends AbstractDAO {
             Connection conexao = BancoDadosOracle.getConexao();
             Cliente cliente = (Cliente) entidade;
             PreparedStatement declaracao = conexao.prepareStatement("INSERT INTO cliente "
-                    + "(nome,sobrenome, data_nascimento, ranking, senha, email, cpf,rg, sexo, logradouroCobranca, "
-                    + "bairroCobranca, cepCobranca, numeroCobranca, cidadeCobranca, ufCobranca, paisCobranca, tipoLogradouroCobranca, "
-                    + "complementoCobranca)"
-                                    + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                    + "(nome,sobrenome, data_nascimento, ranking, senha, email, cpf,rg, sexo)"
+                                    + " VALUES(?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
                     declaracao.setString(1, cliente.getNome());
                     declaracao.setString(2, cliente.getSobrenome());
@@ -40,23 +38,35 @@ public class ClienteDAO extends AbstractDAO {
                     declaracao.setString(7, cliente.getCpf());
                     declaracao.setString(8, cliente.getRg());
                     declaracao.setString(9, cliente.getSexo());
-                    declaracao.setString(10, cliente.getEndereco().getLogradouro());
-                    declaracao.setString(11, cliente.getEndereco().getBairro());
-                    declaracao.setString(12, cliente.getEndereco().getCep());
-                    declaracao.setString(13, cliente.getEndereco().getNumero());
-                    declaracao.setString(14, cliente.getEndereco().getCidade());
-                    declaracao.setString(15, cliente.getEndereco().getUf());
-                    declaracao.setString(16, cliente.getEndereco().getPais());
-                    declaracao.setString(17, cliente.getEndereco().getTipoLogradouro());
-                    declaracao.setString(18, cliente.getEndereco().getComplemento());
-               
             declaracao.execute();
             System.out.print("EXECUTEI A QUERY CLIENTE");
             ResultSet rs = declaracao.getGeneratedKeys();
             // Seta o ID cliente com o ID autoincrement que foi gerado no banco de dados
-            cliente.setId((rs.next())?rs.getInt(1):0);                
+            cliente.setId((rs.next())?rs.getInt(1):0);
+            
+            //Inserir endereco de cobranca no cliente 
+            PreparedStatement declaracao2 = conexao.prepareStatement("INSERT INTO endereco "
+                    + "(logradouro,numero, bairro, cep, cidade, uf, tipoLogradouro,nomeEndereco, complemento, "
+                    + "referencia, tipoEndereco, id_cliente)"
+                        + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                    declaracao2.setString(1, cliente.getEndereco().getLogradouro());
+                    declaracao2.setString(2, cliente.getEndereco().getNumero());
+                    declaracao2.setString(3, cliente.getEndereco().getBairro());
+                    declaracao2.setString(4, cliente.getEndereco().getCep());                  
+                    declaracao2.setString(5, cliente.getEndereco().getCidade());
+                    declaracao2.setString(6, cliente.getEndereco().getUf());                    
+                    declaracao2.setString(7, cliente.getEndereco().getTipoLogradouro());
+                    declaracao2.setString(8, cliente.getEndereco().getNomeEndereco());
+                    declaracao2.setString(9, cliente.getEndereco().getComplemento());
+                    declaracao2.setString(10, cliente.getEndereco().getReferencia());
+                    declaracao2.setString(11, "1");
+                    declaracao2.setInt(12, cliente.getId());
+                    declaracao2.execute();
+            
+            
             resultado.setStatus(true);
-            resultado.setMensagem("O Cliente foi inserido com sucesso!");   
+            resultado.setMensagem("O Cliente foi inserido com sucesso!");
+            
             // Fecha a conexao.
             conexao.close();
         } catch (ClassNotFoundException erro) {
@@ -77,8 +87,7 @@ public class ClienteDAO extends AbstractDAO {
             Connection conexao = BancoDadosOracle.getConexao();
             Cliente cliente = (Cliente) entidade;
             PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome,c.sobrenome, c.data_nascimento, "
-                    + "c.ranking, c.email, c.cpf, c.rg, c.sexo, c.logradouroCobranca, c.bairroCobranca, c.cepCobranca,"
-                    + "c.numeroCobranca, c.cidadeCobranca, c.ufCobranca, c.paisCobranca, c.tipoLogradouroCobranca, c.complementoCobranca "
+                    + "c.ranking, c.email, c.cpf, c.rg, c.sexo "
                     + "FROM cliente c WHERE c.status = 1");
             ResultSet rs =  declaracao.executeQuery();
             while(rs.next()) {
@@ -92,16 +101,7 @@ public class ClienteDAO extends AbstractDAO {
                 cli.setCpf(rs.getString("cpf"));
                 cli.setRg(rs.getString("rg"));
                 cli.setSexo(rs.getString("sexo"));
-                cli.getEndereco().setLogradouro(rs.getString("logradouroCobranca"));
-                cli.getEndereco().setBairro(rs.getString("bairroCobranca"));
-                cli.getEndereco().setCep(rs.getString("cepCobranca"));
-                cli.getEndereco().setNumero(rs.getString("numeroCobranca"));
-                cli.getEndereco().setCidade(rs.getString("cidadeCobranca"));
-                cli.getEndereco().setUf(rs.getString("ufCobranca"));
-                cli.getEndereco().setPais(rs.getString("paisCobranca"));
-                cli.getEndereco().setTipoLogradouro(rs.getString("tipoLogradouroCobranca"));
-                cli.getEndereco().setComplemento(rs.getString("complementoCobranca"));
-
+               
                 entidades.add(cli);
 		resultado.setStatus(true);
             }
@@ -117,6 +117,7 @@ public class ClienteDAO extends AbstractDAO {
     }
 
     
+   @Override
     public Resultado consultarPorID(EntidadeDominio entidade) {
          List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
         try {
@@ -124,8 +125,7 @@ public class ClienteDAO extends AbstractDAO {
             Connection conexao = BancoDadosOracle.getConexao();
             Cliente cliente = (Cliente) entidade;
             PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome,c.sobrenome, c.data_nascimento, "
-                    + "c.ranking, c.email, c.cpf, c.rg, c.sexo, c.logradouroCobranca, c.bairroCobranca, c.cepCobranca,"
-                    + "c.numeroCobranca, c.cidadeCobranca, c.ufCobranca, c.paisCobranca, c.tipoLogradouroCobranca, c.complementoCobranca "
+                    + "c.ranking, c.email, c.cpf, c.rg, c.sexo "
                     + "FROM cliente c WHERE c.status = 1 AND c.id = ?");
             declaracao.setInt(1, cliente.getId());
            ResultSet rs =  declaracao.executeQuery();
@@ -140,16 +140,7 @@ public class ClienteDAO extends AbstractDAO {
                 cli.setCpf(rs.getString("cpf"));
                 cli.setRg(rs.getString("rg"));
                 cli.setSexo(rs.getString("sexo"));
-                cli.getEndereco().setLogradouro(rs.getString("logradouroCobranca"));
-                cli.getEndereco().setBairro(rs.getString("bairroCobranca"));
-                cli.getEndereco().setCep(rs.getString("cepCobranca"));
-                cli.getEndereco().setNumero(rs.getString("numeroCobranca"));
-                cli.getEndereco().setCidade(rs.getString("cidadeCobranca"));
-                cli.getEndereco().setUf(rs.getString("ufCobranca"));
-                cli.getEndereco().setPais(rs.getString("paisCobranca"));
-                cli.getEndereco().setTipoLogradouro(rs.getString("tipoLogradouroCobranca"));
-                cli.getEndereco().setComplemento(rs.getString("complementoCobranca"));
-
+                resultado.setAcao("consultarCliente");
                 entidades.add(cli);
 		resultado.setStatus(true);
             }
@@ -164,7 +155,7 @@ public class ClienteDAO extends AbstractDAO {
        return resultado;
     }
 
-    
+   @Override
     public Resultado alterar(EntidadeDominio entidade) {
          List<EntidadeDominio> ListEntidades = new ArrayList<EntidadeDominio>();
         try {
@@ -173,9 +164,7 @@ public class ClienteDAO extends AbstractDAO {
             Cliente cliente = (Cliente) entidade;
             PreparedStatement declaracao = conexao.prepareStatement(""
                                                 + "UPDATE cliente SET nome = ?, sobrenome=?,data_nascimento=?"
-						+ ", email=?,cpf=?, rg=?, sexo=?, logradouroCobranca=?"
-						+ ", bairroCobranca=?, cepCobranca=?, numeroCobranca=?"
-						+ ", cidadeCobranca=?, ufCobranca=?, paisCobranca=?, complementoCobranca=?"
+						+ ", email=?,cpf=?, rg=?, sexo=? "
 						+ " WHERE id=?");
             
 				declaracao.setString(1, cliente.getNome());
@@ -185,15 +174,7 @@ public class ClienteDAO extends AbstractDAO {
                                 declaracao.setString(5, cliente.getCpf());
 				declaracao.setString(6, cliente.getRg());
 				declaracao.setString(7, cliente.getSexo());
-                                declaracao.setString(8, cliente.getEndereco().getLogradouro());
-                                declaracao.setString(9, cliente.getEndereco().getBairro());
-                                declaracao.setString(10, cliente.getEndereco().getCep());
-                                declaracao.setString(11, cliente.getEndereco().getNumero());
-                                declaracao.setString(12, cliente.getEndereco().getCidade());
-                                declaracao.setString(13, cliente.getEndereco().getUf());
-                                declaracao.setString(14, cliente.getEndereco().getPais());
-                                declaracao.setString(15, cliente.getEndereco().getComplemento());
-				declaracao.setInt(16, cliente.getId());
+				declaracao.setInt(8, cliente.getId());
 
 				declaracao.execute();
             System.out.print("EXECUTEI A QUERY CLIENTE");
@@ -210,6 +191,43 @@ public class ClienteDAO extends AbstractDAO {
         }
           return resultado;
     }
-        
+     public Resultado consultarEndCobranca(EntidadeDominio entidade) {
+      List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Cliente cliente = (Cliente) entidade;
+            PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id, c.logradouroCobranca, c.bairroCobranca, c.cepCobranca,"
+                    + "c.numeroCobranca, c.cidadeCobranca, c.ufCobranca, c.paisCobranca, c.tipoLogradouroCobranca, c.complementoCobranca "
+                    + "FROM cliente c WHERE c.status = 1 AND c.id = ?");
+            declaracao.setInt(1, cliente.getId());
+           ResultSet rs =  declaracao.executeQuery();
+            while(rs.next()) {
+                Cliente cli = new Cliente();
+                cli.setId(rs.getInt("id"));
+                cli.getEndereco().setLogradouro(rs.getString("logradouroCobranca"));
+                cli.getEndereco().setBairro(rs.getString("bairroCobranca"));
+                cli.getEndereco().setCep(rs.getString("cepCobranca"));
+                cli.getEndereco().setNumero(rs.getString("numeroCobranca"));
+                cli.getEndereco().setCidade(rs.getString("cidadeCobranca"));
+                cli.getEndereco().setUf(rs.getString("ufCobranca"));
+                cli.getEndereco().setPais(rs.getString("paisCobranca"));
+                cli.getEndereco().setTipoLogradouro(rs.getString("tipoLogradouroCobranca"));
+                cli.getEndereco().setComplemento(rs.getString("complementoCobranca"));
+                resultado.setAcao("consultarEndereco");
+                entidades.add(cli);
+		resultado.setStatus(true);
+            }
+        }catch(ClassNotFoundException erro) {
+            erro.printStackTrace();     
+            resultado.setStatus(false);
+            resultado.setMensagem("Houve algum erro ao listar o endereco");
+        } catch (SQLException erro) {
+            erro.printStackTrace();   
+        }
+        resultado.setEntidades(entidades);
+         return resultado;
+     }
+    
 }
     

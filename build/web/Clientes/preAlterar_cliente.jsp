@@ -37,7 +37,7 @@
         
         <form action="AlterarCliente" method="POST">
                    
-                        <input type="hidden" name="id" id="id" value="<%= cliente.getId() %>">
+                        <input type="text" name="id" id="id" value="<%= cliente.getId() %>">
 
                         <label for="nome" data-error="Informe o nome!">Nome</label>
                         <input type="text" name="nome" id="nome" value="<%= cliente.getNome()%>" class="validate" required>
@@ -68,63 +68,7 @@
                                    <%}%>
                         </select>
                        
-                       
-                        
-                      
-                       
 
-
-                            
-                     <!-- DADOS ENDERECO-->       
-                     <br> 
-                        <h1>Endereco</h1>
-                        <label for="tipoLogradouro" data-error="Informe o tipo do endereco"  >Endereço de: </label>
-                        <select id="tipoLogradouro" name="tipoLogradouro"class="validate" value="<% cliente.getEndereco().getTipoLogradouro();%>">
-                             <% if(cliente.getEndereco().getTipoLogradouro().equals("vila")){
-                                %> <option value="vila" selected>Vila</option>
-                            <%}else if(cliente.getEndereco().getTipoLogradouro().equals("estrada")){
-                                    %><option selected value="estrada">Estrada</option>
-                             <%}else if(cliente.getEndereco().getTipoLogradouro().equals("fazenda")){                           
-                                    %>  <option selected value="fazenda">Fazenda</option>
-                             <%}else if(cliente.getEndereco().getTipoLogradouro().equals("sitio")){               
-                                       %> <option selected value="sitio">Sitio</option>
-                            <%}else{          
-                                        %> <option selected value="condominio">Condominio</option>   
-                                       <%};%>
-                        </select>
-
-                            <br>
-                        <label for="cep" >CEP</label>                            
-                        <input type="text" value="<%= cliente.getEndereco().getCep()%>" name="cep" id="cep" required>
-                        
-                        <label for="cidade" data-error="Informe a cidade!" >Cidade</label>
-                        <input type="text" value="<%= cliente.getEndereco().getCidade()%>" name="cidade" id="cidade"required>
-
-
-                        <label for="bairro" data-error="Informe a bairro!" >Bairro</label>
-                        <input type="text" value="<%= cliente.getEndereco().getBairro()%>" name="bairro" id="bairro"required>
-                    
-                        <label for="uf" data-error="Informe o estado!" >Estado</label>
-                        <input type="text" value="<%= cliente.getEndereco().getUf()%>" name="uf" id="uf"required>
-                        
-                        <label for="pais" data-error="Informe o pais!" >País</label>
-                        <input type="text" value="<%= cliente.getEndereco().getPais()%>" name="pais" id="pais"required>
-
-                        <button type="button" value="Buscar CEP" class="btn col s12 l2"/>Buscar CEP</button>
-
-                        <br>
-                        <label for="logradouro" data-error="Informe o endereço!">Endereço</label>
-                        <input type="text" value="<%= cliente.getEndereco().getLogradouro()%>"" name="logradouro" id="logradouro" required>
-                        
-                        <label for="numero" data-error="Informe o numero da casa!">Nº</label>
-                        <input type="text" value="<%= cliente.getEndereco().getNumero()%>" name="numero" id="numero"required>
-
-                        <% if(cliente.getEndereco().getComplemento() != null){ %>
-                            <label for="complemento" data-error="Informe o complemento!">Complemento</label>
-                            <input type="text" value="<%= cliente.getEndereco().getComplemento()%>" name="complemento" id="complemento">
-                        <% } %>
-                       
-                                                     
                         <br> <br> <br> <br>                         
                        <input type="submit" name="acao" value="alterar" class="btn btn-success">                                  
         </form>

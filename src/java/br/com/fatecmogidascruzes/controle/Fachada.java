@@ -81,7 +81,7 @@ public class Fachada implements IFachada{
             resultado = dao.get(entidade.getClass().getName()).consultarPorID(entidade);
             resultado.setStatus(true);
             resultado.setMensagem("Listado com sucesso");
-            resultado.setAcao("consultarPorID");
+            
         } catch(Exception e) {
             resultado.setStatus(false);
             resultado.setMensagem("Erro ao consultar por ID");
