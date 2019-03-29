@@ -5,6 +5,7 @@
  */
 package br.com.fatecmogidascruzes.dados;
 
+import br.com.fatecmogidascruzes.dominio.Cliente;
 import br.com.fatecmogidascruzes.dominio.Endereco;
 import br.com.fatecmogidascruzes.dominio.Endereco;
 import br.com.fatecmogidascruzes.dominio.EntidadeDominio;
@@ -94,15 +95,14 @@ public class EnderecoDAO extends AbstractDAO {
                 end.setReferencia(rs.getString("referencia"));
                 end.setTipoEndereco(rs.getString("tipoEndereco"));
 
-                if(end.getTipoEndereco().equals("1")){
-                    resultado.setAcao("listarCobranca");
-                }
-                else{
-                    resultado.setAcao("listarEntrega");
-                }
+                resultado.setAcao("listar");
                 entidades.add(end);
 		resultado.setStatus(true);
             }
+            if(resultado.getAcao() == null){
+                resultado.setAcao("inserir");
+            }
+            
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);
@@ -112,6 +112,7 @@ public class EnderecoDAO extends AbstractDAO {
         }
         resultado.setEntidades(entidades);
        return resultado;
+    
     }
 
     @Override
@@ -123,7 +124,7 @@ public class EnderecoDAO extends AbstractDAO {
             Endereco endereco = (Endereco) entidade;
             PreparedStatement declaracao = conexao.prepareStatement("SELECT e.id, e.logradouro, e.numero, e.bairro, e.cep, e.cidade, e.uf, "
                     + "e.tipoLogradouro, e.nomeEndereco, e.complemento, e.referencia, e.tipoEndereco "
-                    + "FROM endereco e WHERE e.id_cliente = ?" );
+                    + "FROM endereco e WHERE e.id = ?" );
             declaracao.setInt(1, endereco.getClienteId());
             ResultSet rs =  declaracao.executeQuery();
             while(rs.next()) {
@@ -141,7 +142,7 @@ public class EnderecoDAO extends AbstractDAO {
                 end.setReferencia(rs.getString("referencia"));
                 end.setTipoEndereco(rs.getString("tipoEndereco"));
 
-                resultado.setAcao("listar");
+                resultado.setAcao("listarEndereco");
                 entidades.add(end);
 		resultado.setStatus(true);
             }
@@ -162,7 +163,44 @@ public class EnderecoDAO extends AbstractDAO {
 
     @Override
     public Resultado alterar(EntidadeDominio entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       List<EntidadeDominio> ListEntidades = new ArrayList<EntidadeDominio>();
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Endereco endereco = (Endereco) entidade;
+            PreparedStatement declaracao = conexao.prepareStatement(""
+                                                + "UPDATE endereco SET logradouro = ?, numero=?,bairro=?"
+						+ ", cep=?,cidade=?, uf=?, tipoLogradouro=?, nomeEndereco=?,"
+                                                + "complemento=?, referencia=? "
+						+ " WHERE id=?");
+            
+				declaracao.setString(1, endereco.getLogradouro());
+                                declaracao.setString(2, endereco.getNumero());
+                                declaracao.setString(3, endereco.getBairro());
+                                declaracao.setString(4, endereco.getCep());
+                                declaracao.setString(5, endereco.getCidade());
+                                declaracao.setString(6, endereco.getUf());
+				declaracao.setString(7, endereco.getTipoLogradouro());
+				declaracao.setString(8, endereco.getNomeEndereco());
+                                declaracao.setString(9, endereco.getComplemento());
+                                declaracao.setString(10, endereco.getReferencia());
+				declaracao.setInt(11, endereco.getClienteId());
+
+				declaracao.execute();
+            System.out.print("EXECUTEI A QUERY CLIENTE");
+            resultado.setStatus(true);
+            resultado.setMensagem("O Cliente foi inserido com sucesso!");  
+            resultado.setAcao("alterar");
+            // Fecha a conexao.
+            conexao.close();
+        } catch (ClassNotFoundException erro) {
+            erro.printStackTrace();     
+            resultado.setStatus(false);
+            resultado.setMensagem("Houve algum erro ao inserir o cliente");
+        } catch (SQLException erro) {
+            erro.printStackTrace();   
+        }
+          return resultado;
     }
 
 

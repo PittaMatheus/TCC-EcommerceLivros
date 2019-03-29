@@ -12,10 +12,13 @@
         <title>Adicionar endereco de entrega</title>
     </head>
     <body>
-                    <h1>Endereco</h1>
+        <%
+                String id = request.getParameter("id");
+            %>  
+                    <h1>Adicionar endereco de entrega</h1>
         <form action="InserirEndereco" name="acao" value="inserir" method="POST">
             <label for="tipoLogradouro" data-error="Informe o tipo do endereco"  >Endereço de: </label>
-            <select id="tipoLogradouro" name="tipoLogradouro"class="validate" value="${param['tipoLogradouro']}">
+            <select id="tipoLogradouro" name="tipoLogradouro"class="validate"   >
                 <option value="" disabled >Tipo de logradouro</option>
                 <option value="vila"selected>Vila</option>
                 <option value="estrada">Estrada</option>
@@ -24,13 +27,13 @@
                 <option value="condominio">Condominio</option> 
                 
             </select>
-                <br>
-            <label for="id" >ID do cliente</label>                            
-            <input type="text" value="2" name="id" id="id" required>    
+                <br>                       
+            <input type="hidden" value="<%= id %>" name="id" id="id" required>    
                 
             <label for="cep" >CEP</label>                            
             <input type="text" value="09870-090" name="cep" id="cep" required>
-
+            <button type="button" value="Buscar CEP" class="btn col s12 l2"/>Buscar CEP</button>
+        <br>
             <label for="cidade" data-error="Informe a cidade!" >Cidade</label>
             <input type="text" value="Mogi das cruzes" name="cidade" id="cidade"required>
 
@@ -44,7 +47,7 @@
             <label for="pais" data-error="Informe o pais!" >País</label>
             <input type="text" value="Brasil" name="pais" id="pais"required>
 
-            <button type="button" value="Buscar CEP" class="btn col s12 l2"/>Buscar CEP</button>
+            
 
             <br>
             <label for="logradouro" data-error="Informe o endereço!">Endereço</label>

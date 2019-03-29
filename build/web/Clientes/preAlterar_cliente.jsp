@@ -15,6 +15,7 @@
         <title>Alterar dados do clientes</title>
     </head>
     <body>
+        <h2>Alterar Dados pessoais</h2>
         <%
                 String id = request.getParameter("id");    
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
@@ -37,7 +38,7 @@
         
         <form action="AlterarCliente" method="POST">
                    
-                        <input type="text" name="id" id="id" value="<%= cliente.getId() %>">
+                        <input type="hidden" name="id" id="id" value="<%= cliente.getId() %>">
 
                         <label for="nome" data-error="Informe o nome!">Nome</label>
                         <input type="text" name="nome" id="nome" value="<%= cliente.getNome()%>" class="validate" required>

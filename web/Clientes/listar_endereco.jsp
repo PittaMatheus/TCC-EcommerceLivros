@@ -21,7 +21,7 @@
                 String id = request.getParameter("id");    
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
 		if(resultado == null) {
-			response.sendRedirect(request.getContextPath() + "/Clientes/ListarEndereco?acao=consultarPorID&id=" + id);
+			response.sendRedirect(request.getContextPath() + "/Clientes/ListarEndereco?acao=listar&id=" + id);
 			return;
 		}
 	%>
@@ -51,7 +51,7 @@
                         %>
                        <tr>
                                 <th>#<th>Logradouro</th><th>Bairro</th><th>CEP</th><th>Numero</th><th>Cidade</th><th>UF</th>
-                                <th>Tipo de logradouro</th><th>Complemento</th>
+                                <th>Tipo de logradouro</th><th>Complemento</th><th>Editar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,6 +66,7 @@
                                 out.println("<td>" + endereco.getUf()+ "</td>");
                                 out.println("<td>" + endereco.getTipoLogradouro()+ "</td>");
                                 out.println("<td>" + endereco.getComplemento()+ "</td>");
+                                out.println("<td><a href='preAlterarEndereco.jsp?id=" + endereco.getId() + "'>Icone editar</a></td>");
                                 out.println("</tr>");    
                                 %>
                                 
@@ -79,7 +80,9 @@
                          }                 
                     %>
                     <br> <br> <br>
-                    <div><a href="cadastro_endereco.jsp">Adicionar endereco de entrega</a></div>
+                    <%
+                     out.println("<a href='cadastro_endereco.jsp?id=" + id + "' >Adicionar Endereco</a>");
+                    %>
                     <br> <br> <br>
                     <a href='listar_clientes.jsp'>Voltar</a>
         <br><br>

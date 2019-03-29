@@ -38,11 +38,6 @@ public class Control extends HttpServlet {
         commands.put("consultarPorID", new CommandConsultarPorID());
         commands.put("alterar", new CommandAlterar());
 
-
-        
-
-
-        
         // Mapa das views
          viewHelper = new HashMap<String,IViewHelper>();
          viewHelper.put("/Ecommerce/Clientes/InserirCliente", new ViewCliente());
@@ -50,11 +45,10 @@ public class Control extends HttpServlet {
          viewHelper.put("/Ecommerce/Clientes/PreAlterarCliente", new ViewCliente());
          viewHelper.put("/Ecommerce/Clientes/AlterarCliente", new ViewCliente());
 
-
          
          viewHelper.put("/Ecommerce/Clientes/InserirEndereco", new ViewEndereco());
          viewHelper.put("/Ecommerce/Clientes/ListarEndereco", new ViewEndereco());
-
+         viewHelper.put("/Ecommerce/Clientes/AlterarEndereco", new ViewEndereco());   
          
          viewHelper.put("/Ecommerce/Clientes/InserirCartao", new ViewCartao());
          viewHelper.put("/Ecommerce/Clientes/ListarCartao", new ViewCartao());
