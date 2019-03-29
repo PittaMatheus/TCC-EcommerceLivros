@@ -112,7 +112,7 @@ public class ViewCliente implements IViewHelper{
                                 request.setAttribute("acao", "inserção");
                                 request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
                             }
-                            else if(resultado.getAcao().equals("listar")){
+                            else if(resultado.getAcao().equals("listarCliente")){
                                 request.getRequestDispatcher("listar_clientes.jsp").forward(request, response);
                             }
                             else if(resultado.getAcao().equals("consultarCliente")){

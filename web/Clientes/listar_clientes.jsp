@@ -54,7 +54,7 @@
                                 out.println("<td>" + cliente.getCpf()+ "</td>");
                                 out.println("<td>" + cliente.getRg()+ "</td>");
                                 if(cliente.getSexo().equals("M")){out.println("<td>Masculino</td>");}else out.println("<td>Feminino</td>");
-                                out.println("<td><a href='listar_endereco.jsp?id=" + cliente.getId() + "'> Entrega</a></td>");
+                                out.println("<td><a href='listar_endEntrega.jsp?id=" + cliente.getId() + "'> Entrega</a></td>");
                                 out.println("<td><a href='listar_endCobranca.jsp?id=" + cliente.getId() + "'> Cobranca</a></td>");
                                 out.println("<td><a href='listar_cartoes.jsp?id=" + cliente.getId() + "'> Ver</a></td>");                                
                                 out.println("</tr>");

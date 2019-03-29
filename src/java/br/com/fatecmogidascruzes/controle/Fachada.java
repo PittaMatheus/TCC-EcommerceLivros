@@ -62,8 +62,6 @@ public class Fachada implements IFachada{
             resultado = dao.get(entidade.getClass().getName()).listar(entidade);
             resultado.setStatus(true);
             resultado.setMensagem("Listado com sucesso");
-            resultado.setAcao("listar");
-
 
 
         } catch(Exception e) {

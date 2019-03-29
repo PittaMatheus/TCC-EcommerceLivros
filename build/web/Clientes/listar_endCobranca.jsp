@@ -20,19 +20,19 @@
                 String id = request.getParameter("id");    
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
 		if(resultado == null) {
-			response.sendRedirect(request.getContextPath() + "/Clientes/ListarClientes?acao=consultarPorID&id=" + id);
+			response.sendRedirect(request.getContextPath() + "/Clientes/ListarEndereco?acao=consultarPorID&id=" + id);
 			return;
 		}
 	%>
 
        
  <%
-                         List<Cliente> clientes = (List) resultado.getEntidades();
+                         List<Endereco> enderecos = (List) resultado.getEntidades();
                          
-                         if(clientes.size() == 0) {
+                         if(enderecos.size() == 0) {
                             out.print("Nenhum endereco cadastrado");
                         } else {
-                            for (Cliente cliente : clientes) {
+                            for (Endereco endereco : enderecos) {
                                 %>
                 <table border='1'>
                     <thead>
@@ -45,16 +45,16 @@
                     <tbody>
                         <%
                                 out.println("<tr>");
-                                out.println("<td><input type='radio' required name='id' value=" + cliente.getId() + " /></td>");
-                                out.println("<td>" + cliente.getEndereco().getLogradouro()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getBairro()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getCep()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getNumero()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getCidade()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getUf()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getPais()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getTipoLogradouro()+ "</td>");
-                                out.println("<td>" + cliente.getEndereco().getComplemento()+ "</td>");
+                                out.println("<td><input type='radio' required name='id' value=" + endereco.getId() + " /></td>");
+                                out.println("<td>" + endereco.getLogradouro()+ "</td>");
+                                out.println("<td>" + endereco.getBairro()+ "</td>");
+                                out.println("<td>" + endereco.getCep()+ "</td>");
+                                out.println("<td>" + endereco.getNumero()+ "</td>");
+                                out.println("<td>" + endereco.getCidade()+ "</td>");
+                                out.println("<td>" + endereco.getUf()+ "</td>");
+                                out.println("<td>" + endereco.getPais()+ "</td>");
+                                out.println("<td>" + endereco.getTipoLogradouro()+ "</td>");
+                                out.println("<td>" + endereco.getComplemento()+ "</td>");
                                 out.println("</tr>");       
                             }
                          }                       

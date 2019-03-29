@@ -104,6 +104,8 @@ public class ClienteDAO extends AbstractDAO {
                
                 entidades.add(cli);
 		resultado.setStatus(true);
+                            resultado.setAcao("listarCliente");
+
             }
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
