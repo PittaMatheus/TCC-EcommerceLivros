@@ -141,15 +141,14 @@ public class EnderecoDAO extends AbstractDAO {
                 end.setReferencia(rs.getString("referencia"));
                 end.setTipoEndereco(rs.getString("tipoEndereco"));
 
-                if(end.getTipoEndereco().equals("1")){
-                    resultado.setAcao("listarCobranca");
-                }
-                else{
-                    resultado.setAcao("listarEntrega");
-                }
+                resultado.setAcao("listar");
                 entidades.add(end);
 		resultado.setStatus(true);
             }
+            if(resultado.getAcao() == null){
+                resultado.setAcao("inserir");
+            }
+            
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);

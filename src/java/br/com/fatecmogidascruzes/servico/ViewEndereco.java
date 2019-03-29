@@ -65,13 +65,11 @@ public class ViewEndereco implements IViewHelper{
 			if(resultado != null && !resultado.getMensagem().isEmpty()) {
 				request.setAttribute("resultado", resultado);
 				if(resultado.getAcao() != null) {
+                                        request.setAttribute("acao", "inserção");
 					if(resultado.getAcao().equals("inserir"))
-                                            request.getRequestDispatcher("cadastro_endereco.jsp").forward(request, response);
-                                        if(resultado.getAcao().equals("listarEntrega")){
+                                            request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                                        else if(resultado.getAcao().equals("listar")){
                                             request.getRequestDispatcher("listar_endereco.jsp").forward(request, response);
-                                        }
-                                        else if(resultado.getAcao().equals("listarCobranca")){
-                                            request.getRequestDispatcher("listar_endCobranca.jsp").forward(request, response);
                                         }
 					else 
 						//request.getRequestDispatcher("index.html").forward(request, response);

@@ -31,7 +31,7 @@
                 <thead>
                     <tr>
                         <th>#</th><th>Nome</th><th>Sobrenome</th><th>Data de nascimento</th><th>Ranking</th><th>EmaIl</th><th>CPF</th><th>RG</th>
-                        <th>Sexo</th><th colspan="2">Endereços</th><th>Cartões</th>
+                        <th>Sexo</th><th>Endereços</th><th>Cartões</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,8 +54,7 @@
                                 out.println("<td>" + cliente.getCpf()+ "</td>");
                                 out.println("<td>" + cliente.getRg()+ "</td>");
                                 if(cliente.getSexo().equals("M")){out.println("<td>Masculino</td>");}else out.println("<td>Feminino</td>");
-                                out.println("<td><a href='listar_endEntrega.jsp?id=" + cliente.getId() + "'> Entrega</a></td>");
-                                out.println("<td><a href='listar_endCobranca.jsp?id=" + cliente.getId() + "'> Cobranca</a></td>");
+                                out.println("<td><a href='listar_endereco.jsp?id=" + cliente.getId() + "'> Ver</a></td>");
                                 out.println("<td><a href='listar_cartoes.jsp?id=" + cliente.getId() + "'> Ver</a></td>");                                
                                 out.println("</tr>");
                             }

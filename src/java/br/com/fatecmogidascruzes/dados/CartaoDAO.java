@@ -97,6 +97,7 @@ public class CartaoDAO extends AbstractDAO{
                 resultado.setEntidades(entidades);
 		resultado.setStatus(true);
             }
+            resultado.setAcao("listar");
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);

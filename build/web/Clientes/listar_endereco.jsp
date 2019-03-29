@@ -17,6 +17,7 @@
     </head>
     <body>
         	<%
+               
                 String id = request.getParameter("id");    
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
 		if(resultado == null) {
@@ -28,17 +29,28 @@
        
  <%
                          List<Endereco> enderecos = (List) resultado.getEntidades();
-                         
+                          
                          if(enderecos.size() == 0) {
                             out.print("Nenhum endereco cadastrado");
                         } else {
                             for (Endereco endereco : enderecos) {
+  
                                 %>
                 <table border='1'>
                     <thead>
-                        <tr><h4>Endereços de cobrança</h4></tr>
+                        <%
+                            if(endereco.getTipoEndereco().equals("1")){
+                        %>
+                        <tr><h4>Endereço de cobrança</h4></tr>
+                        <% 
+                            }else{
+                        %>
+                            <tr><h4>Endereço de Entrega</h4></tr>
+                        <% 
+                            }
+                        %>
                        <tr>
-                                <th>#<th>Logradouro</th><th>Bairro</th><th>CEP</th><th>Numero</th><th>Cidade</th><th>UF</th><th>País</th>
+                                <th>#<th>Logradouro</th><th>Bairro</th><th>CEP</th><th>Numero</th><th>Cidade</th><th>UF</th>
                                 <th>Tipo de logradouro</th><th>Complemento</th>
                         </tr>
                     </thead>
@@ -52,19 +64,24 @@
                                 out.println("<td>" + endereco.getNumero()+ "</td>");
                                 out.println("<td>" + endereco.getCidade()+ "</td>");
                                 out.println("<td>" + endereco.getUf()+ "</td>");
-                                out.println("<td>" + endereco.getPais()+ "</td>");
                                 out.println("<td>" + endereco.getTipoLogradouro()+ "</td>");
                                 out.println("<td>" + endereco.getComplemento()+ "</td>");
-                                out.println("</tr>");       
-                            }
-                         }                       
-                    %>
+                                out.println("</tr>");    
+                                %>
+                                
             </tbody>
         </table>
+      <%                     
 
-
-            
-        <a href='listar_clientes.jsp'>Voltar</a>
+                                  
+                              
+                            }
+                         }                 
+                    %>
+                    <br> <br> <br>
+                    <div><a href="cadastro_endereco.jsp">Adicionar endereco de entrega</a></div>
+                    <br> <br> <br>
+                    <a href='listar_clientes.jsp'>Voltar</a>
         <br><br>
     </body>
 </html>

@@ -60,13 +60,11 @@ public class ViewCartao implements IViewHelper{
 			if(resultado != null && !resultado.getMensagem().isEmpty()) {
 				request.setAttribute("resultado", resultado);
 				if(resultado.getAcao() != null) {
-					if(resultado.getAcao().equals("inserir"))
-                                            request.getRequestDispatcher("cadastro_endereco.jsp").forward(request, response);
-                                        else if(resultado.getAcao().equals("listar")){
-                                            request.getRequestDispatcher("listar_endereco.jsp").forward(request, response);
-                                        }
-                                        else if(resultado.getAcao().equals("consultarPorID")){
-                                             request.getRequestDispatcher("listar_cartoes.jsp").forward(request, response);
+					if(resultado.getAcao().equals("inserir")){
+                                            request.setAttribute("acao", "inserção");
+                                            request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                                        }else if(resultado.getAcao().equals("listar")){
+                                            request.getRequestDispatcher("listar_cartoes.jsp").forward(request, response);
                                         }
 					else 
 						//request.getRequestDispatcher("index.html").forward(request, response);

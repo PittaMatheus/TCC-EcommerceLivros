@@ -24,8 +24,10 @@
                 
             </select>
                 <br>
-            <label for="id" >ID do cliente</label>                            
-            <input type="text" value="3" name="id" id="id" required>    
+            <%
+                String id = request.getParameter("id");
+            %>                          
+            <input type="hidden" value="<%= id %>" name="id" id="id" required>    
                 
             <label for="numeroCartao" >Numero do cartão</label>                            
             <input type="text" value="2321321" name="numeroCartao" id="numeroCartao" required>
@@ -39,7 +41,7 @@
              <label for="codSeguranca" data-error="Informe o código de segurança!" >Codigo de segurança</label>
             <input type="text" value="033" name="codSeguranca" id="dtValidade"required>
             
-            
+            <br>
             <input type="submit" name="acao" value="inserir" class="btn btn-success">                       
 
         </form>

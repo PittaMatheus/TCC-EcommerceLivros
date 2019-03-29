@@ -102,11 +102,9 @@ public class ViewCliente implements IViewHelper{
     @Override
         public void setEntidade(Resultado resultado, HttpServletRequest request,HttpServletResponse response) 
 			throws IOException {
-            System.out.println("Entidade: " + resultado.getEntidades());
 		try {
                     if(resultado != null && !resultado.getMensagem().isEmpty()) {
                         request.setAttribute("resultado", resultado);
-                        System.out.println(resultado.getEntidades());
                         if(resultado.getAcao() != null) {
                             if(resultado.getAcao().equals("inserir")){
                                 request.setAttribute("acao", "inserção");

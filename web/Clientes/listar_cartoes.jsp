@@ -31,7 +31,7 @@
                          List<Cartao> cartoes = (List) resultado.getEntidades();
                          
                          if(cartoes.size() == 0) {
-                            out.print("Nenhum cartão cadastrado");                   
+                            out.print("Nenhum cartão cadastrado");                            
                         } else { %>
                 <table border='1'>
                     <thead>
@@ -59,9 +59,12 @@
                     %>
             </tbody>
         </table>
-
-
-            <br><br><br>            
-        <a href='listar_clientes.jsp'>Voltar</a>
+            <br><br><br>   
+            <%
+            out.println("<a href='cadastro_cartao.jsp?id=" + id + "' >Adicionar cartão</a>");
+            %>
+        
+        <br><br>
+        <a href='listar_clientes.jsp?'>Voltar</a>
     </body>
 </html>

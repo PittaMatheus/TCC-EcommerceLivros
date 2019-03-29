@@ -60,11 +60,13 @@
                        
                        
                         <label for="sexo" data-error="Informe o sexo"  >Sexo:</label>
-                        <select id="sexo" name="sexo"class="validate" value="<%= cliente.getSexo()%>">
+                        <select id="sexo" name="sexo"class="validate" value="">
                             <% if(cliente.getSexo().equals("M")){
                                 %> <option selected value="M">Masculino</option>
+                                    <option value="F">Feminino</option>
                             <%}else{
                                     %><option selected value="F">Feminino</option>
+                                        <option value="M">Masculino</option>
                                    <%}%>
                         </select>
                        
