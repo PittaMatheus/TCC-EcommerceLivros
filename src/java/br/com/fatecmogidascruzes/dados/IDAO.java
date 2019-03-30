@@ -15,5 +15,6 @@ public interface IDAO {
 
     public Resultado desativar(EntidadeDominio entidade);
 
+    public Resultado ativar(EntidadeDominio entidade);
     
 }

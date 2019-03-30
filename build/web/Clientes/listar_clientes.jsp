@@ -18,31 +18,33 @@
         	<%
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
 		if(resultado == null) {
-			response.sendRedirect(request.getContextPath() + "/Clientes/ListarClientes?acao=listar");
+			response.sendRedirect(request.getContextPath() + "/Clientes/ListarClientes?acao=listar&status=1");
 			return;
 		}
 	%>
         
     <h3>Dados dos clientes</h3>
     
-    <form action='DesativarCliente'>
-            <input type='submit' name="acao" value="desativar" />
-        <table border='1'>
-                <thead>
-                    <tr>
-                        <th>#</th><th>Nome</th><th>Sobrenome</th><th>Data de nascimento</th><th>Ranking</th><th>EmaIl</th><th>CPF</th><th>RG</th>
-                        <th>Sexo</th><th>Endereços</th><th>Cartões</th>
-                    </tr>
-                </thead>
-                <tbody>
+  
+        
                      <%
                          List<Cliente> clientes = (List) resultado.getEntidades();
                          
                          if(clientes.size() == 0) {
-                            out.print("<tr");
-                            out.print("<td colspan='3'>Nenhum cliente cadastrado</td>");
-                            out.print("</tr>");
+                            out.print("<br><br>Nenhum cliente cadastrado");
                         } else {
+                     %>
+                       <form action='DesativarCliente'>
+                            <input type='submit' name="acao" value="desativar" />
+                            <table border='1'>
+                                <thead>
+                                    <tr>
+                                        <th>#</th><th>Nome</th><th>Sobrenome</th><th>Data de nascimento</th><th>Ranking</th><th>EmaIl</th><th>CPF</th><th>RG</th>
+                                        <th>Sexo</th><th>Endereços</th><th>Cartões</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%
                             for (Cliente cliente : clientes) {
                                 out.println("<tr>");
                                 out.println("<td><input type='radio' required name='id' value=" + cliente.getId() + " /></td>");
@@ -63,6 +65,7 @@
                 </tbody>
         </table>
     </form>
+                <br><br>
         <a href='../index.html'>Voltar</a>
     </body>
 </html>

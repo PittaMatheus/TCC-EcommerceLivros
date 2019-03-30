@@ -110,7 +110,7 @@ public class Fachada implements IFachada{
         try {
             resultado = dao.get(entidade.getClass().getName()).desativar(entidade);
             resultado.setStatus(true);
-            resultado.setMensagem("Alterado com sucesso");
+            resultado.setMensagem("desativado com sucesso");
             resultado.setAcao("desativar");
         } catch(Exception e) {
             resultado.setStatus(false);
@@ -120,5 +120,20 @@ public class Fachada implements IFachada{
     return resultado;
     }
 
+    @Override
+    public Resultado ativar(EntidadeDominio entidade) {
+        resultado.setEntidades(new ArrayList<EntidadeDominio>());
+        try {
+            resultado = dao.get(entidade.getClass().getName()).ativar(entidade);
+            resultado.setStatus(true);
+            resultado.setMensagem("ativado com sucesso");
+            resultado.setAcao("ativar");
+        } catch(Exception e) {
+            resultado.setStatus(false);
+            resultado.setMensagem("Erro ao ativar");
+            e.printStackTrace();
+        }
+    return resultado;
+    }
 }
 

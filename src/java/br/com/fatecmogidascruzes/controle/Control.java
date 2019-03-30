@@ -38,7 +38,7 @@ public class Control extends HttpServlet {
         commands.put("consultarPorID", new CommandConsultarPorID());
         commands.put("alterar", new CommandAlterar());
         commands.put("desativar", new CommandDesativar());
-        
+        commands.put("ativar", new CommandAtivar());
 
         // Mapa das views
          viewHelper = new HashMap<String,IViewHelper>();
@@ -47,6 +47,7 @@ public class Control extends HttpServlet {
          viewHelper.put("/Ecommerce/Clientes/PreAlterarCliente", new ViewCliente());
          viewHelper.put("/Ecommerce/Clientes/AlterarCliente", new ViewCliente());
          viewHelper.put("/Ecommerce/Clientes/DesativarCliente", new ViewCliente());
+         viewHelper.put("/Ecommerce/Clientes/AtivarCliente", new ViewCliente());
          
          viewHelper.put("/Ecommerce/Clientes/InserirEndereco", new ViewEndereco());
          viewHelper.put("/Ecommerce/Clientes/ListarEndereco", new ViewEndereco());
@@ -65,7 +66,6 @@ public class Control extends HttpServlet {
             throws ServletException, IOException {
         String uri = request.getRequestURI();
         String acao = request.getParameter("acao");
-
         EntidadeDominio entidade = viewHelper.get(uri).getEntidade(request);
         Resultado resultado = commands.get(acao).executar(entidade);
         System.out.println("URL: " + uri + "  ACAO: " + acao);

@@ -86,6 +86,7 @@ public class ClienteDAO extends AbstractDAO {
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();
             Cliente cliente = (Cliente) entidade;
+            if(cliente.isStatus()){
             PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome,c.sobrenome, c.data_nascimento, "
                     + "c.ranking, c.email, c.cpf, c.rg, c.sexo "
                     + "FROM cliente c WHERE c.status = 1");
@@ -103,9 +104,31 @@ public class ClienteDAO extends AbstractDAO {
                 cli.setSexo(rs.getString("sexo"));
                
                 entidades.add(cli);
-		resultado.setStatus(true);
-                            resultado.setAcao("listarCliente");
-
+            }
+            resultado.setStatus(true);
+            resultado.setAcao("listarCliente");
+           }
+            else if(!cliente.isStatus()){
+            PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome,c.sobrenome, c.data_nascimento, "
+                    + "c.ranking, c.email, c.cpf, c.rg, c.sexo "
+                    + "FROM cliente c WHERE c.status = 0");
+            ResultSet rs =  declaracao.executeQuery();
+            while(rs.next()) {
+                Cliente cli = new Cliente();
+                cli.setId(rs.getInt("id"));
+                cli.setNome(rs.getString("nome"));
+                cli.setSobrenome(rs.getString("sobrenome"));
+                cli.setData_nascimento(rs.getString("data_nascimento"));
+                cli.setRanking(rs.getDouble("ranking"));
+                cli.setEmail(rs.getString("email"));
+                cli.setCpf(rs.getString("cpf"));
+                cli.setRg(rs.getString("rg"));
+                cli.setSexo(rs.getString("sexo"));
+               
+                entidades.add(cli);
+            }
+            resultado.setStatus(true);
+            resultado.setAcao("listarDesativados");
             }
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
@@ -208,13 +231,42 @@ public class ClienteDAO extends AbstractDAO {
 				declaracao.execute();
 
             resultado.setStatus(true);
-            resultado.setMensagem("O Cliente foi inserido com sucesso!");   
+            resultado.setMensagem("O Cliente foi desativado com sucesso!");   
             // Fecha a conexao.
             conexao.close();
         } catch (ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);
-            resultado.setMensagem("Houve algum erro ao inserir o cliente");
+            resultado.setMensagem("Houve algum erro ao desativar o cliente");
+        } catch (SQLException erro) {
+            erro.printStackTrace();   
+        }
+          return resultado;
+    }
+
+    @Override
+    public Resultado ativar(EntidadeDominio entidade) {
+       List<EntidadeDominio> ListEntidades = new ArrayList<EntidadeDominio>();
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Cliente cliente = (Cliente) entidade;
+            PreparedStatement declaracao = conexao.prepareStatement(""
+                                                + "UPDATE cliente SET status = ?"
+						+ " WHERE id=?");
+            
+				declaracao.setString(1, "1");
+				declaracao.setInt(2, cliente.getId());
+				declaracao.execute();
+
+            resultado.setStatus(true);
+            resultado.setMensagem("O Cliente foi ativado com sucesso!");   
+            // Fecha a conexao.
+            conexao.close();
+        } catch (ClassNotFoundException erro) {
+            erro.printStackTrace();     
+            resultado.setStatus(false);
+            resultado.setMensagem("Houve algum erro ao ativar o cliente");
         } catch (SQLException erro) {
             erro.printStackTrace();   
         }

@@ -34,6 +34,8 @@ public class ViewCliente implements IViewHelper{
         // RECEBE PARAMETROS DA JSP
         String acao = request.getParameter("acao");
         String id = request.getParameter("id");
+        String status = request.getParameter("status");
+
 
         //CLIENTE
         String nome = request.getParameter("nome");
@@ -77,6 +79,12 @@ public class ViewCliente implements IViewHelper{
         cliente.setSenha(senha);
         cliente.setData_nascimento(dataNascimento);
         
+        if(status != null && status.equals("0"))
+            cliente.setStatus(false);
+        else if(status != null && status.equals("1")){
+            cliente.setStatus(true);
+    }
+
         objEndereco.setBairro(bairro);
         objEndereco.setLogradouro(logradouro);
         objEndereco.setUf(uf);
@@ -122,8 +130,16 @@ public class ViewCliente implements IViewHelper{
                             else if(resultado.getAcao().equals("alterar")){
                                  request.setAttribute("acao", "alteração");
                                  request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                                 
                             }else if(resultado.getAcao().equals("desativar")){
                                  request.setAttribute("acao", "exclusão");
+                                 request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                                 
+                            }else if(resultado.getAcao().equals("listarDesativados")){
+                                 request.getRequestDispatcher("listar_clientesInativos.jsp").forward(request, response);  
+                                 
+                            }else if(resultado.getAcao().equals("ativar")){
+                                 request.setAttribute("acao", "ativação");
                                  request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
                             }else 
                                     request.getRequestDispatcher("../index.html").forward(request, response);
