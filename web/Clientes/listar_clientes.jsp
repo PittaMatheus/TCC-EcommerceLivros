@@ -26,7 +26,7 @@
     <h3>Dados dos clientes</h3>
     
     <form action='DesativarCliente'>
-            <input type='submit' acao="desativar" name="desativar" value="Desativar cliente" />
+            <input type='submit' name="acao" value="desativar" />
         <table border='1'>
                 <thead>
                     <tr>

@@ -122,9 +122,10 @@ public class ViewCliente implements IViewHelper{
                             else if(resultado.getAcao().equals("alterar")){
                                  request.setAttribute("acao", "alteração");
                                  request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
-
-                            }
-                            else 
+                            }else if(resultado.getAcao().equals("desativar")){
+                                 request.setAttribute("acao", "exclusão");
+                                 request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                            }else 
                                     request.getRequestDispatcher("../index.html").forward(request, response);
                                 
                         } else {

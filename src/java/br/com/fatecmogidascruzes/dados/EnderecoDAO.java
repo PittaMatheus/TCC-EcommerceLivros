@@ -203,6 +203,11 @@ public class EnderecoDAO extends AbstractDAO {
           return resultado;
     }
 
+    @Override
+    public Resultado desativar(EntidadeDominio entidade) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
  
     

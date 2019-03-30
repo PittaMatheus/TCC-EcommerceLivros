@@ -177,9 +177,7 @@ public class ClienteDAO extends AbstractDAO {
 				declaracao.setString(6, cliente.getRg());
 				declaracao.setString(7, cliente.getSexo());
 				declaracao.setInt(8, cliente.getId());
-
 				declaracao.execute();
-            System.out.print("EXECUTEI A QUERY CLIENTE");
             resultado.setStatus(true);
             resultado.setMensagem("O Cliente foi inserido com sucesso!");   
             // Fecha a conexao.
@@ -193,43 +191,35 @@ public class ClienteDAO extends AbstractDAO {
         }
           return resultado;
     }
-     public Resultado consultarEndCobranca(EntidadeDominio entidade) {
-      List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+     
+    @Override
+    public Resultado desativar(EntidadeDominio entidade) {
+         List<EntidadeDominio> ListEntidades = new ArrayList<EntidadeDominio>();
         try {
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();
             Cliente cliente = (Cliente) entidade;
-            PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id, c.logradouroCobranca, c.bairroCobranca, c.cepCobranca,"
-                    + "c.numeroCobranca, c.cidadeCobranca, c.ufCobranca, c.paisCobranca, c.tipoLogradouroCobranca, c.complementoCobranca "
-                    + "FROM cliente c WHERE c.status = 1 AND c.id = ?");
-            declaracao.setInt(1, cliente.getId());
-           ResultSet rs =  declaracao.executeQuery();
-            while(rs.next()) {
-                Cliente cli = new Cliente();
-                cli.setId(rs.getInt("id"));
-                cli.getEndereco().setLogradouro(rs.getString("logradouroCobranca"));
-                cli.getEndereco().setBairro(rs.getString("bairroCobranca"));
-                cli.getEndereco().setCep(rs.getString("cepCobranca"));
-                cli.getEndereco().setNumero(rs.getString("numeroCobranca"));
-                cli.getEndereco().setCidade(rs.getString("cidadeCobranca"));
-                cli.getEndereco().setUf(rs.getString("ufCobranca"));
-                cli.getEndereco().setPais(rs.getString("paisCobranca"));
-                cli.getEndereco().setTipoLogradouro(rs.getString("tipoLogradouroCobranca"));
-                cli.getEndereco().setComplemento(rs.getString("complementoCobranca"));
-                resultado.setAcao("consultarEndereco");
-                entidades.add(cli);
-		resultado.setStatus(true);
-            }
-        }catch(ClassNotFoundException erro) {
+            PreparedStatement declaracao = conexao.prepareStatement(""
+                                                + "UPDATE cliente SET status = ?"
+						+ " WHERE id=?");
+            
+				declaracao.setString(1, "0");
+				declaracao.setInt(2, cliente.getId());
+				declaracao.execute();
+
+            resultado.setStatus(true);
+            resultado.setMensagem("O Cliente foi inserido com sucesso!");   
+            // Fecha a conexao.
+            conexao.close();
+        } catch (ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);
-            resultado.setMensagem("Houve algum erro ao listar o endereco");
+            resultado.setMensagem("Houve algum erro ao inserir o cliente");
         } catch (SQLException erro) {
             erro.printStackTrace();   
         }
-        resultado.setEntidades(entidades);
-         return resultado;
-     }
+          return resultado;
+    }
     
 }
     

@@ -44,7 +44,10 @@
         <servlet-name>Control</servlet-name>
         <url-pattern>/Clientes/AlterarEndereco</url-pattern>
     </servlet-mapping>    
-    
+     <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Clientes/DesativarCliente</url-pattern>
+    </servlet-mapping>     
     
     <session-config>
         <session-timeout>
