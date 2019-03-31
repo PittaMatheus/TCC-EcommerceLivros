@@ -18,10 +18,11 @@ import java.util.Map;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dados.IDAO;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Cartao;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.IStrategy;
-import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ValidaCamposObrigatorios;
-import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ValidaConfirmarSenha;
-import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ValidaEspacosVazios;
-import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ValidaSenhaForte;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaCPF;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaCamposObrigatorios;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaConfirmarSenha;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaEspacosVazios;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaSenhaForte;
 import java.util.List;
 
 
@@ -50,6 +51,7 @@ public class Fachada implements IFachada{
         RNClienteSalvar.add(new ValidaSenhaForte());
         RNClienteSalvar.add(new ValidaConfirmarSenha());
         RNClienteSalvar.add(new ValidaEspacosVazios());
+        RNClienteSalvar.add(new ValidaCPF());
         
         
         // Regras de negocio do cliente
@@ -66,7 +68,7 @@ public class Fachada implements IFachada{
     @Override
     public Resultado inserir(EntidadeDominio entidade) {
         resultado.setEntidades(new ArrayList<EntidadeDominio>());
-        executaRegras(entidade,"salvar");
+        RegrasDeNegocio(entidade,"salvar");
         try {
             if(resultado.getMensagem().length() == 0) {
             resultado = dao.get(entidade.getClass().getName()).inserir(entidade);
@@ -166,7 +168,7 @@ public class Fachada implements IFachada{
     return resultado;
     }
     
-    private void executaRegras(EntidadeDominio entidade, String operacao) 
+    private void RegrasDeNegocio(EntidadeDominio entidade, String operacao) 
 	{
 		List<IStrategy> regras = RN.get(operacao).get(entidade.getClass().getName());
 		String resposta = "";

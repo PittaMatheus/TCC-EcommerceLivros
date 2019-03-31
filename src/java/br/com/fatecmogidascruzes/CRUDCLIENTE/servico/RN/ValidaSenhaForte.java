@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.fatecmogidascruzes.CRUDCLIENTE.servico;
+package br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN;
 
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Cliente;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.EntidadeDominio;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.AbstractStrategy;
 
 /**
  *
