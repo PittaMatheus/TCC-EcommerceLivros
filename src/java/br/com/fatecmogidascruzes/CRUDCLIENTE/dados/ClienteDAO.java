@@ -13,7 +13,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import static java.sql.Statement.RETURN_GENERATED_KEYS;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ClienteDAO extends AbstractDAO {
@@ -28,10 +31,10 @@ public class ClienteDAO extends AbstractDAO {
             PreparedStatement declaracao = conexao.prepareStatement("INSERT INTO cliente "
                     + "(nome,sobrenome, data_nascimento, ranking, senha, email, cpf,rg, sexo)"
                                     + " VALUES(?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-
+                    
                     declaracao.setString(1, cliente.getNome());
                     declaracao.setString(2, cliente.getSobrenome());
-                    declaracao.setString(3, cliente.getData_nascimento());
+                    declaracao.setDate(3, new java.sql.Date(cliente.getData_nascimento().getTime()));
                     declaracao.setDouble(4, 50);           // inicia com 50 pontos                    
                     declaracao.setString(5, cliente.getSenha());
                     declaracao.setString(6, cliente.getEmail());                    
@@ -96,7 +99,7 @@ public class ClienteDAO extends AbstractDAO {
                 cli.setId(rs.getInt("id"));
                 cli.setNome(rs.getString("nome"));
                 cli.setSobrenome(rs.getString("sobrenome"));
-                cli.setData_nascimento(rs.getString("data_nascimento"));
+                cli.setData_nascimento(rs.getDate("data_nascimento"));
                 cli.setRanking(rs.getDouble("ranking"));
                 cli.setEmail(rs.getString("email"));
                 cli.setCpf(rs.getString("cpf"));
@@ -118,7 +121,7 @@ public class ClienteDAO extends AbstractDAO {
                 cli.setId(rs.getInt("id"));
                 cli.setNome(rs.getString("nome"));
                 cli.setSobrenome(rs.getString("sobrenome"));
-                cli.setData_nascimento(rs.getString("data_nascimento"));
+                cli.setData_nascimento(rs.getDate("data_nascimento"));
                 cli.setRanking(rs.getDouble("ranking"));
                 cli.setEmail(rs.getString("email"));
                 cli.setCpf(rs.getString("cpf"));
@@ -159,7 +162,7 @@ public class ClienteDAO extends AbstractDAO {
                 cli.setId(rs.getInt("id"));
                 cli.setNome(rs.getString("nome"));
                 cli.setSobrenome(rs.getString("sobrenome"));
-                cli.setData_nascimento(rs.getString("data_nascimento"));
+                cli.setData_nascimento(rs.getDate("data_nascimento"));
                 cli.setRanking(rs.getDouble("ranking"));
                 cli.setEmail(rs.getString("email"));
                 cli.setCpf(rs.getString("cpf"));
@@ -194,7 +197,7 @@ public class ClienteDAO extends AbstractDAO {
             
 				declaracao.setString(1, cliente.getNome());
                                 declaracao.setString(2, cliente.getSobrenome());
-                                declaracao.setString(3, cliente.getData_nascimento());
+                                declaracao.setDate(3, new java.sql.Date(cliente.getData_nascimento().getTime()));
                                 declaracao.setString(4, cliente.getEmail());
                                 declaracao.setString(5, cliente.getCpf());
 				declaracao.setString(6, cliente.getRg());

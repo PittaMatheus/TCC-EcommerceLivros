@@ -41,7 +41,7 @@
                         <input type="text" name="sobrenome" id="sobrenome" value="SobrenomeTeste" class="validate" required>
 
                         <label for="cpf" data-error="Informe o CPF!">CPF</label>
-                        <input type="text" name="cpf" id="cpf" value="444111222333-54" class="validate" required>
+                        <input type="text" name="cpf" id="cpf" value="41656190869" class="validate" required>
 
                         <label for="rg" data-error="Informe o RG!" >RG</label>
                         <input type="text" name="rg" id="rg" value="329702760" class="validate" required>
@@ -57,10 +57,10 @@
                        <input type="text" name="numTelefone" id="numTelefone" value="47223322" class="validate" required>
                        
                        <label for="senha" data-error="Informe a senha" >Senha</label>
-                       <input type="password" name="senha" id="senha" value="senhasenha" class="validate" required>
+                       <input type="password" name="senha" id="senha" value="SenhaValida!@#" class="validate" required>
 
                        <label for="senhaConfirmada" data-error="Informe a senha confirmada">Confirme a senha</label>
-                       <input type="password" name="senhaConfirmada" id="senhaConfirmada" value="senhasenha" class="validate" required>                       
+                       <input type="password" name="senhaConfirmada" id="senhaConfirmada" value="SenhaValida!@#" class="validate" required>                       
                        
                         <label for="sexo" data-error="Informe o sexo"  >Sexo:</label>
                         <select id="sexo" name="sexo"class="validate" value="${param['sexo']}">

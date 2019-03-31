@@ -15,7 +15,7 @@ public class Cliente extends EntidadeDominio{
     private Integer id;
     private String nome;
     private String sobrenome;
-    private String data_nascimento;
+    private Date data_nascimento;
     private boolean status;
     private String sexo;
     private double ranking;
@@ -31,7 +31,7 @@ public class Cliente extends EntidadeDominio{
 
 
     
-    public Cliente(String nome, String sobrenome, boolean status, String sexo, String data_nascimento, double ranking){
+    public Cliente(String nome, String sobrenome, boolean status, String sexo, Date data_nascimento, double ranking){
         super();
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -71,11 +71,11 @@ public class Cliente extends EntidadeDominio{
         this.sobrenome = sobrenome;
     }
 
-    public String getData_nascimento() {
+    public Date getData_nascimento() {
         return data_nascimento;
     }
 
-    public void setData_nascimento(String data_nascimento) {
+    public void setData_nascimento(Date data_nascimento) {
         this.data_nascimento = data_nascimento;
     }
 

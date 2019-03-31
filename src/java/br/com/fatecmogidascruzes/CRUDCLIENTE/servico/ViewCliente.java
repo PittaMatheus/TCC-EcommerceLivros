@@ -11,7 +11,10 @@ import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.EntidadeDominio;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Resultado;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Telefone;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,11 +27,13 @@ public class ViewCliente implements IViewHelper{
 
     @Override
     public EntidadeDominio getEntidade(HttpServletRequest request) {
-        // INSTANCIA DOS DOMINIOS
+          // INSTANCIA DOS DOMINIOS
         Telefone objTelefone = new Telefone();
         Endereco objEndereco = new Endereco();
         Cliente cliente = new Cliente();
-        
+        DateFormat formatadorData = new SimpleDateFormat("dd/mm/yyyy");
+    try{
+
         List<Endereco> enderecos = new ArrayList<>();
         
         // RECEBE PARAMETROS DA JSP
@@ -49,7 +54,7 @@ public class ViewCliente implements IViewHelper{
         String dataNascimento = request.getParameter("data_nascimento");        
         String numTelefone = request.getParameter("numTelefone");
         String tipoTelefone = request.getParameter("TipoTelefone");
-        
+
         // ENDERECO
         String cep = request.getParameter("cep");
         String logradouro = request.getParameter("logradouro");
@@ -69,6 +74,11 @@ public class ViewCliente implements IViewHelper{
         if(id != null){
             cliente.setId(Integer.parseInt(id));
         }
+        
+        if(null != dataNascimento){
+            Date data = formatadorData.parse(dataNascimento);
+            cliente.setData_nascimento(data);
+        }
         cliente.setNome(nome);
         cliente.setSobrenome(sobrenome);
         cliente.setCpf(cpf);
@@ -78,7 +88,7 @@ public class ViewCliente implements IViewHelper{
         cliente.setSexo(sexo);
         cliente.setSenha(senha);
         cliente.setConfirmarSenha(senhaConfirmada);
-        cliente.setData_nascimento(dataNascimento);
+        
         
         if(status != null && status.equals("0"))
             cliente.setStatus(false);
@@ -104,8 +114,13 @@ public class ViewCliente implements IViewHelper{
         
         cliente.setTelefone(objTelefone);
         cliente.setEndereco(objEndereco);
-        return cliente;
+        
+    }catch(Exception e){
+        e.printStackTrace();
+        
     }
+    return cliente;
+ }
 
     
     @Override
