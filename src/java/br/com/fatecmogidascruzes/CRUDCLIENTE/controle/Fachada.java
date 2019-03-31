@@ -21,6 +21,7 @@ import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.IStrategy;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaCPF;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaCamposObrigatorios;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaConfirmarSenha;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaData;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaEspacosVazios;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaSenhaForte;
 import java.util.List;
@@ -52,6 +53,7 @@ public class Fachada implements IFachada{
         RNClienteSalvar.add(new ValidaConfirmarSenha());
         RNClienteSalvar.add(new ValidaEspacosVazios());
         RNClienteSalvar.add(new ValidaCPF());
+        RNClienteSalvar.add(new ValidaData());
         
         
         // Regras de negocio do cliente

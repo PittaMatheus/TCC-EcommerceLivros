@@ -31,7 +31,7 @@ public class ViewCliente implements IViewHelper{
         Telefone objTelefone = new Telefone();
         Endereco objEndereco = new Endereco();
         Cliente cliente = new Cliente();
-        DateFormat formatadorData = new SimpleDateFormat("dd/mm/yyyy");
+        DateFormat formatadorData = new SimpleDateFormat("dd/MM/yyyy");
     try{
 
         List<Endereco> enderecos = new ArrayList<>();
