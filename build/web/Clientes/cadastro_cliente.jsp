@@ -4,6 +4,7 @@
     Author     : matheus
 --%>
 
+<%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Resultado"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +13,24 @@
         <title>Cadastre -se </title>
     </head>
     <body>
+        				<%
+					Resultado resultado = (Resultado) request.getAttribute("resultado");
+					if(resultado != null) {
+						if(!resultado.isStatus() && !resultado.getMensagem().isEmpty()) {
+							out.print("<div class='alert alert-danger'>");
+							out.print(resultado.getMensagem());
+							out.print("</div>");
+						} else {
+							if(!resultado.getMensagem().isEmpty()) {
+								out.print("<div class='alert alert-success'>");
+								out.print(resultado.getMensagem());
+								out.print("</div>");
+							}
+						}
+					}
+				%>
+        
+        
         <h1>Informe seus dados pessoais</h1>
         <form action="InserirCliente" name="acao" value="inserir" method="POST">
                    

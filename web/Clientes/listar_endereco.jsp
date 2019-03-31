@@ -5,9 +5,9 @@
 --%>
 
 <%@page import="java.util.List"%>
-<%@page import="br.com.fatecmogidascruzes.dominio.Endereco"%>
-<%@page import="br.com.fatecmogidascruzes.dominio.Resultado"%>
-<%@page import="br.com.fatecmogidascruzes.dominio.Cliente"%>
+<%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Endereco"%>
+<%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Resultado"%>
+<%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Cliente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
