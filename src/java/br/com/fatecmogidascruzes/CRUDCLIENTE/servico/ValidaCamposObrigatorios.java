@@ -12,7 +12,7 @@ import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.EntidadeDominio;
  *
  * @author matheus
  */
-public class ValidaCamposCliente extends AbstractStrategy {
+public class ValidaCamposObrigatorios extends AbstractStrategy {
 
     @Override
     public String validar(EntidadeDominio entidade) {

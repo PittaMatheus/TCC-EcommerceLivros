@@ -19,7 +19,7 @@ public class ValidaConfirmarSenha extends AbstractStrategy{
         Cliente cliente = (Cliente) entidade;
         
         if(!cliente.getSenha().equals(cliente.getConfirmarSenha())){
-            return "<li>A senhas precisam ser iguais</li>";
+            return "<li>Os campos de senham não correspondem</li>";
         }
         return "";
     }

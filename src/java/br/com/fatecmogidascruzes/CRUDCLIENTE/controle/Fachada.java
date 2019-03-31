@@ -18,8 +18,9 @@ import java.util.Map;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dados.IDAO;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Cartao;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.IStrategy;
-import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ValidaCamposCliente;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ValidaCamposObrigatorios;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ValidaConfirmarSenha;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ValidaEspacosVazios;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ValidaSenhaForte;
 import java.util.List;
 
@@ -45,9 +46,10 @@ public class Fachada implements IFachada{
         List<IStrategy> RNClienteSalvar = new ArrayList<IStrategy>();
         
         // Listas das Regras de negocio do comando insert
-        RNClienteSalvar.add(new ValidaCamposCliente());
+        RNClienteSalvar.add(new ValidaCamposObrigatorios());
         RNClienteSalvar.add(new ValidaSenhaForte());
         RNClienteSalvar.add(new ValidaConfirmarSenha());
+        RNClienteSalvar.add(new ValidaEspacosVazios());
         
         
         // Regras de negocio do cliente
@@ -159,7 +161,7 @@ public class Fachada implements IFachada{
         } catch(Exception e) {
             resultado.setStatus(false);
             resultado.setMensagem("Erro ao ativar");
-            e.printStackTrace();
+            e.printStackTrace(); 
         }
     return resultado;
     }
