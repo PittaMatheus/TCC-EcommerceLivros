@@ -4,6 +4,8 @@
     Author     : matheus
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Cliente"%>
 <%@page import="java.util.List"%>
 <%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Resultado"%>
@@ -31,7 +33,8 @@
                         } else { 
 
                             for (Cliente cliente : clientes) {
-
+                                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                                String dataFormatNasc = formato.format(cliente.getData_nascimento());
 
 	%>
         
@@ -53,7 +56,7 @@
                         <input type="text" name="rg" id="rg" value="<%= cliente.getRg()%>" class="validate" required>
 
                         <label for="data_nascimento" data-error="Informe a data de nascimento!" >Data de nascimento</label>
-                       <input type="text" name="data_nascimento" id="data_nascimento" value="<%= cliente.getData_nascimento()%>"class="validate"  required>
+                       <input type="text" name="data_nascimento" id="data_nascimento" value="<%= dataFormatNasc %>"class="validate"  required>
                        <br>
                        <br>
                        <label for="email" data-error="Informe o email!" >Email</label>

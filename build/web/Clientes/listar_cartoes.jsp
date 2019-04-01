@@ -33,6 +33,8 @@
                          if(cartoes.size() == 0) {
                             out.print("Nenhum cartão cadastrado");                            
                         } else { %>
+            <form action='ExcluirCartao'>
+                <input type='submit' name="acao" value="desativar" />
                 <table border='1'>
                     <thead>
                         <tr>
@@ -59,6 +61,7 @@
                     %>
             </tbody>
         </table>
+            </form>
             <br><br><br>   
             <%
             out.println("<a href='cadastro_cartao.jsp?id=" + id + "' >Adicionar cartão</a>");

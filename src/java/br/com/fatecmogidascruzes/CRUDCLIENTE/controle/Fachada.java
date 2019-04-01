@@ -20,6 +20,7 @@ import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Cartao;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.IStrategy;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaCPF;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaCamposObrigatorios;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaClienteExistente;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaConfirmarSenha;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaData;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaEspacosVazios;
@@ -54,6 +55,7 @@ public class Fachada implements IFachada{
         RNClienteSalvar.add(new ValidaEspacosVazios());
         RNClienteSalvar.add(new ValidaCPF());
         RNClienteSalvar.add(new ValidaData());
+       //    RNClienteSalvar.add(new ValidaClienteExistente());
         
         
         // Regras de negocio do cliente

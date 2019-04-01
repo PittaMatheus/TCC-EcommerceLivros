@@ -4,6 +4,7 @@
     Author     : matheus
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Cliente"%>
 <%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Cliente"%>
@@ -50,7 +51,11 @@
                                 out.println("<td><input type='radio' required name='id' value=" + cliente.getId() + " /></td>");
                                 out.println("<td> " + cliente.getNome()+ "</td>");                                
                                 out.println("<td>" + cliente.getSobrenome()+ "</td>");
-                                out.println("<td>" + cliente.getData_nascimento()+ "</td>");
+                                
+                                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                                String dataFormatNasc = formato.format(cliente.getData_nascimento());
+                                
+                                out.println("<td>" + dataFormatNasc + "</td>");
                                 out.println("<td>" + cliente.getRanking()+ "</td>");
                                 out.println("<td>" + cliente.getEmail()+ "</td>");
                                 out.println("<td>" + cliente.getCpf()+ "</td>");

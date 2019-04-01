@@ -31,9 +31,10 @@ public class Cliente extends EntidadeDominio{
 
 
     
-    public Cliente(String nome, String sobrenome, boolean status, String sexo, Date data_nascimento, double ranking){
+    public Cliente(Integer id, String nome, String sobrenome, boolean status, String sexo, Date data_nascimento, double ranking){
         super();
         this.nome = nome;
+        this.id = id;
         this.sobrenome = sobrenome;
         this.status = status;
         this.sexo = sexo;

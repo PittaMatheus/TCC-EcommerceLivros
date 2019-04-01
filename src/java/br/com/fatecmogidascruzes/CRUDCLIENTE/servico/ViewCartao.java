@@ -62,12 +62,14 @@ public class ViewCartao implements IViewHelper{
 				if(resultado.getAcao() != null) {
 					if(resultado.getAcao().equals("inserir")){
                                             request.setAttribute("acao", "inserção");
-                                            request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                                            request.getRequestDispatcher("../sucesso.jsp").forward(request, response);                                            
                                         }else if(resultado.getAcao().equals("listar")){
                                             request.getRequestDispatcher("listar_cartoes.jsp").forward(request, response);
-                                        }
-					else 
-						//request.getRequestDispatcher("index.html").forward(request, response);
+                                        }else if(resultado.getAcao().equals("desativar")){
+                                            request.setAttribute("acao", "exclusão");
+                                            request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                                        }else 
+						
                                             request.getRequestDispatcher("../index.html").forward(request, response);
 				} else {
                                     response.sendRedirect("../index.html");

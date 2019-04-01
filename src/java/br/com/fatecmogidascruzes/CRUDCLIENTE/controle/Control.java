@@ -55,6 +55,7 @@ public class Control extends HttpServlet {
          
          viewHelper.put("/Ecommerce/Clientes/InserirCartao", new ViewCartao());
          viewHelper.put("/Ecommerce/Clientes/ListarCartao", new ViewCartao());
+         viewHelper.put("/Ecommerce/Clientes/ExcluirCartao", new ViewCartao());
 
     }
     

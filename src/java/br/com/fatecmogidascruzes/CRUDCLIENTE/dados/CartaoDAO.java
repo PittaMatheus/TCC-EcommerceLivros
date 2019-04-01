@@ -116,8 +116,33 @@ public class CartaoDAO extends AbstractDAO{
 
     @Override
     public Resultado desativar(EntidadeDominio entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<EntidadeDominio> ListEntidades = new ArrayList<EntidadeDominio>();
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Cartao cartao = (Cartao) entidade;
+            PreparedStatement declaracao = conexao.prepareStatement(""
+                                                + "DELETE from cartao"
+						+ " WHERE id=?");
+           
+            System.out.println("ID CARTAO: " + cartao.getCliente().getId());
+				declaracao.setInt(1, cartao.getCliente().getId());
+				declaracao.execute();
+
+            resultado.setStatus(true);
+            resultado.setMensagem("O Cartao foi excluido com sucesso!");   
+            // Fecha a conexao.
+            conexao.close();
+        } catch (ClassNotFoundException erro) {
+            erro.printStackTrace();     
+            resultado.setStatus(false);
+            resultado.setMensagem("Houve algum erro ao excluir o cartao");
+        } catch (SQLException erro) {
+            erro.printStackTrace();   
+        }
+          return resultado;
     }
+
 
     @Override
     public Resultado ativar(EntidadeDominio entidade) {
