@@ -12,6 +12,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+         <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Listagem de clientes</title>
     </head>
@@ -24,7 +26,7 @@
 		}
 	%>
         
-    <h3>Dados dos clientes</h3>
+    
     
   
         
@@ -35,9 +37,12 @@
                             out.print("<br><br>Nenhum cliente cadastrado");
                         } else {
                      %>
-                       <form action='DesativarCliente'>
-                            <input type='submit' name="acao" value="desativar" />
-                            <table border='1'>
+                       
+                <div class ="container">
+                    <h3>Dados dos clientes</h3>
+                    <form action='DesativarCliente'>
+                        <input type='submit' name="acao" value="desativar" />
+                            <table class="highlight striped centered responsive-table">
                                 <thead>
                                     <tr>
                                         <th>#</th><th>Nome</th><th>Sobrenome</th><th>Data de nascimento</th><th>Ranking</th><th>EmaIl</th><th>CPF</th><th>RG</th>
@@ -69,8 +74,11 @@
                     %>
                 </tbody>
         </table>
+                            </div>
     </form>
                 <br><br>
         <a href='../index.html'>Voltar</a>
+         <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     </body>
 </html>

@@ -15,4 +15,5 @@ public interface IFachada {
     public Resultado consultarPorID(EntidadeDominio entidade);
     public Resultado desativar(EntidadeDominio entidade);
     public Resultado ativar(EntidadeDominio entidade);
+    public Resultado verificaUsuario(EntidadeDominio entidade);
 }

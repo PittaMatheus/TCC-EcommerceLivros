@@ -9,10 +9,16 @@
 <!DOCTYPE html>
 <html>
     <head>
+         <!-- Compiled and minified CSS -->
+         
+        <link rel="stylesheet" href="../css/materialize.min.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Cadastre -se </title>
     </head>
     <body>
+        <div class="container">
+            <div class="row">
+                
         				<%
 					Resultado resultado = (Resultado) request.getAttribute("resultado");
 					if(resultado != null) {
@@ -32,43 +38,71 @@
         
         
         <h1>Informe seus dados pessoais</h1>
+        <fieldset>
+             <legend><b>Dados pesosais</b></legend>
         <form action="InserirCliente" name="acao" value="inserir" method="POST">
-                   
-                        <label for="nome" data-error="Informe o nome!">Nome</label>
-                        <input type="text" name="nome" id="nome" value="NomeTeste" class="validate" required>
-                        
-                        <label for="sobrenome" data-error="Informe o sobrenome!" >Sobrenome</label>
-                        <input type="text" name="sobrenome" id="sobrenome" value="SobrenomeTeste" class="validate" required>
-
-                        <label for="cpf" data-error="Informe o CPF!">CPF</label>
-                        <input type="text" name="cpf" id="cpf" value="41656190869" class="validate" required>
-
-                        <label for="rg" data-error="Informe o RG!" >RG</label>
-                        <input type="text" name="rg" id="rg" value="329702760" class="validate" required>
-
-                        <label for="data_nascimento" data-error="Informe a data de nascimento!" >Data de nascimento</label>
-                       <input type="text" name="data_nascimento" id="data_nascimento" value="1994-05-11"class="validate"  required>
-                       <br>
-                       <br>
-                       <label for="email" data-error="Informe o email!" >Email</label>
-                       <input type="email" name="email" id="email" value="emailteste@teste.com" class="validate" required>
-                       
+            <div class="input-field col s12 l6">
+                <label for="nome" data-error="Informe o nome!">Nome</label>
+                <input type="text" name="nome" id="nome" value="NomeTeste" class="validate" required>
+            </div>          
+            <div class="input-field col s12 l6">
+                <label for="sobrenome" data-error="Informe o sobrenome!" >Sobrenome</label>
+                <input type="text" name="sobrenome" id="sobrenome" value="SobrenomeTeste" class="validate" required>
+            </div> 
+            <div class="input-field col s12 l6">
+                <label for="cpf" data-error="Informe o CPF!">CPF</label>
+                <input type="text" name="cpf" id="cpf" value="41656190869" class="validate" required>
+            </div>
+            <div class="input-field col s12 l6">
+                <label for="rg" data-error="Informe o RG!" >RG</label>
+                <input type="text" name="rg" id="rg" value="329702760" class="validate" required>
+            </div>
+            <div class="input-field col s12 l4">
+                <label for="data_nascimento" data-error="Informe a data de nascimento!" >Data de nascimento</label>
+                <input type="text" name="data_nascimento" id="data_nascimento" value="1994-05-11"class="validate"  required>
+            </div>    
+            <div class="input-field col s12 l4">
+                <label for="email" data-error="Informe o email!" >Email</label>
+                <input type="email" name="email" id="email" value="emailteste@teste.com" class="validate" required>
+            </div>
+            <div class="input-field col s12 l4">
                        <label for="telefone" data-error="Informe o telefone!" >Telefone</label>
                        <input type="text" name="numTelefone" id="numTelefone" value="47223322" class="validate" required>
-                       
+            </div> 
+            <div class="input-field col s12 l6">           
                        <label for="senha" data-error="Informe a senha" >Senha</label>
                        <input type="password" name="senha" id="senha" value="SenhaValida!@#" class="validate" required>
-
+            </div>
+            <div class="input-field col s12 l6">           
                        <label for="senhaConfirmada" data-error="Informe a senha confirmada">Confirme a senha</label>
                        <input type="password" name="senhaConfirmada" id="senhaConfirmada" value="SenhaValida!@#" class="validate" required>                       
-                       
-                        <label for="sexo" data-error="Informe o sexo"  >Sexo:</label>
-                        <select id="sexo" name="sexo"class="validate" value="${param['sexo']}">
-                            <option value="" disabled >Informe o sexo</option>
-                            <option value="M" selected>Masculino</option>
+            </div>     
+            
+            
+                    <div class="input-field col s12">
+                        <select id="sexo" name="sexo"class="validate">
+                            <option value="" disabled selected> ESCOLHA O SEXO </option>
+                            <option value="M">Masculino</option>
                             <option value="F">Feminino</option>
                         </select>
-                            
+                        <label>Sexo</label>
+                    </div>
+                              
+            
+            
+            <div class="input-field">
+    <select disabled>
+      <option value="" disabled selected>Choose your option</option>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+    </select>
+    <label>Materialize Disabled</label>
+  </div>
+            
+            
+            
+                      </fieldset>
                      <!-- DADOS ENDERECO-->       
                      <br> 
                         <h1>Endereco</h1>
@@ -81,14 +115,23 @@
                         </select>
                             
                         <label for="tipoLogradouro" data-error="Informe o tipo do endereco"  >Endereço de: </label>
-                        <select id="tipoLogradouro" name="tipoLogradouro"class="validate" value="${param['tipoLogradouro']}">
-                            <option value="" disabled >Tipo de logradouro</option>
+                        <select id="tipoLogradouro" name="tipoLogradouro"class="validate" value="${param['tipoLogradouro']}"  >
+                            <option value="" disabled selected >Tipo de logradouro</option>
                             <option value="vila" selected>Vila</option>
                             <option value="estrada">Estrada</option>
                             <option value="fazenda">Fazenda</option>
                             <option value="sitio">Sitio</option>
                             <option value="condominio">Condominio</option>                         
                         </select>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                             <br>
                         <label for="cep" >CEP</label>                            
                         <input type="text" value="12312312312312" name="cep" id="cep" required>
@@ -123,9 +166,16 @@
                                                      
                         <br> <br> <br> <br>                         
                        <input type="submit" name="acao" value="inserir" class="btn btn-success">                                  
-        </form>
-                       
+            </form>
+        </div>
+    </div>
            <div><a href="../index.html">Voltar</a></div>      
 
+           <!-- Compiled and minified JavaScript -->
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="../js/materialize.min.js"></script>
+        <script src="../js/custom.js"></script>
+
+        
     </body>
 </html>

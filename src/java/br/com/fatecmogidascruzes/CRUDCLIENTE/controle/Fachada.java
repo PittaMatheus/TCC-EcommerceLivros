@@ -55,7 +55,7 @@ public class Fachada implements IFachada{
         RNClienteSalvar.add(new ValidaEspacosVazios());
         RNClienteSalvar.add(new ValidaCPF());
         RNClienteSalvar.add(new ValidaData());
-       //    RNClienteSalvar.add(new ValidaClienteExistente());
+        RNClienteSalvar.add(new ValidaClienteExistente());
         
         
         // Regras de negocio do cliente
@@ -67,8 +67,7 @@ public class Fachada implements IFachada{
         RN = new HashMap<String,Map<String,List<IStrategy>>>();
 	RN.put("salvar", regrasCliente);
         
-    }
-    
+    } 
     @Override
     public Resultado inserir(EntidadeDominio entidade) {
         resultado.setEntidades(new ArrayList<EntidadeDominio>());
@@ -188,7 +187,12 @@ public class Fachada implements IFachada{
 		}
 	}
     
-    
+    @Override
+    public Resultado verificaUsuario(EntidadeDominio entidade) {
+        // implementar a funcao VericicaUsuario no DAOCLIENTE pra verificar se o mesmo ja existe na base antes de cadastrar
+        // verificar pelo email e pelo CPF e chamar a função aqui.
+        return resultado;
+    }
     
 }
 

@@ -5,6 +5,8 @@
  */
 package br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN;
 
+import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.CommandConsultarPorID;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Cliente;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.EntidadeDominio;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.AbstractStrategy;
 
@@ -16,7 +18,10 @@ public class ValidaClienteExistente extends AbstractStrategy{
 
     @Override
     public String validar(EntidadeDominio entidade) {
-        String str = "";
+        String str ="";
+        Cliente cliente = (Cliente) entidade;
+        CommandConsultarPorID consultar = new CommandConsultarPorID();
+        consultar.executar(cliente);
             
         return str;
     }
