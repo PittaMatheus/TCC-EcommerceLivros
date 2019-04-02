@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.fatecmogidascruzes.CRUDCLIENTE.controle;
+package br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands;
 
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.EntidadeDominio;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Resultado;
+import java.util.List;
 
 /**
  *
  * @author matheus
  */
-public class CommandAlterar extends AbstractCommand{
-
+public class CommandListar extends AbstractCommand{
     @Override
-    public Resultado executar(EntidadeDominio entidade) {
-        return fachada.alterar(entidade);
-    }
+	public Resultado executar(EntidadeDominio entidade) {
+		return fachada.listar(entidade);
+	}
     
 }

@@ -1,5 +1,12 @@
 package br.com.fatecmogidascruzes.CRUDCLIENTE.controle;
 
+import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands.ICommand;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands.CommandListar;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands.CommandInserir;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands.CommandAlterar;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands.CommandDesativar;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands.CommandAtivar;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands.CommandConsultar;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dados.ClienteDAO;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.IViewHelper;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Cliente;

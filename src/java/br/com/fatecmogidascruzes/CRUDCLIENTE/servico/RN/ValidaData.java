@@ -31,9 +31,9 @@ public class ValidaData extends AbstractStrategy{
         
         // Verifica se é posterior a data atual(modificar para verificar se o cliente tem no minimo 10 anos)
         if(cliente.getData_nascimento().after(dataAtual)){
-            return str+="Data invalida";
+            return str+="<li>Data invalida</li>";
         }else if(cliente.getData_nascimento().after(dataLimite)){
-            return str+="Data invalida";
+            return str+="<li>Data invalida</li>";
         }
 
            

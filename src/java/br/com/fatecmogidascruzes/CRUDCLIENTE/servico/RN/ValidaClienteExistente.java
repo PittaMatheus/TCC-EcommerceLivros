@@ -5,7 +5,7 @@
  */
 package br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN;
 
-import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.CommandConsultar;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands.CommandConsultar;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Cliente;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.EntidadeDominio;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Resultado;
@@ -27,7 +27,6 @@ public class ValidaClienteExistente extends AbstractStrategy{
         Resultado resultado = new Resultado();
         CommandConsultar consultar = new CommandConsultar();
         resultado = consultar.executar(cliente);
-        
         // Objeto resultado foi preenchido com uma lista de resposta da query que verifica se 
         // O cpf ou Email ja esta cadastrado no banco
         List<Cliente> clientes = (List) resultado.getEntidades();
