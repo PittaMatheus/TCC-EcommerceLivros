@@ -22,7 +22,7 @@ import java.util.List;
 public class ClienteDAO extends AbstractDAO {
 
    @Override
-    public Resultado inserir(EntidadeDominio entidade){
+    public Resultado inserir(EntidadeDominio    entidade){
         List<EntidadeDominio> ListEntidades = new ArrayList<EntidadeDominio>();
         try {
             // Abre uma conexao com o banco.
@@ -146,17 +146,38 @@ public class ClienteDAO extends AbstractDAO {
 
     
    @Override
-    public Resultado consultarPorID(EntidadeDominio entidade) {
+    public Resultado consultar(EntidadeDominio entidade) {
          List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
         try {
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();
             Cliente cliente = (Cliente) entidade;
+            // Se o id do objeto cliente não estiver preenchido. A funcao consultar irá consultar o CPF e EMAIL
+            if(cliente.getId() == null){
+                PreparedStatement declaracao = conexao.prepareStatement("SELECT c.email, c.cpf "
+                    + "FROM cliente c WHERE c.status = 1 AND c.cpf = ? OR c.email = ?");
+            declaracao.setString(1, cliente.getCpf());
+            declaracao.setString(2, cliente.getEmail());
+            
+            ResultSet rs =  declaracao.executeQuery();
+            
+            while(rs.next()) {
+                Cliente cli = new Cliente();
+                cli.setCpf(rs.getString("cpf"));
+                cli.setEmail(rs.getString("email"));
+                entidades.add(cli);
+            }
+            
+            resultado.setEntidades(entidades);
+            
+            return resultado;
+            
+            }else{
             PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome,c.sobrenome, c.data_nascimento, "
                     + "c.ranking, c.email, c.cpf, c.rg, c.sexo "
                     + "FROM cliente c WHERE c.status = 1 AND c.id = ?");
             declaracao.setInt(1, cliente.getId());
-           ResultSet rs =  declaracao.executeQuery();
+            ResultSet rs =  declaracao.executeQuery();
             while(rs.next()) {
                 Cliente cli = new Cliente();
                 cli.setId(rs.getInt("id"));
@@ -171,6 +192,7 @@ public class ClienteDAO extends AbstractDAO {
                 resultado.setAcao("consultarCliente");
                 entidades.add(cli);
 		resultado.setStatus(true);
+               }
             }
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
@@ -179,7 +201,9 @@ public class ClienteDAO extends AbstractDAO {
         } catch (SQLException erro) {
             erro.printStackTrace();   
         }
+        resultado.setMensagem("Listado com sucesso");
         resultado.setEntidades(entidades);
+        resultado.setStatus(true);
        return resultado;
     }
 

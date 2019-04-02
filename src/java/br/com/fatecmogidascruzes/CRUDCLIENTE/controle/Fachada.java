@@ -108,12 +108,10 @@ public class Fachada implements IFachada{
     }
 
     @Override
-    public Resultado consultarPorID(EntidadeDominio entidade) {
+    public Resultado consultar(EntidadeDominio entidade) {
         resultado.setEntidades(new ArrayList<EntidadeDominio>());
         try {
-            resultado = dao.get(entidade.getClass().getName()).consultarPorID(entidade);
-            resultado.setStatus(true);
-            resultado.setMensagem("Listado com sucesso");
+            resultado = dao.get(entidade.getClass().getName()).consultar(entidade);
             
         } catch(Exception e) {
             resultado.setStatus(false);

@@ -69,45 +69,6 @@ public class CartaoDAO extends AbstractDAO{
     }
 
 
-    public Resultado consultarPorID(EntidadeDominio entidade) {
-        List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
-        try {
-            // Abre uma conexao com o banco.
-            Connection conexao = BancoDadosOracle.getConexao();
-            Cartao cartao = (Cartao) entidade;
-            PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome,c.dtVencimento, "
-                    + "bandeira, numero, codSeguranca "
-                    + "FROM cartao c WHERE c.id_cliente = ?");
-            declaracao.setInt(1, cartao.getCliente().getId());
-           ResultSet rs =  declaracao.executeQuery();
-            while(rs.next()) {
-                Cartao cart = new Cartao();
-                Bandeira bandeira = new Bandeira();
-                cart.setId(rs.getInt("id"));
-                cart.setNome(rs.getString("nome"));
-                cart.setDtVencimento(rs.getString("dtVencimento"));
-                bandeira.setNome(rs.getString("bandeira"));
-                cart.setBandeira(bandeira);
-                cart.setNumeroCartao(rs.getString("numero"));
-                cart.setCodSeguranca(rs.getString("codSeguranca"));
-                
-
-                
-                entidades.add(cart);
-                resultado.setEntidades(entidades);
-		resultado.setStatus(true);
-            }
-            resultado.setAcao("listar");
-        }catch(ClassNotFoundException erro) {
-            erro.printStackTrace();     
-            resultado.setStatus(false);
-            resultado.setMensagem("Houve algum erro ao listar o endereco");
-        } catch (SQLException erro) {
-            erro.printStackTrace();   
-        }
-        resultado.setEntidades(entidades);
-       return resultado;
-    }
 
     @Override
     public Resultado alterar(EntidadeDominio entidade) {
@@ -147,6 +108,45 @@ public class CartaoDAO extends AbstractDAO{
     @Override
     public Resultado ativar(EntidadeDominio entidade) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Resultado consultar(EntidadeDominio entidade) {
+                List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Cartao cartao = (Cartao) entidade;
+            PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome,c.dtVencimento, "
+                    + "bandeira, numero, codSeguranca "
+                    + "FROM cartao c WHERE c.id_cliente = ?");
+           declaracao.setInt(1, cartao.getCliente().getId());
+           ResultSet rs =  declaracao.executeQuery();
+            while(rs.next()) {
+                Cartao cart = new Cartao();
+                Bandeira bandeira = new Bandeira();
+                cart.setId(rs.getInt("id"));
+                cart.setNome(rs.getString("nome"));
+                cart.setDtVencimento(rs.getString("dtVencimento"));
+                bandeira.setNome(rs.getString("bandeira"));
+                cart.setBandeira(bandeira);
+                cart.setNumeroCartao(rs.getString("numero"));
+                cart.setCodSeguranca(rs.getString("codSeguranca"));
+                entidades.add(cart);	
+            }
+            resultado.setEntidades(entidades);
+            resultado.setStatus(true);
+            resultado.setMensagem("Listado com sucesso");
+            resultado.setAcao("listar");
+        }catch(ClassNotFoundException erro) {
+            erro.printStackTrace();     
+            resultado.setStatus(false);
+            resultado.setMensagem("Houve algum erro ao listar o endereco");
+        } catch (SQLException erro) {
+            erro.printStackTrace();   
+        }
+    return resultado;
+    
     }
         
     

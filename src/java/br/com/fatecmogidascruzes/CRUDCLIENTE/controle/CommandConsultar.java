@@ -12,11 +12,11 @@ import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Resultado;
  *
  * @author matheus
  */
-public class CommandConsultarPorID extends AbstractCommand{
+public class CommandConsultar extends AbstractCommand{
 
     @Override
     public Resultado executar(EntidadeDominio entidade) {
-        return fachada.consultarPorID(entidade);
+        return fachada.consultar(entidade);
     }
     
 }

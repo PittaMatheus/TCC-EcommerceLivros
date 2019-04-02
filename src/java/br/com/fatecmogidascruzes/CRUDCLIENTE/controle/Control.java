@@ -35,7 +35,7 @@ public class Control extends HttpServlet {
         commands = new HashMap<String, ICommand>();
         commands.put("inserir", new CommandInserir());
         commands.put("listar", new CommandListar());
-        commands.put("consultarPorID", new CommandConsultarPorID());
+        commands.put("consultarPorID", new CommandConsultar());
         commands.put("alterar", new CommandAlterar());
         commands.put("desativar", new CommandDesativar());
         commands.put("ativar", new CommandAtivar());

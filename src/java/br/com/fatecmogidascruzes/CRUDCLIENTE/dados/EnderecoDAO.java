@@ -116,7 +116,7 @@ public class EnderecoDAO extends AbstractDAO {
     }
 
     @Override
-    public Resultado consultarPorID(EntidadeDominio entidade) {
+    public Resultado consultar(EntidadeDominio entidade) {
         List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
         try {
             // Abre uma conexao com o banco.
@@ -141,15 +141,14 @@ public class EnderecoDAO extends AbstractDAO {
                 end.setComplemento(rs.getString("complemento"));
                 end.setReferencia(rs.getString("referencia"));
                 end.setTipoEndereco(rs.getString("tipoEndereco"));
-
-                resultado.setAcao("listarEndereco");
                 entidades.add(end);
-		resultado.setStatus(true);
             }
-            if(resultado.getAcao() == null){
-                resultado.setAcao("inserir");
-            }
-            
+        //if(resultado.getAcao() == null){
+          //  resultado.setAcao("inserir");
+       // }
+        resultado.setAcao("listarEndereco");
+        resultado.setStatus(true);    
+        resultado.setMensagem("Listado com sucesso");
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);

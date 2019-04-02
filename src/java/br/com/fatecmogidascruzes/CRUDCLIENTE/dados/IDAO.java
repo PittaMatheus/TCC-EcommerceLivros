@@ -8,8 +8,6 @@ public interface IDAO {
     public Resultado inserir(EntidadeDominio entidade);
 
     public Resultado listar(EntidadeDominio entidade);
-    
-    public Resultado consultarPorID(EntidadeDominio entidade);
 
     public Resultado alterar(EntidadeDominio entidade);
 
@@ -17,4 +15,5 @@ public interface IDAO {
 
     public Resultado ativar(EntidadeDominio entidade);
     
+    public Resultado consultar(EntidadeDominio entidade);
 }

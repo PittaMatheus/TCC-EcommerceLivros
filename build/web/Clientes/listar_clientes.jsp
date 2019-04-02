@@ -13,7 +13,7 @@
 <html>
     <head>
          <!-- Compiled and minified CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Listagem de clientes</title>
     </head>
@@ -42,7 +42,7 @@
                     <h3>Dados dos clientes</h3>
                     <form action='DesativarCliente'>
                         <input type='submit' name="acao" value="desativar" />
-                            <table class="highlight striped centered responsive-table">
+                            <table border="1" class="highlight striped centered responsive-table">
                                 <thead>
                                     <tr>
                                         <th>#</th><th>Nome</th><th>Sobrenome</th><th>Data de nascimento</th><th>Ranking</th><th>EmaIl</th><th>CPF</th><th>RG</th>
@@ -79,6 +79,6 @@
                 <br><br>
         <a href='../index.html'>Voltar</a>
          <!-- Compiled and minified JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
     </body>
 </html>

@@ -11,7 +11,7 @@
     <head>
          <!-- Compiled and minified CSS -->
          
-        <link rel="stylesheet" href="../css/materialize.min.css">
+      <!--  <link rel="stylesheet" href="../css/materialize.min.css"> -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Cadastre -se </title>
     </head>
@@ -59,7 +59,7 @@
             </div>
             <div class="input-field col s12 l4">
                 <label for="data_nascimento" data-error="Informe a data de nascimento!" >Data de nascimento</label>
-                <input type="text" name="data_nascimento" id="data_nascimento" value="1994-05-11"class="validate"  required>
+                <input type="text" name="data_nascimento" id="data_nascimento" value="12/01/1995"class="validate"  required>
             </div>    
             <div class="input-field col s12 l4">
                 <label for="email" data-error="Informe o email!" >Email</label>
@@ -82,24 +82,13 @@
                     <div class="input-field col s12">
                         <select id="sexo" name="sexo"class="validate">
                             <option value="" disabled selected> ESCOLHA O SEXO </option>
-                            <option value="M">Masculino</option>
+                            <option value="M" selected>Masculino</option>
                             <option value="F">Feminino</option>
                         </select>
-                        <label>Sexo</label>
                     </div>
                               
             
-            
-            <div class="input-field">
-    <select disabled>
-      <option value="" disabled selected>Choose your option</option>
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
-    </select>
-    <label>Materialize Disabled</label>
-  </div>
-            
+
             
             
                       </fieldset>
@@ -124,14 +113,8 @@
                             <option value="condominio">Condominio</option>                         
                         </select>
                             
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
+                    
+
                             <br>
                         <label for="cep" >CEP</label>                            
                         <input type="text" value="12312312312312" name="cep" id="cep" required>
@@ -171,10 +154,10 @@
     </div>
            <div><a href="../index.html">Voltar</a></div>      
 
-           <!-- Compiled and minified JavaScript -->
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- Compiled and minified JavaScript -->
+        <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="../js/materialize.min.js"></script>
-        <script src="../js/custom.js"></script>
+        <script src="../js/custom.js"></script>-->
 
         
     </body>
