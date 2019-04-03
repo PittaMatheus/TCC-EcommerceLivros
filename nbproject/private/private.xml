@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/matheus/NetBeansProjects/Ecommerce/web/index.html</file>
-            <file>file:/home/matheus/NetBeansProjects/Ecommerce/src/java/br/com/fatecmogidascruzes/CRUDCLIENTE/servico/RN/ValidaClienteExistente.java</file>
-            <file>file:/home/matheus/NetBeansProjects/Ecommerce/src/java/br/com/fatecmogidascruzes/CRUDCLIENTE/dados/ClienteDAO.java</file>
-            <file>file:/home/matheus/NetBeansProjects/Ecommerce/src/java/br/com/fatecmogidascruzes/CRUDCLIENTE/controle/CommandConsultar.java</file>
+            <file>file:/home/matheus/NetBeansProjects/Ecommerce/src/java/br/com/fatecmogidascruzes/CRUDCLIENTE/servico/RN/ValidaSenha.java</file>
+            <file>file:/home/matheus/NetBeansProjects/Ecommerce/src/java/br/com/fatecmogidascruzes/CRUDCLIENTE/controle/commands/CommandAutenticar.java</file>
+            <file>file:/home/matheus/NetBeansProjects/Ecommerce/src/java/br/com/fatecmogidascruzes/CRUDCLIENTE/controle/Fachada.java</file>
+            <file>file:/home/matheus/NetBeansProjects/Ecommerce/src/java/br/com/fatecmogidascruzes/CRUDCLIENTE/controle/IFachada.java</file>
         </group>
     </open-files>
 </project-private>

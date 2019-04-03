@@ -6,6 +6,7 @@ import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands.CommandInserir;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands.CommandAlterar;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands.CommandDesativar;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands.CommandAtivar;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands.CommandAutenticar;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands.CommandConsultar;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dados.ClienteDAO;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.IViewHelper;
@@ -14,12 +15,14 @@ import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Endereco;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.EntidadeDominio;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Resultado;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Telefone;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Usuario;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.excecao.ExcecaoAcessoDados;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.excecao.ExcecaoLimiteTentativas;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ViewCartao;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ViewCliente;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ViewEndereco;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ViewLogin;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ViewUsuario;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +41,7 @@ public class Control extends HttpServlet {
     // Construtor que inicializará os caminhos de URL
     public Control(){
         super();
+        
         //Mapa dos commands
         commands = new HashMap<String, ICommand>();
         commands.put("inserir", new CommandInserir());
@@ -46,6 +50,10 @@ public class Control extends HttpServlet {
         commands.put("alterar", new CommandAlterar());
         commands.put("desativar", new CommandDesativar());
         commands.put("ativar", new CommandAtivar());
+        commands.put("login", new CommandAutenticar());
+        
+        
+        
 
         // Mapa das views
          viewHelper = new HashMap<String,IViewHelper>();
@@ -56,6 +64,8 @@ public class Control extends HttpServlet {
          viewHelper.put("/Ecommerce/Clientes/DesativarCliente", new ViewCliente());
          viewHelper.put("/Ecommerce/Clientes/AtivarCliente", new ViewCliente());
          
+         viewHelper.put("/Ecommerce/AutenticarUsuario", new ViewUsuario());
+         
          viewHelper.put("/Ecommerce/Clientes/InserirEndereco", new ViewEndereco());
          viewHelper.put("/Ecommerce/Clientes/ListarEndereco", new ViewEndereco());
          viewHelper.put("/Ecommerce/Clientes/AlterarEndereco", new ViewEndereco());   
@@ -65,15 +75,13 @@ public class Control extends HttpServlet {
          viewHelper.put("/Ecommerce/Clientes/ExcluirCartao", new ViewCartao());
 
     }
-    
-    
-    
-    
+
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String uri = request.getRequestURI();
         String acao = request.getParameter("acao");
+       // doPost(request, response);
         EntidadeDominio entidade = viewHelper.get(uri).getEntidade(request);
         Resultado resultado = commands.get(acao).executar(entidade);
         System.out.println("URL: " + uri + "  ACAO: " + acao);
@@ -81,7 +89,13 @@ public class Control extends HttpServlet {
         
     	}
     
-    
+      @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Recuperar os dados do formulário de login.
+        String usuario = request.getParameter("usuarioLogin");
+        String senha = request.getParameter("senha");
+    }
     
 
 }

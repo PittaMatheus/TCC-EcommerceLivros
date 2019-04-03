@@ -12,11 +12,11 @@ import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Resultado;
  *
  * @author matheus
  */
-public class CommandVerificaUsuario extends AbstractCommand{
+public class CommandAutenticar extends AbstractCommand {
 
     @Override
     public Resultado executar(EntidadeDominio entidade) {
-        return fachada.verificaUsuario(entidade);
+        return fachada.autenticar(entidade);
     }
     
 }

@@ -12,10 +12,10 @@
         <title>Login</title>
     </head>
     <body>
-        <form action="/Ecommerce/AutenticarUsuario" mothod="post">
+        <form action="AutenticarUsuario" method="post">
             <br>
             <label for="id" >Login</label>                            
-            <input type="text" value="usuarioTeste" name="usuarioLogin" id="usuarioLogin" required>
+            <input type="text" value="email" name="email" id="usuarioLogin" required>
             <br><br>
             <label for="id" >Senha</label>                            
             <input type="password" value="senha123" name="senha" id="senha" required> 

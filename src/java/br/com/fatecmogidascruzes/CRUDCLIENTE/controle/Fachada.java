@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dados.IDAO;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Cartao;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Usuario;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.IStrategy;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaCPF;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaCamposObrigatorios;
@@ -24,6 +25,7 @@ import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaClienteExistente;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaConfirmarSenha;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaData;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaEspacosVazios;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaSenha;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaSenhaForte;
 import java.util.List;
 
@@ -37,6 +39,7 @@ public class Fachada implements IFachada{
     private Map<String, IDAO> dao;
     private StringBuilder sb = new StringBuilder();
     private Map<String, Map<String,List<IStrategy>>> RN;
+    
     public Fachada(){
         
         // DAO
@@ -45,8 +48,9 @@ public class Fachada implements IFachada{
         dao.put(Endereco.class.getName(),new EnderecoDAO());
         dao.put(Cartao.class.getName(),new CartaoDAO());
         
-        // Lista de de negocio do comando insert
+        // Lista das regras de negocio de acordo com as acoes
         List<IStrategy> RNClienteSalvar = new ArrayList<IStrategy>();
+        List<IStrategy> RNClienteAutenticar = new ArrayList<IStrategy>();
         
         // Listas das Regras de negocio do comando insert
         RNClienteSalvar.add(new ValidaCamposObrigatorios());
@@ -57,31 +61,37 @@ public class Fachada implements IFachada{
         RNClienteSalvar.add(new ValidaData());
         RNClienteSalvar.add(new ValidaClienteExistente());
         
+       // Regras de negocio de autenticacao
+       RNClienteAutenticar.add(new ValidaSenha());
+        
         
         // Regras de negocio do cliente
         Map<String, List<IStrategy>> regrasCliente = new HashMap<String, List<IStrategy>>();
+        
         // Regra salvar
         regrasCliente.put(Cliente.class.getName(), RNClienteSalvar);
+        regrasCliente.put(Usuario.class.getName(), RNClienteAutenticar);
         
         // Todas listas de regras de negocio
         RN = new HashMap<String,Map<String,List<IStrategy>>>();
 	RN.put("salvar", regrasCliente);
-        
+        RN.put("autenticar", regrasCliente);
     } 
+    
+    
     @Override
     public Resultado inserir(EntidadeDominio entidade) {
         resultado.setEntidades(new ArrayList<EntidadeDominio>());
-        RegrasDeNegocio(entidade,"salvar");
+        RegrasDeNegocio(entidade, "salvar");
         try {
             if(resultado.getMensagem().length() == 0) {
-            resultado = dao.get(entidade.getClass().getName()).inserir(entidade);
-            resultado.setAcao("inserir");
-            resultado.setStatus(true);
-            } else {
-            resultado.setStatus(false);
-            resultado.setAcao("falhaInserir");
-            }	
-
+                resultado = dao.get(entidade.getClass().getName()).inserir(entidade);
+                resultado.setAcao("inserir");
+                resultado.setStatus(true);
+                } else {
+                resultado.setStatus(false);
+                resultado.setAcao("falhaInserir");
+                }	
         } catch(Exception e) {
             resultado.setStatus(false);
             resultado.setAcao("inserir");
@@ -169,28 +179,40 @@ public class Fachada implements IFachada{
     return resultado;
     }
     
-    private void RegrasDeNegocio(EntidadeDominio entidade, String operacao) 
-	{
-		List<IStrategy> regras = RN.get(operacao).get(entidade.getClass().getName());
-		String resposta = "";
-		if(regras != null) {
-			for(IStrategy r:regras) {
-				if(r != null) {
-					resposta += r.validar(entidade);
-					resultado.setMensagem(resposta);
-				}
-			}
-		} else {
-			resultado.setMensagem(new String());
-		}
-	}
-    
-    @Override
-    public Resultado verificaUsuario(EntidadeDominio entidade) {
-        // implementar a funcao VericicaUsuario no DAOCLIENTE pra verificar se o mesmo ja existe na base antes de cadastrar
-        // verificar pelo email e pelo CPF e chamar a função aqui.
-        return resultado;
+    private void RegrasDeNegocio(EntidadeDominio entidade, String operacao) {
+        List<IStrategy> regras = RN.get(operacao).get(entidade.getClass().getName());
+        String resposta = "";
+        if(regras != null) {
+            for(IStrategy r:regras) {
+                if(r != null) {
+                    resposta += r.validar(entidade);
+                    resultado.setMensagem(resposta);
+                }
+            }
+        } else {
+            resultado.setMensagem(new String());
+        }
     }
+
+    @Override
+    public Resultado autenticar(EntidadeDominio entidade) {
+        RegrasDeNegocio(entidade,"autenticar");
+        try {
+            if(resultado.getMensagem().length() == 0) {
+                resultado.setStatus(true);
+                resultado.setAcao("logado");
+                } else {
+                resultado.setStatus(false);
+                resultado.setAcao("nao-logado");
+                }	
+        } catch(Exception e) {
+            resultado.setStatus(false);
+            resultado.setAcao("inserir");
+            e.printStackTrace();
+        }
+    return resultado;
+    }
+    
     
 }
 
