@@ -58,7 +58,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Control</servlet-name>
-        <url-pattern>/AutenticarUsuario</url-pattern>
+        <url-pattern>/AutenticarCliente</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

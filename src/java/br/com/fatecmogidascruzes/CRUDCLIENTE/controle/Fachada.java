@@ -48,6 +48,7 @@ public class Fachada implements IFachada{
         dao.put(Endereco.class.getName(),new EnderecoDAO());
         dao.put(Cartao.class.getName(),new CartaoDAO());
         
+        
         // Lista das regras de negocio de acordo com as acoes
         List<IStrategy> RNClienteSalvar = new ArrayList<IStrategy>();
         List<IStrategy> RNClienteAutenticar = new ArrayList<IStrategy>();
@@ -68,14 +69,16 @@ public class Fachada implements IFachada{
         // Regras de negocio do cliente
         Map<String, List<IStrategy>> regrasCliente = new HashMap<String, List<IStrategy>>();
         
+         // Regras de negocio do usuario
+        Map<String, List<IStrategy>> regrasUsuario = new HashMap<String, List<IStrategy>>();
+        
         // Regra salvar
         regrasCliente.put(Cliente.class.getName(), RNClienteSalvar);
-        regrasCliente.put(Usuario.class.getName(), RNClienteAutenticar);
-        
+        regrasUsuario.put(Cliente.class.getName(), RNClienteAutenticar);
         // Todas listas de regras de negocio
         RN = new HashMap<String,Map<String,List<IStrategy>>>();
 	RN.put("salvar", regrasCliente);
-        RN.put("autenticar", regrasCliente);
+        RN.put("autenticar", regrasUsuario);
     } 
     
     
@@ -179,6 +182,7 @@ public class Fachada implements IFachada{
     return resultado;
     }
     
+    
     private void RegrasDeNegocio(EntidadeDominio entidade, String operacao) {
         List<IStrategy> regras = RN.get(operacao).get(entidade.getClass().getName());
         String resposta = "";
@@ -193,21 +197,21 @@ public class Fachada implements IFachada{
             resultado.setMensagem(new String());
         }
     }
-
+    
     @Override
     public Resultado autenticar(EntidadeDominio entidade) {
         RegrasDeNegocio(entidade,"autenticar");
         try {
             if(resultado.getMensagem().length() == 0) {
                 resultado.setStatus(true);
-                resultado.setAcao("logado");
+                resultado.setAcao("logar");
                 } else {
                 resultado.setStatus(false);
                 resultado.setAcao("nao-logado");
                 }	
         } catch(Exception e) {
             resultado.setStatus(false);
-            resultado.setAcao("inserir");
+            resultado.setAcao("nao-logado");
             e.printStackTrace();
         }
     return resultado;

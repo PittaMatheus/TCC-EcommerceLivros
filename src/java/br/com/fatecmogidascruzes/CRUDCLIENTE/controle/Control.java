@@ -21,8 +21,6 @@ import br.com.fatecmogidascruzes.CRUDCLIENTE.excecao.ExcecaoLimiteTentativas;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ViewCartao;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ViewCliente;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ViewEndereco;
-import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ViewLogin;
-import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ViewUsuario;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,8 +51,6 @@ public class Control extends HttpServlet {
         commands.put("login", new CommandAutenticar());
         
         
-        
-
         // Mapa das views
          viewHelper = new HashMap<String,IViewHelper>();
          viewHelper.put("/Ecommerce/Clientes/InserirCliente", new ViewCliente());
@@ -63,9 +59,11 @@ public class Control extends HttpServlet {
          viewHelper.put("/Ecommerce/Clientes/AlterarCliente", new ViewCliente());
          viewHelper.put("/Ecommerce/Clientes/DesativarCliente", new ViewCliente());
          viewHelper.put("/Ecommerce/Clientes/AtivarCliente", new ViewCliente());
+         viewHelper.put("/Ecommerce/AutenticarCliente", new ViewCliente());
          
-         viewHelper.put("/Ecommerce/AutenticarUsuario", new ViewUsuario());
          
+         
+
          viewHelper.put("/Ecommerce/Clientes/InserirEndereco", new ViewEndereco());
          viewHelper.put("/Ecommerce/Clientes/ListarEndereco", new ViewEndereco());
          viewHelper.put("/Ecommerce/Clientes/AlterarEndereco", new ViewEndereco());   
@@ -89,13 +87,6 @@ public class Control extends HttpServlet {
         
     	}
     
-      @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        // Recuperar os dados do formulário de login.
-        String usuario = request.getParameter("usuarioLogin");
-        String senha = request.getParameter("senha");
-    }
-    
+   
 
 }

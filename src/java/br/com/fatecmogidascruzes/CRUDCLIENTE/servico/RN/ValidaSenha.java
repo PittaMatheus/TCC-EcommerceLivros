@@ -23,22 +23,16 @@ public class ValidaSenha extends AbstractStrategy{
     @Override
     public String validar(EntidadeDominio entidade) {
         String str ="";
-        Usuario usuario = (Usuario) entidade;
+        Cliente cliente = (Cliente) entidade;
         Resultado resultado = new Resultado();
         CommandConsultar consultar = new CommandConsultar();
-        resultado = consultar.executar(usuario);
+        resultado = consultar.executar(cliente);
         List<Cliente> clientes = (List) resultado.getEntidades();
         if(clientes.isEmpty()) {
              str +="<li>Senha ou usuario invalidos</li>";
         } else {
-             for (Cliente cli : clientes) {
-                // Email digitado e a senha são iguais ao email que vem do banco?
-                if(cli.getEmail().equals(usuario.getLogin()) && cli.getSenha().equals(usuario.getSenha())){
-                   str = "";
-                }
-            }
-        }
-  
+             str +="<li>Senha e usuario validos</li>";
+             }
         return str;
     }
     

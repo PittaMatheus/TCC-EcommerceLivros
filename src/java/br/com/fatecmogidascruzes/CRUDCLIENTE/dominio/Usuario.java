@@ -12,10 +12,7 @@ package br.com.fatecmogidascruzes.CRUDCLIENTE.dominio;
 public class Usuario extends EntidadeDominio{
     
     private Integer id;
-    private String login,
-            senha,
-            tentativas,
-            papel;
+    private String papel;
 
     public Integer getId() {
         return id;
@@ -23,30 +20,6 @@ public class Usuario extends EntidadeDominio{
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getTentativas() {
-        return tentativas;
-    }
-
-    public void setTentativas(String tentativas) {
-        this.tentativas = tentativas;
     }
 
     public String getPapel() {

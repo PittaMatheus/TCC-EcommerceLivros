@@ -144,7 +144,6 @@ public class ClienteDAO extends AbstractDAO {
        return resultado;
     }
 
-    
    @Override
     public Resultado consultar(EntidadeDominio entidade) {
          List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
@@ -153,47 +152,66 @@ public class ClienteDAO extends AbstractDAO {
             Connection conexao = BancoDadosOracle.getConexao();
             Cliente cliente = (Cliente) entidade;
             // Se o id do objeto cliente não estiver preenchido. A funcao consultar irá consultar o CPF e EMAIL
-            if(cliente.getId() == null){
-                PreparedStatement declaracao = conexao.prepareStatement("SELECT c.email, c.cpf "
-                    + "FROM cliente c WHERE c.status = 1 AND c.cpf = ? OR c.email = ?");
-            declaracao.setString(1, cliente.getCpf());
-            declaracao.setString(2, cliente.getEmail());
-            
-            ResultSet rs =  declaracao.executeQuery();
-            
-            while(rs.next()) {
-                Cliente cli = new Cliente();
-                cli.setCpf(rs.getString("cpf"));
-                cli.setEmail(rs.getString("email"));
-                entidades.add(cli);
-            }
-            
-            resultado.setEntidades(entidades);
-            
-            return resultado;
-            
+            if(cliente.getId() == null && cliente.getCpf() != null){
+                        PreparedStatement declaracao = conexao.prepareStatement("SELECT c.email, c.cpf "
+                            + "FROM cliente c WHERE c.status = 1 AND c.cpf = ? OR c.email = ?");
+                    declaracao.setString(1, cliente.getCpf());
+                    declaracao.setString(2, cliente.getEmail());
+
+                    ResultSet rs =  declaracao.executeQuery();
+
+                    while(rs.next()) {
+                        Cliente cli = new Cliente();
+                        cli.setCpf(rs.getString("cpf"));
+                        cli.setEmail(rs.getString("email"));
+                        entidades.add(cli);
+                    }
+                    resultado.setEntidades(entidades);
+                    return resultado;
+
+            }else if(cliente.getId() == null & cliente.getCpf() == null){
+                        PreparedStatement declaracao = conexao.prepareStatement("SELECT c.email, c.senha "
+                            + "FROM cliente c WHERE c.status = 1 AND c.email=? AND c.senha=?");
+                    declaracao.setString(1, cliente.getEmail());
+                    declaracao.setString(2, cliente.getSenha());
+
+                    ResultSet rs =  declaracao.executeQuery();
+
+                    while(rs.next()) {
+                        Cliente cli = new Cliente();
+                        cli.setSenha(rs.getString("senha"));
+                        cli.setEmail(rs.getString("email"));
+                        entidades.add(cli);
+                    }
+
+                    resultado.setEntidades(entidades);
+
+                    return resultado;
+
+
+
             }else{
-            PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome,c.sobrenome, c.data_nascimento, "
-                    + "c.ranking, c.email, c.cpf, c.rg, c.sexo "
-                    + "FROM cliente c WHERE c.status = 1 AND c.id = ?");
-            declaracao.setInt(1, cliente.getId());
-            ResultSet rs =  declaracao.executeQuery();
-            while(rs.next()) {
-                Cliente cli = new Cliente();
-                cli.setId(rs.getInt("id"));
-                cli.setNome(rs.getString("nome"));
-                cli.setSobrenome(rs.getString("sobrenome"));
-                cli.setData_nascimento(rs.getDate("data_nascimento"));
-                cli.setRanking(rs.getDouble("ranking"));
-                cli.setEmail(rs.getString("email"));
-                cli.setCpf(rs.getString("cpf"));
-                cli.setRg(rs.getString("rg"));
-                cli.setSexo(rs.getString("sexo"));
-                resultado.setAcao("consultarCliente");
-                entidades.add(cli);
-		resultado.setStatus(true);
-               }
-            }
+                    PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome,c.sobrenome, c.data_nascimento, "
+                            + "c.ranking, c.email, c.cpf, c.rg, c.sexo "
+                            + "FROM cliente c WHERE c.status = 1 AND c.id = ?");
+                    declaracao.setInt(1, cliente.getId());
+                    ResultSet rs =  declaracao.executeQuery();
+                    while(rs.next()) {
+                        Cliente cli = new Cliente();
+                        cli.setId(rs.getInt("id"));
+                        cli.setNome(rs.getString("nome"));
+                        cli.setSobrenome(rs.getString("sobrenome"));
+                        cli.setData_nascimento(rs.getDate("data_nascimento"));
+                        cli.setRanking(rs.getDouble("ranking"));
+                        cli.setEmail(rs.getString("email"));
+                        cli.setCpf(rs.getString("cpf"));
+                        cli.setRg(rs.getString("rg"));
+                        cli.setSexo(rs.getString("sexo"));
+                        resultado.setAcao("consultarCliente");
+                        entidades.add(cli);
+                        resultado.setStatus(true);
+                       }
+                    }
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);
@@ -299,6 +317,11 @@ public class ClienteDAO extends AbstractDAO {
         }
           return resultado;
     }
+    
+ 
+    
+    
+    
     
 }
     

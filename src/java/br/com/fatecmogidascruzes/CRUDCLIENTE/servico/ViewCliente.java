@@ -142,15 +142,15 @@ public class ViewCliente implements IViewHelper{
                             }
                             else if(resultado.getAcao().equals("consultarEndereco")){
                                 request.getRequestDispatcher("listar_endCobranca.jsp").forward(request, response);
-                            }
+                                         }else if(resultado.getAcao().equals("desativar")){
+                                 request.setAttribute("acao", "exclusão");
+                                 request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                                                }
                             else if(resultado.getAcao().equals("alterar")){
                                  request.setAttribute("acao", "alteração");
                                  request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
                                  
-                            }else if(resultado.getAcao().equals("desativar")){
-                                 request.setAttribute("acao", "exclusão");
-                                 request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
-                                 
+
                             }else if(resultado.getAcao().equals("listarDesativados")){
                                  request.getRequestDispatcher("listar_clientesInativos.jsp").forward(request, response);  
                                  
@@ -159,6 +159,9 @@ public class ViewCliente implements IViewHelper{
                                  request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
                             }else if(resultado.getAcao().equals("falhaInserir")){
                                  request.getRequestDispatcher("cadastro_cliente.jsp").forward(request, response);
+                                 
+                              }else if(resultado.getAcao().equals("nao-logado")){
+                                  request.getRequestDispatcher("login.jsp").forward(request, response);
                             }else 
                                     request.getRequestDispatcher("../index.html").forward(request, response);
                                 
