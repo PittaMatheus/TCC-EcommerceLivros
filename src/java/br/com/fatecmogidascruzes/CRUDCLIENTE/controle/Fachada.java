@@ -203,8 +203,11 @@ public class Fachada implements IFachada{
         RegrasDeNegocio(entidade,"autenticar");
         try {
             if(resultado.getMensagem().length() == 0) {
+
+                resultado = dao.get(entidade.getClass().getName()).consultar(entidade);
                 resultado.setStatus(true);
                 resultado.setAcao("logar");
+                resultado.setMensagem("Usuario foi autenticado");
                 } else {
                 resultado.setStatus(false);
                 resultado.setAcao("nao-logado");

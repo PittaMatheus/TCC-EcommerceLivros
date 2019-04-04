@@ -81,6 +81,7 @@ public class Control extends HttpServlet {
         String acao = request.getParameter("acao");
        // doPost(request, response);
         EntidadeDominio entidade = viewHelper.get(uri).getEntidade(request);
+        
         Resultado resultado = commands.get(acao).executar(entidade);
         System.out.println("URL: " + uri + "  ACAO: " + acao);
         viewHelper.get(uri).setEntidade(resultado, request, response);

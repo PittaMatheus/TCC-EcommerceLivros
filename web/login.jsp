@@ -37,7 +37,7 @@
             <input type="text" value="email" name="email" id="usuarioLogin" required>
             <br><br>
             <label for="id" >Senha</label>                            
-            <input type="password" value="senha123" name="senha" id="senha" required> 
+            <input type="password" value="SenhaValida!@#" name="senha" id="senha" required> 
             <br>   <br>          
             <input type="submit" name="acao" value="login" class="btn btn-success"> 
         </form>

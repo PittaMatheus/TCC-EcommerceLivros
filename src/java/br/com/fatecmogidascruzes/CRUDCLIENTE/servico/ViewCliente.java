@@ -142,7 +142,7 @@ public class ViewCliente implements IViewHelper{
                             }
                             else if(resultado.getAcao().equals("consultarEndereco")){
                                 request.getRequestDispatcher("listar_endCobranca.jsp").forward(request, response);
-                                         }else if(resultado.getAcao().equals("desativar")){
+                             }else if(resultado.getAcao().equals("desativar")){
                                  request.setAttribute("acao", "exclusão");
                                  request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
                                                 }
@@ -157,10 +157,15 @@ public class ViewCliente implements IViewHelper{
                             }else if(resultado.getAcao().equals("ativar")){
                                  request.setAttribute("acao", "ativação");
                                  request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                                 
                             }else if(resultado.getAcao().equals("falhaInserir")){
                                  request.getRequestDispatcher("cadastro_cliente.jsp").forward(request, response);
                                  
-                              }else if(resultado.getAcao().equals("nao-logado")){
+                            }else if(resultado.getAcao().equals("logar")){
+                                  request.setAttribute("usuarioLogado", resultado);
+                                  //response.sendRedirect("Clientes/home.jsp");
+                                  request.getRequestDispatcher("Clientes/home.jsp").forward(request, response);
+                            }else if(resultado.getAcao().equals("nao-logado")){
                                   request.getRequestDispatcher("login.jsp").forward(request, response);
                             }else 
                                     request.getRequestDispatcher("../index.html").forward(request, response);

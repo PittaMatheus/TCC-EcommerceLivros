@@ -4,6 +4,9 @@
     Author     : matheus
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Resultado"%>
+<%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Cliente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,8 +15,21 @@
         <title>Home</title>
     </head>
     <body>
-        <h4>Seja bem vindo usuário: </h4>
-        
+        <%
+            if(request.getAttribute("resultado") != null){
+                Resultado resultado = (Resultado) request.getAttribute("resultado");    
+                List<Cliente> clientes = (List) resultado.getEntidades();
+                        if(resultado != null) {
+                             if(clientes.size() == 0) {
+                                out.print("<br><br>Nenhum cliente cadastrado");
+                            } else {
+                               for (Cliente cliente : clientes) {         
+                                 out.print("Seja bem vindo usuario" + cliente.getNome());
+                               }
+                             }
+                        }
+            }
+          %>
         <br><br>
         <div><a href="index.html">Sair</a></div>  
     </body>

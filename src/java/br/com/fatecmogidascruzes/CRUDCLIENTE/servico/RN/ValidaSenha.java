@@ -31,7 +31,7 @@ public class ValidaSenha extends AbstractStrategy{
         if(clientes.isEmpty()) {
              str +="<li>Senha ou usuario invalidos</li>";
         } else {
-             str +="<li>Senha e usuario validos</li>";
+             str +="";
              }
         return str;
     }

@@ -170,7 +170,8 @@ public class ClienteDAO extends AbstractDAO {
                     return resultado;
 
             }else if(cliente.getId() == null & cliente.getCpf() == null){
-                        PreparedStatement declaracao = conexao.prepareStatement("SELECT c.email, c.senha "
+                        PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome,c.sobrenome, c.data_nascimento, "
+                            + "c.ranking, c.email, c.cpf, c.rg, c.sexo, c.senha  "
                             + "FROM cliente c WHERE c.status = 1 AND c.email=? AND c.senha=?");
                     declaracao.setString(1, cliente.getEmail());
                     declaracao.setString(2, cliente.getSenha());
@@ -179,8 +180,16 @@ public class ClienteDAO extends AbstractDAO {
 
                     while(rs.next()) {
                         Cliente cli = new Cliente();
+                        cli.setId(rs.getInt("id"));
+                        cli.setNome(rs.getString("nome"));
                         cli.setSenha(rs.getString("senha"));
+                        cli.setSobrenome(rs.getString("sobrenome"));
+                        cli.setData_nascimento(rs.getDate("data_nascimento"));
+                        cli.setRanking(rs.getDouble("ranking"));
                         cli.setEmail(rs.getString("email"));
+                        cli.setCpf(rs.getString("cpf"));
+                        cli.setRg(rs.getString("rg"));
+                        cli.setSexo(rs.getString("sexo"));
                         entidades.add(cli);
                     }
 
