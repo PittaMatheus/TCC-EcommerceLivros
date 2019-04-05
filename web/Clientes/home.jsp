@@ -15,9 +15,11 @@
         <title>Home</title>
     </head>
     <body>
-        <%
-            if(request.getAttribute("resultado") != null){
-                Resultado resultado = (Resultado) request.getAttribute("resultado");    
+        <%  
+            if(session.getAttribute("usuarioLogado") == null){
+                response.sendRedirect("../login.jsp");
+            }else if(session.getAttribute("usuarioLogado") != null){
+                Resultado resultado = (Resultado) session.getAttribute("usuarioLogado");    
                 List<Cliente> clientes = (List) resultado.getEntidades();
                         if(resultado != null) {
                              if(clientes.size() == 0) {
@@ -25,12 +27,15 @@
                             } else {
                                for (Cliente cliente : clientes) {         
                                  out.print("Seja bem vindo usuario" + cliente.getNome());
-                               }
+                                 out.print("\nO seu papel é: " + cliente.getPapel().getId());
                              }
                         }
             }
-          %>
+        }
+         %>
         <br><br>
-        <div><a href="index.html">Sair</a></div>  
+        
+        
+        <div><a href="/Ecommerce/LogoutCliente">Sair</a></div>  
     </body>
 </html>

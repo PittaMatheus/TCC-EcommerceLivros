@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -67,7 +68,10 @@ public class ViewCliente implements IViewHelper{
         String complemento = request.getParameter("complemento");
         String numero = request.getParameter("numero");
         String pais = request.getParameter("pais");
-
+        Integer papel = null;
+        if(request.getParameter("tipo_usuario") != null){
+            papel = Integer.parseInt(request.getParameter("tipo_usuario"));
+        }
         // SEPARANDO DDD DO TELEFONE
         String ddd = "123";
         numTelefone = "321321";
@@ -88,7 +92,9 @@ public class ViewCliente implements IViewHelper{
         cliente.setSexo(sexo);
         cliente.setSenha(senha);
         cliente.setConfirmarSenha(senhaConfirmada);
-        
+        if(null != papel){
+            cliente.getPapel().setId(papel);
+        }
         
         if(status != null && status.equals("0"))
             cliente.setStatus(false);
@@ -162,9 +168,10 @@ public class ViewCliente implements IViewHelper{
                                  request.getRequestDispatcher("cadastro_cliente.jsp").forward(request, response);
                                  
                             }else if(resultado.getAcao().equals("logar")){
-                                  request.setAttribute("usuarioLogado", resultado);
-                                  //response.sendRedirect("Clientes/home.jsp");
-                                  request.getRequestDispatcher("Clientes/home.jsp").forward(request, response);
+                                HttpSession session = request.getSession();
+                                session.setAttribute("usuarioLogado", resultado);
+                                response.sendRedirect("Clientes/home.jsp");
+                                 //request.getRequestDispatcher("Clientes/home.jsp").forward(request, response);
                             }else if(resultado.getAcao().equals("nao-logado")){
                                   request.getRequestDispatcher("login.jsp").forward(request, response);
                             }else 

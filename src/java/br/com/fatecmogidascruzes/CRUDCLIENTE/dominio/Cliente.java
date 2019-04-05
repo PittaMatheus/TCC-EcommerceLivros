@@ -27,11 +27,11 @@ public class Cliente extends EntidadeDominio{
     private String confirmarSenha;
     private String cpf;
     private String rg;
-    private String papel;
+    private Perfil papel;
 
 
     
-    public Cliente(Integer id, String nome, String sobrenome, boolean status, String sexo, Date data_nascimento, double ranking){
+    public Cliente(Integer id, String nome, String sobrenome, boolean status, String sexo, Date data_nascimento, double ranking, Perfil papel){
         super();
         this.nome = nome;
         this.id = id;
@@ -40,6 +40,7 @@ public class Cliente extends EntidadeDominio{
         this.sexo = sexo;
         this.data_nascimento = data_nascimento;
         this.ranking = ranking;
+        this.papel = papel;
         
     }
 
@@ -54,6 +55,7 @@ public class Cliente extends EntidadeDominio{
     public Cliente(){
         endereco = new Endereco();
         telefone = new Telefone();
+        papel = new Perfil();
     }
 
     public String getNome() {
@@ -168,11 +170,11 @@ public class Cliente extends EntidadeDominio{
         this.rg = rg;
     }
     
-    public String getPapel() {
+    public Perfil getPapel() {
         return papel;
     }
 
-    public void setPapel(String papel) {
+    public void setPapel(Perfil papel) {
         this.papel = papel;
     }
 

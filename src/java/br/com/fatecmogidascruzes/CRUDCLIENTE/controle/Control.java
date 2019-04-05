@@ -60,8 +60,8 @@ public class Control extends HttpServlet {
          viewHelper.put("/Ecommerce/Clientes/DesativarCliente", new ViewCliente());
          viewHelper.put("/Ecommerce/Clientes/AtivarCliente", new ViewCliente());
          viewHelper.put("/Ecommerce/AutenticarCliente", new ViewCliente());
-         
-         
+
+         viewHelper.put("/Ecommerce/LogoutCliente", new ViewCliente());
          
 
          viewHelper.put("/Ecommerce/Clientes/InserirEndereco", new ViewEndereco());
