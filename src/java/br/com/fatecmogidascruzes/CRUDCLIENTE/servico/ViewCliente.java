@@ -170,20 +170,23 @@ public class ViewCliente implements IViewHelper{
                             }else if(resultado.getAcao().equals("logar")){
                                 HttpSession session = request.getSession();
                                 session.setAttribute("usuarioLogado", resultado);
-                                response.sendRedirect("Clientes/home.jsp");
-                                 //request.getRequestDispatcher("Clientes/home.jsp").forward(request, response);
+                                response.sendRedirect("Clientes/home.jsp");  
                             }else if(resultado.getAcao().equals("nao-logado")){
                                   request.getRequestDispatcher("login.jsp").forward(request, response);
+                             }else if(resultado.getAcao().equals("logout")){
+                                  HttpSession session = request.getSession();
+                                  request.getSession();
+                                  session.invalidate();
+                                  response.sendRedirect("index.html");  
+                            }     
                             }else 
                                     request.getRequestDispatcher("../index.html").forward(request, response);
                                 
                         } else {
                             response.sendRedirect("../index.html");
                         }
-
-                    }
-    } catch(Exception e) {
-            e.printStackTrace();
-		}
+                } catch(Exception e) {
+                    e.printStackTrace();
+                        }
     }
 }

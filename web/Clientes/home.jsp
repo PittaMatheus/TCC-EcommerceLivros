@@ -23,19 +23,37 @@
                 List<Cliente> clientes = (List) resultado.getEntidades();
                         if(resultado != null) {
                              if(clientes.size() == 0) {
-                                out.print("<br><br>Nenhum cliente cadastrado");
+                                response.sendRedirect("../login.jsp");
                             } else {
                                for (Cliente cliente : clientes) {         
-                                 out.print("Seja bem vindo usuario" + cliente.getNome());
-                                 out.print("\nO seu papel é: " + cliente.getPapel().getId());
-                             }
+                                 out.print("Seja bem vindo " + cliente.getNome());
+
+                                 //Cliente com perfil de ADM
+                                 if(cliente.getPapel().getId() == 2){
+                                     out.print("<div><br><a href='listar_clientes.jsp'>Listar clientes</a></div>");
+                                     out.print("<div><a href='listar_clientes.jsp'>Desativar clientes</a></div> ");
+                                     out.print("<div><a href='listar_clientesInativos.jsp'>Ativar clientes</a></div>");
+                                     out.print("<div><a href=''>Ver pedidos</a></div>");
+                                     out.print("<div><a href=''>Gerenciar pedidos</a></div>");
+                                     out.print("<div><a href=''>Ver trocas </a></div>");
+                                     out.print("<div><a href=''>Gerenciar trocas </a></div>");
+                                     out.print("<div><a href=''>Editar meu perfil </a></div>");
+                                    }
+                                 // Perfil comum
+                                 else if(cliente.getPapel().getId() == 1){
+                                     out.println("<div><a href=''>Adicionar ao carrinho</a></div>");
+                                     out.println("<div><a href=''>Realizar pedido</a></div>");
+                                     out.println("<div><a href=''>Acompanhar pedido</a></div>");
+                                     out.println("<div><a href=''>Editar meu perfil</a></div>");
+                                    }
                         }
             }
         }
+    }
          %>
         <br><br>
         
         
-        <div><a href="/Ecommerce/LogoutCliente">Sair</a></div>  
+        <div><a href="/Ecommerce/LogoutCliente?acao=logout">Sair</a></div>  
     </body>
 </html>

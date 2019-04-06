@@ -84,7 +84,7 @@
                      out.println("<a href='cadastro_endereco.jsp?id=" + id + "' >Adicionar Endereco</a>");
                     %>
                     <br> <br> <br>
-                    <a href='listar_clientes.jsp'>Voltar</a>
+                    <a href='listar_clientes.jsp?'>Voltar</a>
         <br><br>
     </body>
 </html>

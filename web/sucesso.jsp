@@ -15,6 +15,6 @@
             
             
             foi realizada com sucesso!</h1>
-        <a href='${pageContext.request.contextPath}/index.html'>Voltar</a>
+        <a href='${pageContext.request.contextPath}/Clientes/home.jsp'>Voltar</a>
     </body>
 </html>

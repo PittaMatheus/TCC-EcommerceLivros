@@ -8,6 +8,7 @@ import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands.CommandDesativar;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands.CommandAtivar;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands.CommandAutenticar;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands.CommandConsultar;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands.CommandLogout;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dados.ClienteDAO;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.IViewHelper;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Cliente;
@@ -49,9 +50,10 @@ public class Control extends HttpServlet {
         commands.put("desativar", new CommandDesativar());
         commands.put("ativar", new CommandAtivar());
         commands.put("login", new CommandAutenticar());
+        commands.put("logout", new CommandLogout());
         
-        
-        // Mapa das views
+        // MAPA DAS VIEWS DO SISTEMA
+        // Views Cliente
          viewHelper = new HashMap<String,IViewHelper>();
          viewHelper.put("/Ecommerce/Clientes/InserirCliente", new ViewCliente());
          viewHelper.put("/Ecommerce/Clientes/ListarClientes", new ViewCliente());
@@ -60,14 +62,12 @@ public class Control extends HttpServlet {
          viewHelper.put("/Ecommerce/Clientes/DesativarCliente", new ViewCliente());
          viewHelper.put("/Ecommerce/Clientes/AtivarCliente", new ViewCliente());
          viewHelper.put("/Ecommerce/AutenticarCliente", new ViewCliente());
-
          viewHelper.put("/Ecommerce/LogoutCliente", new ViewCliente());
-         
-
+         // Views Endereco
          viewHelper.put("/Ecommerce/Clientes/InserirEndereco", new ViewEndereco());
          viewHelper.put("/Ecommerce/Clientes/ListarEndereco", new ViewEndereco());
          viewHelper.put("/Ecommerce/Clientes/AlterarEndereco", new ViewEndereco());   
-         
+         // Views Cartao
          viewHelper.put("/Ecommerce/Clientes/InserirCartao", new ViewCartao());
          viewHelper.put("/Ecommerce/Clientes/ListarCartao", new ViewCartao());
          viewHelper.put("/Ecommerce/Clientes/ExcluirCartao", new ViewCartao());

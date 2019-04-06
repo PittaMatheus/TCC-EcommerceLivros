@@ -18,6 +18,9 @@ public class Perfil extends EntidadeDominio{
     String nome;
     List<ICommand> funcionalidades = new ArrayList<ICommand>();
 
+    
+    
+    
     public Integer getId() {
         return id;
     }

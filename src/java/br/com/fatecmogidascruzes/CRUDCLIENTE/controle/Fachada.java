@@ -219,6 +219,14 @@ public class Fachada implements IFachada{
         }
     return resultado;
     }
+
+    @Override
+    public Resultado logout(EntidadeDominio entidade) {
+        resultado.setStatus(false);
+        resultado.setAcao("logout");
+        resultado.setMensagem("fechando a sessao");  
+        return resultado;
+    }
     
     
 }

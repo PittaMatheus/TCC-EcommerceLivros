@@ -71,6 +71,6 @@
         </table>
     </form>
                 <br><br>
-        <a href='../index.html'>Voltar</a>
+        <a href='home.jsp'>Voltar</a>
     </body>
 </html>
