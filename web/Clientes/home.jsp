@@ -33,6 +33,7 @@
                                      out.print("<div><br><a href='listar_clientes.jsp'>Listar clientes</a></div>");
                                      out.print("<div><a href='listar_clientes.jsp'>Desativar clientes</a></div> ");
                                      out.print("<div><a href='listar_clientesInativos.jsp'>Ativar clientes</a></div>");
+                                     out.print("<div><a href='../Livros/cadastro_livro.jsp'>Cadastrar livro</a></div>");
                                      out.print("<div><a href=''>Ver pedidos</a></div>");
                                      out.print("<div><a href=''>Gerenciar pedidos</a></div>");
                                      out.print("<div><a href=''>Ver trocas </a></div>");

@@ -16,7 +16,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dados.IDAO;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.dados.LivroDAO;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Cartao;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Livro;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Usuario;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.IStrategy;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.RN.ValidaCPF;
@@ -47,6 +49,7 @@ public class Fachada implements IFachada{
         dao.put(Cliente.class.getName(),new ClienteDAO());
         dao.put(Endereco.class.getName(),new EnderecoDAO());
         dao.put(Cartao.class.getName(),new CartaoDAO());
+        dao.put(Livro.class.getName(),new LivroDAO());
         
         
         // Lista das regras de negocio de acordo com as acoes

@@ -22,6 +22,7 @@ import br.com.fatecmogidascruzes.CRUDCLIENTE.excecao.ExcecaoLimiteTentativas;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ViewCartao;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ViewCliente;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ViewEndereco;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ViewLivro;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +32,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 
 public class Control extends HttpServlet {
     
@@ -71,6 +73,14 @@ public class Control extends HttpServlet {
          viewHelper.put("/Ecommerce/Clientes/InserirCartao", new ViewCartao());
          viewHelper.put("/Ecommerce/Clientes/ListarCartao", new ViewCartao());
          viewHelper.put("/Ecommerce/Clientes/ExcluirCartao", new ViewCartao());
+         
+         
+         // livro
+        viewHelper.put("/Ecommerce/Livros/InserirLivro", new ViewLivro());
+
+
+
+         
 
     }
 
