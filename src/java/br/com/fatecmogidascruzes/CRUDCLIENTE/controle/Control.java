@@ -10,10 +10,12 @@ import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands.CommandAutenticar
 import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands.CommandConsultar;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.controle.commands.CommandLogout;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dados.ClienteDAO;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Categoria;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.IViewHelper;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Cliente;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Endereco;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.EntidadeDominio;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.GrupoLivro;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Resultado;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Telefone;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Usuario;
@@ -25,6 +27,7 @@ import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ViewEndereco;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ViewLivro;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -91,13 +94,27 @@ public class Control extends HttpServlet {
         String acao = request.getParameter("acao");
        // doPost(request, response);
         EntidadeDominio entidade = viewHelper.get(uri).getEntidade(request);
-        
-        Resultado resultado = commands.get(acao).executar(entidade);
+                Resultado resultado = commands.get(acao).executar(entidade);
         System.out.println("URL: " + uri + "  ACAO: " + acao);
         viewHelper.get(uri).setEntidade(resultado, request, response);
         
     	}
     
-   
+   @Override
+    public void init() throws ServletException {
+        super.init();
+        
+        //consultar estados e cidades e botar no contexto da aplicação (similar à session) salvar o map de Estados e cidades
+		 
+        ICommand command = new CommandConsultar();
+
+        Resultado resultado = command.executar(new Categoria());
+        List<EntidadeDominio> categorias = resultado.getEntidades();
+        getServletContext().setAttribute("categorias", categorias);
+        
+        resultado = command.executar(new GrupoLivro());
+        List<EntidadeDominio> grupoLivros = resultado.getEntidades();
+        getServletContext().setAttribute("grupoLivros", grupoLivros);
+    }
 
 }

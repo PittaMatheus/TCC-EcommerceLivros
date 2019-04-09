@@ -13,6 +13,15 @@ package br.com.fatecmogidascruzes.CRUDCLIENTE.dominio;
  */
 public class Categoria extends EntidadeDominio{
     
+    private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
     private String nome;
 
     public String getNome() {

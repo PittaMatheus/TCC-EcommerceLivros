@@ -7,6 +7,9 @@ package br.com.fatecmogidascruzes.CRUDCLIENTE.dominio;
 public class GrupoLivro extends EntidadeDominio{
     
     private String nome;
+    private Integer id;
+
+
     private double margemLucro;
 
     public String getNome() {
@@ -25,5 +28,12 @@ public class GrupoLivro extends EntidadeDominio{
         this.margemLucro = margemLucro;
     }
     
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
     
 }

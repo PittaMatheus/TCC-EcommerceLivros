@@ -1,3 +1,5 @@
+<%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.GrupoLivro"%>
+<%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Categoria"%>
 <%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Livro"%>
 <%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.EntidadeDominio"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -10,12 +12,10 @@
         <title>Cadastro de livros</title>
     </head>
     <body>
-       <%//List<EntidadeDominio> categorias = (List<EntidadeDominio>) getServletContext().getAttribute("categorias");%>
-       <%//List<EntidadeDominio> grupoLivros = (List<EntidadeDominio>) getServletContext().getAttribute("grupoLivros");%>
-       <%//Livro livro = (Livro)request.getAttribute("livro");
-       
-       //if(livro ==null){
-        %>
+       <%
+        List<EntidadeDominio> categorias = (List<EntidadeDominio>) getServletContext().getAttribute("categorias");
+        List<EntidadeDominio> grupoLivros = (List<EntidadeDominio>) getServletContext().getAttribute("grupoLivros");
+%>
             <form action="InserirLivro" method="post">
                  <h2>Cadastro de Livro</h2>
                  <% 
@@ -68,23 +68,23 @@
                  <label for="txtPreco">Preço:</label> 
                  <input type="text" value="49.99" id="txtPreco" name="txtPreco" /> <br>
 
-                 <label>Categoria:</label><br>
+                <label>Categoria:</label><br>
 
-                 <%/*for(EntidadeDominio edCat:categorias){
-                     Categoria categoria = (Categoria)edCat;*/ %>
-                     <input type="checkbox" checked name="categoria" id =""value="1">Cat 1<br>
-                     <input type="checkbox" name="categoria" id =""value="categoria1">Cat 2<br>
-                 <%//}%>
+                 <%for(EntidadeDominio edCat:categorias){
+                     Categoria categoria = (Categoria)edCat; %>
+                     <input type="checkbox" name="categoria" id ="categoria<%=categoria.getNome()%>"value="<%=categoria.getId()%>"><%=categoria.getNome()%><br>
+
+                 <%}%>
 
                  <label>Grupo de Precificação:</label>
                  <select name="grupoLivro" id="cbPrecificacao">
                  <option value="">Selecione um grupo...</option>
-                 <option value="">Grupo 1</option>
-                 <option selected value="2">Grupo 2</option>
-                     <%//for(EntidadeDominio edGrupo:grupoLivros){
-                         // GrupoLivro grupoLivro = (GrupoLivro)//edGrupo;%>
-                     <%//}%>	
+                     <%for(EntidadeDominio edGrupo:grupoLivros){
+                         GrupoLivro grupoLivro = (GrupoLivro)edGrupo;%>
+                 <option id ="cbPrecificacao<%=grupoLivro.getId()%>"value="<%=grupoLivro.getId()%>"><%=grupoLivro.getNome()%></option>
+                     <%}%>	
                  </select>
+
 
                  <br> 
                  <input type="submit" name="acao" value="inserir" placeholder="SALVAR" id="btSalvar"/>

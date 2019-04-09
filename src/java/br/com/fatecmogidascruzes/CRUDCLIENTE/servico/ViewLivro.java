@@ -38,6 +38,7 @@ public class ViewLivro implements IViewHelper{
         String sinopse = request.getParameter("txtSinopse");
         String ativo = request.getParameter("checkAtivo");
         String nomeEditora = request.getParameter("txtEditora");
+       // String id_editora = request.getParameter("");
         String[] idsCategoria = request.getParameterValues("categoria");
         String altura = request.getParameter("txtAltura");
         String largura = request.getParameter("txtLargura");
@@ -68,6 +69,7 @@ public class ViewLivro implements IViewHelper{
 
         Editora editora = new Editora();
         editora.setNome(nomeEditora);
+        //editora.setId(id_editora);
         livro.setEditora(editora);
 
         Dimensoes dimensoes = new Dimensoes();

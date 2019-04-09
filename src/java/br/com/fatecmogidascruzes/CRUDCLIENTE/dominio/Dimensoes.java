@@ -2,6 +2,7 @@ package br.com.fatecmogidascruzes.CRUDCLIENTE.dominio;
 
 public class Dimensoes extends EntidadeDominio{
     
+    private Integer id;
     private Double altura;
     private Double largura;
     private Double peso;
@@ -37,6 +38,14 @@ public class Dimensoes extends EntidadeDominio{
 
     public void setProfundidade(Double profundidade) {
         this.profundidade = profundidade;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
     
     

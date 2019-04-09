@@ -6,8 +6,10 @@
 package br.com.fatecmogidascruzes.CRUDCLIENTE.controle;
 
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dados.CartaoDAO;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.dados.CategoriaDAO;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dados.ClienteDAO;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dados.EnderecoDAO;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.dados.GrupoLivroDAO;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Cliente;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Endereco;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.EntidadeDominio;
@@ -18,6 +20,8 @@ import java.util.Map;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dados.IDAO;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dados.LivroDAO;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Cartao;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Categoria;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.GrupoLivro;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Livro;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Usuario;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.IStrategy;
@@ -50,7 +54,8 @@ public class Fachada implements IFachada{
         dao.put(Endereco.class.getName(),new EnderecoDAO());
         dao.put(Cartao.class.getName(),new CartaoDAO());
         dao.put(Livro.class.getName(),new LivroDAO());
-        
+        dao.put(Categoria.class.getName(), new CategoriaDAO());
+        dao.put(GrupoLivro.class.getName(), new GrupoLivroDAO());
         
         // Lista das regras de negocio de acordo com as acoes
         List<IStrategy> RNClienteSalvar = new ArrayList<IStrategy>();
