@@ -38,7 +38,6 @@ public class ViewLivro implements IViewHelper{
         String sinopse = request.getParameter("txtSinopse");
         String ativo = request.getParameter("checkAtivo");
         String nomeEditora = request.getParameter("txtEditora");
-       // String id_editora = request.getParameter("");
         String[] idsCategoria = request.getParameterValues("categoria");
         String altura = request.getParameter("txtAltura");
         String largura = request.getParameter("txtLargura");
@@ -113,7 +112,24 @@ public class ViewLivro implements IViewHelper{
 
     @Override
     public void setEntidade(Resultado resultado, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                try {
+                    if(resultado != null && !resultado.getMensagem().isEmpty()) {
+                        request.setAttribute("resultado", resultado);
+                        if(resultado.getAcao() != null) {
+                            if(resultado.getAcao().equals("inserir")){
+                                request.setAttribute("acao", "inserção");
+                                request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                            }
+                            else if(resultado.getAcao().equals("listarCliente")){
+                                request.getRequestDispatcher("listar_clientes.jsp").forward(request, response);
+                            }    
+                        } 
+                    }
+                }catch(Exception e){
+                    e.printStackTrace();  
+                }
+
     }
-    
 }
+                      
+    

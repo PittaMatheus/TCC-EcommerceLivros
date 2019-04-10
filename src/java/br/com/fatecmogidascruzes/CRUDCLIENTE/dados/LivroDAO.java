@@ -17,7 +17,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -54,37 +56,48 @@ public class LivroDAO extends AbstractDAO{
              rs = declaracao2.getGeneratedKeys(); 
              livro.getDimensoes().setId((rs.next())?rs.getInt(1):0);
              
-  
-            PreparedStatement declaracao3 = conexao.prepareStatement(
+             
+            // Inserir categoria
+             PreparedStatement declaracao3 = conexao.prepareStatement(
+                    "INSERT INTO isbm "
+                    + "(cod_barras) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
+             declaracao3.setString(1, livro.getIsbn().getCodBarras());
+             declaracao3.execute();
+             rs = declaracao3.getGeneratedKeys(); 
+             livro.getIsbn().setId((rs.next())?rs.getInt(1):0); 
+             
+            // INSERIR LIVRO
+            PreparedStatement declaracao4 = conexao.prepareStatement(
                     "INSERT INTO livro "
-                    + "(codigo_barras, autor, titulo, ano, edicao, numero_paginas, sinopse, ativo, preco, nome_editora,id_dimensao, id_isbn, id_grupolivro("
+                    + "(codigo_barras, autor, titulo, ano, edicao, numero_paginas, sinopse, ativo, preco, id_editora,id_dimensao, id_isbn, id_grupolivro)"
                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             
-            declaracao3.setString(1, livro.getCodigoBarras());
-            declaracao3.setString(2, livro.getAutor());
-            declaracao3.setString(3, livro.getTitulo());
-            declaracao3.setString(4, livro.getAno());
-            declaracao3.setString(5, livro.getEdicao());
-            declaracao3.setString(6, livro.getNumeroPaginas());
-            declaracao3.setString(7, livro.getSinopse());
-            declaracao3.setBoolean(8, livro.getAtivo());
-            declaracao3.setDouble(9, livro.getPreco());
-            declaracao3.setInt(10, livro.getEditora().getId());
-            declaracao3.setInt(11, livro.getDimensoes().getId());
-            declaracao3.setInt(12, livro.getIsbn().getId());
-            declaracao3.setInt(13, livro.getGrupoLivro().getId());
-            declaracao3.execute();
+            declaracao4.setString(1, livro.getCodigoBarras());
+            declaracao4.setString(2, livro.getAutor());
+            declaracao4.setString(3, livro.getTitulo());
+            declaracao4.setString(4, livro.getAno());
+            declaracao4.setString(5, livro.getEdicao());
+            declaracao4.setString(6, livro.getNumeroPaginas());
+            declaracao4.setString(7, livro.getSinopse());
+            declaracao4.setBoolean(8, livro.getAtivo());
+            declaracao4.setDouble(9, livro.getPreco());
+            declaracao4.setInt(10, livro.getEditora().getId());
+            declaracao4.setInt(11, livro.getDimensoes().getId());
+            declaracao4.setInt(12, livro.getIsbn().getId());
+            declaracao4.setInt(13, livro.getGrupoLivro().getId());
+            declaracao4.execute();
 
-            rs = declaracao3.getGeneratedKeys(); 
+            rs = declaracao4.getGeneratedKeys(); 
             livro.setId((rs.next())?rs.getInt(1):0);
 
+                // INSERIR CATEGORIA N P N
             for(Categoria categoria: livro.getCategorias()){
-                 PreparedStatement declaracao4 = conexao.prepareStatement(
-                    "INSERT INTO livro "
-                    + "(id_livro, id_categoria VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
-               declaracao4.setInt(1, livro.getId());
-               declaracao4.setInt(2, categoria.getId());
-                declaracao3.execute();
+                 PreparedStatement declaracao5 = conexao.prepareStatement(
+                    "INSERT INTO livro_categoria "
+                    + "(id_livro, id_categoria) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
+               declaracao5.setInt(1, livro.getId());
+               declaracao5.setInt(2, categoria.getId());
+                declaracao5.execute();
             }
           
         } catch (ClassNotFoundException erro) {
@@ -94,7 +107,11 @@ public class LivroDAO extends AbstractDAO{
         } catch (SQLException erro) {
             erro.printStackTrace();   
         }
-          return resultado;
+        resultado.setMensagem("O Livro foi inserido com sucesso!");
+        resultado.setStatus(true);
+        resultado.setAcao("inserir");
+        
+        return resultado;
     
     }
 

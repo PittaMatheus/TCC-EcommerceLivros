@@ -70,6 +70,10 @@
         <url-pattern>/Livros/InserirLivro</url-pattern>
     </servlet-mapping>
     
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Livros/ListarLivro</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
