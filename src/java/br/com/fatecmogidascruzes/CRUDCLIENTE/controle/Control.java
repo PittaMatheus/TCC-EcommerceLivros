@@ -80,7 +80,7 @@ public class Control extends HttpServlet {
          
          // livro
         viewHelper.put("/Ecommerce/Livros/InserirLivro", new ViewLivro());
-
+        viewHelper.put("/Ecommerce/Livros/ListarLivros", new ViewLivro());                    
 
 
          

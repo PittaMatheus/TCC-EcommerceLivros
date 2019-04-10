@@ -129,7 +129,7 @@ public class ClienteDAO extends AbstractDAO {
                 cli.setCpf(rs.getString("cpf"));
                 cli.setRg(rs.getString("rg"));
                 cli.setSexo(rs.getString("sexo"));
-                cli.getPapel().setId(rs.getInt("tipo_usuario"));;
+                cli.getPapel().setId(rs.getInt("tipo_usuario"));
                
                 entidades.add(cli);
             }

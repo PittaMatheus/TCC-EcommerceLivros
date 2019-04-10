@@ -6,8 +6,28 @@ package br.com.fatecmogidascruzes.CRUDCLIENTE.dominio;
  */
 public class Editora extends EntidadeDominio{
     
+    private Integer id;
     private String nome;
+    
+    public Editora(Integer id, String nome) {
+		super();
+		this.id = id;
+		this.nome = nome;
+	}
 
+    public Editora(){
+        
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    
     public String getNome() {
         return nome;
     }

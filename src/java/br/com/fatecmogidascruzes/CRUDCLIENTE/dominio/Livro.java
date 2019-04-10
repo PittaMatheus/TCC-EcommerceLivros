@@ -24,6 +24,10 @@ public class Livro extends EntidadeDominio {
     private Double preco;
     private Boolean ativo;
 
+
+    public Livro(){
+    }
+    
     public Integer getId() {
         return Id;
     }
@@ -40,8 +44,6 @@ public class Livro extends EntidadeDominio {
         this.ano = ano;
     }
     
-    
-
     public String getAutor() {
         return autor;
     }

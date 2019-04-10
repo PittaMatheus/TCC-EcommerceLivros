@@ -117,7 +117,78 @@ public class LivroDAO extends AbstractDAO{
 
     @Override
     public Resultado listar(EntidadeDominio entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Livro livro = (Livro) entidade;
+            if(livro.getAtivo()){
+            PreparedStatement declaracao = conexao.prepareStatement("SELECT id, codigo_barras, autor, titulo, ano, edicao, numero_paginas,"
+                    + " sinopse, ativo, preco, "
+                    + " id_dimensao, id_editora, id_isbn, id_grupolivro "
+                    + "FROM livro l WHERE l.ativo = 1");
+            ResultSet rs =  declaracao.executeQuery();
+            while(rs.next()) {
+                Livro liv = new Livro();
+                liv.setId(rs.getInt("id"));
+                liv.setCodigoBarras(rs.getString("codigo_barras"));
+                liv.setAutor(rs.getString("autor"));
+                liv.setTitulo(rs.getString("titulo"));
+                liv.setAno(rs.getString("ano"));
+                liv.setEdicao(rs.getString("edicao"));
+                liv.setNumeroPaginas(rs.getString("numero_paginas"));
+                liv.setSinopse(rs.getString("sinopse"));
+                liv.setPreco(rs.getDouble("preco"));
+                
+                
+                System.out.println("FDP");
+                
+                
+                liv.getDimensoes().setId(rs.getInt("id_dimensao"));
+               
+                liv.getEditora().setId(rs.getInt("id_editora"));
+                
+                liv.getIsbn().setCodBarras(rs.getString("codigo_barras"));
+                liv.getIsbn().setCodBarras(rs.getString("id_isbm"));
+                liv.getGrupoLivro().setId(rs.getInt("id_grupolivro"));                
+                liv.setAtivo(true);   
+                entidades.add(liv);
+            }
+            resultado.setStatus(true);
+            resultado.setAcao("listarCliente");
+           }
+            else if(!livro.getAtivo()){
+            PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome,c.sobrenome, c.data_nascimento, "
+                    + "c.ranking, c.email, c.cpf, c.rg, c.sexo, c.tipo_usuario "
+                    + "FROM cliente c WHERE c.status = 0");
+            ResultSet rs =  declaracao.executeQuery();
+            while(rs.next()) {
+                Cliente cli = new Cliente();
+                cli.setId(rs.getInt("id"));
+                cli.setNome(rs.getString("nome"));
+                cli.setSobrenome(rs.getString("sobrenome"));
+                cli.setData_nascimento(rs.getDate("data_nascimento"));
+                cli.setRanking(rs.getDouble("ranking"));
+                cli.setEmail(rs.getString("email"));
+                cli.setCpf(rs.getString("cpf"));
+                cli.setRg(rs.getString("rg"));
+                cli.setSexo(rs.getString("sexo"));
+                cli.getPapel().setId(rs.getInt("tipo_usuario"));;
+               
+                entidades.add(cli);
+            }
+            resultado.setStatus(true);
+            resultado.setAcao("listarDesativados");
+            }
+        }catch(ClassNotFoundException erro) {
+            erro.printStackTrace();     
+            resultado.setStatus(false);
+            resultado.setMensagem("Houve algum erro ao listar o cliente");
+        } catch (SQLException erro) {
+            erro.printStackTrace();   
+        }
+        resultado.setEntidades(entidades);
+       return resultado;
     }
 
     @Override

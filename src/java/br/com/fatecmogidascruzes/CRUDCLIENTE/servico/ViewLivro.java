@@ -28,6 +28,13 @@ public class ViewLivro implements IViewHelper{
     @Override
     public EntidadeDominio getEntidade(HttpServletRequest request) {
         Livro livro = new Livro();
+        
+        // RECEBE PARAMETROS DA JSP
+        String acao = request.getParameter("acao");
+        String id = request.getParameter("id");
+        String status = request.getParameter("status");
+        
+        
         String idLivro = request.getParameter("txtIdLivro");
         String codigo = request.getParameter("txtCodigo");
         String autor = request.getParameter("txtAutor");
@@ -36,7 +43,6 @@ public class ViewLivro implements IViewHelper{
         String edicao = request.getParameter("txtEdicao");
         String numPaginas = request.getParameter("txtNumPaginas");
         String sinopse = request.getParameter("txtSinopse");
-        String ativo = request.getParameter("checkAtivo");
         String nomeEditora = request.getParameter("txtEditora");
         String[] idsCategoria = request.getParameterValues("categoria");
         String altura = request.getParameter("txtAltura");
@@ -47,7 +53,7 @@ public class ViewLivro implements IViewHelper{
         String idGrupoLivro = request.getParameter("grupoLivro");
         String preco = request.getParameter("txtPreco");
 
-        if(ativo!= null && ativo.equals("ativo"))
+        if(status!= null && status.equals("1"))
             livro.setAtivo(true);
         else
             livro.setAtivo(false);

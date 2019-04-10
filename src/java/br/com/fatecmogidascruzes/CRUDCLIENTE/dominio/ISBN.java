@@ -3,6 +3,7 @@ package br.com.fatecmogidascruzes.CRUDCLIENTE.dominio;
 
 public class ISBN extends EntidadeDominio{
     
+    private Integer id;
     private String codBarras;
 
     public String getCodBarras() {
@@ -12,5 +13,14 @@ public class ISBN extends EntidadeDominio{
     public void setCodBarras(String codBarras) {
         this.codBarras = codBarras;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
        
 }

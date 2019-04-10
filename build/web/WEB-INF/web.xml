@@ -72,7 +72,7 @@
     
     <servlet-mapping>
         <servlet-name>Control</servlet-name>
-        <url-pattern>/Livros/ListarLivro</url-pattern>
+        <url-pattern>/Livros/ListarLivros</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

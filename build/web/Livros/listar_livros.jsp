@@ -1,3 +1,4 @@
+<%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Resultado"%>
 <%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.EntidadeDominio"%>
 <%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Livro"%>
 <%@page import="java.util.List"%>
@@ -9,6 +10,16 @@
         <title>Tela de livros</title>
     </head>
     <body>
+        
+        <%
+      		Resultado resultado = (Resultado) request.getAttribute("resultado");
+		if(resultado == null) {
+			response.sendRedirect(request.getContextPath() + "/Livros/ListarLivros?acao=listar&status=1");
+			return;
+		}
+	%>
+        
+        %>
        
         <table border="1" style ="width: 50%">
         <tr>

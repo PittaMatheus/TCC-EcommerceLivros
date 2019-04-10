@@ -8,6 +8,26 @@ public class Dimensoes extends EntidadeDominio{
     private Double peso;
     private Double profundidade;
 
+    public Dimensoes(Integer id, Double altura, Double largura, Double peso, Double profundidade) {
+		super();
+		this.id = id;
+		this.altura = altura;
+                this.largura = largura;
+                this.peso = peso;
+                this.profundidade = profundidade;
+	}
+    
+    public Dimensoes(){
+    }
+    
+    public Integer getId(){
+        return id;
+    }
+    
+    public void setId(Integer id){
+        this.id = id;
+    }
+    
     public Double getAltura() {
         return altura;
     }
@@ -40,13 +60,5 @@ public class Dimensoes extends EntidadeDominio{
         this.profundidade = profundidade;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    
     
 }
