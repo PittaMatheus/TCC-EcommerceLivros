@@ -16,40 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `endereco`
+-- Table structure for table `cartao`
 --
 
-DROP TABLE IF EXISTS `endereco`;
+DROP TABLE IF EXISTS `cartao`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `endereco` (
+CREATE TABLE `cartao` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `logradouro` varchar(155) NOT NULL,
+  `nome` varchar(155) NOT NULL,
+  `dtVencimento` date NOT NULL,
+  `bandeira` varchar(155) NOT NULL,
   `numero` varchar(155) NOT NULL,
-  `bairro` varchar(155) DEFAULT NULL,
-  `cep` varchar(155) NOT NULL,
-  `cidade` varchar(155) NOT NULL,
-  `uf` varchar(155) NOT NULL,
-  `tipoLogradouro` varchar(155) DEFAULT NULL,
-  `nomeEndereco` varchar(155) DEFAULT NULL,
-  `complemento` varchar(155) DEFAULT NULL,
-  `referencia` varchar(155) DEFAULT NULL,
-  `tipoEndereco` varchar(50) NOT NULL DEFAULT '0',
+  `codSeguranca` varchar(155) NOT NULL,
   `id_cliente` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_cliente_idx` (`id_cliente`),
-  CONSTRAINT `fk_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  KEY `id_cliente_idx` (`id_cliente`),
+  CONSTRAINT `id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `endereco`
+-- Dumping data for table `cartao`
 --
 
-LOCK TABLES `endereco` WRITE;
-/*!40000 ALTER TABLE `endereco` DISABLE KEYS */;
-INSERT INTO `endereco` VALUES (1,'BABACA','12312','cubas','12312312312312','Mogi','SP','vila','Casa','apt 2','null','1',1),(2,'Rua tranÃ§as do rei careca','12312','cubas','12312312312312','Mogi','SP','vila','Casa da avÃ³','apt 2',NULL,'1',2);
-/*!40000 ALTER TABLE `endereco` ENABLE KEYS */;
+LOCK TABLES `cartao` WRITE;
+/*!40000 ALTER TABLE `cartao` DISABLE KEYS */;
+INSERT INTO `cartao` VALUES (1,'JOAO DA SILVA','2019-09-09','mastercard','2321321','033',1);
+/*!40000 ALTER TABLE `cartao` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -61,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-09 11:51:05
+-- Dump completed on 2019-04-11 12:02:20

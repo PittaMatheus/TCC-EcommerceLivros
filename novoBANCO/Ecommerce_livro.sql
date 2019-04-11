@@ -33,12 +33,20 @@ CREATE TABLE `livro` (
   `sinopse` varchar(500) DEFAULT NULL,
   `ativo` tinyint(4) DEFAULT '1',
   `preco` decimal(5,2) DEFAULT NULL,
-  `id_editora` int(11) DEFAULT NULL,
-  `id_dimensao` int(11) DEFAULT NULL,
-  `id_isbn` int(11) DEFAULT NULL,
-  `id_grupolivro` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id_editora` int(11) NOT NULL,
+  `id_dimensao` int(11) NOT NULL,
+  `id_isbn` int(11) NOT NULL,
+  `id_grupolivro` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_livro_editora_idx` (`id_editora`),
+  KEY `fk_livro_isbn_idx` (`id_isbn`),
+  KEY `fk_livro_grupoLivro_idx` (`id_grupolivro`),
+  KEY `fk_livro_dimensoes_idx` (`id_dimensao`),
+  CONSTRAINT `fk_livro_dimensoes` FOREIGN KEY (`id_dimensao`) REFERENCES `dimensoes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_livro_editora` FOREIGN KEY (`id_editora`) REFERENCES `editora` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_livro_grupoLivro` FOREIGN KEY (`id_grupolivro`) REFERENCES `grupolivro` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_livro_isbn` FOREIGN KEY (`id_isbn`) REFERENCES `isbn` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,6 +55,7 @@ CREATE TABLE `livro` (
 
 LOCK TABLES `livro` WRITE;
 /*!40000 ALTER TABLE `livro` DISABLE KEYS */;
+INSERT INTO `livro` VALUES (1,'2010120132','autor teste','titulo teste','02/02/1999','2','222','Esse Ã© um exemplo da sinopse de um livro',1,49.99,3,1,1,1),(2,'201012123','autor teste','titulo teste','02/02/1999','2','222','Esse Ã© um exemplo da sinopse de um livro',1,49.99,4,2,2,1),(3,'2010120123132','autor teste','lancamento','02/02/1999','2','222','Esse Ã© um exemplo da sinopse de um livro',1,49.99,5,3,3,2);
 /*!40000 ALTER TABLE `livro` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +68,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-09 11:51:05
+-- Dump completed on 2019-04-11 12:02:19

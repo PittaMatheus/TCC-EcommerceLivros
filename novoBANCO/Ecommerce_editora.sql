@@ -16,30 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `dimensoes`
+-- Table structure for table `editora`
 --
 
-DROP TABLE IF EXISTS `dimensoes`;
+DROP TABLE IF EXISTS `editora`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `dimensoes` (
+CREATE TABLE `editora` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `altura` decimal(5,2) DEFAULT NULL,
-  `largura` decimal(5,2) DEFAULT NULL,
-  `peso` decimal(5,2) DEFAULT NULL,
-  `profundidade` decimal(5,2) DEFAULT NULL,
+  `nome_editora` varchar(155) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `dimensoes`
+-- Dumping data for table `editora`
 --
 
-LOCK TABLES `dimensoes` WRITE;
-/*!40000 ALTER TABLE `dimensoes` DISABLE KEYS */;
-INSERT INTO `dimensoes` VALUES (1,20.00,14.00,1.50,4.00);
-/*!40000 ALTER TABLE `dimensoes` ENABLE KEYS */;
+LOCK TABLES `editora` WRITE;
+/*!40000 ALTER TABLE `editora` DISABLE KEYS */;
+INSERT INTO `editora` VALUES (1,'Abril'),(2,'Abril'),(3,'Abril'),(4,'Abril'),(5,'Abril');
+/*!40000 ALTER TABLE `editora` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-09 11:51:05
+-- Dump completed on 2019-04-11 12:02:20

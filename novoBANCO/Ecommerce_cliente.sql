@@ -16,26 +16,38 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `isbm`
+-- Table structure for table `cliente`
 --
 
-DROP TABLE IF EXISTS `isbm`;
+DROP TABLE IF EXISTS `cliente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `isbm` (
+CREATE TABLE `cliente` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cod_barras` varchar(155) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `nome` varchar(155) NOT NULL,
+  `sobrenome` varchar(155) NOT NULL,
+  `data_nascimento` date NOT NULL,
+  `status` tinyint(4) DEFAULT '1',
+  `ranking` double DEFAULT NULL,
+  `senha` varchar(155) NOT NULL,
+  `email` varchar(155) NOT NULL,
+  `cpf` varchar(155) NOT NULL,
+  `rg` varchar(155) DEFAULT NULL,
+  `sexo` varchar(155) NOT NULL,
+  `tipo_usuario` varchar(55) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `fk_tipoUsuario_idx` (`tipo_usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `isbm`
+-- Dumping data for table `cliente`
 --
 
-LOCK TABLES `isbm` WRITE;
-/*!40000 ALTER TABLE `isbm` DISABLE KEYS */;
-/*!40000 ALTER TABLE `isbm` ENABLE KEYS */;
+LOCK TABLES `cliente` WRITE;
+/*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+INSERT INTO `cliente` VALUES (1,'NomeTesteasd','SobrenomeTeste','1995-01-12',1,50,'SenhaValida!@#','emailteste@teste.com','41656190869','329702760','M','1'),(2,'adm','SobrenomeTeste','1995-01-12',1,50,'SenhaValida!@#','adm@adm.com','45296735889','329702760','M','2');
+/*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -47,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-09 11:51:04
+-- Dump completed on 2019-04-11 12:02:20

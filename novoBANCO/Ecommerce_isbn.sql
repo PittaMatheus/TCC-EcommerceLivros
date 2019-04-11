@@ -16,28 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `grupolivro`
+-- Table structure for table `isbn`
 --
 
-DROP TABLE IF EXISTS `grupolivro`;
+DROP TABLE IF EXISTS `isbn`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `grupolivro` (
+CREATE TABLE `isbn` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome_grupolivro` varchar(155) DEFAULT NULL,
-  `margem_lucro` double DEFAULT NULL,
+  `cod_barras` varchar(155) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `grupolivro`
+-- Dumping data for table `isbn`
 --
 
-LOCK TABLES `grupolivro` WRITE;
-/*!40000 ALTER TABLE `grupolivro` DISABLE KEYS */;
-INSERT INTO `grupolivro` VALUES (1,'promocao',50);
-/*!40000 ALTER TABLE `grupolivro` ENABLE KEYS */;
+LOCK TABLES `isbn` WRITE;
+/*!40000 ALTER TABLE `isbn` DISABLE KEYS */;
+INSERT INTO `isbn` VALUES (1,'2423432'),(2,'242343212'),(3,'2423123432');
+/*!40000 ALTER TABLE `isbn` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-09 11:51:05
+-- Dump completed on 2019-04-11 12:02:19

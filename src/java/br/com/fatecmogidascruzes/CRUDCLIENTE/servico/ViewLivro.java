@@ -63,8 +63,8 @@ public class ViewLivro implements IViewHelper{
         else
             livro.setAtivo(false);
 
-        if(idLivro != null && !idLivro.trim().isEmpty())	
-            livro.setId(Integer.parseInt(idLivro));
+        if(id != null && !id.trim().isEmpty())	
+            livro.setId(Integer.parseInt(id));
 
         
         livro.setCodigoBarras(codigo);
@@ -133,6 +133,8 @@ public class ViewLivro implements IViewHelper{
                             }
                             else if(resultado.getAcao().equals("listarLivros")){
                                 request.getRequestDispatcher("listar_livros.jsp").forward(request, response);
+                            }else if(resultado.getAcao().equals("alterarLivro")){
+                                request.getRequestDispatcher("preAlterar_livro.jsp").forward(request, response);
                             }    
                         } 
                     }

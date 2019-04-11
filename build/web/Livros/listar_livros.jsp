@@ -70,7 +70,7 @@
             <td><%=livro.getPreco()%></td>
             <td><%=livro.getPreco() + (livro.getPreco() * (livro.getGrupoLivro().getMargemLucro()/100))%></td>
             <td><%=(livro.getPreco() + (livro.getPreco() * (livro.getGrupoLivro().getMargemLucro()/100)))  -   (livro.getPreco())%></td>
-            <td><a href="/Livraria-web/VisualizarLivro?operacao=consultar&id=<% out.print(livro.getId()); %>" id="linkVisualizar<%=livro.getCodigoBarras()%>">Editar</a></td>
+            <td><a href="preAlterar_livro.jsp?id=<% out.print(livro.getId()); %>">Editar</a></td>
             </tr>
         <% }} %>
         </table>

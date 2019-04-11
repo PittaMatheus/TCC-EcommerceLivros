@@ -166,7 +166,7 @@ public class LivroDAO extends AbstractDAO{
             resultado.setStatus(true);
             resultado.setAcao("listarLivros");
            }
-            else if(!livro.getAtivo()){
+            /*else if(!livro.getAtivo()){
             PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome,c.sobrenome, c.data_nascimento, "
                     + "c.ranking, c.email, c.cpf, c.rg, c.sexo, c.tipo_usuario "
                     + "FROM cliente c WHERE c.status = 0");
@@ -188,7 +188,7 @@ public class LivroDAO extends AbstractDAO{
             }
             resultado.setStatus(true);
             resultado.setAcao("listarDesativados");
-            }
+            }*/
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);
@@ -217,7 +217,66 @@ public class LivroDAO extends AbstractDAO{
 
     @Override
     public Resultado consultar(EntidadeDominio entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Livro livro = (Livro) entidade;
+            if(livro.getAtivo()){
+                PreparedStatement declaracao = conexao.prepareStatement("SELECT\n" +
+        "livro.id as id_livro, livro.codigo_barras as cod_barras, livro.autor as autor, livro.ano as ano,\n" +
+        "livro.edicao as edicao, livro.titulo as titulo,livro.numero_paginas as numero_paginas, livro.sinopse as sinopse, livro.ativo as status,\n" +
+        "livro.preco as preco, editora.id as id_editora, editora.nome_editora as nome_editora, \n" +
+        "dimensoes.id as id_dimensoes, dimensoes.altura as altura,\n" +
+        "dimensoes.profundidade as profundidade, dimensoes.largura as largura, dimensoes.peso as peso, \n" +
+        "isbn.id as id_isbn, isbn.cod_barras as ISBN, grupolivro.id as id_grupolivro, \n" +
+        "grupolivro.nome_grupolivro as nome_grupolivro, grupolivro.margem_lucro as margem_lucro\n" +
+        "FROM livro\n" +
+        "INNER JOIN editora ON editora.id = livro.id_editora\n" +
+        "INNER JOIN dimensoes ON dimensoes.id = livro.id_dimensao\n" +
+        "INNER JOIN isbn ON isbn.id = livro.id_isbn\n" +
+        "INNER JOIN livro_categoria ON livro_categoria.id_livro = livro.id \n" +
+        "INNER JOIN grupolivro on grupolivro.id = livro.id_grupolivro where livro.ativo =1 AND livro.id = ?");
+            declaracao.setInt(1, livro.getId());
+            ResultSet rs =  declaracao.executeQuery();
+            while(rs.next()) {
+                Livro liv = new Livro();
+                liv.setId(rs.getInt("id_livro"));
+                liv.setCodigoBarras(rs.getString("cod_barras"));
+                liv.setAutor(rs.getString("autor"));
+                liv.setTitulo(rs.getString("titulo"));
+                liv.setAno(rs.getString("ano"));
+                liv.setEdicao(rs.getString("edicao"));
+                liv.setNumeroPaginas(rs.getString("numero_paginas"));
+                liv.setSinopse(rs.getString("sinopse"));
+                liv.setPreco(rs.getDouble("preco"));
+                liv.getEditora().setId(rs.getInt("id_editora"));
+                liv.getEditora().setNome(rs.getString("nome_editora"));
+                liv.getDimensoes().setId(rs.getInt("id_dimensoes"));
+                liv.getDimensoes().setAltura(rs.getDouble("altura"));
+                liv.getDimensoes().setProfundidade(rs.getDouble("profundidade"));
+                liv.getDimensoes().setLargura(rs.getDouble("largura"));
+                liv.getDimensoes().setPeso(rs.getDouble("peso"));
+                liv.getIsbn().setCodBarras(rs.getString("ISBN"));
+                liv.getIsbn().setId(rs.getInt("id_isbn"));
+                liv.getGrupoLivro().setId(rs.getInt("id_grupolivro"));
+                liv.getGrupoLivro().setNome(rs.getString("nome_grupolivro"));
+                liv.getGrupoLivro().setMargemLucro(rs.getDouble("margem_lucro"));
+                liv.setAtivo(true);   
+                entidades.add(liv);
+            }
+            resultado.setStatus(true);
+            resultado.setAcao("alterarLivro");
+            resultado.setMensagem("livro listado com sucesso");
+           }
+            }catch(ClassNotFoundException erro) {
+                erro.printStackTrace();     
+                resultado.setStatus(false);
+                resultado.setMensagem("Houve algum erro ao listar o cliente");
+            } catch (SQLException erro) {
+                erro.printStackTrace();   
+            }
+       resultado.setEntidades(entidades);
+       return resultado;
     }
-    
 }

@@ -15,7 +15,7 @@
        <%
         List<EntidadeDominio> categorias = (List<EntidadeDominio>) getServletContext().getAttribute("categorias");
         List<EntidadeDominio> grupoLivros = (List<EntidadeDominio>) getServletContext().getAttribute("grupoLivros");
-%>
+        %>
             <form action="InserirLivro" method="post">
                  <h2>Cadastro de Livro</h2>
                  <% 

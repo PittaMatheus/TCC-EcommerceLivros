@@ -16,35 +16,12 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `cartao`
+-- Dumping events for database 'Ecommerce'
 --
 
-DROP TABLE IF EXISTS `cartao`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `cartao` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(155) NOT NULL,
-  `dtVencimento` date NOT NULL,
-  `bandeira` varchar(155) NOT NULL,
-  `numero` varchar(155) NOT NULL,
-  `codSeguranca` varchar(155) NOT NULL,
-  `id_cliente` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_cliente_idx` (`id_cliente`),
-  CONSTRAINT `id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 --
--- Dumping data for table `cartao`
+-- Dumping routines for database 'Ecommerce'
 --
-
-LOCK TABLES `cartao` WRITE;
-/*!40000 ALTER TABLE `cartao` DISABLE KEYS */;
-INSERT INTO `cartao` VALUES (1,'JOAO DA SILVA','2019-09-09','mastercard','2321321','033',1);
-/*!40000 ALTER TABLE `cartao` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -55,4 +32,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-09 11:51:05
+-- Dump completed on 2019-04-11 12:02:20
