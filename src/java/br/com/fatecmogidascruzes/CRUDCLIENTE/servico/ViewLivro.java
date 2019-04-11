@@ -28,12 +28,17 @@ public class ViewLivro implements IViewHelper{
     @Override
     public EntidadeDominio getEntidade(HttpServletRequest request) {
         Livro livro = new Livro();
-        
+        ISBN isbn = new ISBN();
+        GrupoLivro grupoLivro = new GrupoLivro();
+        Editora editora = new Editora();
+        Dimensoes dimensoes = new Dimensoes();
+         
         // RECEBE PARAMETROS DA JSP
         String acao = request.getParameter("acao");
         String id = request.getParameter("id");
+        String id_editora = request.getParameter("id_editora");
         String status = request.getParameter("status");
-        
+        List<Categoria> categoriasLivro = new ArrayList<>();
         
         String idLivro = request.getParameter("txtIdLivro");
         String codigo = request.getParameter("txtCodigo");
@@ -61,6 +66,7 @@ public class ViewLivro implements IViewHelper{
         if(idLivro != null && !idLivro.trim().isEmpty())	
             livro.setId(Integer.parseInt(idLivro));
 
+        
         livro.setCodigoBarras(codigo);
         livro.setAutor(autor);
         livro.setTitulo(titulo);
@@ -72,12 +78,13 @@ public class ViewLivro implements IViewHelper{
         if(preco != null)
             livro.setPreco(Double.valueOf(preco));
 
-        Editora editora = new Editora();
+        if(id_editora != null){
+            editora.setId(Integer.parseInt(id_editora));
+        }
         editora.setNome(nomeEditora);
-        //editora.setId(id_editora);
         livro.setEditora(editora);
 
-        Dimensoes dimensoes = new Dimensoes();
+       
         if(altura != null && !altura.trim().isEmpty())
             dimensoes.setAltura(Double.valueOf(altura));
 
@@ -91,12 +98,10 @@ public class ViewLivro implements IViewHelper{
             dimensoes.setProfundidade(Double.valueOf(profundidade));
 
         livro.setDimensoes(dimensoes);
-
-        ISBN isbn = new ISBN();
         isbn.setCodBarras(codigoIsbn);
         livro.setIsbn(isbn);
 
-        List<Categoria> categoriasLivro = new ArrayList<>();
+        
         if(idsCategoria != null && idsCategoria.length > 0){
                 for(String idCategoria: idsCategoria){
                         Categoria categoria = new Categoria();
@@ -106,7 +111,7 @@ public class ViewLivro implements IViewHelper{
         }
         livro.setCategorias(categoriasLivro);
         
-        GrupoLivro grupoLivro = new GrupoLivro();
+        
         
         if(idGrupoLivro != null && !idGrupoLivro.isEmpty())
             grupoLivro.setId(Integer.parseInt(idGrupoLivro));
@@ -126,8 +131,8 @@ public class ViewLivro implements IViewHelper{
                                 request.setAttribute("acao", "inserção");
                                 request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
                             }
-                            else if(resultado.getAcao().equals("listarCliente")){
-                                request.getRequestDispatcher("listar_clientes.jsp").forward(request, response);
+                            else if(resultado.getAcao().equals("listarLivros")){
+                                request.getRequestDispatcher("listar_livros.jsp").forward(request, response);
                             }    
                         } 
                     }

@@ -69,8 +69,8 @@ public class LivroDAO extends AbstractDAO{
             // INSERIR LIVRO
             PreparedStatement declaracao4 = conexao.prepareStatement(
                     "INSERT INTO livro "
-                    + "(codigo_barras, autor, titulo, ano, edicao, numero_paginas, sinopse, ativo, preco, id_editora,id_dimensao, id_isbn, id_grupolivro)"
-                   + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                    + "(codigo_barras, autor, titulo, ano, edicao, numero_paginas, sinopse, preco, id_editora,id_dimensao, id_isbn, id_grupolivro)"
+                   + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             
             declaracao4.setString(1, livro.getCodigoBarras());
             declaracao4.setString(2, livro.getAutor());
@@ -78,13 +78,12 @@ public class LivroDAO extends AbstractDAO{
             declaracao4.setString(4, livro.getAno());
             declaracao4.setString(5, livro.getEdicao());
             declaracao4.setString(6, livro.getNumeroPaginas());
-            declaracao4.setString(7, livro.getSinopse());
-            declaracao4.setBoolean(8, livro.getAtivo());
-            declaracao4.setDouble(9, livro.getPreco());
-            declaracao4.setInt(10, livro.getEditora().getId());
-            declaracao4.setInt(11, livro.getDimensoes().getId());
-            declaracao4.setInt(12, livro.getIsbn().getId());
-            declaracao4.setInt(13, livro.getGrupoLivro().getId());
+            declaracao4.setString(7, livro.getSinopse());;
+            declaracao4.setDouble(8, livro.getPreco());
+            declaracao4.setInt(9, livro.getEditora().getId());
+            declaracao4.setInt(10, livro.getDimensoes().getId());
+            declaracao4.setInt(11, livro.getIsbn().getId());
+            declaracao4.setInt(12, livro.getGrupoLivro().getId());
             declaracao4.execute();
 
             rs = declaracao4.getGeneratedKeys(); 
@@ -139,23 +138,16 @@ public class LivroDAO extends AbstractDAO{
                 liv.setNumeroPaginas(rs.getString("numero_paginas"));
                 liv.setSinopse(rs.getString("sinopse"));
                 liv.setPreco(rs.getDouble("preco"));
-                
-                
-                System.out.println("FDP");
-                
-                
-                liv.getDimensoes().setId(rs.getInt("id_dimensao"));
-               
                 liv.getEditora().setId(rs.getInt("id_editora"));
-                
+                liv.getDimensoes().setId(rs.getInt("id_dimensao"));   
                 liv.getIsbn().setCodBarras(rs.getString("codigo_barras"));
-                liv.getIsbn().setCodBarras(rs.getString("id_isbm"));
+                liv.getIsbn().setCodBarras(rs.getString("id_isbn"));
                 liv.getGrupoLivro().setId(rs.getInt("id_grupolivro"));                
                 liv.setAtivo(true);   
                 entidades.add(liv);
             }
             resultado.setStatus(true);
-            resultado.setAcao("listarCliente");
+            resultado.setAcao("listarLivros");
            }
             else if(!livro.getAtivo()){
             PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome,c.sobrenome, c.data_nascimento, "

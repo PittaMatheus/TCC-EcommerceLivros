@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Livro extends EntidadeDominio {
     
-    private Integer Id;
+    private Integer id;
     private String autor;
     private String codigoBarras;
     private String titulo;
@@ -24,16 +24,42 @@ public class Livro extends EntidadeDominio {
     private Double preco;
     private Boolean ativo;
 
-
+    public Livro(Integer Id, String autor,String codigoBarras,String titulo,String edicao, String sinopse, String numeroPaginas, String ano,
+     List<Categoria> categorias,Dimensoes dimensoes,Editora editora, GrupoLivro grupoLivro, ISBN isbn, Double preco, Boolean ativo){
+        super();
+        this.id = id;
+        this.autor = autor;
+        this.codigoBarras = codigoBarras;
+        this.titulo = titulo;
+        this.edicao = edicao;
+        this.sinopse = sinopse;
+        this.numeroPaginas = numeroPaginas;
+        this.ano = ano;
+        this.categorias = categorias;
+        this.dimensoes = dimensoes;
+        this.editora = editora;
+        this.categorias = categorias;
+        this.grupoLivro = grupoLivro;
+        this.isbn = isbn;
+        this.preco = preco;
+        this.ativo = ativo;
+        
+    }
+    
+    
     public Livro(){
+        editora = new Editora();
+        isbn = new ISBN();
+        dimensoes = new Dimensoes();
+        grupoLivro = new GrupoLivro();
     }
     
     public Integer getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Integer Id) {
-        this.Id = Id;
+        this.id = Id;
     }
 
     public String getAno() {

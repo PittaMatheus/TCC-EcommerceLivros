@@ -8,16 +8,6 @@ public class Editora extends EntidadeDominio{
     
     private Integer id;
     private String nome;
-    
-    public Editora(Integer id, String nome) {
-		super();
-		this.id = id;
-		this.nome = nome;
-	}
-
-    public Editora(){
-        
-    }
 
     public Integer getId() {
         return id;

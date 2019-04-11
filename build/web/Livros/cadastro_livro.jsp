@@ -26,7 +26,7 @@
                      //}
                  %>
 
-                 <input type="checkbox" name="checkAtivo" value="ativo" checked="true">Ativo<br>
+                 
 
                  <label for="txtCodigo">Código:</label> 
                  <input type="text" id="txtCodigo" value="2010120132" name="txtCodigo" /> <br> 
