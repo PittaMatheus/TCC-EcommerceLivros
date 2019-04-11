@@ -20,44 +20,61 @@
 	%>
         
         
-        <h4>Livros</h4>
-        <table border="1" style ="width: 50%">
+        <h4>Livros ativos</h4>
+       
+        <%
+         List<Livro> livros = (List) resultado.getEntidades();
+                         
+                         if(livros.size() == 0) {
+                            out.print("<br><br>Nenhum livro cadastrado");
+                 }else {
+        %> 
+         <table border="1" style ="width: 50%">
         <tr>
-
             <th>Código barra</th>
             <th>Título</th>
             <th>Autor</th>
             <th>Ano</th>
             <th>Editora</th>
             <th>ISBN</th>
-            <th>Preco Revenda</th>
-            <th>Status</th>
+            <th>Altura</th>
+            <th>Largura</th>
+            <th>Peso</th>
+            <th>Profundidade</th>
+            <th>Grupo de precificação</th>
+            <th>Margem de lucro</th>
+            <th>Preco de custo</th>
+            <th>Preco de revenda</th>
+            <th>Lucro</th>  
             <th>Ação</th>
-            
-        </tr>
+        </tr>       
         <%
-         List<Livro> livros = (List) resultado.getEntidades();
-                         
-                         if(livros.size() == 0) {
-                            out.print("<br><br>Nenhum cliente cadastrado");
-                        } else {
+                            
+                        
                               for (Livro livro : livros) {
                      %>
-            <tr>
-
-                <td><%=livro.getCodigoBarras()%></td>
-                <td><%=livro.getTitulo()%></td>
-                <td><%=livro.getAutor()%></td>
-                <td><%=livro.getAno()%></td>
-                <td><%=livro.getEditora().getNome()%></td>
-                <td><%=livro.getIsbn().getCodBarras()%></td>
-
-                <td><a href="/Livraria-web/VisualizarLivro?operacao=consultar&id=<% out.print(livro.getId()); %>" id="linkVisualizar<%=livro.getCodigoBarras()%>">Visualizar</a></td>
-                
+    
+        <tr>
+            <td><%=livro.getCodigoBarras()%></td>
+            <td><%=livro.getTitulo()%></td>
+            <td><%=livro.getAutor()%></td>
+            <td><%=livro.getAno()%></td>
+            <td><%=livro.getEditora().getNome()%></td>
+            <td><%=livro.getIsbn().getCodBarras()%></td>
+            <td><%=livro.getDimensoes().getAltura()%></td>
+            <td><%=livro.getDimensoes().getLargura()%></td>
+            <td><%=livro.getDimensoes().getPeso()%></td>
+            <td><%=livro.getDimensoes().getProfundidade()%></td>
+            <td><%=livro.getGrupoLivro().getNome()%></td>
+            <td><%=livro.getGrupoLivro().getMargemLucro()%>%</td>
+            <td><%=livro.getPreco()%></td>
+            <td><%=livro.getPreco() + (livro.getPreco() * (livro.getGrupoLivro().getMargemLucro()/100))%></td>
+            <td><%=(livro.getPreco() + (livro.getPreco() * (livro.getGrupoLivro().getMargemLucro()/100)))  -   (livro.getPreco())%></td>
+            <td><a href="/Livraria-web/VisualizarLivro?operacao=consultar&id=<% out.print(livro.getId()); %>" id="linkVisualizar<%=livro.getCodigoBarras()%>">Editar</a></td>
             </tr>
         <% }} %>
         </table>
-        
+        <br><br>
          <a href='../Clientes/home.jsp'>Voltar</a>
     </body>
 </html>

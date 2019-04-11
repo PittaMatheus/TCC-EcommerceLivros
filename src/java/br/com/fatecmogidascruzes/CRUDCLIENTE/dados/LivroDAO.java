@@ -59,7 +59,7 @@ public class LivroDAO extends AbstractDAO{
              
             // Inserir categoria
              PreparedStatement declaracao3 = conexao.prepareStatement(
-                    "INSERT INTO isbm "
+                    "INSERT INTO isbn "
                     + "(cod_barras) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
              declaracao3.setString(1, livro.getIsbn().getCodBarras());
              declaracao3.execute();
@@ -122,15 +122,25 @@ public class LivroDAO extends AbstractDAO{
             Connection conexao = BancoDadosOracle.getConexao();
             Livro livro = (Livro) entidade;
             if(livro.getAtivo()){
-            PreparedStatement declaracao = conexao.prepareStatement("SELECT id, codigo_barras, autor, titulo, ano, edicao, numero_paginas,"
-                    + " sinopse, ativo, preco, "
-                    + " id_dimensao, id_editora, id_isbn, id_grupolivro "
-                    + "FROM livro l WHERE l.ativo = 1");
+                PreparedStatement declaracao = conexao.prepareStatement("SELECT\n" +
+        "livro.id as id_livro, livro.codigo_barras as cod_barras, livro.autor as autor, livro.ano as ano,\n" +
+        "livro.edicao as edicao, livro.titulo as titulo,livro.numero_paginas as numero_paginas, livro.sinopse as sinopse, livro.ativo as status,\n" +
+        "livro.preco as preco, editora.id as id_editora, editora.nome_editora as nome_editora, \n" +
+        "dimensoes.id as id_dimensoes, dimensoes.altura as altura,\n" +
+        "dimensoes.profundidade as profundidade, dimensoes.largura as largura, dimensoes.peso as peso, \n" +
+        "isbn.id as id_isbn, isbn.cod_barras as ISBN, grupolivro.id as id_grupolivro, \n" +
+        "grupolivro.nome_grupolivro as nome_grupolivro, grupolivro.margem_lucro as margem_lucro\n" +
+        "FROM livro\n" +
+        "INNER JOIN editora ON editora.id = livro.id_editora\n" +
+        "INNER JOIN dimensoes ON dimensoes.id = livro.id_dimensao\n" +
+        "INNER JOIN isbn ON isbn.id = livro.id_isbn\n" +
+        "INNER JOIN livro_categoria ON livro_categoria.id_livro = livro.id \n" +
+        "INNER JOIN grupolivro on grupolivro.id = livro.id_grupolivro where livro.ativo =1;");
             ResultSet rs =  declaracao.executeQuery();
             while(rs.next()) {
                 Livro liv = new Livro();
-                liv.setId(rs.getInt("id"));
-                liv.setCodigoBarras(rs.getString("codigo_barras"));
+                liv.setId(rs.getInt("id_livro"));
+                liv.setCodigoBarras(rs.getString("cod_barras"));
                 liv.setAutor(rs.getString("autor"));
                 liv.setTitulo(rs.getString("titulo"));
                 liv.setAno(rs.getString("ano"));
@@ -139,10 +149,17 @@ public class LivroDAO extends AbstractDAO{
                 liv.setSinopse(rs.getString("sinopse"));
                 liv.setPreco(rs.getDouble("preco"));
                 liv.getEditora().setId(rs.getInt("id_editora"));
-                liv.getDimensoes().setId(rs.getInt("id_dimensao"));   
-                liv.getIsbn().setCodBarras(rs.getString("codigo_barras"));
-                liv.getIsbn().setCodBarras(rs.getString("id_isbn"));
-                liv.getGrupoLivro().setId(rs.getInt("id_grupolivro"));                
+                liv.getEditora().setNome(rs.getString("nome_editora"));
+                liv.getDimensoes().setId(rs.getInt("id_dimensoes"));
+                liv.getDimensoes().setAltura(rs.getDouble("altura"));
+                liv.getDimensoes().setProfundidade(rs.getDouble("profundidade"));
+                liv.getDimensoes().setLargura(rs.getDouble("largura"));
+                liv.getDimensoes().setPeso(rs.getDouble("peso"));
+                liv.getIsbn().setCodBarras(rs.getString("ISBN"));
+                liv.getIsbn().setId(rs.getInt("id_isbn"));
+                liv.getGrupoLivro().setId(rs.getInt("id_grupolivro"));
+                liv.getGrupoLivro().setNome(rs.getString("nome_grupolivro"));
+                liv.getGrupoLivro().setMargemLucro(rs.getDouble("margem_lucro"));
                 liv.setAtivo(true);   
                 entidades.add(liv);
             }
