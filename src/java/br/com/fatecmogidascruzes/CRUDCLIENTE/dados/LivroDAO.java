@@ -202,7 +202,48 @@ public class LivroDAO extends AbstractDAO{
 
     @Override
     public Resultado alterar(EntidadeDominio entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<EntidadeDominio> ListEntidades = new ArrayList<EntidadeDominio>();
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Livro livro = (Livro) entidade;
+            // Instancia das entidades relacionadas
+            DimensoesDAO dimensoesDAO = new DimensoesDAO();
+            IsbnDAO isbnDAO = new IsbnDAO();
+            EditoraDAO editoraDao = new EditoraDAO();;
+            dimensoesDAO.alterar(livro);
+            isbnDAO.alterar(livro);
+            editoraDao.alterar(livro);
+   
+            PreparedStatement declaracao = conexao.prepareStatement("UPDATE livro SET autor=?, codigo_barras=?, titulo=?, ano=?, edicao=?, "
+                    + "numero_paginas=?, sinopse=?, id_grupolivro=?, preco=? "
+            + " WHERE id=?");
+            
+            declaracao.setString(1, livro.getAutor());
+            declaracao.setString(2, livro.getCodigoBarras());
+            declaracao.setString(3, livro.getTitulo());
+            declaracao.setString(4, livro.getAno());
+            declaracao.setString(5, livro.getEdicao());
+            declaracao.setString(6, livro.getNumeroPaginas());
+            declaracao.setString(7, livro.getSinopse());
+            declaracao.setInt(8, livro.getGrupoLivro().getId());
+            declaracao.setDouble(9, livro.getPreco());
+            declaracao.setInt(10, livro.getId());
+            declaracao.execute();
+            
+            
+            resultado.setStatus(true);
+            resultado.setMensagem("O livro foi alterarado com sucesso!");   
+            // Fecha a conexao.
+            conexao.close();
+        } catch (ClassNotFoundException erro) {
+            erro.printStackTrace();     
+            resultado.setStatus(false);
+            resultado.setMensagem("Houve algum erro ao alterar o livro");
+        } catch (SQLException erro) {
+            erro.printStackTrace();   
+        }
+          return resultado;
     }
 
     @Override

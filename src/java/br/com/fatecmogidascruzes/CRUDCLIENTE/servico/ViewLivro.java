@@ -40,7 +40,10 @@ public class ViewLivro implements IViewHelper{
         String status = request.getParameter("status");
         List<Categoria> categoriasLivro = new ArrayList<>();
         
-        String idLivro = request.getParameter("txtIdLivro");
+        
+        
+        String id_isbn = request.getParameter("id_isbn");
+        String id_dimensoes = request.getParameter("id_dimensoes");
         String codigo = request.getParameter("txtCodigo");
         String autor = request.getParameter("txtAutor");
         String titulo = request.getParameter("txtTitulo");
@@ -57,7 +60,9 @@ public class ViewLivro implements IViewHelper{
         String codigoIsbn = request.getParameter("txtIsbn");
         String idGrupoLivro = request.getParameter("grupoLivro");
         String preco = request.getParameter("txtPreco");
-
+        String nomeGrupoLivro = request.getParameter("nomeGrupoLivro");
+        
+        
         if(status!= null && status.equals("1"))
             livro.setAtivo(true);
         else
@@ -66,6 +71,17 @@ public class ViewLivro implements IViewHelper{
         if(id != null && !id.trim().isEmpty())	
             livro.setId(Integer.parseInt(id));
 
+        
+        if(id_dimensoes != null && !id_dimensoes.trim().isEmpty())	
+            dimensoes.setId(Integer.parseInt(id_dimensoes));
+        
+        
+        if(id_isbn != null && !id_isbn.trim().isEmpty())	
+            isbn.setId(Integer.parseInt(id_isbn));
+        
+        
+        
+        
         
         livro.setCodigoBarras(codigo);
         livro.setAutor(autor);
@@ -115,7 +131,7 @@ public class ViewLivro implements IViewHelper{
         
         if(idGrupoLivro != null && !idGrupoLivro.isEmpty())
             grupoLivro.setId(Integer.parseInt(idGrupoLivro));
-        
+        grupoLivro.setNome(nomeGrupoLivro);
         livro.setGrupoLivro(grupoLivro);
 
         return livro;
@@ -135,7 +151,10 @@ public class ViewLivro implements IViewHelper{
                                 request.getRequestDispatcher("listar_livros.jsp").forward(request, response);
                             }else if(resultado.getAcao().equals("alterarLivro")){
                                 request.getRequestDispatcher("preAlterar_livro.jsp").forward(request, response);
+                            }else if(resultado.getAcao().equals("alterar")){
+                                request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
                             }    
+                            
                         } 
                     }
                 }catch(Exception e){

@@ -42,8 +42,13 @@
 
        
         <h3>Editar livro</h3>
-        <form action="" method="POST">
+        <form action="AlterarLivro" method="POST">
             
+                 <input type="hidden" id="id" name="id" value="<%=livro.getId()%>"/>
+                 <input type="hidden" id="id" name="id_editora" value="<%=livro.getEditora().getId()%>"/>
+                 <input type="hidden" id="id" name="id_dimensoes" value="<%=livro.getDimensoes().getId()%>"/>
+                 <input type="hidden" id="id" name="id_grupolivro" value="<%=livro.getGrupoLivro().getId()%>"/>
+                 <input type="hidden" id="id" name="id_isbn" value="<%=livro.getIsbn().getId()%>"/>
                  <label for="txtCodigo">Código:</label> 
                  <input type="text" id="txtCodigo" value="<%=livro.getCodigoBarras()%>" name="txtCodigo" /> <br> 
 
@@ -86,30 +91,23 @@
                        
                        
                <%for(EntidadeDominio edCat:categorias){
-                     Categoria categoria = (Categoria)edCat; %>
+                     Categoria categoria = (Categoria)edCat;
+               %>
                      <input type="checkbox" name="categoria" id ="categoria<%=categoria.getNome()%>"value="<%=categoria.getId()%>"><%=categoria.getNome()%><br>
                 <%}%>
                 
                  <label>Grupo de Precificação:</label>
                  <select name="grupoLivro" id="cbPrecificacao">
                 <%for(EntidadeDominio edGrupo:grupoLivros){
-                       GrupoLivro grupoLivro = (GrupoLivro)edGrupo;%>
-                       <option id ="cbPrecificacao<%=grupoLivro.getId()%>"value="<%=grupoLivro.getId()%>"><%=grupoLivro.getNome()%></option>
-                       <option value="<%=grupoLivro.getId()%>"
-                            <%if(grupoLivro.getNome().equals(livro.getGrupoLivro().getNome()))
-                            {
-                                %> selected </option> 
+                       GrupoLivro grupoLivro = (GrupoLivro)edGrupo;
                        
-                       <%=livro.getGrupoLivro().getNome());
-                                
-                            }%>  
-                        
-                       
-                <%}%>
-                         
+                       if(grupoLivro.getNome().equals(livro.getGrupoLivro().getNome())){ %>
+                           <option id ="cbPrecificacao<%=grupoLivro.getId()%>"value="<%=grupoLivro.getId()%>"selected ><%=grupoLivro.getNome()%></option>
+                       <% }else %>
+                           <option id ="cbPrecificacao<%=grupoLivro.getId()%>"value="<%=grupoLivro.getId()%>"><%=grupoLivro.getNome()%></option>
+                         <%}%>
                  </select>
                  <br><br>
-                 
                 <%  } 
     } %>
                  <input type="submit" name="acao" value="alterar" class="btn btn-success">   
