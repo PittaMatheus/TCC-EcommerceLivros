@@ -29,27 +29,53 @@
                                  out.print("Seja bem vindo " + cliente.getNome());
 
                                  //Cliente com perfil de ADM
-                                 if(cliente.getPapel().getId() == 2){
-                                     out.print("<div><br><a href='listar_clientes.jsp'>Listar clientes</a></div>");
-                                     out.print("<div><a href='listar_clientes.jsp'>Desativar clientes</a></div> ");
-                                     out.print("<div><a href='listar_clientesInativos.jsp'>Ativar clientes</a></div>");
-                                     out.print("<div><a href='../Livros/cadastro_livro.jsp'>Cadastrar livro</a></div>");
-                                     out.print("<div><a href='../Livros/listar_livros.jsp'>Listar livro</a></div>");
-                                     out.print("<div><a href='../Livros/listar_livros.jsp'>Desativar livro</a></div>");
-                                     out.print("<div><a href='../Livros/listar_livrosInativos.jsp'>Ativar livro</a></div>");
-                                     out.print("<div><a href=''>Ver pedidos</a></div>");
-                                     out.print("<div><a href=''>Gerenciar pedidos</a></div>");
-                                     out.print("<div><a href=''>Ver trocas </a></div>");
-                                     out.print("<div><a href=''>Gerenciar trocas </a></div>");
-                                     out.print("<div><a href=''>Editar meu perfil </a></div>");
+                                 if(cliente.getPapel().getId() == 2){ %>
+                                 
+                                 <br><br><br>
+                                 <fieldset>
+                                     <legend>Gerencia de clientes</legend>
+                                     <br>
+                                    <div><a href='listar_clientes.jsp'>Listar clientes</a></div>
+                                    <div><a href='listar_clientes.jsp'>Desativar clientes</a></div>
+                                    <div><a href='listar_clientesInativos.jsp'>Ativar clientes</a></div>
+                                </fieldset>
+                                <fieldset>
+                                    <legend>Gerencia de livros</legend>
+                                    <br>
+                                    <div><a href='../Livros/cadastro_livro.jsp'>Cadastrar livro</a></div>
+                                    <div><a href='../Livros/listar_livros.jsp'>Listar livro</a></div>
+                                    <div><a href='../Livros/listar_livros.jsp'>Desativar livro</a></div>
+                                    <div><a href='../Livros/listar_livrosInativos.jsp'>Ativar livro</a></div>
+                                    <div><a href='../Livros/cadastro_categoria.jsp'>Inserir Categoria de livro</a></div>
+                                    <div><a href=''>Listar Categorias de livro</a></div>
+                                    <div><a href='../Livros/cadastro_grupoLivro.jsp'>Inserir grupo de precificação</a></div>
+                                    <div><a href=''>Listar grupo de precificação</a></div>
+                                    
+                                </fieldset>
+                                <fieldset>
+                                    <br>
+                                    <legend>Gerencia de pedidos</legend>
+                                    <div><a href=''>Ver pedidos</a></div>
+                                    <div><a href=''>Gerenciar pedidos</a></div>
+                                    <div><a href=''>Ver trocas </a></div>
+                                    <div><a href=''>Gerenciar trocas </a></div>
+                                    <div><a href=''>Editar meu perfil </a></div>
+                                </fieldset>
+                                     <%
                                     }
                                  // Perfil comum
-                                 else if(cliente.getPapel().getId() == 1){
-                                     out.println("<div><a href=''>Adicionar ao carrinho</a></div>");
-                                     out.println("<div><a href=''>Realizar pedido</a></div>");
-                                     out.println("<div><a href=''>Acompanhar pedido</a></div>");
-                                     out.println("<div><a href=''>Editar meu perfil</a></div>");
-                                    }
+                                 else if(cliente.getPapel().getId() == 1){ %>
+                                 <br><br>
+                                <fieldset>
+                                    <br>
+                                    <legend>Ações</legend> 
+                                    <div><a href=''>Adicionar ao carrinho</a></div>
+                                    <div><a href=''>Realizar pedido</a></div>
+                                    <div><a href=''>Acompanhar pedido</a></div>
+                                    <div><a href=''>Editar meu perfil</a></div>
+                                </fieldset>
+                                    <%
+                                     }
                         }
             }
         }

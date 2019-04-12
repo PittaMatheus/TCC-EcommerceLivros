@@ -95,6 +95,22 @@
         <url-pattern>/Livros/AtivarLivro</url-pattern>
     </servlet-mapping>
     
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Livros/InserirCategoria</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Livros/ListarCategorias</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Livros/InserirGrupoLivro</url-pattern>
+    </servlet-mapping>
+    
+    
     <session-config>
         <session-timeout>
             30

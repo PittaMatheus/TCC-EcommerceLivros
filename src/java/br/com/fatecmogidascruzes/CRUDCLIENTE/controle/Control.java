@@ -22,8 +22,10 @@ import br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Usuario;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.excecao.ExcecaoAcessoDados;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.excecao.ExcecaoLimiteTentativas;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ViewCartao;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ViewCategoria;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ViewCliente;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ViewEndereco;
+import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ViewGrupoLivro;
 import br.com.fatecmogidascruzes.CRUDCLIENTE.servico.ViewLivro;
 import java.io.IOException;
 import java.util.HashMap;
@@ -76,8 +78,6 @@ public class Control extends HttpServlet {
          viewHelper.put("/Ecommerce/Clientes/InserirCartao", new ViewCartao());
          viewHelper.put("/Ecommerce/Clientes/ListarCartao", new ViewCartao());
          viewHelper.put("/Ecommerce/Clientes/ExcluirCartao", new ViewCartao());
-         
-         
          // livro
         viewHelper.put("/Ecommerce/Livros/InserirLivro", new ViewLivro());
         viewHelper.put("/Ecommerce/Livros/ListarLivros", new ViewLivro());
@@ -85,6 +85,14 @@ public class Control extends HttpServlet {
         viewHelper.put("/Ecommerce/Livros/AlterarLivro", new ViewLivro());            
         viewHelper.put("/Ecommerce/Livros/DesativarLivro", new ViewLivro());
         viewHelper.put("/Ecommerce/Livros/AtivarLivro", new ViewLivro());
+        // Categoria
+        viewHelper.put("/Ecommerce/Livros/InserirCategoria", new ViewCategoria());
+        viewHelper.put("/Ecommerce/Livros/ListarCategorias", new ViewCategoria());
+
+        // ViewGrupo
+        viewHelper.put("/Ecommerce/Livros/InserirGrupoLivro", new ViewGrupoLivro());
+        
+        
 
     }
 

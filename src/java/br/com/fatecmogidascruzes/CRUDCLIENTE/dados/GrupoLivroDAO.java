@@ -24,8 +24,28 @@ public class GrupoLivroDAO extends AbstractDAO{
 
     @Override
     public Resultado inserir(EntidadeDominio entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            GrupoLivro grupoLivro = (GrupoLivro) entidade;
+            PreparedStatement declaracao = conexao.prepareStatement("INSERT INTO grupolivro (nome_grupoLivro, margem_lucro) VALUES(?,?)");
+            declaracao.setString(1, grupoLivro.getNome());
+            declaracao.setDouble(2, grupoLivro.getMargemLucro());
+            declaracao.execute();
+            resultado.setStatus(true);
+            resultado.setMensagem("O grupo foi inserido com sucesso");
+            // Fecha a conexao.
+            conexao.close();
+        } catch (ClassNotFoundException erro) {
+            erro.printStackTrace();
+            resultado.setStatus(false);
+            resultado.setMensagem("Ocorreu um erro ao inserir o grupo ");
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+        return resultado;
     }
+
 
     @Override
     public Resultado listar(EntidadeDominio entidade) {

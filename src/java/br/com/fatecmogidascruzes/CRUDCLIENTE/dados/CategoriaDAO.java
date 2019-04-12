@@ -24,7 +24,25 @@ public class CategoriaDAO extends AbstractDAO{
 
     @Override
     public Resultado inserir(EntidadeDominio entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Categoria categoria = (Categoria) entidade;
+            PreparedStatement declaracao = conexao.prepareStatement("INSERT INTO categoria (nome) VALUES(?)");
+            declaracao.setString(1, categoria.getNome());
+            declaracao.execute();
+            resultado.setStatus(true);
+            resultado.setMensagem("A categoria foi inserida com sucesso");
+            // Fecha a conexao.
+            conexao.close();
+        } catch (ClassNotFoundException erro) {
+            erro.printStackTrace();
+            resultado.setStatus(false);
+            resultado.setMensagem("Ocorreu um erro ao inserir a categoria");
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+        return resultado;
     }
 
     @Override
