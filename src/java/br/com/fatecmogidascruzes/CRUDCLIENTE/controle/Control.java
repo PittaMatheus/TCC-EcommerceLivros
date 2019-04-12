@@ -83,8 +83,8 @@ public class Control extends HttpServlet {
         viewHelper.put("/Ecommerce/Livros/ListarLivros", new ViewLivro());
         viewHelper.put("/Ecommerce/Livros/PreAlterarLivro", new ViewLivro());
         viewHelper.put("/Ecommerce/Livros/AlterarLivro", new ViewLivro());            
-
-         
+        viewHelper.put("/Ecommerce/Livros/DesativarLivro", new ViewLivro());
+        viewHelper.put("/Ecommerce/Livros/AtivarLivro", new ViewLivro());
 
     }
 
@@ -98,7 +98,6 @@ public class Control extends HttpServlet {
         Resultado resultado = commands.get(acao).executar(entidade);
         System.out.println("URL: " + uri + "  ACAO: " + acao);
         viewHelper.get(uri).setEntidade(resultado, request, response);
-        
     	}
     
    @Override

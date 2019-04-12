@@ -21,7 +21,8 @@
         
         
         <h4>Livros ativos</h4>
-       
+       <form action='DesativarLivro'>
+                        <input type='submit' name="acao" value="desativar" />
         <%
          List<Livro> livros = (List) resultado.getEntidades();
                          
@@ -31,6 +32,7 @@
         %> 
          <table border="1" style ="width: 50%">
         <tr>
+            <th>-</th>
             <th>Código barra</th>
             <th>Título</th>
             <th>Autor</th>
@@ -49,12 +51,11 @@
             <th>Ação</th>
         </tr>       
         <%
-                            
-                        
-                              for (Livro livro : livros) {
+            for (Livro livro : livros) {
                      %>
     
         <tr>
+            <td><input type='radio' required name='id' value="<%=livro.getId() %>" /></td>
             <td><%=livro.getCodigoBarras()%></td>
             <td><%=livro.getTitulo()%></td>
             <td><%=livro.getAutor()%></td>
@@ -74,6 +75,7 @@
             </tr>
         <% }} %>
         </table>
+       </form>
         <br><br>
          <a href='../Clientes/home.jsp'>Voltar</a>
     </body>

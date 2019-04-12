@@ -85,6 +85,16 @@
         <url-pattern>/Livros/AlterarLivro</url-pattern>
     </servlet-mapping>
       
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Livros/DesativarLivro</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Livros/AtivarLivro</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30

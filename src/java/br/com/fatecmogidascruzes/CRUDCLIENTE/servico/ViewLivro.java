@@ -152,9 +152,17 @@ public class ViewLivro implements IViewHelper{
                             }else if(resultado.getAcao().equals("alterarLivro")){
                                 request.getRequestDispatcher("preAlterar_livro.jsp").forward(request, response);
                             }else if(resultado.getAcao().equals("alterar")){
+                                request.setAttribute("acao", "alteração");
                                 request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
-                            }    
-                            
+                            }else if(resultado.getAcao().equals("desativar")){
+                                request.setAttribute("acao", "desativação");
+                                request.getRequestDispatcher("../sucesso.jsp").forward(request, response);    
+                            }else if(resultado.getAcao().equals("listarLivrosInativos")){
+                                request.getRequestDispatcher("listar_livrosInativos.jsp").forward(request, response);
+                            }else if(resultado.getAcao().equals("ativar")){
+                                request.setAttribute("acao", "ativação");
+                                request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                            }
                         } 
                     }
                 }catch(Exception e){

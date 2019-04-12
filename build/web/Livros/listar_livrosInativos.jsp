@@ -14,22 +14,23 @@
         <%
       		Resultado resultado = (Resultado) request.getAttribute("resultado");
 		if(resultado == null) {
-			response.sendRedirect(request.getContextPath() + "/Livros/ListarLivros?acao=listar&status=1");
+			response.sendRedirect(request.getContextPath() + "/Livros/ListarLivros?acao=listar&status=0");
 			return;
 		}
 	%>
         
         
-        <h4>Livros ativos</h4>
-       <form action='DesativarLivro'>
-                        <input type='submit' name="acao" value="desativar" />
+        <h4>Livros Inativos</h4>
+      
         <%
          List<Livro> livros = (List) resultado.getEntidades();
                          
                          if(livros.size() == 0) {
-                            out.print("<br><br>Nenhum livro cadastrado");
+                            out.print("<br><br>Nenhum livro inativo");
                  }else {
         %> 
+         <form action='AtivarLivro'>
+        <input type='submit' name="acao" value="ativar" />
          <table border="1" style ="width: 50%">
         <tr>
             <th>-</th>
@@ -48,7 +49,6 @@
             <th>Preco de custo</th>
             <th>Preco de revenda</th>
             <th>Lucro</th>  
-            <th>Ação</th>
         </tr>       
         <%
             for (Livro livro : livros) {
@@ -71,7 +71,6 @@
             <td><%=livro.getPreco()%></td>
             <td><%=livro.getPreco() + (livro.getPreco() * (livro.getGrupoLivro().getMargemLucro()/100))%></td>
             <td><%=(livro.getPreco() + (livro.getPreco() * (livro.getGrupoLivro().getMargemLucro()/100)))  -   (livro.getPreco())%></td>
-            <td><a href="preAlterar_livro.jsp?id=<% out.print(livro.getId()); %>">Editar</a></td>
             </tr>
         <% }} %>
         </table>

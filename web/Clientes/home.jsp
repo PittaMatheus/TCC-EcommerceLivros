@@ -35,6 +35,8 @@
                                      out.print("<div><a href='listar_clientesInativos.jsp'>Ativar clientes</a></div>");
                                      out.print("<div><a href='../Livros/cadastro_livro.jsp'>Cadastrar livro</a></div>");
                                      out.print("<div><a href='../Livros/listar_livros.jsp'>Listar livro</a></div>");
+                                     out.print("<div><a href='../Livros/listar_livros.jsp'>Desativar livro</a></div>");
+                                     out.print("<div><a href='../Livros/listar_livrosInativos.jsp'>Ativar livro</a></div>");
                                      out.print("<div><a href=''>Ver pedidos</a></div>");
                                      out.print("<div><a href=''>Gerenciar pedidos</a></div>");
                                      out.print("<div><a href=''>Ver trocas </a></div>");

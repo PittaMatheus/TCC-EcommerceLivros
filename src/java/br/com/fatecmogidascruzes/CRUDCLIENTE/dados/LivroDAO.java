@@ -121,7 +121,6 @@ public class LivroDAO extends AbstractDAO{
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();
             Livro livro = (Livro) entidade;
-            if(livro.getAtivo()){
                 PreparedStatement declaracao = conexao.prepareStatement("SELECT\n" +
         "livro.id as id_livro, livro.codigo_barras as cod_barras, livro.autor as autor, livro.ano as ano,\n" +
         "livro.edicao as edicao, livro.titulo as titulo,livro.numero_paginas as numero_paginas, livro.sinopse as sinopse, livro.ativo as status,\n" +
@@ -135,7 +134,8 @@ public class LivroDAO extends AbstractDAO{
         "INNER JOIN dimensoes ON dimensoes.id = livro.id_dimensao\n" +
         "INNER JOIN isbn ON isbn.id = livro.id_isbn\n" +
         "INNER JOIN livro_categoria ON livro_categoria.id_livro = livro.id \n" +
-        "INNER JOIN grupolivro on grupolivro.id = livro.id_grupolivro where livro.ativo =1;");
+        "INNER JOIN grupolivro on grupolivro.id = livro.id_grupolivro where livro.ativo =?;");
+            declaracao.setBoolean(1, livro.getAtivo());     
             ResultSet rs =  declaracao.executeQuery();
             while(rs.next()) {
                 Livro liv = new Livro();
@@ -160,35 +160,16 @@ public class LivroDAO extends AbstractDAO{
                 liv.getGrupoLivro().setId(rs.getInt("id_grupolivro"));
                 liv.getGrupoLivro().setNome(rs.getString("nome_grupolivro"));
                 liv.getGrupoLivro().setMargemLucro(rs.getDouble("margem_lucro"));
-                liv.setAtivo(true);   
+                if(livro.getAtivo()){
+                    liv.setAtivo(true); 
+                    resultado.setAcao("listarLivros");
+                }else{
+                    liv.setAtivo(false);
+                    resultado.setAcao("listarLivrosInativos");
+                }
                 entidades.add(liv);
             }
             resultado.setStatus(true);
-            resultado.setAcao("listarLivros");
-           }
-            /*else if(!livro.getAtivo()){
-            PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome,c.sobrenome, c.data_nascimento, "
-                    + "c.ranking, c.email, c.cpf, c.rg, c.sexo, c.tipo_usuario "
-                    + "FROM cliente c WHERE c.status = 0");
-            ResultSet rs =  declaracao.executeQuery();
-            while(rs.next()) {
-                Cliente cli = new Cliente();
-                cli.setId(rs.getInt("id"));
-                cli.setNome(rs.getString("nome"));
-                cli.setSobrenome(rs.getString("sobrenome"));
-                cli.setData_nascimento(rs.getDate("data_nascimento"));
-                cli.setRanking(rs.getDouble("ranking"));
-                cli.setEmail(rs.getString("email"));
-                cli.setCpf(rs.getString("cpf"));
-                cli.setRg(rs.getString("rg"));
-                cli.setSexo(rs.getString("sexo"));
-                cli.getPapel().setId(rs.getInt("tipo_usuario"));;
-               
-                entidades.add(cli);
-            }
-            resultado.setStatus(true);
-            resultado.setAcao("listarDesativados");
-            }*/
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);
@@ -248,12 +229,60 @@ public class LivroDAO extends AbstractDAO{
 
     @Override
     public Resultado desativar(EntidadeDominio entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<EntidadeDominio> ListEntidades = new ArrayList<EntidadeDominio>();
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Livro livro = (Livro) entidade;
+            PreparedStatement declaracao = conexao.prepareStatement(""
+                                                + "UPDATE livro SET ativo = ?"
+						+ " WHERE id=?");
+            
+				declaracao.setString(1, "0");
+				declaracao.setInt(2, livro.getId());
+				declaracao.execute();
+
+            resultado.setStatus(true);
+            resultado.setMensagem("O livro foi desativado com sucesso!");   
+            // Fecha a conexao.
+            conexao.close();
+        } catch (ClassNotFoundException erro) {
+            erro.printStackTrace();     
+            resultado.setStatus(false);
+            resultado.setMensagem("Houve algum erro ao desativar o livro");
+        } catch (SQLException erro) {
+            erro.printStackTrace();   
+        }
+          return resultado;
     }
 
     @Override
     public Resultado ativar(EntidadeDominio entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<EntidadeDominio> ListEntidades = new ArrayList<EntidadeDominio>();
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Livro livro = (Livro) entidade;
+            PreparedStatement declaracao = conexao.prepareStatement(""
+                                                + "UPDATE livro SET ativo = ?"
+						+ " WHERE id=?");
+            
+				declaracao.setString(1, "1");
+				declaracao.setInt(2, livro.getId());
+				declaracao.execute();
+
+            resultado.setStatus(true);
+            resultado.setMensagem("O livro foi ativado com sucesso!");   
+            // Fecha a conexao.
+            conexao.close();
+        } catch (ClassNotFoundException erro) {
+            erro.printStackTrace();     
+            resultado.setStatus(false);
+            resultado.setMensagem("Houve algum erro ao ativar o livro");
+        } catch (SQLException erro) {
+            erro.printStackTrace();   
+        }
+          return resultado;
     }
 
     @Override

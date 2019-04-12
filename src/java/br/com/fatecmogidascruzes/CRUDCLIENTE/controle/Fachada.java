@@ -70,10 +70,9 @@ public class Fachada implements IFachada{
         RNClienteSalvar.add(new ValidaData());
         RNClienteSalvar.add(new ValidaClienteExistente());
         
-       // Regras de negocio de autenticacao
-       RNClienteAutenticar.add(new ValidaSenha());
-        
-        
+        // Regras de negocio de autenticacao
+        RNClienteAutenticar.add(new ValidaSenha());
+
         // Regras de negocio do cliente
         Map<String, List<IStrategy>> regrasCliente = new HashMap<String, List<IStrategy>>();
         
