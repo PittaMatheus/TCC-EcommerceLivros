@@ -133,7 +133,6 @@ public class LivroDAO extends AbstractDAO{
         "INNER JOIN editora ON editora.id = livro.id_editora\n" +
         "INNER JOIN dimensoes ON dimensoes.id = livro.id_dimensao\n" +
         "INNER JOIN isbn ON isbn.id = livro.id_isbn\n" +
-        "INNER JOIN livro_categoria ON livro_categoria.id_livro = livro.id \n" +
         "INNER JOIN grupolivro on grupolivro.id = livro.id_grupolivro where livro.ativo =?;");
             declaracao.setBoolean(1, livro.getAtivo());     
             ResultSet rs =  declaracao.executeQuery();

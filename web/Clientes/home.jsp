@@ -47,9 +47,9 @@
                                     <div><a href='../Livros/listar_livros.jsp'>Desativar livro</a></div>
                                     <div><a href='../Livros/listar_livrosInativos.jsp'>Ativar livro</a></div>
                                     <div><a href='../Livros/cadastro_categoria.jsp'>Inserir Categoria de livro</a></div>
-                                    <div><a href=''>Listar Categorias de livro</a></div>
+                                    <div><a href='../Livros/listar_categorias.jsp'>Listar Categorias de livro</a></div>
                                     <div><a href='../Livros/cadastro_grupoLivro.jsp'>Inserir grupo de precificação</a></div>
-                                    <div><a href=''>Listar grupo de precificação</a></div>
+                                    <div><a href='../Livros/listar_grupoPrecificacao.jsp'>Listar grupo de precificação</a></div>
                                     
                                 </fieldset>
                                 <fieldset>
