@@ -21,9 +21,11 @@ public class ViewGrupoLivro implements IViewHelper {
     @Override
     public EntidadeDominio getEntidade(HttpServletRequest request) {
         GrupoLivro grupoLivro = new GrupoLivro();
+        String id = request.getParameter("id");
         String nomeCategoria = request.getParameter("nomeGrupo");
         String margemLucro = request.getParameter("margemLucro");
         
+        grupoLivro.setId(Integer.parseInt(id));
         grupoLivro.setNome(nomeCategoria);
         grupoLivro.setMargemLucro(Integer.parseInt(margemLucro));
         return grupoLivro;
@@ -34,10 +36,13 @@ public class ViewGrupoLivro implements IViewHelper {
        try {
             if(resultado != null && !resultado.getMensagem().isEmpty()) {
                 request.setAttribute("resultado", resultado);
-                if(resultado.getAcao() != null) {
+                if(resultado.getAcao().equals("inserir") ) {
                     request.setAttribute("acao", "inserção");
                     request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
                     //response.sendRedirect("../sucesso.jsp");  
+                }else if(resultado.getAcao().equals("alterar")){
+                    request.setAttribute("acao", "alteração");
+                    request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
                 }
             }
         }catch(Exception e) {

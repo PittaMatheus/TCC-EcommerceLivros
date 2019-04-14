@@ -54,7 +54,27 @@ public class GrupoLivroDAO extends AbstractDAO{
 
     @Override
     public Resultado alterar(EntidadeDominio entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            GrupoLivro grupoLivro = (GrupoLivro) entidade;
+            PreparedStatement declaracao = conexao.prepareStatement("UPDATE grupolivro set nome_grupoLivro = ?, margem_lucro = ? where id = ?");
+            declaracao.setString(1, grupoLivro.getNome());
+            declaracao.setDouble(2, grupoLivro.getMargemLucro());
+            declaracao.setInt(3, grupoLivro.getId());
+            declaracao.execute();
+            resultado.setStatus(true);
+            resultado.setMensagem("A categoria foi alterada com sucesso");
+            // Fecha a conexao.
+            conexao.close();
+        } catch (ClassNotFoundException erro) {
+            erro.printStackTrace();
+            resultado.setStatus(false);
+            resultado.setMensagem("Ocorreu um erro ao alterar a categoria");
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+        return resultado;
     }
 
     @Override

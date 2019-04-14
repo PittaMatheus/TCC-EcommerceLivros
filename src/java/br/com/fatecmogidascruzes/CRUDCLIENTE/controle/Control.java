@@ -87,11 +87,10 @@ public class Control extends HttpServlet {
         viewHelper.put("/Ecommerce/Livros/AtivarLivro", new ViewLivro());
         // Categoria
         viewHelper.put("/Ecommerce/Livros/InserirCategoria", new ViewCategoria());
-        viewHelper.put("/Ecommerce/Livros/ListarCategorias", new ViewCategoria());
-
+        viewHelper.put("/Ecommerce/Livros/AlterarCategoria", new ViewCategoria());
         // ViewGrupo
         viewHelper.put("/Ecommerce/Livros/InserirGrupoLivro", new ViewGrupoLivro());
-        
+        viewHelper.put("/Ecommerce/Livros/AlterarGrupoLivro", new ViewGrupoLivro());
         
 
     }

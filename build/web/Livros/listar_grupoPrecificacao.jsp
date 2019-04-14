@@ -10,10 +10,10 @@
         <title>Categorias</title>
     </head>
     <body>
-        <h1>Categorias dos livros</h1>
+        <h1>Grupo de precificação dos livros</h1>
           <% List<EntidadeDominio> grupoLivros = (List<EntidadeDominio>) getServletContext().getAttribute("grupoLivros"); %>
           
-        <form action='DesativarCategoria'>
+        <form action='DesativarGrupo'>
             <input type='submit' name="acao" value="desativar" />
             <br><br>
             <table border='1'>

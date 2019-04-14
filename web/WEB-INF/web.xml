@@ -99,15 +99,20 @@
         <servlet-name>Control</servlet-name>
         <url-pattern>/Livros/InserirCategoria</url-pattern>
     </servlet-mapping>
-    
+
     <servlet-mapping>
         <servlet-name>Control</servlet-name>
-        <url-pattern>/Livros/ListarCategorias</url-pattern>
+        <url-pattern>/Livros/InserirGrupoLivro</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
         <servlet-name>Control</servlet-name>
-        <url-pattern>/Livros/InserirGrupoLivro</url-pattern>
+        <url-pattern>/Livros/AlterarCategoria</url-pattern>
+    </servlet-mapping>    
+    
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Livros/AlterarGrupoLivro</url-pattern>
     </servlet-mapping>
     
     

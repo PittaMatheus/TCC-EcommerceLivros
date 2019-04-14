@@ -21,7 +21,9 @@ public class ViewCategoria implements IViewHelper{
     @Override
     public EntidadeDominio getEntidade(HttpServletRequest request) {
         Categoria categoria = new Categoria();
+        String id = request.getParameter("id");
         String nomeCategoria = request.getParameter("nomeCategoria");
+        categoria.setId(Integer.parseInt(id));
         categoria.setNome(nomeCategoria);
         return categoria;
     }
@@ -31,9 +33,12 @@ public class ViewCategoria implements IViewHelper{
         try {
             if(resultado != null && !resultado.getMensagem().isEmpty()) {
                 request.setAttribute("resultado", resultado);
-                if(resultado.getAcao() != null) {
+                if(resultado.getAcao().equals("inserir")) {
                     request.setAttribute("acao", "inserção");
                     response.sendRedirect("../sucesso.jsp");  
+                }else if(resultado.getAcao().equals("alterar")){
+                    request.setAttribute("acao", "alteração");
+                    request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
                 }
             }
         }catch(Exception e) {

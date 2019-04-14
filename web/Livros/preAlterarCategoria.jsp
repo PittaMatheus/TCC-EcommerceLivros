@@ -1,9 +1,6 @@
-<%-- 
-    Document   : preAlterarCategoria
-    Created on : Apr 13, 2019, 11:41:49 AM
-    Author     : matheus
---%>
-
+<%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Categoria"%>
+<%@page import="java.util.List"%>
+<%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.EntidadeDominio"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +9,24 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+       <% List<EntidadeDominio> categorias = (List<EntidadeDominio>) getServletContext().getAttribute("categorias"); 
+           int id = Integer.parseInt(request.getParameter("id"));
+           
+        %>
+        <h1>Editar categoria</h1>
+        <form action='AlterarCategoria' method='POST'>
+            <% for(EntidadeDominio edCat: categorias){
+                    Categoria categoria = (Categoria)edCat;
+                    if(categoria.getId().equals(id)){ %>
+                        <input type="hidden" id="id" name="id" value="<%=categoria.getId() %>"/>
+                        <label for="nome">Nome da categoria</label> 
+                        <input type="text" id="nomeCategoria" value="<%=categoria.getNome() %>" name="nomeCategoria" /> <br>
+                        <br>
+                <% }
+            }%>
+            <input type="submit" name="acao" value="alterar" placeholder="ALTERAR" id="btAlterar"/>
+        </form>
     </body>
+    <br><br>
+    <a href="listar_categorias.jsp">Voltar</a>
 </html>
