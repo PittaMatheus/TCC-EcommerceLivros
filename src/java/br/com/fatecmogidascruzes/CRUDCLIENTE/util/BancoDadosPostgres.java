@@ -11,7 +11,7 @@ public class BancoDadosPostgres {
         Class.forName("org.postgresql.Driver");
         // Abre uma conexao com o banco.
         Connection conexao;
-        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/ecommerce_livros","root","root");
+        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/Ecommerce","root","root");
     }
 
 }

@@ -1,3 +1,4 @@
+<%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Resultado"%>
 <%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.GrupoLivro"%>
 <%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Categoria"%>
 <%@page import="java.util.List"%>
@@ -7,12 +8,26 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Categorias</title>
+        <title>Grupo de precificação</title>
     </head>
     <body>
         <h1>Grupo de precificação dos livros</h1>
-          <% List<EntidadeDominio> grupoLivros = (List<EntidadeDominio>) getServletContext().getAttribute("grupoLivros"); %>
-          
+        <%
+		Resultado resultado = (Resultado) request.getAttribute("resultado");
+		if(resultado == null) {
+			response.sendRedirect(request.getContextPath() + "/Livros/ListarGrupoLivros?acao=listar&status=1");
+			return;
+		}
+                
+                
+                         List<GrupoLivro> gruposLivros = (List) resultado.getEntidades();
+                         
+                         if(gruposLivros.size() == 0) {
+                            out.print("<br><br>Nenhum grupo de precificação cadastrado");
+                        } else {
+                     
+        %>  
+        
         <form action='DesativarGrupo'>
             <input type='submit' name="acao" value="desativar" />
             <br><br>
@@ -23,15 +38,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <%for(EntidadeDominio gruLiv : grupoLivros){
-                          GrupoLivro grupoLivro = (GrupoLivro)gruLiv; %>
-                        <tr>
-                            <td><input type="radio" id="grupoLivro" required name='id' value=" <%= grupoLivro.getId() %> " /></td>
-                            <td> <%=grupoLivro.getNome()%></td>
-                            <td> <%=grupoLivro.getMargemLucro()%></td>
-                            <td><a href="preAlterarGrupoLivro.jsp?id=<%=grupoLivro.getId()%>">Editar</a></td>
-                        </tr>
+                    <%
+                            for (GrupoLivro grupoLivro : gruposLivros) {  %>
+                                <tr>
+                                    <td><input type="radio" id="grupoLivro" required name='id' value=" <%= grupoLivro.getId() %> " /></td>
+                                    <td> <%=grupoLivro.getNome()%></td>
+                                    <td> <%=grupoLivro.getMargemLucro()%></td>
+                                    <td><a href="../Livros/preAlterarGrupoLivro.jsp?id=<%=grupoLivro.getId()%>">Editar</a></td>
+                                </tr>
                       <%}%>
+                            <% }
+                                                
+                    %>
                 </tbody>
             </table>
         </form>

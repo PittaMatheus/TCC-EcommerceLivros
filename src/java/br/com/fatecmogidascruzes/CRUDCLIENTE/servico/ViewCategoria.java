@@ -23,7 +23,9 @@ public class ViewCategoria implements IViewHelper{
         Categoria categoria = new Categoria();
         String id = request.getParameter("id");
         String nomeCategoria = request.getParameter("nomeCategoria");
-        categoria.setId(Integer.parseInt(id));
+        if(null != id){
+            categoria.setId(Integer.parseInt(id));
+        }
         categoria.setNome(nomeCategoria);
         return categoria;
     }
@@ -39,7 +41,13 @@ public class ViewCategoria implements IViewHelper{
                 }else if(resultado.getAcao().equals("alterar")){
                     request.setAttribute("acao", "alteração");
                     request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                }else if(resultado.getAcao().equals("listarCategoria")){
+                    request.getRequestDispatcher("listar_categorias.jsp").forward(request, response);
+                }else if(resultado.getAcao().equals("consultar")){
+                    request.getRequestDispatcher("preAlterarCategoria.jsp").forward(request, response);
                 }
+                
+                
             }
         }catch(Exception e) {
             e.printStackTrace();

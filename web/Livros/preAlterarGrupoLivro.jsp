@@ -1,3 +1,4 @@
+<%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Resultado"%>
 <%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.GrupoLivro"%>
 <%@page import="java.util.List"%>
 <%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.EntidadeDominio"%>
@@ -9,21 +10,33 @@
         <title>JSP Page</title>
     </head>
     <body>
-       <% List<EntidadeDominio> gruposLivro = (List<EntidadeDominio>) getServletContext().getAttribute("grupoLivros"); 
-           int id = Integer.parseInt(request.getParameter("id"));
-           
-        %>
-        <h1>Editar grupo de precificação</h1>
-        <form action='AlterarGrupoLivro' method='POST'>
-            <% for(EntidadeDominio edGrupoLivro: gruposLivro){
-                    GrupoLivro grupoLivro = (GrupoLivro)edGrupoLivro;
-                    if(grupoLivro.getId().equals(id)){ %>
-                        <input type="hidden" name="id" id="id" value="<%=grupoLivro.getId()%>" />
-                        <label for="nome">Nome do grupo de precificação do livro: </label> 
-                        <input type="text" id="nomeCategoria" value="<%=grupoLivro.getNome() %>" name="nomeGrupo" /> <br>
-                        <br>
-                        <label for="margemLucro">Margem de lucro do grupo(%): </label> 
-                        <input type="text" id="margemLucro" value="<%=grupoLivro.getMargemLucro()%>" name="margemLucro" /> <br>
+       
+        <%
+                String id = request.getParameter("id");    
+		Resultado resultado = (Resultado) request.getAttribute("resultado");
+		if(resultado == null) {
+			response.sendRedirect(request.getContextPath() + "/Livros/PreAlterarGrupoLivro?acao=consultarPorID&id=" + id);
+			return;
+		}
+
+                         List<GrupoLivro> grupoLivros = (List) resultado.getEntidades();
+                         
+                         if(grupoLivros.size() == 0) {
+                            out.print("Erro");                   
+                        } else { 
+
+                             %>
+            <h1>Editar grupo de precificação</h1>
+        <%
+                            for (GrupoLivro grupLivro : grupoLivros) {
+	%>
+            <form action='AlterarGrupoLivro' method='POST'>
+                <input type="hidden" name="id" id="id" value="<%=grupLivro.getId()%>" />
+                <label for="nome">Nome do grupo de precificação do livro: </label> 
+                <input type="text" id="nomeCategoria" value="<%=grupLivro.getNome() %>" name="nomeGrupo" /> <br>
+                <br>
+                <label for="margemLucro">Margem de lucro do grupo(%): </label> 
+                <input type="text" id="margemLucro" value="<%=grupLivro.getMargemLucro()%>" name="margemLucro" /> <br>
                 <% }
             }%>
             <br>
@@ -31,5 +44,5 @@
         </form>
     </body>
     <br><br>
-    <a href="listar_categorias.jsp">Voltar</a>
+    <a href="listar_grupoPrecificacao.jsp">Voltar</a>
 </html>

@@ -24,7 +24,7 @@
 			response.sendRedirect(request.getContextPath() + "/Clientes/ListarClientes?acao=listar&status=1");
 			return;
 		}
-	%>
+                %>
         
     
     

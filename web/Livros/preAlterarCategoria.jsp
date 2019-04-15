@@ -1,3 +1,4 @@
+<%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Resultado"%>
 <%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.Categoria"%>
 <%@page import="java.util.List"%>
 <%@page import="br.com.fatecmogidascruzes.CRUDCLIENTE.dominio.EntidadeDominio"%>
@@ -9,22 +10,34 @@
         <title>JSP Page</title>
     </head>
     <body>
-       <% List<EntidadeDominio> categorias = (List<EntidadeDominio>) getServletContext().getAttribute("categorias"); 
-           int id = Integer.parseInt(request.getParameter("id"));
-           
-        %>
-        <h1>Editar categoria</h1>
-        <form action='AlterarCategoria' method='POST'>
-            <% for(EntidadeDominio edCat: categorias){
-                    Categoria categoria = (Categoria)edCat;
-                    if(categoria.getId().equals(id)){ %>
-                        <input type="hidden" id="id" name="id" value="<%=categoria.getId() %>"/>
-                        <label for="nome">Nome da categoria</label> 
-                        <input type="text" id="nomeCategoria" value="<%=categoria.getNome() %>" name="nomeCategoria" /> <br>
-                        <br>
+       <%
+                String id = request.getParameter("id");    
+		Resultado resultado = (Resultado) request.getAttribute("resultado");
+		if(resultado == null) {
+			response.sendRedirect(request.getContextPath() + "/Livros/PreAlterarCategoria?acao=consultarPorID&id=" + id);
+			return;
+		}
+
+                         List<Categoria> categorias = (List) resultado.getEntidades();
+                         
+                         if(categorias.size() == 0) {
+                            out.print("Erro");                   
+                        } else { 
+
+                             %>
+            <h1>Editar Categoria</h1>
+        <%
+                            for (Categoria cat : categorias) {
+	%>
+            <form action='AlterarCategoria' method='POST'>
+                <input type="hidden" name="id" id="id" value="<%=cat.getId()%>" />
+                <label for="nome">Categoria </label> 
+                <input type="text" id="categoria" value="<%=cat.getNome() %>" name="nomeCategoria" /> <br>
+                <br>
                 <% }
             }%>
-            <input type="submit" name="acao" value="alterar" placeholder="ALTERAR" id="btAlterar"/>
+            <br>
+            <input type="submit" name="acao" value="alterar" placeholder="SALVAR" id="btAlterar"/>
         </form>
     </body>
     <br><br>

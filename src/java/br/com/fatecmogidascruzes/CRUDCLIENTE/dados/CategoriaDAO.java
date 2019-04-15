@@ -47,8 +47,32 @@ public class CategoriaDAO extends AbstractDAO{
 
     @Override
     public Resultado listar(EntidadeDominio entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-}
+      List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Categoria categoria = (Categoria) entidade;
+                        PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome "
+                                + "FROM categoria c ");
+            ResultSet rs =  declaracao.executeQuery();
+            while(rs.next()) {
+                Categoria cat = new Categoria();
+                cat.setId(rs.getInt("id"));
+                cat.setNome(rs.getString("nome"));
+                entidades.add(cat);
+            }
+            resultado.setStatus(true);
+            resultado.setAcao("listarCategoria");
+        }catch(ClassNotFoundException erro) {
+            erro.printStackTrace();     
+            resultado.setStatus(false);
+            resultado.setMensagem("Houve algum erro ao listar o cliente");
+        }catch (SQLException erro) {
+            erro.printStackTrace();   
+        }
+        resultado.setEntidades(entidades);
+       return resultado;
+    }  
 
     @Override
     public Resultado alterar(EntidadeDominio entidade) {
@@ -91,26 +115,28 @@ public class CategoriaDAO extends AbstractDAO{
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();
             Categoria categoria = (Categoria) entidade;
-                        PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome "
-                                + "FROM categoria c ");
+            // Se o id do objeto cliente não estiver preenchido. A funcao consultar irá consultar o CPF e EMAIL
+            PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id, c.nome "
+                            + "FROM categoria c WHERE c.id = ?");
+            declaracao.setInt(1, categoria.getId());
             ResultSet rs =  declaracao.executeQuery();
             while(rs.next()) {
-                Categoria cat = new Categoria();
-                cat.setId(rs.getInt("id"));
-                cat.setNome(rs.getString("nome"));
-                entidades.add(cat);
+                categoria.setNome(rs.getString("nome"));   
             }
+            entidades.add(categoria);
+            resultado.setMensagem("Listado com sucesso");
+            resultado.setEntidades(entidades);
+            resultado.setAcao("consultar");
             resultado.setStatus(true);
-            resultado.setAcao("listarCliente");
-        }catch(ClassNotFoundException erro) {
-            erro.printStackTrace();     
-            resultado.setStatus(false);
-            resultado.setMensagem("Houve algum erro ao listar o cliente");
-        }catch (SQLException erro) {
-            erro.printStackTrace();   
-        }
-        resultado.setEntidades(entidades);
-       return resultado;
-    }
+            }catch(ClassNotFoundException erro) {
+                erro.printStackTrace();     
+                resultado.setStatus(false);
+                resultado.setMensagem("Houve algum erro ao listar o endereco");
+            } catch (SQLException erro) {
+                erro.printStackTrace();   
+            }
+           return resultado;            
+
     
+    }
 }

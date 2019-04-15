@@ -22,12 +22,16 @@ public class ViewGrupoLivro implements IViewHelper {
     public EntidadeDominio getEntidade(HttpServletRequest request) {
         GrupoLivro grupoLivro = new GrupoLivro();
         String id = request.getParameter("id");
-        String nomeCategoria = request.getParameter("nomeGrupo");
+        String nome = request.getParameter("nomeGrupo");
         String margemLucro = request.getParameter("margemLucro");
         
-        grupoLivro.setId(Integer.parseInt(id));
-        grupoLivro.setNome(nomeCategoria);
-        grupoLivro.setMargemLucro(Integer.parseInt(margemLucro));
+        if(null != id){
+            grupoLivro.setId(Integer.parseInt(id));
+        }
+        grupoLivro.setNome(nome);
+        if(null != margemLucro){
+            grupoLivro.setMargemLucro(Integer.parseInt(margemLucro));
+        }
         return grupoLivro;
     }
 
@@ -43,7 +47,13 @@ public class ViewGrupoLivro implements IViewHelper {
                 }else if(resultado.getAcao().equals("alterar")){
                     request.setAttribute("acao", "alteração");
                     request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                }else if(resultado.getAcao().equals("listarGrupoLivro")){
+                    request.getRequestDispatcher("listar_grupoPrecificacao.jsp").forward(request, response);
+                }else if(resultado.getAcao().equals("preAlterarGrupo")){
+                    request.getRequestDispatcher("preAlterarGrupoLivro.jsp").forward(request, response);
                 }
+                
+                
             }
         }catch(Exception e) {
             e.printStackTrace();
