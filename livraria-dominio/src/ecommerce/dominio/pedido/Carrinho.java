@@ -1,0 +1,78 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ecommerce.dominio.pedido;
+
+import ecommerce.dominio.EntidadeDominio;
+import ecommerce.dominio.cliente.Cliente;
+import ecommerce.dominio.livro.Livro;
+import java.util.List;
+
+/**
+ *
+ * @author matheus
+ */
+public class Carrinho extends EntidadeDominio{
+    private Integer id;
+    private int qt_itens;
+    private List<Livro> livros;
+    private Livro livro;
+    private Cliente cliente;
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Livro getLivro() {
+        return livro;
+    }
+
+    public void setLivro(Livro livro) {
+        this.livro = livro;
+    }
+    
+    public Carrinho(){
+    }
+
+    public List<Livro> getLivros() {
+        return livros;
+    }
+
+    public void setLivros(List<Livro> livros) {
+        this.livros = livros;
+    }
+    private double subTotal;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public int getQt_itens() {
+        return qt_itens;
+    }
+
+    public void setQt_itens(int qt_itens) {
+        this.qt_itens = qt_itens;
+    }
+
+    public double getSubTotal() {
+        return subTotal;
+    }
+
+    public void setSubTotal(double subTotal) {
+        this.subTotal = subTotal;
+    }
+
+    
+    
+}

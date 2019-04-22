@@ -1,0 +1,13 @@
+AT01 - Implementar regras de negócio no CRUDLIVROS(PELA ARQUITETURA ATUAL)
+AT02 - Criação do pedido por parte do cliente(vincular todas as informações ao pedido(cliente - livro - pedido)
+AT03 - Encriptografar a senha
+AT04 - Incluir a opção esqueci minha senha na tela de login
+AT05 - Incluir filtros de requisição pelas paginas do sistema(nivel usuario comum e adm)
+AT06 - Vincular motivo ao desativar um livro(opções fixas em um <select> vindo do banco
+AT07 - Incluir LOGS 
+AT08 - Organizar projeto em 3(core - dominio - web)
+AT09 - Incluir classe LivroUtil na JSP
+AT10 - Adicionar padrão factory para testar os bancos de dados
+
+
+
