@@ -8,10 +8,11 @@ public class ValidarCategoriasLivro extends AbstractStrategy{
     
     public String validar(EntidadeDominio entidade) {
         Livro livro = (Livro)entidade;
+        String msgRetorno = "";
 
         if(livro.getCategorias() != null && livro.getCategorias().isEmpty())
-            return "Selecione ao menos uma categoria!";
+            msgRetorno += "<li>Selecione ao menos uma categoria!</li>";
 
-        return "";
+        return msgRetorno;
     }
 }

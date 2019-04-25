@@ -1,3 +1,4 @@
+<%@page import="livraria.core.util.LivroUtils"%>
 <%@page import="livraria.core.aplicacao.Resultado"%>
 <%@page import="ecommerce.dominio.EntidadeDominio"%>
 <%@page import="ecommerce.dominio.livro.Livro"%>
@@ -68,9 +69,9 @@
             <td><%=livro.getDimensoes().getProfundidade()%></td>
             <td><%=livro.getGrupoLivro().getNome()%></td>
             <td><%=livro.getGrupoLivro().getMargemLucro()%>%</td>
-            <td><%=livro.getPreco()%></td>
-            <td><%=livro.getPreco() + (livro.getPreco() * (livro.getGrupoLivro().getMargemLucro()/100))%></td>
-            <td><%=(livro.getPreco() + (livro.getPreco() * (livro.getGrupoLivro().getMargemLucro()/100)))  -   (livro.getPreco())%></td>
+            <td><% out.println(LivroUtils.formatarPreco(livro.getPreco())); %></td>
+            <td><% out.write(LivroUtils.formatarPrecoLivro(livro)); %></td>
+            <td><% out.write(LivroUtils.formatarPrecoLivroLucro(livro)); %></td>
             <td><a href="preAlterar_livro.jsp?id=<% out.print(livro.getId()); %>">Editar</a></td>
             </tr>
         <% }} %>

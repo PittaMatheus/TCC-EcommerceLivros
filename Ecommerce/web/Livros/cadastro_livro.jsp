@@ -16,20 +16,23 @@
         List<EntidadeDominio> categorias = (List<EntidadeDominio>) getServletContext().getAttribute("categorias");
         List<EntidadeDominio> grupoLivros = (List<EntidadeDominio>) getServletContext().getAttribute("grupoLivros");
         %>
-            <form action="InserirLivro" method="post">
+        
+        <!-- /Livros/InserirLivro?txtCodigo=20&txtAutor=autor+teste&txtTitulo=titulo+teste&txtAno=02%2F02%2F1999&txtEdicao=2&txtNumPaginas=222&txtSinopse=Esse+exemplo+da+sinopse+de+um+livro&txtEditora=Abril&txtAltura=20&txtLargura=14&txtPeso=1.50&txtProfundidade=4&txtIsbn=2423432&txtPreco=49.99&categoria=9&grupoLivro=&acao=inserir -->
+        <form action="InserirLivro">
                  <h2>Cadastro de Livro</h2>
                  <% 
-                     //String mensagem = (String) request.getAttribute("mensagem");
+                    String mensagem = (String) request.getAttribute("mensagem");
 
-                    // if (mensagem != null) {
-                    //     out.print(mensagem);
-                     //}
-                 %>
+                    if (mensagem != null) {
+                        out.println(mensagem);
+                 %> 
+                        <br>
+                    <%}%>
 
                  
-
+                 
                  <label for="txtCodigo">Código:</label> 
-                 <input type="text" id="txtCodigo" value="2010120132" name="txtCodigo" /> <br> 
+                 <input type="text" id="txtCodigo" value="20" name="txtCodigo" /> <br> 
 
                  <label for="txtAutor">Autor:</label> 
                  <input type="text" id="txtAutor" value="autor teste"name="txtAutor" /> <br> 
@@ -45,7 +48,7 @@
                  <label for="txtNumPaginas">Número de páginas:</label> 
                  <input type="text" id="txtNumPaginas"  value="222" name="txtNumPaginas" /> <br>
                  <label for="txtSinopse">Sinopse:</label> 
-                 <input type="text" id="txtSinopse"  value="Esse é um exemplo da sinopse de um livro"name="txtSinopse" /> <br>
+                 <input type="text" id="txtSinopse"  value="Esse exemplo da sinopse de um livro"name="txtSinopse" /> <br>
                  <label for="txtEditora">Editora:</label> 
                  <input type="text"  value="Abril"id="txtEditora" name="txtEditora" /> <br>
 
@@ -90,7 +93,7 @@
                  <input type="submit" name="acao" value="inserir" placeholder="SALVAR" id="btSalvar"/>
              </form>
         
-        <%//}}{%>
+        
 
     </body>
 </html>

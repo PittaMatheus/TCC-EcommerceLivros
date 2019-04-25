@@ -17,10 +17,11 @@ public class ValidarGrupoPrecificacao extends AbstractStrategy{
     
     public String validar(EntidadeDominio entidade) {
         Livro livro = (Livro)entidade;
+        String msgRetorno = "";
+        
+        if(livro.getGrupoLivro() == null || livro.getGrupoLivro().getId().equals(0))
+            msgRetorno += "<li>Selecione um Grupo de Precificação!</li>";
 
-        if(livro.getGrupoLivro() != null && livro.getGrupoLivro().getId()  <= 0)
-            return "Selecione um Grupo de Precificação!";
-
-        return "";
+        return msgRetorno;
     }
 }

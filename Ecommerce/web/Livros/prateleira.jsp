@@ -19,6 +19,27 @@
     </head>
   
     <body>
+        
+        <%
+            Resultado resultado2 = (Resultado) request.getAttribute("resultado");
+                if(resultado2 != null) {
+                        if(!resultado2.isStatus() && !resultado2.getMensagem().isEmpty()) {
+                                out.print("<div class='alert alert-danger'>");
+                                out.print(resultado2.getMensagem());
+                                out.print("</div>");
+                        } else {
+                                if(!resultado2.getMensagem().isEmpty()) {
+                                        out.print("<div class='alert alert-success'>");
+                                        out.print(resultado2.getMensagem());
+                                        out.print("</div>");
+                                }
+                        }
+                }
+
+        %>
+        
+        
+        
       <% if(session.getAttribute("usuarioLogado") == null){
                 response.sendRedirect("../login.jsp");
             }else if(session.getAttribute("usuarioLogado") != null){
@@ -34,12 +55,7 @@
 
         <h2>Livros</h2>
                     <% List<EntidadeDominio> livros = (List<EntidadeDominio>) getServletContext().getAttribute("livros"); 
-                       String st = request.getParameter("st");
-                       if(null != st && st.equals("sucess")){
-                        %>
-                        Adicionado ao carrinho
-                    <%
-                       }
+                      
                    for(EntidadeDominio liv :livros){
                                 Livro livro = (Livro)liv; %>
                 <fieldset style="width:150px">
@@ -47,7 +63,8 @@
                     <h4> <%=livro.getTitulo()%></h4>
                   <li class="livro"><%=livro.getAutor()%></li>
                   <li><%=livro.getSinopse()%></li>
-                  <a href="carrinho.jsp?l=<%=livro.getId()%>&u=<%=cliente.getId()%>">Add</a>
+                  <li><%=livro.getPreco()%></li>
+                  <a href="../Pedidos/add_carrinho.jsp?l=<%=livro.getId()%>&u=<%=cliente.getId()%>">Add</a>
                 </div>
                 </fieldset>
                             <%}
@@ -56,5 +73,7 @@
 }
          }%>
         </div>
+        <br><br><br>
+        <a href="../Clientes/home.jsp">Voltar</a>
     </body>
 </html>

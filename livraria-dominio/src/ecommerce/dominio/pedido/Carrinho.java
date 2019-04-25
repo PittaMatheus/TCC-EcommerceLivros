@@ -10,16 +10,25 @@ import ecommerce.dominio.cliente.Cliente;
 import ecommerce.dominio.livro.Livro;
 import java.util.List;
 
-/**
- *
- * @author matheus
- */
 public class Carrinho extends EntidadeDominio{
     private Integer id;
     private int qt_itens;
     private List<Livro> livros;
     private Livro livro;
     private Cliente cliente;
+    
+    
+    public Carrinho(){
+         livro = new Livro();
+         cliente = new Cliente();
+    }
+    
+    public Carrinho(Integer id, int qt_itens,  List<Livro> livros){
+        this.id = id;
+        this.qt_itens = qt_itens;
+        this.livros = livros;
+               
+    }
 
     public Cliente getCliente() {
         return cliente;
@@ -37,8 +46,6 @@ public class Carrinho extends EntidadeDominio{
         this.livro = livro;
     }
     
-    public Carrinho(){
-    }
 
     public List<Livro> getLivros() {
         return livros;

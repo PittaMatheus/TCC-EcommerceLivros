@@ -62,9 +62,9 @@
                                  <br><br>
                                 <fieldset>
                                     <br>
-                                    <legend>Ações</legend> 
+                                    <legend>Ações</legend>
                                     <div><a href='../Livros/prateleira.jsp'>Adicionar ao carrinho</a></div>
-                                    <div><a href=''>Realizar pedido</a></div>
+                                    <div><a href='../Pedidos/carrinho.jsp?u=<%=cliente.getId()%>'>Ver carrinho</a></div>
                                     <div><a href=''>Acompanhar pedido</a></div>
                                     <div><a href=''>Editar meu perfil</a></div>
                                 </fieldset>

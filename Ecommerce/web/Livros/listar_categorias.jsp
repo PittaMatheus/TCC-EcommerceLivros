@@ -14,7 +14,7 @@
          <%
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
 		if(resultado == null) {
-			response.sendRedirect(request.getContextPath() + "/Livros/ListarCategorias?acao=listar");
+			response.sendRedirect(request.getContextPath() + "/Livros/ListarCategorias?acao=listar&status=1");
 			return;
 		}
                 

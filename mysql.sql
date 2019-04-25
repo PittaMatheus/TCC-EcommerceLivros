@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: ecommerce_livros
+-- Host: localhost    Database: Ecommerce
 -- ------------------------------------------------------
 -- Server version	5.7.24-0ubuntu0.18.04.1
 
@@ -38,7 +38,7 @@ CREATE TABLE `carrinho` (
 
 LOCK TABLES `carrinho` WRITE;
 /*!40000 ALTER TABLE `carrinho` DISABLE KEYS */;
-INSERT INTO `carrinho` VALUES (4,1),(5,1),(2,1),(3,1),(4,1),(5,1),(3,1),(2,1),(2,1),(2,1),(2,1),(2,1),(2,1),(2,1),(2,1),(2,1),(2,1),(2,1),(4,1),(2,1),(3,1),(5,1),(3,1),(2,1),(4,1);
+INSERT INTO `carrinho` VALUES (5,1),(6,1);
 /*!40000 ALTER TABLE `carrinho` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -52,7 +52,7 @@ DROP TABLE IF EXISTS `cartao`;
 CREATE TABLE `cartao` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(155) NOT NULL,
-  `dtVencimento` varchar(155) NOT NULL,
+  `dtVencimento` date NOT NULL,
   `bandeira` varchar(155) NOT NULL,
   `numero` varchar(155) NOT NULL,
   `codSeguranca` varchar(155) NOT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE `cartao` (
   PRIMARY KEY (`id`),
   KEY `id_cliente_idx` (`id_cliente`),
   CONSTRAINT `id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `cartao` (
 
 LOCK TABLES `cartao` WRITE;
 /*!40000 ALTER TABLE `cartao` DISABLE KEYS */;
-INSERT INTO `cartao` VALUES (1,'JOAO DA SILVA','2019-09-09','mastercard','2321321','033',1),(2,'JOAO DA SILVA','2019-09-09','elo','13123123123','122',1);
+INSERT INTO `cartao` VALUES (1,'JOAO DA SILVA','2019-09-09','mastercard','2321321','033',1);
 /*!40000 ALTER TABLE `cartao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,7 +84,7 @@ CREATE TABLE `categoria` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(155) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +93,7 @@ CREATE TABLE `categoria` (
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
-INSERT INTO `categoria` VALUES (1,'terror3'),(2,'comedia2'),(3,'didatico'),(4,'reliquias'),(5,'x');
+INSERT INTO `categoria` VALUES (1,'2terror2'),(2,'comedia'),(3,'didatico'),(4,'suspense'),(5,'drama'),(6,'acao'),(7,'faroeste2'),(8,'romance');
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,11 +116,10 @@ CREATE TABLE `cliente` (
   `cpf` varchar(155) NOT NULL,
   `rg` varchar(155) DEFAULT NULL,
   `sexo` varchar(155) NOT NULL,
-  `tipo_usuario` int(11) NOT NULL DEFAULT '1',
+  `tipo_usuario` varchar(55) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
-  KEY `fk_tipoUsuario_idx` (`tipo_usuario`),
-  CONSTRAINT `fk_tipoUsuario` FOREIGN KEY (`tipo_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  KEY `fk_tipoUsuario_idx` (`tipo_usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +128,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'comum','SobrenomeTeste','1995-01-12',1,50,'SenhaValida!@#','emailteste@teste.com','41656190869','329702760','M',1),(2,'adm','adm','1995-01-12',1,50,'SenhaValida!@#','adm@adm.com.br','91185651071','329702760','M',2),(3,'NomeTeste','SobrenomeTeste','1995-01-12',0,50,'SenhaValida!@#','lu@teste.com','42342513801','329702760','M',1);
+INSERT INTO `cliente` VALUES (1,'NomeTesteasd','SobrenomeTeste','1995-01-12',1,50,'SenhaValida!@#','emailteste@teste.com','41656190869','329702760','M','1'),(2,'ALTERANDO TESTE','SobrenomeTeste','1995-01-12',1,50,'SenhaValida!@#','adm@adm.com','45296735889','329702760','M','2');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,7 +146,7 @@ CREATE TABLE `dimensoes` (
   `peso` decimal(5,2) DEFAULT NULL,
   `profundidade` decimal(5,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -156,7 +155,7 @@ CREATE TABLE `dimensoes` (
 
 LOCK TABLES `dimensoes` WRITE;
 /*!40000 ALTER TABLE `dimensoes` DISABLE KEYS */;
-INSERT INTO `dimensoes` VALUES (1,20.00,14.00,1.50,4.00),(2,20.00,14.00,1.50,4.00),(3,20.00,14.00,1.50,4.00),(4,20.00,14.00,1.50,4.00),(5,20.00,14.00,20.00,4.00);
+INSERT INTO `dimensoes` VALUES (1,20.00,14.00,20.00,4.00),(2,20.00,14.00,1.50,4.00),(3,20.00,14.00,20.00,4.00),(4,20.00,14.00,1.50,4.00),(5,20.00,14.00,1.50,4.00),(6,20.00,14.00,1.50,4.00),(7,20.00,14.00,1.50,4.00),(8,20.00,14.00,1.50,4.00),(9,20.00,1.33,1.50,4.00),(10,20.00,14.00,1.50,4.00),(11,20.00,14.00,1.50,4.00);
 /*!40000 ALTER TABLE `dimensoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,7 +170,7 @@ CREATE TABLE `editora` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome_editora` varchar(155) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +179,7 @@ CREATE TABLE `editora` (
 
 LOCK TABLES `editora` WRITE;
 /*!40000 ALTER TABLE `editora` DISABLE KEYS */;
-INSERT INTO `editora` VALUES (1,'Abril'),(2,'Abril'),(3,'Abril'),(4,'Abril'),(5,'Abril');
+INSERT INTO `editora` VALUES (1,'Abril'),(2,'Abril'),(3,'Abril'),(4,'Abril'),(5,'Abril'),(6,'Abril'),(7,'Abril'),(8,'Abril'),(9,'Abril'),(10,'Abril'),(11,'Abril'),(12,'Abril'),(13,'Abril');
 /*!40000 ALTER TABLE `editora` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -203,12 +202,12 @@ CREATE TABLE `endereco` (
   `nomeEndereco` varchar(155) DEFAULT NULL,
   `complemento` varchar(155) DEFAULT NULL,
   `referencia` varchar(155) DEFAULT NULL,
-  `tipoEndereco` tinyint(4) NOT NULL DEFAULT '1',
+  `tipoEndereco` varchar(50) NOT NULL DEFAULT '0',
   `id_cliente` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_cliente_idx` (`id_cliente`),
   CONSTRAINT `fk_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -217,8 +216,33 @@ CREATE TABLE `endereco` (
 
 LOCK TABLES `endereco` WRITE;
 /*!40000 ALTER TABLE `endereco` DISABLE KEYS */;
-INSERT INTO `endereco` VALUES (1,'Rua tranÃ§as do rei careca','12312','cubas','12312312312312','Mogi','SP','vila','Casa da avÃ³','apt 2',NULL,1,1),(2,'Rua tranÃ§as do rei careca','12312','cubas','12312312312312','Mogi','SP','vila','Casa da avÃ³','apt 2',NULL,1,2),(3,'A.V brasil','664','cubas','09870-090','Mogi das cruzes','SP','vila','Casa da vÃ³','Apt 22','Proximo ao mercado',1,1),(4,'Rua tranÃ§as do rei careca','12312','cubas','12312312312312','Mogi','SP','vila','Casa da avÃ³','apt 2',NULL,1,3),(5,'A.V brasil','664','cubas','09870-090','nova ciry1','SP','vila','Casa','Apt 22','\\a',1,1);
+INSERT INTO `endereco` VALUES (1,'BABACA','12312','cubas','12312312312312','Mogi','SP','vila','Casa','apt 2','null','1',1),(2,'Rua tranÃ§as do rei careca','12312','cubas','12312312312312','Mogi','SP','vila','Casa da avÃ³','apt 2',NULL,'1',2),(3,'Rua tranÃ§as do rei careca','12312','cubas','12312312312312','Mogi','SP','vila','Casa da avÃ³','apt 2',NULL,'1',3),(4,'Rua tranÃ§as do rei careca','12312','cubas','12312312312312','Mogi','SP','vila','Casa da avÃ³','apt 2',NULL,'1',4);
 /*!40000 ALTER TABLE `endereco` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `estoque`
+--
+
+DROP TABLE IF EXISTS `estoque`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `estoque` (
+  `id_livro` int(11) NOT NULL,
+  `quantidade` int(11) NOT NULL,
+  KEY `fk_estoque_livro_idx` (`id_livro`),
+  CONSTRAINT `fk_estoque_livro` FOREIGN KEY (`id_livro`) REFERENCES `livro` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `estoque`
+--
+
+LOCK TABLES `estoque` WRITE;
+/*!40000 ALTER TABLE `estoque` DISABLE KEYS */;
+INSERT INTO `estoque` VALUES (1,50),(3,15),(6,15),(5,15);
+/*!40000 ALTER TABLE `estoque` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -233,7 +257,7 @@ CREATE TABLE `grupolivro` (
   `nome_grupolivro` varchar(155) DEFAULT NULL,
   `margem_lucro` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -242,7 +266,7 @@ CREATE TABLE `grupolivro` (
 
 LOCK TABLES `grupolivro` WRITE;
 /*!40000 ALTER TABLE `grupolivro` DISABLE KEYS */;
-INSERT INTO `grupolivro` VALUES (1,'promocao',50),(2,'Lancamento',70),(3,'reliquias da morte',33),(4,'caros',95),(5,'novidadeX',22);
+INSERT INTO `grupolivro` VALUES (1,NULL,0),(2,'Lancamento23',13),(3,'lancamento',45),(4,'liquidacao',20),(5,'teste',12),(6,'serial',11),(7,'rarissimos',90),(8,'nerds',22);
 /*!40000 ALTER TABLE `grupolivro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -257,7 +281,7 @@ CREATE TABLE `isbn` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cod_barras` varchar(155) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -266,8 +290,33 @@ CREATE TABLE `isbn` (
 
 LOCK TABLES `isbn` WRITE;
 /*!40000 ALTER TABLE `isbn` DISABLE KEYS */;
-INSERT INTO `isbn` VALUES (1,'2423432'),(2,'2423432'),(3,'2423432'),(4,'2423432'),(5,'2423432');
+INSERT INTO `isbn` VALUES (1,'2423432'),(2,'242343212'),(3,'2423123432'),(4,'2423432'),(5,'2423432'),(6,'2423432'),(7,'2423432'),(8,'2423432'),(9,'2423432'),(10,'2423432'),(11,'2423432');
 /*!40000 ALTER TABLE `isbn` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `item`
+--
+
+DROP TABLE IF EXISTS `item`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `item` (
+  `id_livro` int(11) NOT NULL,
+  `qt_livros` int(11) NOT NULL,
+  KEY `fk_item_livro_idx` (`id_livro`),
+  CONSTRAINT `fk_item_livro` FOREIGN KEY (`id_livro`) REFERENCES `livro` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `item`
+--
+
+LOCK TABLES `item` WRITE;
+/*!40000 ALTER TABLE `item` DISABLE KEYS */;
+INSERT INTO `item` VALUES (2,40),(1,10);
+/*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -301,7 +350,7 @@ CREATE TABLE `livro` (
   CONSTRAINT `fk_livro_editora` FOREIGN KEY (`id_editora`) REFERENCES `editora` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_livro_grupoLivro` FOREIGN KEY (`id_grupolivro`) REFERENCES `grupolivro` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_livro_isbn` FOREIGN KEY (`id_isbn`) REFERENCES `isbn` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -310,7 +359,7 @@ CREATE TABLE `livro` (
 
 LOCK TABLES `livro` WRITE;
 /*!40000 ALTER TABLE `livro` DISABLE KEYS */;
-INSERT INTO `livro` VALUES (1,'2010120132','autor teste','Livro1','02/02/1999','2','222','Esse Ã© um exemplo da sinopse de um livro',0,49.99,1,1,1,2),(2,'2010120132','autor teste','Livro 2','02/02/1999','2','222','Esse Ã© um exemplo da sinopse de um livro',1,49.99,2,2,2,1),(3,'2010120132','autor teste','Livro 3','02/02/1999','2','222','Esse Ã© um exemplo da sinopse de um livro',1,49.99,3,3,3,1),(4,'2010120132','reeeee','titulo teste','02/02/1999','2','222','Esse Ã© um exemplo da sinopse de um livro',1,49.99,4,4,4,3),(5,'2010120132','AUTEREI A PORRA TODA','titulo teste','02/02/1999','2','222','Esse Ã?Â© um exemplo da sinopse de um livro',1,49.99,5,5,5,4);
+INSERT INTO `livro` VALUES (1,'2010120132','qq','titulo teste','02/02/1999','2','222','Esse Ã??Ã?Â© um exemplo da sinopse de um livro',0,49.99,3,1,1,1),(2,'201012123','autor teste','titulo teste','02/02/1999','2','222','Esse Ã© um exemplo da sinopse de um livro',0,49.99,4,2,2,1),(3,'2010120123132','autor teste','lancamento','02/02/1999','2','222','Esse Ã?Â© um exemplo da sinopse de um livro',0,89.99,5,3,3,1),(4,'2010120132','autor teste','titulo teste','02/02/1999','2','222','Esse Ã© um exemplo da sinopse de um livro',0,49.99,6,4,4,5),(5,'2010120132','asd','asdsd','02/02/1999','2','222','Esse Ã© um exemplo da sinopse de um livro',1,49.99,7,5,5,7),(6,'2010120132','nononoononono','nononoonnoon','02/02/1999','2','222','Esse Ã© um exemplo da sinopse de um livro',1,49.99,8,6,6,2),(7,'2010120132','autor teste','titulo teste','02/02/1999','2','222','Esse Ã© um exemplo da sinopse de um livro',1,49.99,9,7,7,4),(8,'2010120132','autor teste','titulo teste','02/02/1999','2','222','Esse Ã© um exemplo da sinopse de um livro',1,49.99,10,8,8,6),(9,'2010120132','autor teste','titulo teste','02/02/1999','2','222','Esse Ã© um exemplo da sinopse de um livro',1,49.99,11,9,9,8),(10,'20','autor teste','titulo teste','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,12,10,10,8),(11,'20','autor teste','titulo teste','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,150.00,13,11,11,8);
 /*!40000 ALTER TABLE `livro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -337,7 +386,7 @@ CREATE TABLE `livro_categoria` (
 
 LOCK TABLES `livro_categoria` WRITE;
 /*!40000 ALTER TABLE `livro_categoria` DISABLE KEYS */;
-INSERT INTO `livro_categoria` VALUES (1,1),(3,1),(5,1),(2,2),(3,2),(2,3),(3,3),(4,3);
+INSERT INTO `livro_categoria` VALUES (1,1),(3,1),(5,1),(8,1),(10,1),(5,2),(6,2),(7,2),(8,2),(10,2),(2,3),(4,3),(6,3),(7,3),(11,5),(4,6),(4,7),(9,7),(11,7);
 /*!40000 ALTER TABLE `livro_categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -350,7 +399,7 @@ DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(45) DEFAULT NULL,
+  `papel` varchar(155) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -366,11 +415,11 @@ INSERT INTO `usuario` VALUES (1,'comum'),(2,'adm'),(3,'root');
 UNLOCK TABLES;
 
 --
--- Dumping events for database 'ecommerce_livros'
+-- Dumping events for database 'Ecommerce'
 --
 
 --
--- Dumping routines for database 'ecommerce_livros'
+-- Dumping routines for database 'Ecommerce'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -382,4 +431,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-21 21:46:17
+-- Dump completed on 2019-04-25 11:51:22

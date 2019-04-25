@@ -1,4 +1,4 @@
-package livraria.web.view.carrinho;
+package livraria.web.view.pedido;
 
 import ecommerce.dominio.EntidadeDominio;
 import ecommerce.dominio.cliente.Cliente;
@@ -24,14 +24,22 @@ public class ViewCarrinho implements IViewHelper {
         Cliente objCliente = new Cliente();
         Carrinho carrinho = new Carrinho();
         List<Livro> livros = new ArrayList<>();
+        
         String id_livro = request.getParameter("l");
         String id_cliente = request.getParameter("u");
 
-        objLivro.setId(Integer.parseInt(id_livro));
-        objCliente.setId(Integer.parseInt(id_cliente));
-        
-        carrinho.setCliente(objCliente);
-        carrinho.setLivro(objLivro);
+        if(id_livro != null){
+            objLivro.setId(Integer.parseInt(id_livro));
+        }
+        if(id_cliente != null){
+            objCliente.setId(Integer.parseInt(id_cliente));
+        }
+        if(objCliente != null){
+            carrinho.setCliente(objCliente);
+        }
+        if(objLivro != null){
+            carrinho.setLivro(objLivro);
+        }
 
         
         return carrinho;
@@ -44,8 +52,15 @@ public class ViewCarrinho implements IViewHelper {
                 request.setAttribute("resultado", resultado);
                 if(resultado.getAcao() != null) {
                     if(resultado.getAcao().equals("inserir")){
-                        request.getRequestDispatcher("prateleira.jsp?st=sucess").forward(request, response);
-                    }       
+                        request.getRequestDispatcher("../Livros/prateleira.jsp").forward(request, response);
+                    }else if(resultado.getAcao().equals("consultar")){
+                        request.getRequestDispatcher("../Pedidos/carrinho.jsp").forward(request, response);
+                    }else if(resultado.getAcao().equals("desativar")){
+                        request.setAttribute("acao", "remoção do carrinho");
+                        request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                    }else if(resultado.getAcao().equals("falhaInserir")){     
+                       request.getRequestDispatcher("../Livros/prateleira.jsp").forward(request, response);
+                    }
                 }
             }
         } catch(Exception e) {

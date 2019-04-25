@@ -28,7 +28,6 @@ import livraria.web.view.cliente.ViewCliente;
 import livraria.web.view.cliente.ViewEndereco;
 import livraria.web.view.livro.ViewGrupoLivro;
 import livraria.web.view.livro.ViewLivro;
-import livraria.web.view.carrinho.ViewCarrinho;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +38,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import livraria.web.view.pedido.ViewCarrinho;
 
 
 public class Control extends HttpServlet {
@@ -49,7 +48,7 @@ public class Control extends HttpServlet {
     
     // Construtor que inicializará os caminhos de URL
     public Control(){
-        super();
+        
         
         //Mapa dos commands
         commands = new HashMap<String, ICommand>();
@@ -98,8 +97,13 @@ public class Control extends HttpServlet {
         viewHelper.put("/Ecommerce/Livros/ListarGrupoLivros", new ViewGrupoLivro());
         viewHelper.put("/Ecommerce/Livros/AlterarGrupoLivro", new ViewGrupoLivro());
         viewHelper.put("/Ecommerce/Livros/PreAlterarGrupoLivro", new ViewGrupoLivro());
+        
         // ViewCarrinho
-        viewHelper.put("/Ecommerce/Livros/AdicionarCarrinho", new ViewCarrinho());
+        viewHelper.put("/Ecommerce/Pedidos/AdicionarCarrinho", new ViewCarrinho());
+        viewHelper.put("/Ecommerce/Pedidos/VerCarrinho", new ViewCarrinho());
+        viewHelper.put("/Ecommerce/Pedidos/RemoverCarrinho", new ViewCarrinho());
+        
+        // View
         
 
     }
@@ -107,14 +111,41 @@ public class Control extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        // Obtem a uri que invocou esta servlet(O que foi definido no action do form
+        // html)
         String uri = request.getRequestURI();
+        // Obtem a operação que será executada
         String acao = request.getParameter("acao");
-       // doPost(request, response);
-        EntidadeDominio entidade = viewHelper.get(uri).getEntidade(request);
-        Resultado resultado = commands.get(acao).executar(entidade);
+        // Obtem um viewhelper indexado pela uri que invocou esta servlet
+        IViewHelper vh = viewHelper.get(uri); 
+       // O View Helper retorna a entidade especifica para a tela que chamou esta
+        // servlet
+        EntidadeDominio entidade = null;
+        if(vh != null)
+            entidade = vh.getEntidade(request);
+        // Obtem o command para executar a respectiva operação
+        ICommand command = commands.get(acao);
+        
+        /*
+         * Executa o commando que chamará a fachada para executar a operação requisitada
+         * o retorno é uma instância da classe resultado que pode conter mensagens de
+         * erro ou entidades de retorno
+         */
+        
+        Resultado resultado = null;
+        if(entidade != null) // evita erro quando as operações não irão para a fachada
+            resultado = command.executar(entidade);
+        
         System.out.println("URL: " + uri + "  ACAO: " + acao);
+        
+        /*
+         * Executa o método setView do view helper específico para definir como deverá
+         * ser apresentado o resultado para o usuário
+         * 
+         */
         viewHelper.get(uri).setEntidade(resultado, request, response);
-    	}
+    }
     
    @Override
     public void init() throws ServletException {
@@ -135,6 +166,10 @@ public class Control extends HttpServlet {
         resultado = commandListar.executar(new Livro());
         List<EntidadeDominio> livros = resultado.getEntidades();
         getServletContext().setAttribute("livros", livros);
+        
+        
+        
+        
     }
 
 }

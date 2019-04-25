@@ -13,28 +13,28 @@
         <div class="container">
             <div class="row">
                 
-        				<%
-					Resultado resultado = (Resultado) request.getAttribute("resultado");
-					if(resultado != null) {
-						if(!resultado.isStatus() && !resultado.getMensagem().isEmpty()) {
-							out.print("<div class='alert alert-danger'>");
-							out.print(resultado.getMensagem());
-							out.print("</div>");
-						} else {
-							if(!resultado.getMensagem().isEmpty()) {
-								out.print("<div class='alert alert-success'>");
-								out.print(resultado.getMensagem());
-								out.print("</div>");
-							}
-						}
-					}
-				%>
+                <%
+                Resultado resultado = (Resultado) request.getAttribute("resultado");
+                if(resultado != null) {
+                        if(!resultado.isStatus() && !resultado.getMensagem().isEmpty()) {
+                                out.print("<div class='alert alert-danger'>");
+                                out.print(resultado.getMensagem());
+                                out.print("</div>");
+                        } else {
+                                if(!resultado.getMensagem().isEmpty()) {
+                                        out.print("<div class='alert alert-success'>");
+                                        out.print(resultado.getMensagem());
+                                        out.print("</div>");
+                                }
+                        }
+                }
+            %>
         
-        
+        <!-- Clientes/InserirCliente?nome=edner&sobrenome=SobrenomeTeste&cpf=41656190869&rg=329702760&data_nascimento=12%2F01%2F1995&email=emailteste%40teste.com&numTelefone=47223322&senha=SenhaValida%21%40%23&senhaConfirmada=SenhaValida%21%40%23&sexo=M&tipoEndereco=cobranca&tipoLogradouro=vila&cep=12312312312312&cidade=Mogi&bairro=cubas&uf=SP&pais=brasil&logradouro=Rua+tranças+do+rei+careca&numero=12312&complemento=apt+2&nomeEndereco=Casa+da+avó&acao=inserir -->
         <h1>Informe seus dados pessoais</h1>
         <fieldset>
              <legend><b>Dados pesosais</b></legend>
-        <form action="InserirCliente" name="acao" value="inserir" method="POST">
+        <form action="InserirCliente" name="acao" value="inserir">
             <div class="input-field col s12 l6">
                 <label for="nome" data-error="Informe o nome!">Nome</label>
                 <input type="text" name="nome" id="nome" value="NomeTeste" class="validate" required>

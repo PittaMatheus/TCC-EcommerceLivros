@@ -25,6 +25,7 @@ import ecommerce.dominio.livro.Categoria;
 import ecommerce.dominio.livro.GrupoLivro;
 import ecommerce.dominio.livro.Livro;
 import ecommerce.dominio.Usuario;
+import ecommerce.dominio.estoque.Estoque;
 import ecommerce.dominio.livro.Dimensoes;
 import ecommerce.dominio.livro.Editora;
 import ecommerce.dominio.livro.ISBN;
@@ -43,10 +44,12 @@ import livraria.core.dao.livro.DimensoesDAO;
 import livraria.core.dao.livro.EditoraDAO;
 import livraria.core.dao.livro.IsbnDAO;
 import livraria.core.dao.pedido.CarrinhoDAO;
+import livraria.core.dao.pedido.EstoqueDAO;
 import livraria.core.regras.livro.ValidarCamposVaziosLivro;
 import livraria.core.regras.livro.ValidarCategoriasLivro;
 import livraria.core.regras.livro.ValidarDimensoesLivro;
 import livraria.core.regras.livro.ValidarGrupoPrecificacao;
+import livraria.core.regras.pedido.ValidaEstoque;
 
 
 public class Fachada implements IFachada{
@@ -58,7 +61,6 @@ public class Fachada implements IFachada{
     public Fachada(){
         
         dao = new HashMap<String, IDAO>();
-        
         
         // DAO de clientes
         dao.put(Cliente.class.getName(),new ClienteDAO());
@@ -72,9 +74,8 @@ public class Fachada implements IFachada{
         dao.put(Dimensoes.class.getName(), new DimensoesDAO());
         dao.put(ISBN.class.getName(), new IsbnDAO());
         dao.put(Editora.class.getName(), new EditoraDAO());
-        
-        // DAO de pedidos
         dao.put(Carrinho.class.getName(), new CarrinhoDAO());
+        dao.put(Estoque.class.getName(), new EstoqueDAO());
         
         RN = new HashMap<String,Map<String,List<IStrategy>>>();
         
@@ -82,7 +83,7 @@ public class Fachada implements IFachada{
         List<IStrategy> RNClienteSalvar = new ArrayList<IStrategy>();
         List<IStrategy> RNClienteAutenticar = new ArrayList<IStrategy>();
         
-        // Listas das Regras de negocio do comando insert
+        // Listas das Regras de negocio do cliente
         RNClienteSalvar.add(new ValidaCamposObrigatorios());
         RNClienteSalvar.add(new ValidaSenhaForte());
         RNClienteSalvar.add(new ValidaConfirmarSenha());
@@ -91,26 +92,23 @@ public class Fachada implements IFachada{
         RNClienteSalvar.add(new ValidaData());
         RNClienteSalvar.add(new ValidaClienteExistente());
         
-        // Regras de negocio de autenticacao
+        // Regras de negocio de autenticacao cliente
         RNClienteAutenticar.add(new ValidaSenha());
 
         // Regras de negocio do cliente
         Map<String, List<IStrategy>> regrasCliente = new HashMap<String, List<IStrategy>>();
-        
-         // Regras de negocio do usuario
-        Map<String, List<IStrategy>> regrasUsuario = new HashMap<String, List<IStrategy>>();
-        
-        // Regra salvar
-        regrasCliente.put(Cliente.class.getName(), RNClienteSalvar);
-        regrasUsuario.put(Cliente.class.getName(), RNClienteAutenticar);
+                     
+        // Regra salvar e autenticar cliente
+        regrasCliente.put("salvar", RNClienteSalvar);
+        regrasCliente.put("autenticar", RNClienteAutenticar);
         
         // Regras de negocio geral
-      	RN.put("salvar", regrasCliente);
-        RN.put("autenticar", regrasUsuario);
+      	RN.put(Cliente.class.getName(), regrasCliente);
         
         // Regras do livro
         List<IStrategy> regrasSalvarLivro = new ArrayList<IStrategy>();
         
+        //Listas das regras de negocio do livro
         regrasSalvarLivro.add(new ValidarCamposVaziosLivro());
         regrasSalvarLivro.add(new ValidarCategoriasLivro());
         regrasSalvarLivro.add(new ValidarGrupoPrecificacao());
@@ -118,11 +116,22 @@ public class Fachada implements IFachada{
         
         Map<String, List<IStrategy>> regrasLivro = new HashMap<String, List<IStrategy>>();
         
-        regrasLivro.put(Livro.class.getName(), regrasSalvarLivro);
-        regrasLivro.put(Livro.class.getName(), regrasSalvarLivro);
+        //Regras salvar e alterar livro
+        regrasLivro.put("salvar", regrasSalvarLivro);
+        regrasLivro.put("alterar", regrasSalvarLivro);
 
-        RN.put("salvar", regrasLivro);
-        RN.put("alterar", regrasLivro);
+        // Regras de negocio geral
+        RN.put(Livro.class.getName(), regrasLivro);
+        
+        
+        // Regras pedido
+        List<IStrategy> RNAddCarrinho = new ArrayList<IStrategy>();
+        //Lista de regras de negocio do pedido
+        RNAddCarrinho.add(new ValidaEstoque());
+        Map<String, List<IStrategy>> regrasPedido = new HashMap<String, List<IStrategy>>();
+        regrasPedido.put("salvar", RNAddCarrinho);
+        // Regras de negocio geral
+        RN.put(Carrinho.class.getName(), regrasPedido);
     } 
     
     
@@ -130,6 +139,7 @@ public class Fachada implements IFachada{
     public Resultado inserir(EntidadeDominio entidade) {
         resultado.setEntidades(new ArrayList<EntidadeDominio>());
         RegrasDeNegocio(entidade, "salvar");
+        
         try {
             if(resultado.getMensagem().length() == 0) {
                 resultado = dao.get(entidade.getClass().getName()).inserir(entidade);
@@ -141,10 +151,13 @@ public class Fachada implements IFachada{
                 }	
         } catch(Exception e) {
             resultado.setStatus(false);
-            resultado.setAcao("inserir");
+            resultado.setAcao("falhaInserir");
             e.printStackTrace();
         }
-    return resultado;
+        List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+        entidades.add(entidade);
+        resultado.setEntidades(entidades);
+        return resultado;
     }
 
     @Override
@@ -181,17 +194,26 @@ public class Fachada implements IFachada{
     @Override
     public Resultado alterar(EntidadeDominio entidade) {
         resultado.setEntidades(new ArrayList<EntidadeDominio>());
+        RegrasDeNegocio(entidade, "alterar");
         try {
+            if(resultado.getMensagem().length() == 0) {
             resultado = dao.get(entidade.getClass().getName()).alterar(entidade);
             resultado.setStatus(true);
             resultado.setMensagem("Alterado com sucesso");
             resultado.setAcao("alterar");
+            } else {
+                resultado.setStatus(false);
+                resultado.setAcao("falhaAlterar");
+            }
         } catch(Exception e) {
             resultado.setStatus(false);
-            resultado.setMensagem("Erro ao alterar");
+            resultado.setMensagem("falhaAlterar");
             e.printStackTrace();
         }
-    return resultado;
+        List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+        entidades.add(entidade);
+        resultado.setEntidades(entidades);
+        return resultado;
     }
 
     @Override
@@ -227,14 +249,22 @@ public class Fachada implements IFachada{
     }
     
     
-    private void RegrasDeNegocio(EntidadeDominio entidade, String operacao) {
-        List<IStrategy> regras = RN.get(operacao).get(entidade.getClass().getName());
+    private void RegrasDeNegocio(EntidadeDominio entidade, String operacao){ 
+        String nomeClasse = entidade.getClass().getName();
+	StringBuilder msg = new StringBuilder();
+
+        Map<String, List<IStrategy>> regrasOperacao = RN.get(nomeClasse);
+//        List<IStrategy> regras = RN.get(operacao).get(entidade.getClass().getName());
+        System.out.println(RN.toString());
         String resposta = "";
-        if(regras != null) {
-            for(IStrategy r:regras) {
-                if(r != null) {
-                    resposta += r.validar(entidade);
-                    resultado.setMensagem(resposta);
+        if(regrasOperacao != null) {
+            List<IStrategy> regras = regrasOperacao.get(operacao);
+            if(regras != null){
+                for(IStrategy r:regras) {
+                    if(r != null) {
+                        resposta += r.validar(entidade);
+                        resultado.setMensagem(resposta);
+                    }
                 }
             }
         } else {

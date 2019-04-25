@@ -25,7 +25,7 @@
         <%
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
 		if(resultado == null) {
-			response.sendRedirect(request.getContextPath() + "/Livros/AdicionarCarrinho?acao=inserir&l="+id_livro + "&u=" + id_usuario);
+			response.sendRedirect(request.getContextPath() + "/Pedidos/AdicionarCarrinho?acao=inserir&l="+id_livro + "&u=" + id_usuario);
 			return;
 		}
                 %>

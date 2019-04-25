@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>Ocorreu um erro. Sentimos muito.</h1>
-        <h2><%= request.getAttribute("mensagem")%></h2>
-        <a href='/Agenda/Contatos'>Voltar</a>
+<!--        <h2><%= request.getAttribute("mensagem")%></h2>-->
+        <a href="../">Voltar</a>
     </body> 
 </html>

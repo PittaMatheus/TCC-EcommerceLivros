@@ -60,9 +60,7 @@ public class ViewLivro implements IViewHelper{
         String profundidade = request.getParameter("txtProfundidade");
         String codigoIsbn = request.getParameter("txtIsbn");
         String idGrupoLivro = request.getParameter("grupoLivro");
-        String preco = request.getParameter("txtPreco");
-        String nomeGrupoLivro = request.getParameter("nomeGrupoLivro");
-
+        String preco = request.getParameter("txtPreco");        
         
         if(status!= null && status.equals("1"))
             livro.setAtivo(true);
@@ -80,10 +78,6 @@ public class ViewLivro implements IViewHelper{
         if(id_isbn != null && !id_isbn.trim().isEmpty())	
             isbn.setId(Integer.parseInt(id_isbn));
         
-        
-        
-        
-        
         livro.setCodigoBarras(codigo);
         livro.setAutor(autor);
         livro.setTitulo(titulo);
@@ -92,8 +86,11 @@ public class ViewLivro implements IViewHelper{
         livro.setNumeroPaginas(numPaginas);
         livro.setSinopse(sinopse);
 
-        if(preco != null)
+        if(preco != null && !preco.trim().isEmpty() && !preco.equals("null")){
             livro.setPreco(Double.valueOf(preco));
+        }else{
+            livro.setPreco(null);
+        }
 
         if(id_editora != null){
             editora.setId(Integer.parseInt(id_editora));
@@ -102,17 +99,29 @@ public class ViewLivro implements IViewHelper{
         livro.setEditora(editora);
 
        
-        if(altura != null && !altura.trim().isEmpty())
+        if(altura != null && !altura.trim().isEmpty() && !altura.equals("null")){
             dimensoes.setAltura(Double.valueOf(altura));
+        }else{
+            dimensoes.setAltura(null);
+        }
 
-        if(largura != null && !largura.trim().isEmpty())
+        if(largura != null && !largura.trim().isEmpty() && !largura.equals("null")){
             dimensoes.setLargura(Double.valueOf(largura));
+        }else{
+            dimensoes.setLargura(null);
+        }
 
-        if(peso != null && !peso.trim().isEmpty())
+        if(peso != null && !peso.trim().isEmpty() && !peso.equals("null")){
             dimensoes.setPeso(Double.valueOf(peso));
+        }else{
+            dimensoes.setPeso(null);
+        }
 
-        if(profundidade != null && !profundidade.trim().isEmpty())
+        if(profundidade != null && !profundidade.trim().isEmpty() && !profundidade.equals("null")){
             dimensoes.setProfundidade(Double.valueOf(profundidade));
+        }else{
+            dimensoes.setProfundidade(null);
+        }
 
         livro.setDimensoes(dimensoes);
         isbn.setCodBarras(codigoIsbn);
@@ -128,11 +137,11 @@ public class ViewLivro implements IViewHelper{
         }
         livro.setCategorias(categoriasLivro);
         
-        
-        
-        if(idGrupoLivro != null && !idGrupoLivro.isEmpty())
+        if(idGrupoLivro != null && !idGrupoLivro.isEmpty()){
             grupoLivro.setId(Integer.parseInt(idGrupoLivro));
-        grupoLivro.setNome(nomeGrupoLivro);
+        }else{
+            grupoLivro.setId(0);
+        }
         livro.setGrupoLivro(grupoLivro);
 
         return livro;
@@ -147,6 +156,9 @@ public class ViewLivro implements IViewHelper{
                             if(resultado.getAcao().equals("inserir")){
                                 request.setAttribute("acao", "inserção");
                                 request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                            }else if(resultado.getAcao().equals("falhaInserir")){
+                                request.setAttribute("mensagem", resultado.getMensagem());
+                                request.getRequestDispatcher("cadastro_livro.jsp").forward(request, response);
                             }
                             else if(resultado.getAcao().equals("listarLivros")){
                                 request.getRequestDispatcher("listar_livros.jsp").forward(request, response);
@@ -163,6 +175,8 @@ public class ViewLivro implements IViewHelper{
                             }else if(resultado.getAcao().equals("ativar")){
                                 request.setAttribute("acao", "ativação");
                                 request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                            }else if(resultado.getAcao().equals("falhaAlterar")){
+                                request.getRequestDispatcher("preAlterar_livro.jsp").forward(request, response);
                             }
                         } 
                     }

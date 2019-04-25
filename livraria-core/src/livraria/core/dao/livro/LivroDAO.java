@@ -29,7 +29,7 @@ public class LivroDAO extends AbstractDAO{
 
     @Override
     public Resultado inserir(EntidadeDominio entidade) {
-         List<EntidadeDominio> ListEntidades = new ArrayList<EntidadeDominio>();
+        List<EntidadeDominio> ListEntidades = new ArrayList<EntidadeDominio>();
         try {
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();
@@ -121,18 +121,18 @@ public class LivroDAO extends AbstractDAO{
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();
             Livro livro = (Livro) entidade;
-                PreparedStatement declaracao = conexao.prepareStatement("SELECT\n" +
-        "livro.id as id_livro, livro.codigo_barras as cod_barras, livro.autor as autor, livro.ano as ano,\n" +
-        "livro.edicao as edicao, livro.titulo as titulo,livro.numero_paginas as numero_paginas, livro.sinopse as sinopse, livro.ativo as status,\n" +
-        "livro.preco as preco, editora.id as id_editora, editora.nome_editora as nome_editora, \n" +
-        "dimensoes.id as id_dimensoes, dimensoes.altura as altura,\n" +
-        "dimensoes.profundidade as profundidade, dimensoes.largura as largura, dimensoes.peso as peso, \n" +
-        "isbn.id as id_isbn, isbn.cod_barras as ISBN, grupolivro.id as id_grupolivro, \n" +
-        "grupolivro.nome_grupolivro as nome_grupolivro, grupolivro.margem_lucro as margem_lucro\n" +
-        "FROM livro\n" +
-        "INNER JOIN editora ON editora.id = livro.id_editora\n" +
-        "INNER JOIN dimensoes ON dimensoes.id = livro.id_dimensao\n" +
-        "INNER JOIN isbn ON isbn.id = livro.id_isbn\n" +
+                PreparedStatement declaracao = conexao.prepareStatement("SELECT " +
+        "livro.id as id_livro, livro.codigo_barras as cod_barras, livro.autor as autor, livro.ano as ano, " +
+        "livro.edicao as edicao, livro.titulo as titulo,livro.numero_paginas as numero_paginas, livro.sinopse as sinopse, livro.ativo as status, " +
+        "livro.preco as preco, editora.id as id_editora, editora.nome_editora as nome_editora,  " +
+        "dimensoes.id as id_dimensoes, dimensoes.altura as altura, " +
+        "dimensoes.profundidade as profundidade, dimensoes.largura as largura, dimensoes.peso as peso,  " +
+        "isbn.id as id_isbn, isbn.cod_barras as ISBN, grupolivro.id as id_grupolivro,  " +
+        "grupolivro.nome_grupolivro as nome_grupolivro, grupolivro.margem_lucro as margem_lucro " +
+        "FROM livro " +
+        "INNER JOIN editora ON editora.id = livro.id_editora " +
+        "INNER JOIN dimensoes ON dimensoes.id = livro.id_dimensao " +
+        "INNER JOIN isbn ON isbn.id = livro.id_isbn " +
         "INNER JOIN grupolivro on grupolivro.id = livro.id_grupolivro where livro.ativo =?;");
             if(livro.getAtivo() == null){
                 livro.setAtivo(true);
@@ -162,6 +162,35 @@ public class LivroDAO extends AbstractDAO{
                 liv.getGrupoLivro().setId(rs.getInt("id_grupolivro"));
                 liv.getGrupoLivro().setNome(rs.getString("nome_grupolivro"));
                 liv.getGrupoLivro().setMargemLucro(rs.getDouble("margem_lucro"));
+                
+                 // PESQUISAR TODAS AS CATEGORIAS DO LIVRO
+                declaracao = conexao.prepareStatement("SELECT id_categoria FROM livro_categoria WHERE id_livro = ?");
+                
+                declaracao.setInt(1, liv.getId());
+                ResultSet rsCategoria = declaracao.executeQuery();
+                List<Categoria> categorias = new ArrayList<Categoria>();
+                
+                while (rsCategoria.next()){
+
+                    Integer idCategoria = rsCategoria.getInt("id_categoria");
+
+                    CategoriaDAO categoriaDao = new CategoriaDAO();
+                    Categoria categoria = new Categoria();
+                    
+
+                    categoria.setId(idCategoria);
+
+                    Resultado categoriaConsulta = categoriaDao.consultar(categoria);
+                    
+
+                    if( ! categoriaConsulta.getEntidades().isEmpty()){
+                        categoria = (Categoria)categoriaConsulta.getEntidades().get(0);
+                        categorias.add(categoria);
+                    }
+                }
+                
+                liv.setCategorias(categorias);
+                
                 if(livro.getAtivo()){
                     liv.setAtivo(true); 
                     resultado.setAcao("listarLivros");
@@ -291,24 +320,29 @@ public class LivroDAO extends AbstractDAO{
     public Resultado consultar(EntidadeDominio entidade) {
         List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
         try {
+//            "INNER JOIN categoria ON categoria.id = categoria.id" +
+//            "categoria.id as id_categoria, categoria.nome as nome_categoria " +
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();
             Livro livro = (Livro) entidade;
             if(livro.getAtivo()){
-                PreparedStatement declaracao = conexao.prepareStatement("SELECT\n" +
-        "livro.id as id_livro, livro.codigo_barras as cod_barras, livro.autor as autor, livro.ano as ano,\n" +
-        "livro.edicao as edicao, livro.titulo as titulo,livro.numero_paginas as numero_paginas, livro.sinopse as sinopse, livro.ativo as status,\n" +
-        "livro.preco as preco, editora.id as id_editora, editora.nome_editora as nome_editora, \n" +
-        "dimensoes.id as id_dimensoes, dimensoes.altura as altura,\n" +
-        "dimensoes.profundidade as profundidade, dimensoes.largura as largura, dimensoes.peso as peso, \n" +
-        "isbn.id as id_isbn, isbn.cod_barras as ISBN, grupolivro.id as id_grupolivro, \n" +
-        "grupolivro.nome_grupolivro as nome_grupolivro, grupolivro.margem_lucro as margem_lucro\n" +
-        "FROM livro\n" +
-        "INNER JOIN editora ON editora.id = livro.id_editora\n" +
-        "INNER JOIN dimensoes ON dimensoes.id = livro.id_dimensao\n" +
-        "INNER JOIN isbn ON isbn.id = livro.id_isbn\n" +
-        "INNER JOIN livro_categoria ON livro_categoria.id_livro = livro.id \n" +
-        "INNER JOIN grupolivro on grupolivro.id = livro.id_grupolivro where livro.ativo =1 AND livro.id = ?");
+                PreparedStatement declaracao = conexao.prepareStatement("SELECT " +
+        "livro.id as id_livro, livro.codigo_barras as cod_barras, livro.autor as autor, livro.ano as ano, " +
+        "livro.edicao as edicao, livro.titulo as titulo,livro.numero_paginas as numero_paginas, livro.sinopse as sinopse, livro.ativo as status, " +
+        "livro.preco as preco, editora.id as id_editora, editora.nome_editora as nome_editora,  " +
+        "dimensoes.id as id_dimensoes, dimensoes.altura as altura, " +
+        "dimensoes.profundidade as profundidade, dimensoes.largura as largura, dimensoes.peso as peso,  " +
+        "isbn.id as id_isbn, isbn.cod_barras as ISBN, grupolivro.id as id_grupolivro,  " +
+        "grupolivro.nome_grupolivro as nome_grupolivro, grupolivro.margem_lucro as margem_lucro " +
+        
+        "FROM livro " +
+        "INNER JOIN editora ON editora.id = livro.id_editora " +
+        "INNER JOIN dimensoes ON dimensoes.id = livro.id_dimensao " +
+        "INNER JOIN isbn ON isbn.id = livro.id_isbn " +
+        "INNER JOIN livro_categoria ON livro_categoria.id_livro = livro.id  " +
+        "INNER JOIN grupolivro on grupolivro.id = livro.id_grupolivro " +
+        
+        "where livro.ativo =1 AND livro.id = ?");
             declaracao.setInt(1, livro.getId());
             ResultSet rs =  declaracao.executeQuery();
             while(rs.next()) {
@@ -334,7 +368,35 @@ public class LivroDAO extends AbstractDAO{
                 liv.getGrupoLivro().setId(rs.getInt("id_grupolivro"));
                 liv.getGrupoLivro().setNome(rs.getString("nome_grupolivro"));
                 liv.getGrupoLivro().setMargemLucro(rs.getDouble("margem_lucro"));
-                liv.setAtivo(true);   
+                liv.setAtivo(true);
+                
+                // PESQUISAR TODAS AS CATEGORIAS DO LIVRO
+                declaracao = conexao.prepareStatement("SELECT id_categoria FROM livro_categoria WHERE id_livro = ?");
+                
+                declaracao.setInt(1, liv.getId());
+                ResultSet rsCategoria = declaracao.executeQuery();
+                List<Categoria> categorias = new ArrayList<Categoria>();
+                
+                while (rsCategoria.next()){
+
+                    Integer idCategoria = rsCategoria.getInt("id_categoria");
+
+                    CategoriaDAO categoriaDao = new CategoriaDAO();
+                    Categoria categoria = new Categoria();
+                    
+
+                    categoria.setId(idCategoria);
+
+                    Resultado categoriaConsulta = categoriaDao.consultar(categoria);
+                    
+
+                    if( ! categoriaConsulta.getEntidades().isEmpty()){
+                        categoria = (Categoria)categoriaConsulta.getEntidades().get(0);
+                        categorias.add(categoria);
+                    }
+                }
+                
+                liv.setCategorias(categorias);
                 entidades.add(liv);
             }
             resultado.setStatus(true);

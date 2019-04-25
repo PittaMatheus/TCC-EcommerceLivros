@@ -151,11 +151,22 @@
     
     <servlet-mapping>
         <servlet-name>Control</servlet-name>
-        <url-pattern>/Livros/AdicionarCarrinho</url-pattern>
+        <url-pattern>/Pedidos/AdicionarCarrinho</url-pattern>
     </servlet-mapping>
     
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Pedidos/VerCarrinho</url-pattern>
+    </servlet-mapping>
+ 
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Pedidos/RemoverCarrinho</url-pattern>
+    </servlet-mapping>       
     
+
     <session-config>
+        
         <session-timeout>
             30
         </session-timeout>
