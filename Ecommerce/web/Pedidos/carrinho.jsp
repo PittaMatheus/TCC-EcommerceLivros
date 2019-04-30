@@ -54,7 +54,6 @@
                     </tr>
 <%                      
                         preco = carrinho.getSubTotal();
-                        
                              }
                          }
 %>
@@ -69,6 +68,14 @@
         %>
     </form>
         <br><br>
+        <form action="confirmaEndereco.jsp">
+            <input type="hidden" name="id" id="id_usuario" value="<%=id_usuario%>">
+            <input type="submit" value="Realizar pedido"> 
+        </form>
+           
+        <br><br>
+        
+        
         <a href="../Clientes/home.jsp">Voltar</a>
 
 

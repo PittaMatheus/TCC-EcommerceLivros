@@ -1,0 +1,17 @@
+1- Pagina de detalhe do livro adicionado ao carrinho
+2- Exibir os livros na home
+3- Incluir a opção: "Adicionar endereço" ao confirmar os dados após solicitar o pedido
+4- Incluir a possibilidade de utilizar mais de 1 cartão de crédito para dividir o valor do pedido
+5 - Incluir o valor total da compra ao confirmar pedido
+6 - gerar cupom de troca ao finalizar um pedido
+7-  Incluir a possiblidade de utilizar um cupom de desconto no pagamento
+8 - Acrescentar pontos ao ranking do cliente após o pedido ser aprovado
+9- Incluir tabela de dominio da bandeira do cartão
+10- Incluir DAO estoque
+11 - incluir validação da data de validade do cartão de credito antes de finalizar o pedido junto com cupom de desconto por categoria
+12 - Listar pedidos
+13 - alterar status do um pedido
+14 - 
+
+
+

@@ -43,14 +43,14 @@ public class CarrinhoDAO extends AbstractDAO{
                 declaracao.setInt(2, carrinho.getCliente().getId());
                 declaracao.execute();
             resultado.setStatus(true);
-            resultado.setMensagem("O carrinho foi inserido com sucesso");
+            resultado.setMensagem("O Livro foi inserido com sucesso");
             resultado.setAcao("adicionar");
             // Fecha a conexao.
             conexao.close();
         } catch (ClassNotFoundException erro) {
             erro.printStackTrace();
             resultado.setStatus(false);
-            resultado.setMensagem("Ocorreu um erro ao inserir o carrinho");
+            resultado.setMensagem("Ocorreu um erro ao inserir o Livro");
         } catch (SQLException erro) {
             erro.printStackTrace();
         }

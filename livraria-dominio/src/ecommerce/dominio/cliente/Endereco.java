@@ -26,12 +26,13 @@ public class Endereco extends EntidadeDominio{
     private String nomeEndereco;
     private String referencia;
     private String pais;
+    private boolean status;
 
 
     private Integer clienteId;
     
     public Endereco(String logradouro, String bairro, String cep, String numero, String cidade, String uf, String tipoEndereco,
-			 String tipoLogradouro) {
+			 String tipoLogradouro, boolean status) {
 		super();
 		this.logradouro = logradouro;
 		this.bairro = bairro;
@@ -41,12 +42,23 @@ public class Endereco extends EntidadeDominio{
                 this.uf = uf;
 		this.tipoEndereco = tipoEndereco;
 		this.tipoLogradouro = tipoLogradouro;
+                this.status = status;
 	}
 
     public Endereco(){
         
     }
 
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    
+    
     public String getLogradouro() {
         return logradouro;
     }

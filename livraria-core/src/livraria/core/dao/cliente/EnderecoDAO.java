@@ -103,7 +103,9 @@ public class EnderecoDAO extends AbstractDAO {
             if(resultado.getAcao() == null){
                 resultado.setAcao("inserir");
             }
-            
+           if(!endereco.isStatus()){
+               resultado.setAcao("confirma");
+           }
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);
@@ -111,7 +113,8 @@ public class EnderecoDAO extends AbstractDAO {
         } catch (SQLException erro) {
             erro.printStackTrace();   
         }
-        resultado.setEntidades(entidades);
+      
+       resultado.setEntidades(entidades);
        return resultado;
     
     }

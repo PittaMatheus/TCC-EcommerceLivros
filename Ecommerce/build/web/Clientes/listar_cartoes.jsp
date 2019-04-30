@@ -9,15 +9,15 @@
         <title>Cartões </title>
     </head>
     <body>
-        <h1>Cartões</h1>
-                	<%
+    <h1>Cartões</h1>
+                <%
                 String id = request.getParameter("id");    
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
 		if(resultado == null) {
 			response.sendRedirect(request.getContextPath() + "/Clientes/ListarCartao?acao=consultarPorID&id=" + id);
 			return;
 		}
-	%>
+                %>
            
 
        

@@ -119,7 +119,7 @@ public class CartaoDAO extends AbstractDAO{
             Connection conexao = BancoDadosOracle.getConexao();
             Cartao cartao = (Cartao) entidade;
             PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome,c.dtVencimento, "
-                    + "bandeira, numero, codSeguranca "
+                    + "bandeira, numero, codSeguranca, id_cliente "
                     + "FROM cartao c WHERE c.id_cliente = ?");
            declaracao.setInt(1, cartao.getCliente().getId());
            ResultSet rs =  declaracao.executeQuery();
@@ -133,12 +133,16 @@ public class CartaoDAO extends AbstractDAO{
                 cart.setBandeira(bandeira);
                 cart.setNumeroCartao(rs.getString("numero"));
                 cart.setCodSeguranca(rs.getString("codSeguranca"));
+                cart.getCliente().setId(rs.getInt("id_cliente"));
                 entidades.add(cart);	
             }
             resultado.setEntidades(entidades);
             resultado.setStatus(true);
             resultado.setMensagem("Listado com sucesso");
             resultado.setAcao("listar");
+            if(!cartao.isStatus()){
+               resultado.setAcao("confirma");
+           }
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);

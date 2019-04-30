@@ -39,6 +39,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import livraria.web.view.pedido.ViewCarrinho;
+import livraria.web.view.pedido.ViewPedido;
 
 
 public class Control extends HttpServlet {
@@ -102,6 +103,11 @@ public class Control extends HttpServlet {
         viewHelper.put("/Ecommerce/Pedidos/AdicionarCarrinho", new ViewCarrinho());
         viewHelper.put("/Ecommerce/Pedidos/VerCarrinho", new ViewCarrinho());
         viewHelper.put("/Ecommerce/Pedidos/RemoverCarrinho", new ViewCarrinho());
+        viewHelper.put("/Ecommerce/Clientes/AdicionarPedido", new ViewPedido());
+        
+        
+        viewHelper.put("/Ecommerce/Clientes/AuxilioPedido", new ViewPedido());
+
         
         // View
         
@@ -125,8 +131,10 @@ public class Control extends HttpServlet {
         if(vh != null)
             entidade = vh.getEntidade(request);
         // Obtem o command para executar a respectiva operação
-        ICommand command = commands.get(acao);
         
+        
+        ICommand command = commands.get(acao);
+       
         /*
          * Executa o commando que chamará a fachada para executar a operação requisitada
          * o retorno é uma instância da classe resultado que pode conter mensagens de
@@ -134,10 +142,10 @@ public class Control extends HttpServlet {
          */
         
         Resultado resultado = null;
-        if(entidade != null) // evita erro quando as operações não irão para a fachada
+        if(entidade != null && command != null) // evita erro quando as operações não irão para a fachada
             resultado = command.executar(entidade);
-        
-        System.out.println("URL: " + uri + "  ACAO: " + acao);
+
+       
         
         /*
          * Executa o método setView do view helper específico para definir como deverá

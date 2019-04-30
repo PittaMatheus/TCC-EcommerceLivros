@@ -24,9 +24,14 @@ public class ViewEndereco implements IViewHelper{
         Endereco endereco = new Endereco();
         // Recebe o ID do cliente que deseja inserir o endereço de cobrança
         String id = request.getParameter("id");
+        
         if(id != null){
             endereco.setClienteId(Integer.parseInt(id));
         }
+        
+        // Se o parametro conf for recebido. A listagem será liberado um botão de confirmar endereço para a compra
+        
+        String conf = request.getParameter("conf");
         
         // ENDERECO
         String cep = request.getParameter("cep");
@@ -40,6 +45,12 @@ public class ViewEndereco implements IViewHelper{
         String numero = request.getParameter("numero");
         String pais = request.getParameter("pais");
         String referencia = request.getParameter("referencia");
+        
+        
+        if(conf != null){
+            endereco.setStatus(false);
+        }else
+            endereco.setStatus(true);
         
         endereco.setBairro(bairro);
         endereco.setLogradouro(logradouro);
@@ -76,6 +87,8 @@ public class ViewEndereco implements IViewHelper{
                                         }else if(resultado.getAcao().equals("alterar")){
                                             request.setAttribute("acao", "alteração");
                                             request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                                        }else if(resultado.getAcao().equals("confirma")){
+                                            request.getRequestDispatcher("../Pedidos/confirmaEndereco.jsp").forward(request, response);
                                         }
 					else 
 						//request.getRequestDispatcher("index.html").forward(request, response);

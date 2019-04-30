@@ -30,6 +30,8 @@ import ecommerce.dominio.livro.Dimensoes;
 import ecommerce.dominio.livro.Editora;
 import ecommerce.dominio.livro.ISBN;
 import ecommerce.dominio.pedido.Carrinho;
+import ecommerce.dominio.pedido.Pagamento;
+import ecommerce.dominio.pedido.Pedido;
 import livraria.core.IStrategy;
 import livraria.core.regras.cliente.ValidaCPF;
 import livraria.core.regras.cliente.ValidaCamposObrigatorios;
@@ -45,10 +47,13 @@ import livraria.core.dao.livro.EditoraDAO;
 import livraria.core.dao.livro.IsbnDAO;
 import livraria.core.dao.pedido.CarrinhoDAO;
 import livraria.core.dao.pedido.EstoqueDAO;
+import livraria.core.dao.pedido.PagamentoDAO;
+import livraria.core.dao.pedido.PedidoDAO;
 import livraria.core.regras.livro.ValidarCamposVaziosLivro;
 import livraria.core.regras.livro.ValidarCategoriasLivro;
 import livraria.core.regras.livro.ValidarDimensoesLivro;
 import livraria.core.regras.livro.ValidarGrupoPrecificacao;
+import livraria.core.regras.pedido.ConfirmaDados;
 import livraria.core.regras.pedido.ValidaEstoque;
 
 
@@ -76,6 +81,8 @@ public class Fachada implements IFachada{
         dao.put(Editora.class.getName(), new EditoraDAO());
         dao.put(Carrinho.class.getName(), new CarrinhoDAO());
         dao.put(Estoque.class.getName(), new EstoqueDAO());
+        dao.put(Pedido.class.getName(), new PedidoDAO());
+        dao.put(Pagamento.class.getName(), new PagamentoDAO());
         
         RN = new HashMap<String,Map<String,List<IStrategy>>>();
         
@@ -124,14 +131,30 @@ public class Fachada implements IFachada{
         RN.put(Livro.class.getName(), regrasLivro);
         
         
-        // Regras pedido
+        // Regras carrinho
         List<IStrategy> RNAddCarrinho = new ArrayList<IStrategy>();
         //Lista de regras de negocio do pedido
         RNAddCarrinho.add(new ValidaEstoque());
+        Map<String, List<IStrategy>> regrasCarrinho = new HashMap<String, List<IStrategy>>();
+        regrasCarrinho.put("salvar", RNAddCarrinho);
+        // Regras de negocio geral
+        RN.put(Carrinho.class.getName(), regrasCarrinho);
+        
+        
+        /* Gerar pedido
+        List<IStrategy> RNAddPedido = new ArrayList<IStrategy>();
+        //Lista de regras de negocio do pedido
+        RNAddCarrinho.add(new ConfirmaDados());
         Map<String, List<IStrategy>> regrasPedido = new HashMap<String, List<IStrategy>>();
-        regrasPedido.put("salvar", RNAddCarrinho);
+        regrasPedido.put("salvar", RNAddPedido);
         // Regras de negocio geral
         RN.put(Carrinho.class.getName(), regrasPedido);
+        */
+        
+        
+        
+        
+        
     } 
     
     

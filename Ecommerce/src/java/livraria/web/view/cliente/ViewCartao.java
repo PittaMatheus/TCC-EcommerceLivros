@@ -39,12 +39,19 @@ public class ViewCartao implements IViewHelper{
         String codSeguranca = request.getParameter("codSeguranca");
         String nomeCartao = request.getParameter("nomeCartao");
         String idBandeira = request.getParameter("bandeira");
-        
+        String conf = request.getParameter("conf");
         
         // Preenche objeto cartao
         if(id != null){
            cartao.getCliente().setId(Integer.parseInt(id));
         }
+        
+        
+        if(conf != null){
+            cartao.setStatus(false);
+        }else
+            cartao.setStatus(true);
+        
         cartao.setNumeroCartao(numCartao);
         cartao.setDtVencimento(dtVencimento);
         cartao.setNome(nomeCartao);
@@ -69,6 +76,8 @@ public class ViewCartao implements IViewHelper{
                                         }else if(resultado.getAcao().equals("desativar")){
                                             request.setAttribute("acao", "exclusão");
                                             request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                                        } else if(resultado.getAcao().equals("confirma")){
+                                            request.getRequestDispatcher("../Pedidos/confirmaCartao.jsp").forward(request, response);
                                         }else 
 						
                                             request.getRequestDispatcher("../index.html").forward(request, response);
