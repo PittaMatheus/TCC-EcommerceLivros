@@ -59,13 +59,14 @@
                    for(EntidadeDominio liv :livros){
                                 Livro livro = (Livro)liv; %>
                 <fieldset style="width:150px">
-                <div id="texto-livros">
-                    <h4> <%=livro.getTitulo()%></h4>
-                  <li class="livro"><%=livro.getAutor()%></li>
-                  <li><%=livro.getSinopse()%></li>
-                  <li><%=livro.getPreco()%></li>
-                  <a href="../Pedidos/add_carrinho.jsp?l=<%=livro.getId()%>&u=<%=cliente.getId()%>">Add</a>
-                </div>
+                    <div id="texto-livros">
+                        <h4> <%=livro.getTitulo()%></h4>
+                      <li class="livro"><%=livro.getAutor()%></li>
+                      <li><%=livro.getSinopse()%></li>
+                      <li><%=livro.getPreco()%></li>
+                      <!--<a href="../Pedidos/add_carrinho.jsp?l=<%=livro.getId()%>&u=<%=cliente.getId()%>">Add</a> -->
+                      <a href="../Pedidos/detalheItem.jsp?l=<%=livro.getId()%>&u=<%=cliente.getId()%>">Add</a>
+                    </div>
                 </fieldset>
                             <%}
              }
