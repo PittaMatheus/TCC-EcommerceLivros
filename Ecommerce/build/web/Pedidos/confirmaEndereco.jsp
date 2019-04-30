@@ -68,11 +68,14 @@
         </table>
       <%                     
                             }      
-                            }
-                         }     
-            }
+                        }
+                    }     
+                }
                     %>
                     <br> <br> <br>
+                    
+                    <a href="../Clientes/cadastro_endereco.jsp?id=<%=id_usuario%>">Adicionar endereco</a>   
+                    <br><br><br>
                     <input type="submit">
                     
                     <input type="hidden" name="u" value="<%=id_usuario%>">
