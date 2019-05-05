@@ -38,6 +38,7 @@ public class PedidoDAO extends AbstractDAO{
             //pedido.getEndereco().setClienteId(resultado.getEntidades().get(0).getId());
             int id_endereco = resultado.getEntidades().get(0).getId();
             Pagamento pagamento = new Pagamento();
+            pagamento.setValorTotal(pedido.getPagamento().getValorTotal());
             pagamento.getCartao().setId(pedido.getPagamento().getCartao().getId());
             resultado = pagamentoDAO.inserir(pagamento);
             pedido.getPagamento().setId(Integer.parseInt(resultado.getAcao()));

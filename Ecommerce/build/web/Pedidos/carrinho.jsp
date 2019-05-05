@@ -27,9 +27,9 @@
                          if(carrinhos.size() == 0) {
                             out.print("<br><br>Carrinho vazio");
                         } else { %>
-            <form action='LimparCarrinho'>
+
              <br>
-                <button name="acao" value="desativar">Limpar carrinho</button>
+
                 <br><br>
                  <table border="1" style ="width: 50%">
                         <tr>
@@ -66,10 +66,12 @@
         
         
         %>
-    </form>
+
         <br><br>
-        <form action="confirmaEndereco.jsp">
-            <input type="hidden" name="id" id="id_usuario" value="<%=id_usuario%>">
+        <form action="confirmaValorTotal.jsp" method="GET">
+            <input type="hidden" name="id_usuario" id="id_usuario" value="<%=id_usuario%>">
+            <input type="hidden" name="valorTotal" value="<%= livro.getPreco() %>">
+            
             <input type="submit" value="Realizar pedido"> 
         </form>
            

@@ -31,8 +31,10 @@ public class PagamentoDAO extends AbstractDAO{
             
                  PreparedStatement declaracao = conexao.prepareStatement(
                     "INSERT INTO pagamento "
-                    + "(id_cartao) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
-                declaracao.setInt(1, pagamento.getCartao().getId()); 
+                    + "(id_cartao, valor_total) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS);
+                declaracao.setInt(1, pagamento.getCartao().getId());
+                declaracao.setDouble(2, pagamento.getValorTotal());
+                
                 declaracao.execute();
                  ResultSet rs = declaracao.getGeneratedKeys();
             // Seta o ID cliente com o ID autoincrement que foi gerado no banco de dados

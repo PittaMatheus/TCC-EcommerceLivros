@@ -32,6 +32,12 @@ public class ViewPedido implements IViewHelper {
         String id_endereco = request.getParameter("id_endereco");
         String id_cartao = request.getParameter("id_cartao");
         
+        String valorTotal =request.getParameter("valorTotal");
+        
+        if(valorTotal != null){
+            pedido.getPagamento().setValorTotal(Double.valueOf(valorTotal));
+        }
+        
         if(id_cliente != null ){
             pedido.getCliente().setId(Integer.parseInt(id_cliente));
         }
@@ -42,7 +48,8 @@ public class ViewPedido implements IViewHelper {
         if(id_cartao != null){
             pedido.getPagamento().getCartao().setId(Integer.parseInt(id_cartao));
         }
-         HttpSession session = request.getSession();
+        
+        HttpSession session = request.getSession();
         session.setAttribute("pedido", pedido);
         return pedido;
     }
@@ -50,18 +57,20 @@ public class ViewPedido implements IViewHelper {
     @Override
     public void setEntidade(Resultado resultado, HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-			if(resultado != null && !resultado.getMensagem().isEmpty()) {
-				request.setAttribute("resultado", resultado);
-				if(resultado.getAcao() != null) {
-                                    request.setAttribute("acao", "pedido");
-					if(resultado.getAcao().equals("inserir"))
-                                            request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
-					
-                                }
-				}else {
-                                    request.getRequestDispatcher("../Pedidos/confirmaCartao.jsp").forward(request, response);
-                                
-			}
+            Object objeto = new Object();
+            Pedido pedido = (Pedido) request.getSession().getAttribute("pedido");
+            request.setAttribute("pedido", pedido);
+            if(pedido.getPagamento().getValorTotal() != null && pedido.getEndereco().getClienteId()== null){
+                // valor total ja foi setado. Endereço ainda nao. então é hora de confirmar os dados de endereço.
+                request.getRequestDispatcher("confirmaEndereco.jsp").forward(request, response);
+            }else if(pedido.getPagamento().getCartao().getId() == null){
+                // o cartão de credito ainda não foi escolhido. hora de confirma-lo
+                request.getRequestDispatcher("../Pedidos/confirmaCartao.jsp").forward(request, response);
+
+            }else
+                request.setAttribute("acao", "pedido");
+                request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+            
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

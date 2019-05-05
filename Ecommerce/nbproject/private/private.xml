@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/matheus/NetBeansProjects/ecommerce_dev/Ecommerce/src/java/livraria/web/view/cliente/ViewEndereco.java</file>
-            <file>file:/home/matheus/NetBeansProjects/ecommerce_dev/Ecommerce/web/Clientes/cadastro_endereco.jsp</file>
-            <file>file:/home/matheus/NetBeansProjects/ecommerce_dev/Ecommerce/web/Pedidos/confirmaEndereco.jsp</file>
+            <file>file:/home/matheus/NetBeansProjects/Ecommerce_dev/Ecommerce/web/Pedidos/confirmaCartao.jsp</file>
+            <file>file:/home/matheus/NetBeansProjects/Ecommerce_dev/Ecommerce/src/java/livraria/web/controle/Control.java</file>
+            <file>file:/home/matheus/NetBeansProjects/Ecommerce_dev/Ecommerce/src/java/livraria/web/view/pedido/ViewPedido.java</file>
+            <file>file:/home/matheus/NetBeansProjects/Ecommerce_dev/Ecommerce/web/Clientes/cadastro_endereco.jsp</file>
         </group>
     </open-files>
 </project-private>

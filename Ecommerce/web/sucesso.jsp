@@ -5,7 +5,7 @@
         <title>Resultado da Operação</title>
     </head>
     <body>
-        <h1>A 
+        <h1>
             <%= 
                
                request.getAttribute("acao")

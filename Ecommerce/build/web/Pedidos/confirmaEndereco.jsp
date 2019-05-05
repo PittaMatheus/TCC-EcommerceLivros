@@ -4,6 +4,7 @@
     Author     : matheus
 --%>
 
+<%@page import="ecommerce.dominio.pedido.Pedido"%>
 <%@page import="ecommerce.dominio.cliente.Cartao"%>
 <%@page import="ecommerce.dominio.cliente.Endereco"%>
 <%@page import="java.util.List"%>
@@ -20,8 +21,10 @@
         <h1>Confirme seus dados para realizar a compra</h1>
         <%
             String id_livro = request.getParameter("l");
-            String id_usuario = request.getParameter("id");
-
+            String id_usuario = request.getParameter("u");
+            int id =0;
+            double valorTotal = 0;
+            
 
             Resultado resultado = (Resultado) request.getAttribute("resultado");
             if(resultado == null) {
@@ -36,7 +39,7 @@
                             for (Endereco endereco : enderecos) {
   
                                 %>
-            <form action="AuxilioPedido" method="POST">
+            <form action="AdicionarPedido" method="POST">
                 <table border='1'>
                     <thead>
                         <%
@@ -71,14 +74,25 @@
                         }
                     }     
                 }
+            
+                    // Receber os dados do pedido : id_cliente + valor total
+                    if(session.getAttribute("pedido") != null){
+                    Pedido pedido = (Pedido) session.getAttribute("pedido");
+                    id = pedido.getCliente().getId();
+                    valorTotal = pedido.getPagamento().getValorTotal();
+                        }
+
+
                     %>
                     <br> <br> <br>
                     
-                    <a href="../Clientes/cadastro_endereco.jsp?id=<%=id_usuario%>">Adicionar endereco</a>   
-                    <br><br><br>
-                    <input type="submit">
                     
-                    <input type="hidden" name="u" value="<%=id_usuario%>">
+                    <a href="../Clientes/cadastro_endereco.jsp?id=<%=id%>">Adicionar endereco</a>   
+                    <br><br><br>
+                     <input type="hidden" name="valorTotal" value="<%=valorTotal%>">
+                    <input type="hidden" name="u" value="<%=id%>">
+                    <input type="submit">
+                   
             </form>
 
                       

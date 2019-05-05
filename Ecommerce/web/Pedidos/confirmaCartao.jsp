@@ -21,7 +21,11 @@
    
             if(session.getAttribute("pedido") != null){
                 Pedido pedido = (Pedido) session.getAttribute("pedido");    
-
+                out.println("Valor total: " + pedido.getPagamento().getValorTotal());
+                out.println("id do cliente: " + pedido.getCliente().getId());
+                out.println("id do endereco " + pedido.getEndereco().getClienteId());
+                
+                
             
             
            // String id_endereco = request.getParameter("id_endereco");
@@ -66,8 +70,9 @@
                                 </tbody>
                              </table>
                                 <br><br>
-                                <input type="hidden" name="u" value="<%=id_usuario%>">
-                                 <input type="hidden" name="id_endereco" value="<%=pedido.getEndereco().getClienteId()%>">
+                                <input type="text" name="u" value="<%=id_usuario%>">
+                                 <input type="text" name="id_endereco" value="<%=pedido.getEndereco().getClienteId()%>">
+                                 <input type="text" name="valorTotal" value="<%=pedido.getPagamento().getValorTotal()%>">
                                  <button name="acao" value="inserir">Confirmar pedido</button>
                                 
                         </form>
