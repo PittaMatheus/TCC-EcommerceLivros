@@ -11,6 +11,9 @@ TO DO
 12 - Listar pedidos
 13 - alterar status do um pedido
 14- Remover itens do carrinho / LIMPAR carrinho
+15- Correção - validar pedido minimo de 5 reais
+16 - adicionar quantidade de livros	
+17 - Ajustar detalhes do livro (array aparecendo)
 
 
 ________________________________________________________________________________________________________
@@ -19,7 +22,7 @@ DONE
 
 OK		1- Pagina de detalhe do livro adicionado ao carrinho			
 OK		3- Incluir a opção: "Adicionar endereço" ao confirmar os dados após solicitar o pedido
-OK      4 -Incluir o valor total da compra ao confirmar pedido
+OK      	4 -Incluir o valor total da compra ao confirmar pedido
 _________________________________________________________________________________________________________
 DOING
-
+		12 - Listar pedidos

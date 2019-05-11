@@ -12,8 +12,12 @@ public class BancoDadosOracle {
         Class.forName("com.mysql.jdbc.Driver"); 
         // Abre uma conexao com o banco.
         Connection conexao;
-        // return DriverManager.getConnection("jdbc:postgresql://localhost:5432/contato", "postgres", "123Fatec");
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce_livros","root","root");
+        //Trocar quando for usar
+        //Matteus
+        //return DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce_livros","root","root");
+        //Edner
+        //return DriverManager.getConnection("jdbc:mysql://localhost:3306/Ecommerce","root","admin123");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/Ecommerce","root","root");
     }
 
         public void devolverConexao(Connection conexao) throws SQLException {

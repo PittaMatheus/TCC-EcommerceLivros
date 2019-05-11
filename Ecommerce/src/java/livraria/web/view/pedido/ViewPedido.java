@@ -57,23 +57,30 @@ public class ViewPedido implements IViewHelper {
     @Override
     public void setEntidade(Resultado resultado, HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            Object objeto = new Object();
-            Pedido pedido = (Pedido) request.getSession().getAttribute("pedido");
-            request.setAttribute("pedido", pedido);
-            if(pedido.getPagamento().getValorTotal() != null && pedido.getEndereco().getClienteId()== null){
-                // valor total ja foi setado. Endereço ainda nao. então é hora de confirmar os dados de endereço.
-                request.getRequestDispatcher("confirmaEndereco.jsp").forward(request, response);
-            }else if(pedido.getPagamento().getCartao().getId() == null){
-                // o cartão de credito ainda não foi escolhido. hora de confirma-lo
-                request.getRequestDispatcher("../Pedidos/confirmaCartao.jsp").forward(request, response);
+             if(resultado != null && !resultado.getMensagem().isEmpty()) {
+                    request.setAttribute("resultado", resultado);
+                    if(resultado.getAcao() != null) {
+                        if(resultado.getAcao().equals("listarPedidos")){
+                            request.getRequestDispatcher("../adm/listar_pedidos.jsp").forward(request, response);
+                        }
+                    }
+             }else{
+                    Pedido pedido = (Pedido) request.getSession().getAttribute("pedido");
+                    request.setAttribute("pedido", pedido);
+                    if(pedido.getPagamento().getValorTotal() != null && pedido.getEndereco().getClienteId()== null){
+                        // valor total ja foi setado. Endereço ainda nao. então é hora de confirmar os dados de endereço.
+                        request.getRequestDispatcher("confirmaEndereco.jsp").forward(request, response);
+                    }else if(pedido.getPagamento().getCartao().getId() == null){
+                        // o cartão de credito ainda não foi escolhido. hora de confirma-lo
+                        request.getRequestDispatcher("../Pedidos/confirmaCartao.jsp").forward(request, response);
 
-            }else
-                request.setAttribute("acao", "pedido");
-                request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
-            
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+                    }else
+                        request.setAttribute("acao", "pedido");
+                        request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+             } 
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
     
 }

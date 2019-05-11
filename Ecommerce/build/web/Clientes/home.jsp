@@ -49,7 +49,7 @@
                                 <fieldset>
                                     <br>
                                     <legend>Gerencia de pedidos</legend>
-                                    <div><a href=''>Ver pedidos</a></div>
+                                    <div><a href='../adm/listar_pedidos.jsp'>Ver pedidos</a></div>
                                     <div><a href=''>Gerenciar pedidos</a></div>
                                     <div><a href=''>Ver trocas </a></div>
                                     <div><a href=''>Gerenciar trocas </a></div>

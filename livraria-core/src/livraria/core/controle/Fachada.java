@@ -62,6 +62,7 @@ public class Fachada implements IFachada{
     private Map<String, IDAO> dao;
     private StringBuilder sb = new StringBuilder();
     private Map<String, Map<String,List<IStrategy>>> RN;
+    public static Cliente usuario = new Cliente();
     
     public Fachada(){
         
@@ -153,7 +154,7 @@ public class Fachada implements IFachada{
         
         
         
-        
+            
         
     } 
     
@@ -277,8 +278,7 @@ public class Fachada implements IFachada{
 	StringBuilder msg = new StringBuilder();
 
         Map<String, List<IStrategy>> regrasOperacao = RN.get(nomeClasse);
-//        List<IStrategy> regras = RN.get(operacao).get(entidade.getClass().getName());
-        System.out.println(RN.toString());
+
         String resposta = "";
         if(regrasOperacao != null) {
             List<IStrategy> regras = regrasOperacao.get(operacao);
@@ -298,6 +298,8 @@ public class Fachada implements IFachada{
     @Override
     public Resultado autenticar(EntidadeDominio entidade) {
         RegrasDeNegocio(entidade,"autenticar");
+        Cliente cl = (Cliente) entidade;
+        
         try {
             if(resultado.getMensagem().length() == 0) {
 
@@ -305,6 +307,8 @@ public class Fachada implements IFachada{
                 resultado.setStatus(true);
                 resultado.setAcao("logar");
                 resultado.setMensagem("Usuario foi autenticado");
+                usuario.setEmail(cl.getEmail());
+                System.out.println(usuario.getEmail());
                 } else {
                 resultado.setStatus(false);
                 resultado.setAcao("nao-logado");

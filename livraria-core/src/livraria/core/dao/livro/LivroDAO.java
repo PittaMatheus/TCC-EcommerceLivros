@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import livraria.core.controle.Fachada;
+import livraria.core.util.LogTransacoes;
 
 /**
  *
@@ -98,6 +100,18 @@ public class LivroDAO extends AbstractDAO{
                declaracao5.setInt(2, categoria.getId());
                 declaracao5.execute();
             }
+            //LOG
+//            StringBuilder log = new StringBuilder();
+//            log.append("\nOPERAÇÃO: SALVAR | AUTOR: " + Fachada.usuario.getEmail() + "| ENTIDADE: LIVRO | \n");
+//            log.append("DADOS_INSERIDOS: (\n LIVRO_ID: " + livro.getId() + ",\n TÍTULO: " + livro.getTitulo() + ",\n");
+//            log.append(" AUTOR: " + livro.getAutor() + ",\n EDIÇÃO: " + livro.getEdicao() + ",\n");
+//            log.append(" EDITORA: " + livro.getEditora().getNome() + ",\n ANO: " + livro.getAno() + ",\n");
+//            log.append(" NUMERO_PAGINAS: " + livro.getNumeroPaginas() + ",\n ALTURA: " + livro.getDimensoes().getAltura() + ",\n");
+//            log.append(" LARGURA: " + livro.getDimensoes().getLargura() + ",\n PROFUNDIDADE: " + livro.getDimensoes().getProfundidade() + ",\n");
+//            log.append(" PESO: " + livro.getDimensoes().getPeso() + ",\n SINOPSE: " + livro.getSinopse() + ",\n");
+//            log.append(" PRECIFICAÇÃO: " + livro.getPreco() + ",\n ISBN: " + livro.getIsbn().getCodBarras() + ",\n");
+//            log.append(" CODIGO_BARRAS: " + livro.getCodigoBarras() + ")");
+//            LogTransacoes.executaLog(log.toString());
           
         } catch (ClassNotFoundException erro) {
             erro.printStackTrace();     

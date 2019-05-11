@@ -1,0 +1,18 @@
+2019-05-07 15:51:41,263 INFO l.c.u.LogTransacoes [http-nio-8080-exec-5] 
+OPERAÇÃO: SALVAR | AUTOR: adm@adm.com| ENTIDADE: LIVRO | 
+DADOS_INSERIDOS: (
+ LIVRO_ID: 100,
+ TÍTULO: titulo teste,
+ AUTOR: autor teste,
+ EDIÇÃO: 2,
+ EDITORA: Abril,
+ ANO: 02/02/1999,
+ NUMERO_PAGINAS: 222,
+ ALTURA: 20.0,
+ LARGURA: 14.0,
+ PROFUNDIDADE: 4.0,
+ PESO: 1.5,
+ SINOPSE: Esse exemplo da sinopse de um livro,
+ PRECIFICAÇÃO: 49.99,
+ ISBN: 2423432,
+ CODIGO_BARRAS: 20)

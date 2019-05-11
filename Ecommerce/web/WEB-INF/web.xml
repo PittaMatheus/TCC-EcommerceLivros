@@ -177,7 +177,17 @@
     <servlet-mapping>
         <servlet-name>Control</servlet-name>
         <url-pattern>/Pedidos/AdicionarPedido</url-pattern>
+    </servlet-mapping>  
+ 
+    
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/adm/ListarPedidos</url-pattern>
     </servlet-mapping>    
+      
+        
+          
+              
 
     <session-config>
         <session-timeout>

@@ -9,7 +9,7 @@
         <title>Alterar endereco</title>
     </head>
     <body>
-       <h1>Alterar endereco de entrega</h1>
+       <h1>Endereco de entrega do pedido </h1>
        <%
                 String id = request.getParameter("id");    
 		Resultado resultado = (Resultado) request.getAttribute("resultado");

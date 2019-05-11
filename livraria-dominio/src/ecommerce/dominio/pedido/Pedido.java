@@ -27,6 +27,7 @@ public class Pedido extends EntidadeDominio{
 	public Pedido() {
                 cliente = new Cliente();
                 endereco = new Endereco();
+                statusPedido = new StatusPedido();
 		Pagamento pagamento = new Pagamento();
 		List<PagamentoCartaoCredito> pagamentos = new ArrayList<PagamentoCartaoCredito>();
 		pagamento.setPagamentosCartao(pagamentos);

@@ -12,6 +12,7 @@ import ecommerce.dominio.EntidadeDominio;
  * @author matheus
  */
 public class StatusPedido extends EntidadeDominio{
+        private Integer id;
         private String status;
 	private StatusPedido proximoStatus;
 	public static final Integer EM_PROGRESSO = 1;
@@ -22,6 +23,16 @@ public class StatusPedido extends EntidadeDominio{
 	public static final Integer REPROVADO = 6;
 	public static final Integer TROCADO = 7;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+        
+        
     public String getStatus() {
         return status;
     }

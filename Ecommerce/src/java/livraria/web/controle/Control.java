@@ -108,6 +108,8 @@ public class Control extends HttpServlet {
         
         viewHelper.put("/Ecommerce/Clientes/AuxilioPedido", new ViewPedido());
         viewHelper.put("/Ecommerce/Pedidos/AdicionarPedido", new ViewPedido());
+        viewHelper.put("/Ecommerce/adm/ListarPedidos", new ViewPedido());
+        
 
 
         
