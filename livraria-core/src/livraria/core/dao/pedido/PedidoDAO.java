@@ -75,15 +75,18 @@ public class PedidoDAO extends AbstractDAO{
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();
             Pedido pedido = (Pedido) entidade;
-                       PreparedStatement declaracao = conexao.prepareStatement("select p.id, p.id_cliente, p.id_pagamento, pag.valor_total, p.id_statusPedido, p.id_endereco, p.dt_pedido,\n" +
-        "	c.email, c.cpf, c.data_nascimento, c.id, c.nome, c.ranking, c.rg, c.sexo, c.email, c.sobrenome,\n" +
-        "	e.bairro, e.cep, e.cidade, e.complemento, e.logradouro, e.nomeEndereco, e.numero, e.referencia,\n" +
-        "	e.tipoEndereco, e.tipoLogradouro, e.uf\n" +
-        "	from pedido p\n" +
-        "	inner join cliente c\n" +
-        "	inner join endereco e\n" +
-        "	inner join pagamento pag where pag.id = p.id_pagamento \n" +
-        "	AND c.id = p.id_cliente AND p.id_endereco = e.id;");
+                       PreparedStatement declaracao = conexao.prepareStatement("select p.id, p.id_cliente, p.id_pagamento, pag.valor_total,\n" +
+                    "car.bandeira, car.dtVencimento, car.numero, p.id_statusPedido, p.id_endereco, p.dt_pedido,\n" +
+                    "pag.dt_pagamento, c.email, c.cpf, c.data_nascimento, c.id, c.nome, c.ranking, c.rg, c.sexo, c.email, c.sobrenome,\n" +
+                    "e.bairro, e.cep, e.cidade, e.complemento, e.logradouro, e.nomeEndereco, e.numero, e.referencia,\n" +
+                    "e.tipoEndereco, e.tipoLogradouro, e.uf\n" +
+                    "from pedido p\n" +
+                    "inner join cliente c\n" +
+                    "inner join endereco e\n" +
+                    "inner join cartao car \n" +
+                    "inner join pagamento pag \n" +
+                    "where pag.id = p.id_pagamento \n" +
+                    "AND c.id = p.id_cliente AND p.id_endereco = e.id AND car.id = pag.id_cartao;");
             ResultSet rs =  declaracao.executeQuery();
             while(rs.next()) {
                 Pedido ped = new Pedido();
@@ -98,6 +101,8 @@ public class PedidoDAO extends AbstractDAO{
                 // Setando dados do pagamento
                 ped.getPagamento().setId(rs.getInt("id_pagamento"));
                 ped.getPagamento().setValorTotal(rs.getDouble("valor_total"));
+                ped.getPagamento().getCartao().getBandeira().setNome(rs.getString("bandeira"));
+                ped.getPagamento().setDtPagamento(rs.getDate("dt_pagamento"));
                 // Setando dados do endereco
                 ped.getEndereco().setId(rs.getInt("id_endereco"));
                 ped.getEndereco().setLogradouro(rs.getString("logradouro"));

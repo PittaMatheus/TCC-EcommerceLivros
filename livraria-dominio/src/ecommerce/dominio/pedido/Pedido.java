@@ -23,10 +23,12 @@ public class Pedido extends EntidadeDominio{
     private Pagamento pagamento;
     private Date dtPedido;
     private StatusPedido statusPedido;
+    private Cupom cupom;
 	
 	public Pedido() {
                 cliente = new Cliente();
                 endereco = new Endereco();
+                cupom = new Cupom();
                 statusPedido = new StatusPedido();
 		Pagamento pagamento = new Pagamento();
 		List<PagamentoCartaoCredito> pagamentos = new ArrayList<PagamentoCartaoCredito>();

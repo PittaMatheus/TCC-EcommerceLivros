@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 package ecommerce.dominio.pedido;
-
 import ecommerce.dominio.EntidadeDominio;
 import ecommerce.dominio.cliente.Cartao;
+import ecommerce.dominio.pedido.Cupom;
+
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class Pagamento extends EntidadeDominio {
         private Integer id;
         private Date dtPagamento;
         private Cartao cartao;
-	//private Cupom cupom;
+	private Cupom cupom;
 	//private List<CupomTroca> cuponsTroca;
 	private Double valorTotal;
 	private List<PagamentoCartaoCredito> pagamentosCartao;
@@ -26,10 +27,19 @@ public class Pagamento extends EntidadeDominio {
         
         public Pagamento(){
             cartao = new Cartao();
+            cupom = new Cupom();
         }
 
     public Cartao getCartao() {
         return cartao;
+    }
+
+    public Cupom getCupom() {
+        return cupom;
+    }
+
+    public void setCupom(Cupom cupom) {
+        this.cupom = cupom;
     }
 
     public void setCartao(Cartao cartao) {

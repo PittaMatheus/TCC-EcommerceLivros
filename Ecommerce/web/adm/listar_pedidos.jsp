@@ -22,9 +22,12 @@
         <%
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
 		if(resultado == null) {
+                        
 			response.sendRedirect(request.getContextPath() + "/adm/ListarPedidos?acao=listar");
+                        
 			return;
 		}
+                        
                          List<Pedido> pedidos = (List) resultado.getEntidades();
                          
                          if(pedidos.size() == 0) {
@@ -38,7 +41,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th><th>Id do pedido</th><th>Email</th><th>Nome</th><th>data do pedido</th><th>Status do pedido</th><th>Endereco de entrega</th>
-                                        <th>Valor total</th>
+                                        <th>Valor total</th><th>Pagamento</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -58,9 +61,11 @@
                                 DecimalFormat formatoDouble = new DecimalFormat("#.##");      
                                 valorTotal = Double.valueOf(formatoDouble.format(valorTotal));
                                 out.println("<td> R$ " + valorTotal + "</td>");
+                                out.println("<td><a href=listar_pagamento.jsp?id_ped=" + pedido.getId() + ">detalhar</a>");
                                 out.println("</tr>");
                             }
-                         }                       
+                         }    
+                    session.setAttribute("resultado",  resultado);  
                     %>
                             </tbody>
                             </table>

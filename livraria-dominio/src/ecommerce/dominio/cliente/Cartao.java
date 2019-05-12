@@ -35,6 +35,8 @@ public class Cartao extends EntidadeDominio {
     
     public Cartao(){
             cliente = new Cliente();
+            bandeira = new Bandeira();
+
     }
 
     public Integer getId() {
