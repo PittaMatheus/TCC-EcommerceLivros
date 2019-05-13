@@ -26,7 +26,7 @@ public class StatusPedido extends EntidadeDominio{
     public Integer getId() {
         return id;
     }
-
+    
     public void setId(Integer id) {
         this.id = id;
     }

@@ -42,7 +42,7 @@
                      <table border="1" class="highlight striped centered responsive-table">
                                 <thead>
                                     <tr>
-                                        <th>Id do pedido</th><th>Data de pagamento</th><th>Valor total</th><th>Cupom de desconto</th><th>Bandeira do cartão</th>
+                                        <th>Id do pedido</th><th>Data de pagamento</th><th>Valor total</th><th>Cupom de desconto</th><th>Numero do cartão</th><th>Bandeira do cartão</th>
                                     </tr>
                                 </thead>
                                 <tbody>                
@@ -53,6 +53,7 @@
                                 out.println("<td>" + pedido.getPagamento().getDtPagamento()+ "</td>");
                                 out.println("<td>" + pedido.getPagamento().getValorTotal()+ "</td>"); 
                                 out.println("<td>" + pedido.getPagamento().getCupom() + "</td>");
+                                out.println("<td>" + pedido.getPagamento().getCartao().getNumeroCartao() + "</td>");
                                 out.println("<td>" + pedido.getPagamento().getCartao().getBandeira().getNome()+ "</td>");                                
                                 out.println("</tr>");
                                 out.println("</tbody>");

@@ -37,6 +37,9 @@
                        
                 <div class ="container">
                     <h3>Pedidos registrados</h3>
+                    <form action="gerenciar_pedido.jsp" method="POST">
+                        
+                        
                             <table border="1" class="highlight striped centered responsive-table">
                                 <thead>
                                     <tr>
@@ -46,7 +49,9 @@
                                 </thead>
                                 <tbody>
                                     <%
+                                        session.setAttribute("resultado",  resultado); 
                             for (Pedido pedido : pedidos) {
+                               
                                 out.println("<tr>");
                                 out.println("<td><input type='radio' required name='id' value=" + pedido.getId() + " /></td>");
                                 out.println("<td>" + pedido.getId() + "</td>"); 
@@ -65,12 +70,14 @@
                                 out.println("</tr>");
                             }
                          }    
-                    session.setAttribute("resultado",  resultado);  
+                     
                     %>
                             </tbody>
-                            </table>
+                        </table>
+                            <br>
+                            <input type="submit" name="acao" value="gerenciar">
             </div>
-    </form>
+                </form>
                 <br><br>
         <a href='../Clientes/home.jsp'>Voltar</a>
     </body>

@@ -17,6 +17,7 @@ import java.util.List;
  * @author matheus
  */
 public class Pedido extends EntidadeDominio{
+    private Integer id;
     private Cliente cliente;
     private List<ItemPedido> items;
     private Endereco endereco;
@@ -44,6 +45,25 @@ public class Pedido extends EntidadeDominio{
         this.cliente = cliente;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Cupom getCupom() {
+        return cupom;
+    }
+
+    public void setCupom(Cupom cupom) {
+        this.cupom = cupom;
+    }
+
+    
+    
+    
     public List<ItemPedido> getItems() {
         return items;
     }

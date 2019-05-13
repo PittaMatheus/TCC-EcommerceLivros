@@ -28,6 +28,7 @@ public class ViewPedido implements IViewHelper {
         Livro objLivro = new Livro();
         Cliente objCliente = new Cliente();
         Pedido pedido = new Pedido();
+        String id = request.getParameter("id_pedido");
         String id_cliente = request.getParameter("u");
         String id_endereco = request.getParameter("id_endereco");
         String id_cartao = request.getParameter("id_cartao");
@@ -37,7 +38,6 @@ public class ViewPedido implements IViewHelper {
         if(valorTotal != null){
             pedido.getPagamento().setValorTotal(Double.valueOf(valorTotal));
         }
-        
         if(id_cliente != null ){
             pedido.getCliente().setId(Integer.parseInt(id_cliente));
         }
@@ -48,7 +48,9 @@ public class ViewPedido implements IViewHelper {
         if(id_cartao != null){
             pedido.getPagamento().getCartao().setId(Integer.parseInt(id_cartao));
         }
-        
+        if(id != null){
+            pedido.setId(Integer.parseInt(id));
+        }
         HttpSession session = request.getSession();
         session.setAttribute("pedido", pedido);
         return pedido;

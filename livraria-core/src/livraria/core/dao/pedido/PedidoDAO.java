@@ -7,6 +7,7 @@ package livraria.core.dao.pedido;
 
 import ecommerce.dominio.EntidadeDominio;
 import ecommerce.dominio.cliente.Endereco;
+import ecommerce.dominio.livro.Livro;
 import ecommerce.dominio.pedido.Pagamento;
 import ecommerce.dominio.pedido.Pedido;
 import java.sql.Connection;
@@ -18,6 +19,9 @@ import java.util.List;
 import livraria.core.aplicacao.Resultado;
 import livraria.core.dao.AbstractDAO;
 import livraria.core.dao.cliente.EnderecoDAO;
+import livraria.core.dao.livro.DimensoesDAO;
+import livraria.core.dao.livro.EditoraDAO;
+import livraria.core.dao.livro.IsbnDAO;
 import livraria.core.util.BancoDadosOracle;
 
 /**
@@ -103,6 +107,7 @@ public class PedidoDAO extends AbstractDAO{
                 ped.getPagamento().setValorTotal(rs.getDouble("valor_total"));
                 ped.getPagamento().getCartao().getBandeira().setNome(rs.getString("bandeira"));
                 ped.getPagamento().setDtPagamento(rs.getDate("dt_pagamento"));
+                ped.getPagamento().getCartao().setNumeroCartao(rs.getString("numero"));
                 // Setando dados do endereco
                 ped.getEndereco().setId(rs.getInt("id_endereco"));
                 ped.getEndereco().setLogradouro(rs.getString("logradouro"));
@@ -134,8 +139,33 @@ public class PedidoDAO extends AbstractDAO{
 
     @Override
     public Resultado alterar(EntidadeDominio entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<EntidadeDominio> ListEntidades = new ArrayList<EntidadeDominio>();
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Pedido pedido = (Pedido) entidade;
+            // Instancia das entidades relacionadas
+            
+   
+            PreparedStatement declaracao = conexao.prepareStatement("UPDATE pedido SET id_statusPedido=? " +
+             "WHERE id=?");
+            declaracao.setInt(1, pedido.getId());
+            declaracao.execute();
+            resultado.setStatus(true);
+            resultado.setMensagem("O Status do pedido foi alterarado com sucesso!");   
+            // Fecha a conexao.
+            conexao.close();
+        } catch (ClassNotFoundException erro) {
+            erro.printStackTrace();     
+            resultado.setStatus(false);
+            resultado.setMensagem("Houve algum erro ao alterar o status do pedido");
+        } catch (SQLException erro) {
+            erro.printStackTrace();   
+        }
+          return resultado;
     }
+        
+
 
     @Override
     public Resultado desativar(EntidadeDominio entidade) {
