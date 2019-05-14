@@ -51,7 +51,7 @@
                                     <legend>Gerencia de pedidos</legend>
                                     <div><a href='../adm/listar_pedidos.jsp'>Ver pedidos</a></div>
                                     <div><a href='../adm/listar_pedidos.jsp'>Gerenciar pedidos</a></div>
-                                    <div><a href='../adm/listar_SolicitacaoTrocas.jsp'>Ver trocas </a></div>
+                                    <div><a href='../adm/listar_SolicitacaoTrocas.jsp'>Ver Solicitações de trocas </a></div>
                                     <div><a href=''>Gerenciar trocas </a></div>
                                     <div><a href=''>Editar meu perfil </a></div>
                                 </fieldset>
@@ -67,6 +67,12 @@
                                     <div><a href='ListarCupomTroca.jsp'>Ver Cupons de troca</a></div>                                   
                                     <div><a href='../Pedidos/carrinho.jsp?u=<%=cliente.getId()%>'>Ver carrinho</a></div>
                                     <div><a href='../Clientes/listar_meusPedidos.jsp'>Ver pedidos</a></div>
+                                    <div><a href=''>Solicitar troca</a></div>
+                                    <div><a href=''>Consultar andamento da troca</a></div>
+                                    <div><a href=''>Consultar pontos acumulativos</a></div>
+                                    
+                                    
+                                    
                                     <div><a href=''>Editar meu perfil</a></div>
                                 </fieldset>
                                     <%
