@@ -113,7 +113,7 @@ public class CartaoDAO extends AbstractDAO{
 
     @Override
     public Resultado consultar(EntidadeDominio entidade) {
-                List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+        List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
         try {
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();

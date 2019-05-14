@@ -19,7 +19,7 @@
         Resultado resultado = (Resultado) session.getAttribute("resultado");    
         List<Pedido> pedidos = (List) resultado.getEntidades();
         int id_pedido = Integer.parseInt(request.getParameter("id_ped"));
-                
+               int tipoCliente =0; 
                          if(pedidos.size() == 0) {
                             out.print("<br><br>Erro");
                         } else {
@@ -27,6 +27,7 @@
                        
                 <div class ="container">
                     <%
+                        
                     for (Pedido pedido : pedidos) {
                         if(pedido.getId() == id_pedido){
                     %>
@@ -57,15 +58,30 @@
                                 out.println("<td>" + pedido.getPagamento().getCartao().getBandeira().getNome()+ "</td>");                                
                                 out.println("</tr>");
                                 out.println("</tbody>");
+                                 tipoCliente = pedido.getCliente().getPapel().getId(); 
+                               
                                 }
                             }
-                         }    
+                            
+                            
+                        
+                    }    
 
     
     %>
             </table>
+            
+            <br><br>    
+            <%
+            if(tipoCliente == 1){
+                    out.println("<a href='../Clientes/listar_meusPedidos.jsp'>Voltar</a>");   
+                }else{
+                    out.println("<a href='listar_pedidos.jsp'>Voltar</a>");   
+                }
+            
+            
+            %>
         <br><br>
-                   
-        <a href="listar_pedidos.jsp">Voltar</a>   
+        
     </body>
 </html>

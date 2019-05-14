@@ -18,6 +18,7 @@ import java.util.List;
  */
 public class Pedido extends EntidadeDominio{
     private Integer id;
+    private String tipo;
     private Cliente cliente;
     private List<ItemPedido> items;
     private Endereco endereco;
@@ -37,6 +38,15 @@ public class Pedido extends EntidadeDominio{
 		this.setPagamento(pagamento);
 	}
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+        
     public Cliente getCliente() {
         return cliente;
     }

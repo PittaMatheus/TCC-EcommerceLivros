@@ -19,9 +19,6 @@ public class Perfil extends EntidadeDominio{
     String nome;
     
 
-    
-    
-    
     public Integer getId() {
         return id;
     }

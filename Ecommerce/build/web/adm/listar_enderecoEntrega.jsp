@@ -25,6 +25,7 @@
         List<Pedido> pedidos = (List) resultado.getEntidades();
         int id_endereco = Integer.parseInt(request.getParameter("id_end"));
         int id_pedido = Integer.parseInt(request.getParameter("id_ped"));
+        int tipoCliente =0; 
                 
                          if(pedidos.size() == 0) {
                             out.print("<br><br>Erro");
@@ -66,6 +67,7 @@
                                 out.println("<td>" + pedido.getEndereco().getNomeEndereco()+ "</td>");
                                 out.println("</tr>");
                                 out.println("</tbody>");
+                                tipoCliente = pedido.getCliente().getPapel().getId(); 
                                 }
                             }
                          }    
@@ -73,8 +75,17 @@
     
     %>
             </table>
+            
         <br><br>
-                   
-        <a href="listar_pedidos.jsp">Voltar</a>   
+            <%
+            if(tipoCliente == 1){
+                    out.println("<a href='../Clientes/listar_meusPedidos.jsp'>Voltar</a>");   
+                }else{
+                    out.println("<a href='listar_pedidos.jsp'>Voltar</a>");   
+                }
+            
+            
+            %>
+        <br><br>       
     </body>
 </html>

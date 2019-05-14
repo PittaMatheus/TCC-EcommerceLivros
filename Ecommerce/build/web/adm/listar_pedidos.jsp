@@ -23,7 +23,7 @@
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
 		if(resultado == null) {
                         
-			response.sendRedirect(request.getContextPath() + "/adm/ListarPedidos?acao=listar");
+			response.sendRedirect(request.getContextPath() + "/adm/ListarPedidos?acao=listar&tipoUsuario=2");
                         
 			return;
 		}
@@ -49,9 +49,27 @@
                                 </thead>
                                 <tbody>
                                     <%
+                                        String stPedido = "";
                                         session.setAttribute("resultado",  resultado); 
                             for (Pedido pedido : pedidos) {
-                               
+                                 
+                            if(pedido.getStatusPedido().getId() == 1){
+                                stPedido = "EM PROGRESSO";
+                            }else if(pedido.getStatusPedido().getId() == 2){
+                                 stPedido = "EM_TRANSPORTE";
+                            }else if(pedido.getStatusPedido().getId() == 3){
+                                stPedido = "ENTREGUE";
+                            }else if(pedido.getStatusPedido().getId() == 4){
+                                 stPedido = "EM TROCA";
+                            }
+                            else if(pedido.getStatusPedido().getId() == 5){
+                                 stPedido = "TROCA APROVADA";
+                            }
+                            else if(pedido.getStatusPedido().getId() == 6){
+                                 stPedido = "TROCA REPROVADA";
+                            }else if(pedido.getStatusPedido().getId() == 7){
+                               stPedido = "TROCA FINALIZADA";
+                            }
                                 out.println("<tr>");
                                 out.println("<td><input type='radio' required name='id' value=" + pedido.getId() + " /></td>");
                                 out.println("<td>" + pedido.getId() + "</td>"); 
@@ -60,7 +78,7 @@
                                 SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                                 String dataFormatPedido = formato.format(pedido.getDtPedido());
                                 out.println("<td>" + dataFormatPedido+ "</td>");
-                                out.println("<td>" + pedido.getStatusPedido().getId()+ "</td>");
+                                out.println("<td>" + stPedido + "</td>");
                                 out.println("<td><a href=../adm/listar_enderecoEntrega.jsp?id_end=" + pedido.getEndereco().getId()+ "&id_ped=" + pedido.getId() + ">Ver</a></td>");
                                 double valorTotal= pedido.getPagamento().getValorTotal();
                                 DecimalFormat formatoDouble = new DecimalFormat("#.##");      

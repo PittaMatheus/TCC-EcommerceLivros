@@ -56,6 +56,7 @@ public class PedidoDAO extends AbstractDAO{
             declaracao.setInt(3, id_endereco);
             
             declaracao.execute();
+            resultado.setAcao("pedidoGerado");
             resultado.setStatus(true);
             // Fecha a conexao.
             conexao.close();
@@ -80,7 +81,7 @@ public class PedidoDAO extends AbstractDAO{
             Connection conexao = BancoDadosOracle.getConexao();
             Pedido pedido = (Pedido) entidade;
                        PreparedStatement declaracao = conexao.prepareStatement("select p.id, p.id_cliente, p.id_pagamento, pag.valor_total,\n" +
-                    "car.bandeira, car.dtVencimento, car.numero, p.id_statusPedido, p.id_endereco, p.dt_pedido,\n" +
+                    "car.bandeira, c.tipo_usuario, car.dtVencimento, car.numero, p.id_statusPedido, p.id_endereco, p.dt_pedido,\n" +
                     "pag.dt_pagamento, c.email, c.cpf, c.data_nascimento, c.id, c.nome, c.ranking, c.rg, c.sexo, c.email, c.sobrenome,\n" +
                     "e.bairro, e.cep, e.cidade, e.complemento, e.logradouro, e.nomeEndereco, e.numero, e.referencia,\n" +
                     "e.tipoEndereco, e.tipoLogradouro, e.uf\n" +
@@ -102,6 +103,9 @@ public class PedidoDAO extends AbstractDAO{
                 ped.getCliente().setId(rs.getInt("id_cliente"));
                 ped.getCliente().setEmail(rs.getString("email"));
                 ped.getCliente().setNome(rs.getString("nome"));
+                String tipoUsuario = rs.getString("tipo_usuario");
+                ped.getCliente().getPapel().setId(Integer.parseInt(tipoUsuario));
+                
                 // Setando dados do pagamento
                 ped.getPagamento().setId(rs.getInt("id_pagamento"));
                 ped.getPagamento().setValorTotal(rs.getDouble("valor_total"));
@@ -124,8 +128,11 @@ public class PedidoDAO extends AbstractDAO{
                 entidades.add(ped);
             }
             resultado.setStatus(true);
-            resultado.setAcao("listarPedidos");
-           
+            if(pedido.getTipo().equals("1") && pedido.getTipo() != null){
+                resultado.setAcao("listarMeusPedidos");
+            }else{
+                resultado.setAcao("listarPedidos");
+            }
         }catch(ClassNotFoundException erro) {
                  erro.printStackTrace();     
                  resultado.setStatus(false);
@@ -144,13 +151,13 @@ public class PedidoDAO extends AbstractDAO{
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();
             Pedido pedido = (Pedido) entidade;
-            // Instancia das entidades relacionadas
+            PreparedStatement declaracao = conexao.prepareStatement("update pedido set id_statusPedido = ? where id = ? " );
+
+            pedido.getStatusPedido().setId(pedido.getStatusPedido().getId() + 1);
+            declaracao.setInt(1, pedido.getStatusPedido().getId());
+            declaracao.setInt(2, pedido.getId());
             
-   
-            PreparedStatement declaracao = conexao.prepareStatement("UPDATE pedido SET id_statusPedido=? " +
-             "WHERE id=?");
-            declaracao.setInt(1, pedido.getId());
-            declaracao.execute();
+            declaracao.executeUpdate();
             resultado.setStatus(true);
             resultado.setMensagem("O Status do pedido foi alterarado com sucesso!");   
             // Fecha a conexao.

@@ -30,8 +30,10 @@ import ecommerce.dominio.livro.Dimensoes;
 import ecommerce.dominio.livro.Editora;
 import ecommerce.dominio.livro.ISBN;
 import ecommerce.dominio.pedido.Carrinho;
+import ecommerce.dominio.pedido.CupomTroca;
 import ecommerce.dominio.pedido.Pagamento;
 import ecommerce.dominio.pedido.Pedido;
+import ecommerce.dominio.pedido.Troca;
 import livraria.core.IStrategy;
 import livraria.core.regras.cliente.ValidaCPF;
 import livraria.core.regras.cliente.ValidaCamposObrigatorios;
@@ -46,9 +48,11 @@ import livraria.core.dao.livro.DimensoesDAO;
 import livraria.core.dao.livro.EditoraDAO;
 import livraria.core.dao.livro.IsbnDAO;
 import livraria.core.dao.pedido.CarrinhoDAO;
+import livraria.core.dao.pedido.CupomTrocaDAO;
 import livraria.core.dao.pedido.EstoqueDAO;
 import livraria.core.dao.pedido.PagamentoDAO;
 import livraria.core.dao.pedido.PedidoDAO;
+import livraria.core.dao.pedido.TrocaDAO;
 import livraria.core.regras.livro.ValidarCamposVaziosLivro;
 import livraria.core.regras.livro.ValidarCategoriasLivro;
 import livraria.core.regras.livro.ValidarDimensoesLivro;
@@ -84,6 +88,8 @@ public class Fachada implements IFachada{
         dao.put(Estoque.class.getName(), new EstoqueDAO());
         dao.put(Pedido.class.getName(), new PedidoDAO());
         dao.put(Pagamento.class.getName(), new PagamentoDAO());
+        dao.put(Troca.class.getName(), new TrocaDAO());
+        dao.put(CupomTroca.class.getName(), new CupomTrocaDAO());
         
         RN = new HashMap<String,Map<String,List<IStrategy>>>();
         

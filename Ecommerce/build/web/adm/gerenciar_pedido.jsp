@@ -37,36 +37,39 @@
 
                     </ul>
                         <h3>Gerenciar pedido</h3>
-                        Status do pedido:<br>  <%
+                       <br>  <%
                             
-                            if(pedido.getStatusPedido().getId() == 1){
-                                out.println("EM PROGRESSO");
-                            }else if(pedido.getStatusPedido().getId() == 2){
-                                out.println("EM_TRANSPORTE");
-                            }else if(pedido.getStatusPedido().getId() == 3){
-                                out.println("ENTREGUE");
-                            }else if(pedido.getStatusPedido().getId() == 4){
-                                out.println("EM TROCA");
-                            }
-                            else if(pedido.getStatusPedido().getId() == 5){
-                                out.println("TROCA APROVADA");
-                            }
-                            else if(pedido.getStatusPedido().getId() == 6){
-                                out.println("TROCA REPROVADA");
-                            }else if(pedido.getStatusPedido().getId() == 7){
-                                out.println("TROCA FINALIZADA");
-                            }
-                        
-                        %><br><br>
+                           
+                            if(pedido.getStatusPedido().getId() >= 3){
+                                out.println("menu -> gerenciar Trocas");
+                            }else{
+                                 out.println("Status do pedido:<br>");
+                                        if(pedido.getStatusPedido().getId() == 1){
+                                       out.println("EM PROGRESSO");
+                                   }else if(pedido.getStatusPedido().getId() == 2){
+                                       out.println("EM_TRANSPORTE");
+                                   }else if(pedido.getStatusPedido().getId() == 3){
+                                       out.println("ENTREGUE");
 
+                                   }
+%>
+<br><br>
                         <form action="GerenciarPedido">
                             <input type="hidden" name="id_pedido" value="<%=pedido.getId()%>">
-                            <button name="acao" value="alterarStatusPedido">Alterar status do pedido</button>
+                            <input type="hidden" name="u" value="<%=pedido.getCliente().getId()%>">
+                            <input type="hidden" name="status" value="<%=pedido.getStatusPedido().getId()%>">
+                            
+                            <button name="acao" value="alterar">Alterar status do pedido</button>
                         </form>
        <%
+           }
        }
 }
 }
        %>
+       
+       <br><br>
+       <a href='listar_pedidos.jsp'>Voltar</a
     </body>
+    
 </html>

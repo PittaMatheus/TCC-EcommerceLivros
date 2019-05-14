@@ -30,8 +30,14 @@ public class ViewPedido implements IViewHelper {
         Pedido pedido = new Pedido();
         String id = request.getParameter("id_pedido");
         String id_cliente = request.getParameter("u");
+        String tipoUsuario = request.getParameter("tipoUsuario");        
         String id_endereco = request.getParameter("id_endereco");
         String id_cartao = request.getParameter("id_cartao");
+        String status = request.getParameter("status");
+        
+        if(tipoUsuario != null){
+            pedido.setTipo(tipoUsuario);
+        }
         
         String valorTotal =request.getParameter("valorTotal");
         
@@ -51,6 +57,9 @@ public class ViewPedido implements IViewHelper {
         if(id != null){
             pedido.setId(Integer.parseInt(id));
         }
+        if(status != null){
+            pedido.getStatusPedido().setId(Integer.parseInt(status));
+        }
         HttpSession session = request.getSession();
         session.setAttribute("pedido", pedido);
         return pedido;
@@ -64,7 +73,19 @@ public class ViewPedido implements IViewHelper {
                     if(resultado.getAcao() != null) {
                         if(resultado.getAcao().equals("listarPedidos")){
                             request.getRequestDispatcher("../adm/listar_pedidos.jsp").forward(request, response);
-                        }
+                        }else if(resultado.getAcao().equals("alterar")){
+                         request.setAttribute("alterado", "status do pedido ");
+                            request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                        }else if(resultado.getAcao().equals("inserir")){
+                            request.setAttribute("acao", "pedido ");
+                            request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                        
+                        }else if(resultado.getAcao().equals("listarMeusPedidos")){
+                            request.getRequestDispatcher("../Clientes/listar_meusPedidos.jsp").forward(request, response);
+
+                    }
+                    }else if(resultado.getAcao().equals("alterar")){
+                         request.setAttribute("alterado", "status do pedido ");
                     }
              }else{
                     Pedido pedido = (Pedido) request.getSession().getAttribute("pedido");

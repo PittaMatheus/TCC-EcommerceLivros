@@ -39,7 +39,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import livraria.web.view.pedido.ViewCarrinho;
+import livraria.web.view.pedido.ViewCupomTroca;
 import livraria.web.view.pedido.ViewPedido;
+import livraria.web.view.pedido.ViewTroca;
 
 
 public class Control extends HttpServlet {
@@ -110,6 +112,19 @@ public class Control extends HttpServlet {
         viewHelper.put("/Ecommerce/Pedidos/AdicionarPedido", new ViewPedido());
         viewHelper.put("/Ecommerce/adm/ListarPedidos", new ViewPedido());
         viewHelper.put("/Ecommerce/adm/GerenciarPedido", new ViewPedido());
+        viewHelper.put("/Ecommerce/Clientes/ListarMeusPedidos", new ViewPedido());
+        viewHelper.put("/Ecommerce/Clientes/SolicitarTroca", new ViewTroca());
+        viewHelper.put("/Ecommerce/adm/ListarTrocas", new ViewTroca());
+        viewHelper.put("/Ecommerce/adm/AutorizarTroca", new ViewCupomTroca());
+        viewHelper.put("/Ecommerce/Clientes/ConsultarCupomTroca", new ViewCupomTroca());
+        
+        
+        
+
+        
+        
+        
+        
 
 
         

@@ -50,8 +50,8 @@
                                     <br>
                                     <legend>Gerencia de pedidos</legend>
                                     <div><a href='../adm/listar_pedidos.jsp'>Ver pedidos</a></div>
-                                    <div><a href=''>Gerenciar pedidos</a></div>
-                                    <div><a href=''>Ver trocas </a></div>
+                                    <div><a href='../adm/listar_pedidos.jsp'>Gerenciar pedidos</a></div>
+                                    <div><a href='../adm/listar_SolicitacaoTrocas.jsp'>Ver trocas </a></div>
                                     <div><a href=''>Gerenciar trocas </a></div>
                                     <div><a href=''>Editar meu perfil </a></div>
                                 </fieldset>
@@ -63,9 +63,10 @@
                                 <fieldset>
                                     <br>
                                     <legend>Ações</legend>
-                                    <div><a href='../Livros/prateleira.jsp'>Adicionar ao carrinho</a></div>
+                                    <div><a href='../Livros/prateleira.jsp'>Home</a></div>
+                                    <div><a href='ListarCupomTroca.jsp'>Ver Cupons de troca</a></div>                                   
                                     <div><a href='../Pedidos/carrinho.jsp?u=<%=cliente.getId()%>'>Ver carrinho</a></div>
-                                    <div><a href=''>Acompanhar pedido</a></div>
+                                    <div><a href='../Clientes/listar_meusPedidos.jsp'>Ver pedidos</a></div>
                                     <div><a href=''>Editar meu perfil</a></div>
                                 </fieldset>
                                     <%

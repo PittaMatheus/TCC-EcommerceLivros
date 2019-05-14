@@ -188,10 +188,33 @@
         <servlet-name>Control</servlet-name>
         <url-pattern>/adm/GerenciarPedido</url-pattern>
     </servlet-mapping>  
-
+    
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Clientes/ListarMeusPedidos</url-pattern>
+    </servlet-mapping>  
+    
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Clientes/SolicitarTroca</url-pattern>
+    </servlet-mapping>  
+    
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/adm/ListarTrocas</url-pattern>
+    </servlet-mapping>  
+    
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/adm/AutorizarTroca</url-pattern>
+    </servlet-mapping> 
+    
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Clientes/ConsultarCupomTroca</url-pattern>
+    </servlet-mapping> 
+    
           
-              
-
     <session-config>
         <session-timeout>
             30
