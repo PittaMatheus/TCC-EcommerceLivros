@@ -9,11 +9,13 @@ import ecommerce.dominio.EntidadeDominio;
 import ecommerce.dominio.cliente.Endereco;
 import ecommerce.dominio.livro.Livro;
 import ecommerce.dominio.pedido.Pagamento;
+import ecommerce.dominio.pedido.PagamentoCartaoCredito;
 import ecommerce.dominio.pedido.Pedido;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import livraria.core.aplicacao.Resultado;
@@ -38,24 +40,38 @@ public class PedidoDAO extends AbstractDAO{
             Pedido pedido = (Pedido) entidade;
             EnderecoDAO enderecoDAO = new EnderecoDAO();
             PagamentoDAO pagamentoDAO = new PagamentoDAO();
+            PagamentoCartaoCredito pgCartao = new PagamentoCartaoCredito();
+            Pagamento pagamento = new Pagamento();
+            
             
             Endereco endereco = new Endereco();
             endereco.setClienteId(pedido.getCliente().getId());
             resultado = enderecoDAO.consultar(endereco);
             //pedido.getEndereco().setClienteId(resultado.getEntidades().get(0).getId());
             int id_endereco = resultado.getEntidades().get(0).getId();
-            Pagamento pagamento = new Pagamento();
+            
+           
+            
+            
+            
+            PreparedStatement declaracao = conexao.prepareStatement("INSERT INTO pedido(id_cliente, "
+                    + "id_endereco) VALUES(?, ?)", Statement.RETURN_GENERATED_KEYS);
+            declaracao.setInt(1, pedido.getCliente().getId());
+            declaracao.setInt(2, id_endereco);
+            declaracao.execute();
+            ResultSet rs = declaracao.getGeneratedKeys();
+            pedido.setId((rs.next())?rs.getInt(1):0);
+            
+             // Setar os dados de pagamento
+            pagamento.getPedido().setId(pedido.getId());
+            pagamento.setPagamentosCartao(pedido.getPagamento().getPagamentosCartao());
             pagamento.setValorTotal(pedido.getPagamento().getValorTotal());
             pagamento.getCartao().setId(pedido.getPagamento().getCartao().getId());
             resultado = pagamentoDAO.inserir(pagamento);
-            pedido.getPagamento().setId(Integer.parseInt(resultado.getAcao()));
-            PreparedStatement declaracao = conexao.prepareStatement("INSERT INTO pedido (id_cliente, id_pagamento, "
-                    + "id_endereco) VALUES(?, ?, ?)");
-            declaracao.setInt(1, pedido.getCliente().getId());
-            declaracao.setInt(2, pedido.getPagamento().getId());
-            declaracao.setInt(3, id_endereco);
             
-            declaracao.execute();
+            
+            
+            
             resultado.setAcao("pedidoGerado");
             resultado.setStatus(true);
             // Fecha a conexao.

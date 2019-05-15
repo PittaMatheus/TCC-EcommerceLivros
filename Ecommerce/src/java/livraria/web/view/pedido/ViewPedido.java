@@ -6,10 +6,14 @@
 package livraria.web.view.pedido;
 
 import ecommerce.dominio.EntidadeDominio;
+import ecommerce.dominio.cliente.Cartao;
 import ecommerce.dominio.cliente.Cliente;
 import ecommerce.dominio.livro.Livro;
+import ecommerce.dominio.pedido.PagamentoCartaoCredito;
 import ecommerce.dominio.pedido.Pedido;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.crypto.spec.IvParameterSpec;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,9 +36,9 @@ public class ViewPedido implements IViewHelper {
         String id_cliente = request.getParameter("u");
         String tipoUsuario = request.getParameter("tipoUsuario");        
         String id_endereco = request.getParameter("id_endereco");
-        String id_cartao = request.getParameter("id_cartao");
+        String[] idsCartao = request.getParameterValues("id_cartao");
         String status = request.getParameter("status");
-        
+        List<PagamentoCartaoCredito> idsCartoes = new ArrayList<>();
         if(tipoUsuario != null){
             pedido.setTipo(tipoUsuario);
         }
@@ -51,15 +55,25 @@ public class ViewPedido implements IViewHelper {
             pedido.getEndereco().setClienteId(Integer.parseInt(id_endereco));
         }
         
-        if(id_cartao != null){
-            pedido.getPagamento().getCartao().setId(Integer.parseInt(id_cartao));
-        }
+       
         if(id != null){
             pedido.setId(Integer.parseInt(id));
         }
         if(status != null){
             pedido.getStatusPedido().setId(Integer.parseInt(status));
         }
+        
+        
+        
+        if(idsCartao != null && idsCartao.length > 0){
+                for(String idCartao: idsCartao){
+                        PagamentoCartaoCredito pgCartao = new PagamentoCartaoCredito();
+                        pgCartao.setId(Integer.parseInt(idCartao));
+                        idsCartoes.add(pgCartao);
+                }
+        }
+        pedido.getPagamento().setPagamentosCartao(idsCartoes);
+        
         HttpSession session = request.getSession();
         session.setAttribute("pedido", pedido);
         return pedido;

@@ -52,7 +52,7 @@
                              <%
                             for (Cartao cartao : cartoes) {
                                 out.println("<tr>");
-                                out.println("<td><input type='checkbox' required name='id_cartao' value=" + cartao.getId() + " /></td>");
+                                out.println("<td><input type='checkbox' name='id_cartao' value=" + cartao.getId() + " /></td>");
                                 out.println("<td>" + cartao.getBandeira().getNome() + "</td>");
                                 out.println("<td>" + cartao.getNome()+ "</td>");
                                 out.println("<td>" + cartao.getDtVencimento()+ "</td>");
