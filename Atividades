@@ -2,27 +2,26 @@
 
 ___Atividades_____
 
-A1      - Exibir os livros na home
-A3      - Incluir a possiblidade de utilizar um cupom de desconto no pagamento
-A4      - Acrescentar pontos ao ranking do cliente após o pedido ser aprovado
+
+
+
 A5     - Incluir DAO estoque
 A7     - Remover itens do carrinho / LIMPAR carrinho
 A8     - Correção - validar pedido minimo de 5 reais
-A9     - adicionar quantidade de livros	
+
 A10     - Ajustar detalhes do livro (array aparecendo)
-A11     - Ver cupons de troca(cliente)
-A12     - Criar pagina de vizualização de status(linha do tempo)
+
 A13     - Editar meu perfil(cliente e ADM)
 A14     - Adicionar seleção para que o ADM possa escolher entre Aprovar ou Reprovar uma solicitação de troca
 A15     - Adicionar campo de validade ao cupom de troca que foi gerado
 A16     - Gerenciar trocas(alterar status das trocas)
 A17     - Acrescentar link "Voltar" em : -cadastro de livro; -Confirmar endereco de compra; - Confirmar cartao de compra
 A18     - Esconder dados na tela: - Confirmar cartão de compra
-A19     - Incluir possibilidade do cliente adidcionar livros sem estar logado(sessao). Carrinho com login ja esta OK
+
 A20     - Listar ranking de pontos (cliente) - e indicar possiveis descontos
 A21     - Incluir a possibilidade de utilizar o ranking de pontos como desconto nas compras
 A22     - Incluir a possiblidade de utilizar um cupom de troca no pagamento
-A23		- Incluir visualização do preço parcelado em tempo real com javaScript
+A23	- Incluir visualização do preço parcelado em tempo real com javaScript
 
 _____ ANALISE__________
 A23     - Relatorio: -Quantidade de pedidos feitos por mês
@@ -42,9 +41,20 @@ B03 - Exibir campo cupom de desconto em "pedidos realizados" apenas se o cupom d
 _________________________________________________________________________________________________________
 
                                                             DOING
+	MATHEUS
 A2      - Incluir a possibilidade de utilizar mais de 1 cartão de crédito para dividir o valor do pedido
-A23		- Incluir parcelas no pagamento
-A6     - incluir validação da data de validade do cartão de credito antes de finalizar o pedido
+A23	- Incluir parcelas no pagamento
+A6     	- incluir validação da data de validade do cartão de credito antes de finalizar o pedido
+A19     - Incluir possibilidade do cliente adidcionar livros sem estar logado(sessao). Carrinho com login ja esta OK
+A1      - Exibir os livros na home
+A3      - Incluir a possiblidade de utilizar um cupom de desconto no pagamento
+A4      - Acrescentar pontos ao ranking do cliente após o pedido ser aprovado
+A9     - adicionar quantidade de livros	
+A11     - Ver cupons de troca(cliente)
+A12     - Criar pagina de vizualização de status(linha do tempo)
+
+	EDNER
+// Escolher as atividades e colar aqui. me avisar antes 
 ________________________________________________________________________________________________________
 
                                                              DONE
