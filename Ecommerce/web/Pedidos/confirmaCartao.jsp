@@ -21,16 +21,14 @@
    
             if(session.getAttribute("pedido") != null){
                 Pedido pedido = (Pedido) session.getAttribute("pedido");    
-                out.println("Valor total: " + pedido.getPagamento().getValorTotal());
-                out.println("id do cliente: " + pedido.getCliente().getId());
-                out.println("id do endereco " + pedido.getEndereco().getClienteId());
+               
                 
                 
             
             
            // String id_endereco = request.getParameter("id_endereco");
             String id_usuario = request.getParameter("u");
-            
+            double valorTotal = 0;
 
             Resultado resultado = (Resultado) request.getAttribute("resultado");
             if(resultado == null) {
@@ -54,7 +52,7 @@
                              <%
                             for (Cartao cartao : cartoes) {
                                 out.println("<tr>");
-                                out.println("<td><input type='radio' required name='id_cartao' value=" + cartao.getId() + " /></td>");
+                                out.println("<td><input type='checkbox' required name='id_cartao' value=" + cartao.getId() + " /></td>");
                                 out.println("<td>" + cartao.getBandeira().getNome() + "</td>");
                                 out.println("<td>" + cartao.getNome()+ "</td>");
                                 out.println("<td>" + cartao.getDtVencimento()+ "</td>");
@@ -64,15 +62,29 @@
                                 id_usuario = String.valueOf(cartao.getCliente().getId());
                         }
                 }
+               // out.println("Valor total: " + pedido.getPagamento().getValorTotal());
+               // out.println("id do cliente: " + pedido.getCliente().getId());
+               // out.println("id do endereco " + pedido.getEndereco().getClienteId());
+               valorTotal = pedido.getPagamento().getValorTotal();
+               
         }
             
 %>
                                 </tbody>
                              </table>
+                                <br>
+                o valor total é: <%=valorTotal %><br><br>
+                <label for="Parcelas">Parcelas</label>
+                        <select>
+                            <option selected value="1">1x</option>
+                            <option value="2">2x</option>
+                            <option value="3">3x</option>
+                            <option value="4">4x</option>
+                          </select>
                                 <br><br>
-                                <input type="text" name="u" value="<%=id_usuario%>">
-                                 <input type="text" name="id_endereco" value="<%=pedido.getEndereco().getClienteId()%>">
-                                 <input type="text" name="valorTotal" value="<%=pedido.getPagamento().getValorTotal()%>">
+                                <input type="hidden" name="u" value="<%=id_usuario%>">
+                                 <input type="hidden" name="id_endereco" value="<%=pedido.getEndereco().getClienteId()%>">
+                                 <input type="hidden" name="valorTotal" value="<%=pedido.getPagamento().getValorTotal()%>">
                                  <button name="acao" value="inserir">Confirmar pedido</button>
                                 
                         </form>

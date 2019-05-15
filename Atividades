@@ -3,11 +3,9 @@
 ___Atividades_____
 
 A1      - Exibir os livros na home
-A2      - Incluir a possibilidade de utilizar mais de 1 cartão de crédito para dividir o valor do pedido
 A3      - Incluir a possiblidade de utilizar um cupom de desconto no pagamento
 A4      - Acrescentar pontos ao ranking do cliente após o pedido ser aprovado
 A5     - Incluir DAO estoque
-A6     - incluir validação da data de validade do cartão de credito antes de finalizar o pedido
 A7     - Remover itens do carrinho / LIMPAR carrinho
 A8     - Correção - validar pedido minimo de 5 reais
 A9     - adicionar quantidade de livros	
@@ -24,6 +22,8 @@ A19     - Incluir possibilidade do cliente adidcionar livros sem estar logado(se
 A20     - Listar ranking de pontos (cliente) - e indicar possiveis descontos
 A21     - Incluir a possibilidade de utilizar o ranking de pontos como desconto nas compras
 A22     - Incluir a possiblidade de utilizar um cupom de troca no pagamento
+A23		- Incluir visualização do preço parcelado em tempo real com javaScript
+
 _____ ANALISE__________
 A23     - Relatorio: -Quantidade de pedidos feitos por mês
 A24     - Relatório: -Categorias de livros com mais pedidos de compra
@@ -42,7 +42,9 @@ B03 - Exibir campo cupom de desconto em "pedidos realizados" apenas se o cupom d
 _________________________________________________________________________________________________________
 
                                                             DOING
-		
+A2      - Incluir a possibilidade de utilizar mais de 1 cartão de crédito para dividir o valor do pedido
+A23		- Incluir parcelas no pagamento
+A6     - incluir validação da data de validade do cartão de credito antes de finalizar o pedido
 ________________________________________________________________________________________________________
 
                                                              DONE
