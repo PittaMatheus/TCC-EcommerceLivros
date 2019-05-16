@@ -60,18 +60,17 @@ public class PedidoDAO extends AbstractDAO{
             declaracao.setInt(2, id_endereco);
             declaracao.execute();
             ResultSet rs = declaracao.getGeneratedKeys();
+            // Seta o ID do pedido
             pedido.setId((rs.next())?rs.getInt(1):0);
             
              // Setar os dados de pagamento
-            pagamento.getPedido().setId(pedido.getId());
-            pagamento.setPagamentosCartao(pedido.getPagamento().getPagamentosCartao());
-            pagamento.setValorTotal(pedido.getPagamento().getValorTotal());
-            pagamento.getCartao().setId(pedido.getPagamento().getCartao().getId());
-            resultado = pagamentoDAO.inserir(pagamento);
             
             
+
             
             
+            resultado = pagamentoDAO.inserir(pedido);
+
             resultado.setAcao("pedidoGerado");
             resultado.setStatus(true);
             // Fecha a conexao.

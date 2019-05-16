@@ -71,8 +71,7 @@ public class Pedido extends EntidadeDominio{
         this.cupom = cupom;
     }
 
-    
-    
+
     
     public List<ItemPedido> getItems() {
         return items;
@@ -90,13 +89,13 @@ public class Pedido extends EntidadeDominio{
         this.endereco = endereco;
     }
 
-    public Pagamento getPagamento() {
-        return pagamento;
-    }
+   public Pagamento getPagamento() {
+      return pagamento;
+   }
 
     public void setPagamento(Pagamento pagamento) {
         this.pagamento = pagamento;
-    }
+   }
 
     public Date getDtPedido() {
         return dtPedido;

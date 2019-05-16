@@ -8,6 +8,7 @@ package livraria.core.dao.pedido;
 import ecommerce.dominio.EntidadeDominio;
 import ecommerce.dominio.pedido.Pagamento;
 import ecommerce.dominio.pedido.PagamentoCartaoCredito;
+import ecommerce.dominio.pedido.Pedido;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,16 +29,16 @@ public class PagamentoDAO extends AbstractDAO{
          try {
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();
-            Pagamento pagamento = (Pagamento) entidade;
+            Pedido pedido = (Pedido) entidade;
             PagamentoCartaoCredito pgCartao = new PagamentoCartaoCredito();
+            double id_cartao;
             
-            
-            for(PagamentoCartaoCredito pgto: pagamento.getPagamentosCartao()){
+            for(PagamentoCartaoCredito pgto: pedido.getPagamento().getPagamentosCartao()){
                  PreparedStatement declaracao = conexao.prepareStatement(
                     "INSERT INTO pagamentoCartao "
                     + "(id_pedido, id_cartao, valor) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
-                declaracao.setInt(1, pagamento.getPedido().getId());
-                declaracao.setInt(2, pagamento.getCartao().getId());
+                declaracao.setInt(1, pedido.getId());
+                declaracao.setInt(2, pgto.getCartaoCredito().getId());
                 declaracao.setDouble(3, 200);
                 declaracao.execute();
             }

@@ -23,17 +23,16 @@ public class Pagamento extends EntidadeDominio {
 	//private List<CupomTroca> cuponsTroca;
 	private Double valorTotal;
 	private List<PagamentoCartaoCredito> pagamentosCartao;
-         private Pedido pedido;
+
         
         public Pagamento(){
             cartao = new Cartao();
             cupom = new Cupom();
-            pedido = new Pedido();
-        }
+                  }
 
-    public Pedido getPedido() {
-        return pedido;
-    }
+   // public Pedido getPedido() {
+   //     return pedido;
+  //  }
 
 
 
@@ -42,9 +41,9 @@ public class Pagamento extends EntidadeDominio {
         return cartao;
     }
        
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
-    }
+   // public void setPedido(Pedido pedido) {
+   //     this.pedido = pedido;
+   // }
     
     public Cupom getCupom() {
         return cupom;

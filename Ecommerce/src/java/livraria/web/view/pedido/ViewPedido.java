@@ -68,7 +68,9 @@ public class ViewPedido implements IViewHelper {
         if(idsCartao != null && idsCartao.length > 0){
                 for(String idCartao: idsCartao){
                         PagamentoCartaoCredito pgCartao = new PagamentoCartaoCredito();
-                        pgCartao.setId(Integer.parseInt(idCartao));
+                        Cartao cartao = new Cartao();
+                        cartao.setId(Integer.parseInt(idCartao));
+                        pgCartao.setCartaoCredito(cartao);
                         idsCartoes.add(pgCartao);
                 }
         }
@@ -111,9 +113,10 @@ public class ViewPedido implements IViewHelper {
                         // o cartão de credito ainda não foi escolhido. hora de confirma-lo
                         request.getRequestDispatcher("../Pedidos/confirmaCartao.jsp").forward(request, response);
 
-                    }else
-                        request.setAttribute("acao", "pedido");
-                        request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                  //  }else
+                     //  request.setAttribute("acao", "pedido");
+                       // request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+             }
              } 
         } catch(Exception e) {
             e.printStackTrace();
