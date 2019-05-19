@@ -16,12 +16,6 @@ public class PagamentoCartaoCredito extends EntidadeDominio{
     private Cartao cartaoCredito;
     private Double valor;
    
-    
-    
-   
-
-    
-    
 
     public Cartao getCartaoCredito() {
         return cartaoCredito;

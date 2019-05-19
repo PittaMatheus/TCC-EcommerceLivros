@@ -37,40 +37,29 @@ public class PedidoDAO extends AbstractDAO{
          try {
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();
+            // Instancias
             Pedido pedido = (Pedido) entidade;
             EnderecoDAO enderecoDAO = new EnderecoDAO();
             PagamentoDAO pagamentoDAO = new PagamentoDAO();
             PagamentoCartaoCredito pgCartao = new PagamentoCartaoCredito();
             Pagamento pagamento = new Pagamento();
-            
-            
             Endereco endereco = new Endereco();
             endereco.setClienteId(pedido.getCliente().getId());
             resultado = enderecoDAO.consultar(endereco);
+            
             //pedido.getEndereco().setClienteId(resultado.getEntidades().get(0).getId());
             int id_endereco = resultado.getEntidades().get(0).getId();
-            
-           
-            
-            
-            
+
             PreparedStatement declaracao = conexao.prepareStatement("INSERT INTO pedido(id_cliente, "
-                    + "id_endereco) VALUES(?, ?)", Statement.RETURN_GENERATED_KEYS);
+                    + "id_endereco, valorTotal) VALUES(?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             declaracao.setInt(1, pedido.getCliente().getId());
             declaracao.setInt(2, id_endereco);
+            declaracao.setDouble(3, pedido.getPagamento().getValorTotal());
             declaracao.execute();
             ResultSet rs = declaracao.getGeneratedKeys();
             // Seta o ID do pedido
             pedido.setId((rs.next())?rs.getInt(1):0);
-            
-             // Setar os dados de pagamento
-            
-            
-
-            
-            
             resultado = pagamentoDAO.inserir(pedido);
-
             resultado.setAcao("pedidoGerado");
             resultado.setStatus(true);
             // Fecha a conexao.
@@ -83,9 +72,7 @@ public class PedidoDAO extends AbstractDAO{
             erro.printStackTrace();
         }
         return resultado;
-
-        
-        
+  
     }
 
     @Override
@@ -95,18 +82,15 @@ public class PedidoDAO extends AbstractDAO{
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();
             Pedido pedido = (Pedido) entidade;
-                       PreparedStatement declaracao = conexao.prepareStatement("select p.id, p.id_cliente, p.id_pagamento, pag.valor_total,\n" +
-                    "car.bandeira, c.tipo_usuario, car.dtVencimento, car.numero, p.id_statusPedido, p.id_endereco, p.dt_pedido,\n" +
-                    "pag.dt_pagamento, c.email, c.cpf, c.data_nascimento, c.id, c.nome, c.ranking, c.rg, c.sexo, c.email, c.sobrenome,\n" +
-                    "e.bairro, e.cep, e.cidade, e.complemento, e.logradouro, e.nomeEndereco, e.numero, e.referencia,\n" +
-                    "e.tipoEndereco, e.tipoLogradouro, e.uf\n" +
-                    "from pedido p\n" +
-                    "inner join cliente c\n" +
-                    "inner join endereco e\n" +
-                    "inner join cartao car \n" +
-                    "inner join pagamento pag \n" +
-                    "where pag.id = p.id_pagamento \n" +
-                    "AND c.id = p.id_cliente AND p.id_endereco = e.id AND car.id = pag.id_cartao;");
+                       PreparedStatement declaracao = conexao.prepareStatement("select p.id, p.id_cliente, p.id_statusPedido, p.id_endereco, p.dt_pedido, p.valorTotal,\n" +
+"c.email, c.cpf, c.data_nascimento, c.id, c.nome, c.ranking, c.rg, c.sexo, c.email, c.sobrenome,\n" +
+"e.bairro, e.cep, e.cidade, e.complemento, e.logradouro, e.nomeEndereco, e.numero, e.referencia,\n" +
+"e.tipoEndereco, e.tipoLogradouro, e.uf, pag.valor, pag.id_cartao \n" +
+"from pedido p\n" +
+"INNER JOIN cliente c \n" +
+"INNER JOIN endereco e \n" +
+"LEFT JOIN pagamentoCartao pag\n" +
+"on p.id = pag.id_pedido;");
             ResultSet rs =  declaracao.executeQuery();
             while(rs.next()) {
                 Pedido ped = new Pedido();

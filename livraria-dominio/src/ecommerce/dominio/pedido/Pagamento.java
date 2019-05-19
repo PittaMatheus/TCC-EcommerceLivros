@@ -23,11 +23,12 @@ public class Pagamento extends EntidadeDominio {
 	//private List<CupomTroca> cuponsTroca;
 	private Double valorTotal;
 	private List<PagamentoCartaoCredito> pagamentosCartao;
-
+        private PagamentoCartaoCredito pgtoCartaoCredito;
         
         public Pagamento(){
             cartao = new Cartao();
             cupom = new Cupom();
+            this.pgtoCartaoCredito = new PagamentoCartaoCredito();
                   }
 
    // public Pedido getPedido() {
@@ -90,5 +91,15 @@ public class Pagamento extends EntidadeDominio {
     public void setPagamentosCartao(List<PagamentoCartaoCredito> pagamentosCartao) {
         this.pagamentosCartao = pagamentosCartao;
     }
+
+    public PagamentoCartaoCredito getPgtoCartaoCredito() {
+        return pgtoCartaoCredito;
+    }
+
+    public void setPgtoCartaoCredito(PagamentoCartaoCredito pgtoCartaoCredito) {
+        this.pgtoCartaoCredito = pgtoCartaoCredito;
+    }
+    
+    
     
 }

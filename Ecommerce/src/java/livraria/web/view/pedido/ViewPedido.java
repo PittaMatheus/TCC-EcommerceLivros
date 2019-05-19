@@ -37,7 +37,11 @@ public class ViewPedido implements IViewHelper {
         String tipoUsuario = request.getParameter("tipoUsuario");        
         String id_endereco = request.getParameter("id_endereco");
         String[] idsCartao = request.getParameterValues("id_cartao");
+        String[] valoresCartao = request.getParameterValues("valorCartao");
+       
+        
         String status = request.getParameter("status");
+        
         List<PagamentoCartaoCredito> idsCartoes = new ArrayList<>();
         if(tipoUsuario != null){
             pedido.setTipo(tipoUsuario);
@@ -63,17 +67,27 @@ public class ViewPedido implements IViewHelper {
             pedido.getStatusPedido().setId(Integer.parseInt(status));
         }
         
-        
-        
+        int aux = 0;
+        // Recuperando os IDS dos cartoes escolhidos pelo cliente
         if(idsCartao != null && idsCartao.length > 0){
-                for(String idCartao: idsCartao){
-                        PagamentoCartaoCredito pgCartao = new PagamentoCartaoCredito();
-                        Cartao cartao = new Cartao();
-                        cartao.setId(Integer.parseInt(idCartao));
-                        pgCartao.setCartaoCredito(cartao);
-                        idsCartoes.add(pgCartao);
-                }
+            for(String idCartao: idsCartao){
+                    String valor = valoresCartao[aux];
+                    aux++;
+                    PagamentoCartaoCredito pgCartao = new PagamentoCartaoCredito();
+                    Cartao cartao = new Cartao();
+                    // Seto o id do cartao no objeto Cartao
+                    cartao.setId(Integer.parseInt(idCartao));
+                    // seta o valor do cartao
+                    pgCartao.setValor(Double.parseDouble(valor));
+                    pgCartao.setCartaoCredito(cartao);
+                    idsCartoes.add(pgCartao);
+            }
+
+            
+            
         }
+        
+
         pedido.getPagamento().setPagamentosCartao(idsCartoes);
         
         HttpSession session = request.getSession();

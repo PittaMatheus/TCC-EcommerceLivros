@@ -41,31 +41,32 @@
                             out.print("Nenhum cartão cadastrado");
                         } else {
                              %>
-                        <form action="AdicionarPedido" method="POST">
+                        <form action="AdicionarPedido" name="formCartao" id="formCartao" method="POST">
                              <table border='1'>
                                 <thead>
                                     <tr>
-                                         <th>#</th><th>Bandeira</th> <th>Nome</th><th>Data de vencimento</th><th>Numero</th><th>Codigo</th>
+                                        <th>#</th><th>Bandeira</th> <th>Nome</th><th>Data de vencimento</th><th>Numero</th><th>Codigo</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                              <%
                             for (Cartao cartao : cartoes) {
+                                
                                 out.println("<tr>");
-                                out.println("<td><input type='checkbox' name='id_cartao' value=" + cartao.getId() + " /></td>");
-                                out.println("<td>" + cartao.getBandeira().getNome() + "</td>");
+                                out.println("<td><input type='checkbox' onclick='DividePorCartao()' id='id"+cartao.getId() + "' name='id_cartao' value=" + cartao.getId() + " /></td>");
+                                out.println("<td class='tdNomeCartao"+cartao.getId()+"'>" + cartao.getBandeira().getNome() + "</td>");
                                 out.println("<td>" + cartao.getNome()+ "</td>");
                                 out.println("<td>" + cartao.getDtVencimento()+ "</td>");
-                                out.println("<td>" + cartao.getNumeroCartao()+ "</td>");
+                                out.println("<td class='tdNumeroCartao"+cartao.getId()+"'>"  + cartao.getNumeroCartao()+ "</td>");
                                 out.println("<td>" + cartao.getCodSeguranca()+ "</td>");
                                 out.println("</tr>");
                                 id_usuario = String.valueOf(cartao.getCliente().getId());
-                        }
-                }
-               // out.println("Valor total: " + pedido.getPagamento().getValorTotal());
-               // out.println("id do cliente: " + pedido.getCliente().getId());
-               // out.println("id do endereco " + pedido.getEndereco().getClienteId());
-               valorTotal = pedido.getPagamento().getValorTotal();
+                            }
+                    }
+                    // out.println("Valor total: " + pedido.getPagamento().getValorTotal());
+                    // out.println("id do cliente: " + pedido.getCliente().getId());
+                    // out.println("id do endereco " + pedido.getEndereco().getClienteId());
+                    valorTotal = pedido.getPagamento().getValorTotal();
                
         }
             
@@ -74,19 +75,21 @@
                              </table>
                                 <br>
                 o valor total é: <%=valorTotal %><br><br>
-                <label for="Parcelas">Parcelas</label>
-                        <select>
-                            <option selected value="1">1x</option>
-                            <option value="2">2x</option>
-                            <option value="3">3x</option>
-                            <option value="4">4x</option>
-                          </select>
-                                <br><br>
-                                <input type="hidden" name="u" value="<%=id_usuario%>">
-                                 <input type="hidden" name="id_endereco" value="<%=pedido.getEndereco().getClienteId()%>">
-                                 <input type="hidden" name="valorTotal" value="<%=pedido.getPagamento().getValorTotal()%>">
-                                 <button name="acao" value="inserir">Confirmar pedido</button>
-                                
+
+                <div id="DivideValor" style="height:auto;width:auto;">
+                    
+                </div>  
+
+                <div id="alertaValor" style="height:auto;width:auto;">
+                    
+                </div>
+                
+                
+                        <br><br>
+                        <input type="hidden" name="u" value="<%=id_usuario%>">
+                         <input type="hidden" name="id_endereco" value="<%=pedido.getEndereco().getClienteId()%>">
+                         <input type="hidden" id="valorTotal" name="valorTotal" value="<%=pedido.getPagamento().getValorTotal()%>">
+                         <button name="acao" value="inserir">Confirmar pedido</button>
                         </form>
                                 <br>
 
@@ -94,7 +97,10 @@
 <%
     }
 %>
-        
- 
+<br><br>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="../js/Custom.js"></script>
     </body>
 </html>

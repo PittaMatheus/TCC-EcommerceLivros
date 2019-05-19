@@ -14,6 +14,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import livraria.core.aplicacao.Resultado;
 import livraria.core.dao.AbstractDAO;
 import livraria.core.util.BancoDadosOracle;
@@ -32,14 +34,18 @@ public class PagamentoDAO extends AbstractDAO{
             Pedido pedido = (Pedido) entidade;
             PagamentoCartaoCredito pgCartao = new PagamentoCartaoCredito();
             double id_cartao;
-            
+            List<PagamentoCartaoCredito> valoresCartoes = new ArrayList<>();
+            int aux = 0;
             for(PagamentoCartaoCredito pgto: pedido.getPagamento().getPagamentosCartao()){
                  PreparedStatement declaracao = conexao.prepareStatement(
                     "INSERT INTO pagamentoCartao "
                     + "(id_pedido, id_cartao, valor) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
                 declaracao.setInt(1, pedido.getId());
                 declaracao.setInt(2, pgto.getCartaoCredito().getId());
-                declaracao.setDouble(3, 200);
+                valoresCartoes = pedido.getPagamento().getPagamentosCartao();
+                pgCartao = valoresCartoes.get(aux);
+                aux++;             
+                declaracao.setDouble(3,pgCartao.getValor()); // colocar o valor do cartao com o indice certo);
                 declaracao.execute();
             }
 
