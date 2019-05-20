@@ -112,6 +112,8 @@ public class ViewPedido implements IViewHelper {
                         
                         }else if(resultado.getAcao().equals("listarMeusPedidos")){
                             request.getRequestDispatcher("../Clientes/listar_meusPedidos.jsp").forward(request, response);
+                        }else if(resultado.getAcao().equals("falhaInserir")){
+                            request.getRequestDispatcher("../clienteBurlou.jsp").forward(request, response);
 
                     }
                     }else if(resultado.getAcao().equals("alterar")){
