@@ -38,6 +38,7 @@ public class ViewPedido implements IViewHelper {
         String id_endereco = request.getParameter("id_endereco");
         String[] idsCartao = request.getParameterValues("id_cartao");
         String[] valoresCartao = request.getParameterValues("valorCartao");
+        String[] datasValidade = request.getParameterValues("dataValidade");
        
         
         String status = request.getParameter("status");

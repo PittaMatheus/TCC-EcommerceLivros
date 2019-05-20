@@ -42,7 +42,8 @@ ________________________________________________________________________________
 
                                                             DOING
 	MATHEUS
-A2      - Incluir a possibilidade de utilizar mais de 1 cartão de crédito para dividir o valor do pedido
+
+A29	- Incluir validação beck-end no valor do pedido no momento da compra(beck-end ja possui)
 A23	- Incluir parcelas no pagamento
 A6     	- incluir validação da data de validade do cartão de credito antes de finalizar o pedido
 A19     - Incluir possibilidade do cliente adidcionar livros sem estar logado(sessao). Carrinho com login ja esta OK
@@ -58,4 +59,4 @@ A12     - Criar pagina de vizualização de status(linha do tempo)
 ________________________________________________________________________________________________________
 
                                                              DONE
-
+A2      - Incluir a possibilidade de utilizar mais de 1 cartão de crédito para dividir o valor do pedido

@@ -58,6 +58,7 @@ import livraria.core.regras.livro.ValidarCategoriasLivro;
 import livraria.core.regras.livro.ValidarDimensoesLivro;
 import livraria.core.regras.livro.ValidarGrupoPrecificacao;
 import livraria.core.regras.pedido.ConfirmaDados;
+import livraria.core.regras.pedido.ValidaCartaoCredito;
 import livraria.core.regras.pedido.ValidaEstoque;
 import livraria.core.regras.pedido.ValidaValorPedido;
 
@@ -153,6 +154,8 @@ public class Fachada implements IFachada{
         List<IStrategy> RNPedido = new ArrayList<IStrategy>();
         //Lista de regras de negocio do pedido
         RNPedido.add(new ValidaValorPedido());
+        RNPedido.add(new ValidaCartaoCredito());
+        
         Map<String, List<IStrategy>> regrasPedido = new HashMap<String, List<IStrategy>>();
         regrasPedido.put("salvar", RNPedido);
         // Regras de negocio geral

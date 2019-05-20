@@ -1,0 +1,4 @@
+Implementar um for para receber na session pedido todos as datas de validade dos cartões de crédito utilizados na compra
+alterar para formato DATE
+terminar a regra de negócio que valida todos os cartões de credito
+
