@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.26, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
 --
--- Host: localhost    Database: Ecommerce
+-- Host: 127.0.0.1    Database: ecommerce_livros
 -- ------------------------------------------------------
--- Server version	5.7.26-0ubuntu0.18.04.1
+-- Server version	5.7.24-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -520,6 +520,7 @@ CREATE TABLE `pagamentoCartao` (
 
 LOCK TABLES `pagamentoCartao` WRITE;
 /*!40000 ALTER TABLE `pagamentoCartao` DISABLE KEYS */;
+INSERT INTO `pagamentoCartao` VALUES (1,1,10),(1,2,15),(1,4,15),(2,1,40),(2,2,5),(2,3,4.99),(3,3,40),(3,4,9.99);
 /*!40000 ALTER TABLE `pagamentoCartao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -536,8 +537,9 @@ CREATE TABLE `pedido` (
   `id_statusPedido` int(11) DEFAULT '1',
   `id_endereco` int(11) NOT NULL,
   `dt_pedido` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `valorTotal` double NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -546,7 +548,7 @@ CREATE TABLE `pedido` (
 
 LOCK TABLES `pedido` WRITE;
 /*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
-INSERT INTO `pedido` VALUES (1,1,1,1,'2019-05-15 17:36:15'),(2,1,1,1,'2019-05-15 17:37:20');
+INSERT INTO `pedido` VALUES (1,1,1,1,'2019-05-20 11:10:13',49.99),(2,1,1,1,'2019-05-20 17:39:20',49.99),(3,1,1,1,'2019-05-20 22:38:36',49.99);
 /*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -629,11 +631,11 @@ INSERT INTO `usuario` VALUES (1,'comum'),(2,'adm'),(3,'root');
 UNLOCK TABLES;
 
 --
--- Dumping events for database 'Ecommerce'
+-- Dumping events for database 'ecommerce_livros'
 --
 
 --
--- Dumping routines for database 'Ecommerce'
+-- Dumping routines for database 'ecommerce_livros'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -645,4 +647,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-15 15:05:24
+-- Dump completed on 2019-05-20 19:41:25

@@ -14,7 +14,7 @@ import ecommerce.dominio.cliente.Cartao;
  */
 public class PagamentoCartaoCredito extends EntidadeDominio{
     private Cartao cartaoCredito;
-    private Double valor;
+    private double valor;
    
 
     public Cartao getCartaoCredito() {
@@ -25,11 +25,11 @@ public class PagamentoCartaoCredito extends EntidadeDominio{
         this.cartaoCredito = cartaoCredito;
     }
 
-    public Double getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(Double valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
     
