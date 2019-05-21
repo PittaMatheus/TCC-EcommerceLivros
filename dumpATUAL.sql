@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.26, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: ecommerce_livros
+-- Host: localhost    Database: Ecommerce
 -- ------------------------------------------------------
--- Server version	5.7.24-0ubuntu0.18.04.1
+-- Server version	5.7.26-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -198,7 +198,7 @@ CREATE TABLE `dimensoes` (
   `peso` decimal(5,2) DEFAULT NULL,
   `profundidade` decimal(5,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,7 +207,7 @@ CREATE TABLE `dimensoes` (
 
 LOCK TABLES `dimensoes` WRITE;
 /*!40000 ALTER TABLE `dimensoes` DISABLE KEYS */;
-INSERT INTO `dimensoes` VALUES (1,20.00,14.00,20.00,4.00),(2,20.00,14.00,1.50,4.00),(3,20.00,14.00,20.00,4.00),(4,20.00,14.00,1.50,4.00),(5,20.00,14.00,1.50,4.00),(6,20.00,14.00,1.50,4.00),(7,20.00,14.00,1.50,4.00),(8,20.00,14.00,1.50,4.00),(9,20.00,1.33,1.50,4.00),(10,20.00,14.00,1.50,4.00),(11,20.00,14.00,1.50,4.00),(12,20.00,14.00,1.50,4.00);
+INSERT INTO `dimensoes` VALUES (1,20.00,14.00,20.00,4.00),(2,20.00,14.00,1.50,4.00),(3,20.00,14.00,20.00,4.00),(4,20.00,14.00,1.50,4.00),(5,20.00,14.00,1.50,4.00),(6,20.00,14.00,1.50,4.00),(7,20.00,14.00,1.50,4.00),(8,20.00,14.00,1.50,4.00),(9,20.00,1.33,1.50,4.00),(10,20.00,14.00,1.50,4.00),(11,20.00,14.00,1.50,4.00),(12,20.00,14.00,1.50,4.00),(13,20.00,14.00,1.50,4.00),(14,20.00,14.00,1.50,4.00),(15,20.00,14.00,1.50,4.00),(16,20.00,14.00,1.50,4.00);
 /*!40000 ALTER TABLE `dimensoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -222,7 +222,7 @@ CREATE TABLE `editora` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome_editora` varchar(155) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -231,7 +231,7 @@ CREATE TABLE `editora` (
 
 LOCK TABLES `editora` WRITE;
 /*!40000 ALTER TABLE `editora` DISABLE KEYS */;
-INSERT INTO `editora` VALUES (1,'Abril'),(2,'Abril'),(3,'Abril'),(4,'Abril'),(5,'Abril'),(6,'Abril'),(7,'Abril'),(8,'Abril'),(9,'Abril'),(10,'Abril'),(11,'Abril'),(12,'Abril'),(13,'Abril'),(14,'Abril');
+INSERT INTO `editora` VALUES (1,'Abril'),(2,'Abril'),(3,'Abril'),(4,'Abril'),(5,'Abril'),(6,'Abril'),(7,'Abril'),(8,'Abril'),(9,'Abril'),(10,'Abril'),(11,'Abril'),(12,'Abril'),(13,'Abril'),(14,'Abril'),(15,'Abril'),(16,'Abril'),(17,'Abril'),(18,'Abril');
 /*!40000 ALTER TABLE `editora` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -333,7 +333,7 @@ CREATE TABLE `isbn` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cod_barras` varchar(155) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -342,7 +342,7 @@ CREATE TABLE `isbn` (
 
 LOCK TABLES `isbn` WRITE;
 /*!40000 ALTER TABLE `isbn` DISABLE KEYS */;
-INSERT INTO `isbn` VALUES (1,'2423432'),(2,'242343212'),(3,'2423123432'),(4,'2423432'),(5,'2423432'),(6,'2423432'),(7,'2423432'),(8,'2423432'),(9,'2423432'),(10,'2423432'),(11,'2423432'),(12,'2423432');
+INSERT INTO `isbn` VALUES (1,'2423432'),(2,'242343212'),(3,'2423123432'),(4,'2423432'),(5,'2423432'),(6,'2423432'),(7,'2423432'),(8,'2423432'),(9,'2423432'),(10,'2423432'),(11,'2423432'),(12,'2423432'),(13,'2423432'),(14,'2423432'),(15,'2423432'),(16,'2423432');
 /*!40000 ALTER TABLE `isbn` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -420,6 +420,7 @@ CREATE TABLE `livro` (
   `id_dimensao` int(11) NOT NULL,
   `id_isbn` int(11) NOT NULL,
   `id_grupolivro` int(11) NOT NULL,
+  `imagem` varchar(155) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_livro_editora_idx` (`id_editora`),
   KEY `fk_livro_isbn_idx` (`id_isbn`),
@@ -429,7 +430,7 @@ CREATE TABLE `livro` (
   CONSTRAINT `fk_livro_editora` FOREIGN KEY (`id_editora`) REFERENCES `editora` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_livro_grupoLivro` FOREIGN KEY (`id_grupolivro`) REFERENCES `grupolivro` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_livro_isbn` FOREIGN KEY (`id_isbn`) REFERENCES `isbn` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -438,7 +439,7 @@ CREATE TABLE `livro` (
 
 LOCK TABLES `livro` WRITE;
 /*!40000 ALTER TABLE `livro` DISABLE KEYS */;
-INSERT INTO `livro` VALUES (1,'2010120132','qq','titulo teste','02/02/1999','2','222','Esse Ã??Ã?Â© um exemplo da sinopse de um livro',0,49.99,3,1,1,1),(2,'201012123','autor teste','titulo teste','02/02/1999','2','222','Esse Ã© um exemplo da sinopse de um livro',0,49.99,4,2,2,1),(3,'2010120123132','autor teste','lancamento','02/02/1999','2','222','Esse Ã?Â© um exemplo da sinopse de um livro',0,89.99,5,3,3,1),(4,'2010120132','autor teste','titulo teste','02/02/1999','2','222','Esse Ã© um exemplo da sinopse de um livro',0,49.99,6,4,4,5),(5,'2010120132','asd','asdsd','02/02/1999','2','222','Esse Ã© um exemplo da sinopse de um livro',1,49.99,7,5,5,7),(6,'2010120132','nononoononono','nononoonnoon','02/02/1999','2','222','Esse Ã© um exemplo da sinopse de um livro',1,49.99,8,6,6,2),(7,'2010120132','autor teste','titulo teste','02/02/1999','2','222','Esse Ã© um exemplo da sinopse de um livro',1,49.99,9,7,7,4),(8,'2010120132','autor teste','titulo teste','02/02/1999','2','222','Esse Ã© um exemplo da sinopse de um livro',1,49.99,10,8,8,6),(9,'2010120132','autor teste','titulo teste','02/02/1999','2','222','Esse Ã© um exemplo da sinopse de um livro',1,49.99,11,9,9,8),(10,'20','autor teste','titulo teste','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,12,10,10,8),(11,'20','autor teste','titulo teste','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,150.00,13,11,11,8),(12,'20','autor teste','titulo teste','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,14,12,12,7);
+INSERT INTO `livro` VALUES (1,'20','sei la','O exorcista','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,15,13,13,6,'exorcista.jpg'),(2,'20','autor teste','Pelé eterno','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,16,14,14,5,'pele.jpg'),(3,'20','autor teste','Java para burros','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,17,15,15,3,'java.jpg'),(4,'20','autor teste','Livro livro','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,18,16,16,4,'livro1.jpg');
 /*!40000 ALTER TABLE `livro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -465,7 +466,7 @@ CREATE TABLE `livro_categoria` (
 
 LOCK TABLES `livro_categoria` WRITE;
 /*!40000 ALTER TABLE `livro_categoria` DISABLE KEYS */;
-INSERT INTO `livro_categoria` VALUES (1,1),(3,1),(5,1),(8,1),(10,1),(5,2),(6,2),(7,2),(8,2),(10,2),(2,3),(4,3),(6,3),(7,3),(11,5),(4,6),(12,6),(4,7),(9,7),(11,7),(12,7);
+INSERT INTO `livro_categoria` VALUES (1,1),(3,1),(4,1),(5,1),(8,1),(10,1),(5,2),(6,2),(7,2),(8,2),(10,2),(2,3),(3,3),(4,3),(6,3),(7,3),(11,5),(2,6),(4,6),(12,6),(4,7),(9,7),(11,7),(12,7);
 /*!40000 ALTER TABLE `livro_categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -520,7 +521,7 @@ CREATE TABLE `pagamentoCartao` (
 
 LOCK TABLES `pagamentoCartao` WRITE;
 /*!40000 ALTER TABLE `pagamentoCartao` DISABLE KEYS */;
-INSERT INTO `pagamentoCartao` VALUES (1,1,10),(1,2,15),(1,4,15),(2,1,40),(2,2,5),(2,3,4.99),(3,3,40),(3,4,9.99);
+INSERT INTO `pagamentoCartao` VALUES (1,1,10),(1,2,15),(1,4,15),(2,1,40),(2,2,5),(2,3,4.99),(3,1,9.99),(3,2,40),(4,1,20),(4,2,20),(4,4,9.99),(5,3,20),(5,4,29.99),(6,3,20),(6,4,29.99);
 /*!40000 ALTER TABLE `pagamentoCartao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -539,7 +540,7 @@ CREATE TABLE `pedido` (
   `dt_pedido` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `valorTotal` double NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -548,7 +549,7 @@ CREATE TABLE `pedido` (
 
 LOCK TABLES `pedido` WRITE;
 /*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
-INSERT INTO `pedido` VALUES (1,1,1,1,'2019-05-20 11:10:13',49.99),(2,1,1,1,'2019-05-20 17:39:20',49.99),(3,1,1,1,'2019-05-20 22:38:36',49.99);
+INSERT INTO `pedido` VALUES (1,1,1,1,'2019-05-20 11:10:13',49.99),(2,1,1,1,'2019-05-20 17:39:20',49.99),(3,1,1,1,'2019-05-21 11:25:36',49.99),(4,1,1,1,'2019-05-21 11:26:49',49.99),(5,1,1,1,'2019-05-21 12:47:47',49.99),(6,1,1,1,'2019-05-21 13:17:34',49.99);
 /*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -631,11 +632,11 @@ INSERT INTO `usuario` VALUES (1,'comum'),(2,'adm'),(3,'root');
 UNLOCK TABLES;
 
 --
--- Dumping events for database 'ecommerce_livros'
+-- Dumping events for database 'Ecommerce'
 --
 
 --
--- Dumping routines for database 'ecommerce_livros'
+-- Dumping routines for database 'Ecommerce'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -647,4 +648,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-20 19:41:25
+-- Dump completed on 2019-05-21 14:56:26

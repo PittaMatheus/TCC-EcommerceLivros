@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 
-
+ $(document).ready(function(){
+      $('.carousel').carousel();
+    });
+        
 function DividePorCartao(){
     //var checkCartao = document.formCartao.checkCartao;
     //console.log(checkCartao)

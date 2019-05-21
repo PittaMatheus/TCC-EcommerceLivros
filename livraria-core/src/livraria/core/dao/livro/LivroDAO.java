@@ -136,7 +136,7 @@ public class LivroDAO extends AbstractDAO{
             Connection conexao = BancoDadosOracle.getConexao();
             Livro livro = (Livro) entidade;
                 PreparedStatement declaracao = conexao.prepareStatement("SELECT " +
-        "livro.id as id_livro, livro.codigo_barras as cod_barras, livro.autor as autor, livro.ano as ano, " +
+        "livro.id as id_livro, livro.codigo_barras as cod_barras, livro.autor as autor, livro.imagem as imagem, livro.ano as ano, " +
         "livro.edicao as edicao, livro.titulo as titulo,livro.numero_paginas as numero_paginas, livro.sinopse as sinopse, livro.ativo as status, " +
         "livro.preco as preco, editora.id as id_editora, editora.nome_editora as nome_editora,  " +
         "dimensoes.id as id_dimensoes, dimensoes.altura as altura, " +
@@ -176,6 +176,7 @@ public class LivroDAO extends AbstractDAO{
                 liv.getGrupoLivro().setId(rs.getInt("id_grupolivro"));
                 liv.getGrupoLivro().setNome(rs.getString("nome_grupolivro"));
                 liv.getGrupoLivro().setMargemLucro(rs.getDouble("margem_lucro"));
+                liv.setImagem((rs.getString("imagem")));
                 
                  // PESQUISAR TODAS AS CATEGORIAS DO LIVRO
                 declaracao = conexao.prepareStatement("SELECT id_categoria FROM livro_categoria WHERE id_livro = ?");
@@ -204,15 +205,19 @@ public class LivroDAO extends AbstractDAO{
                 }
                 
                 liv.setCategorias(categorias);
-                
-                if(livro.getAtivo()){
-                    liv.setAtivo(true); 
-                    resultado.setAcao("listarLivros");
-                }else{
-                    liv.setAtivo(false);
-                    resultado.setAcao("listarLivrosInativos");
+                if(livro.getAcao() == null){
+                    if(livro.getAtivo()){
+                        liv.setAtivo(true); 
+                        resultado.setAcao("listarLivros");
+                    }else{
+                        liv.setAtivo(false);
+                        resultado.setAcao("listarLivrosInativos");
+                    }
                 }
-                entidades.add(liv);
+                else{
+                    resultado.setAcao("listarHome");
+                }
+                    entidades.add(liv);
             }
             resultado.setStatus(true);
         }catch(ClassNotFoundException erro) {

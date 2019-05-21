@@ -60,7 +60,12 @@ public class ViewLivro implements IViewHelper{
         String profundidade = request.getParameter("txtProfundidade");
         String codigoIsbn = request.getParameter("txtIsbn");
         String idGrupoLivro = request.getParameter("grupoLivro");
-        String preco = request.getParameter("txtPreco");        
+        String preco = request.getParameter("txtPreco");    
+        String menu = request.getParameter("menu");
+        if(null != menu && menu.equals("ok")){
+            livro.setAcao("menu");
+        }
+        
         
         if(status!= null && status.equals("1"))
             livro.setAtivo(true);
@@ -177,6 +182,8 @@ public class ViewLivro implements IViewHelper{
                                 request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
                             }else if(resultado.getAcao().equals("falhaAlterar")){
                                 request.getRequestDispatcher("preAlterar_livro.jsp").forward(request, response);
+                            }else if(resultado.getAcao().equals("listarHome")){
+                                request.getRequestDispatcher("../index.jsp").forward(request, response);
                             }
                         } 
                     }

@@ -4,6 +4,8 @@
     Author     : matheus
 --%>
 
+<%@page import="ecommerce.dominio.cliente.Cliente"%>
+<%@page import="livraria.core.aplicacao.Resultado"%>
 <%@page import="ecommerce.dominio.livro.Livro"%>
 <%@page import="ecommerce.dominio.EntidadeDominio"%>
 <%@page import="java.util.List"%>
@@ -18,6 +20,7 @@
     <body>
         <h1>Detalhes</h1>
         <%
+           
 
             int id_livro = Integer.parseInt(request.getParameter("l"));
             String id_usuario = request.getParameter("u");
@@ -47,10 +50,40 @@
                                     
                                 </div>
                             </fieldset>
-                                    <a href="../Pedidos/add_carrinho.jsp?l=<%=livro.getId()%>&u=<%=id_usuario%>">Adicionar ao carrinho</a>
+                                    
+                                    
+                                    
+                                    
+                                   
         <%
                         }
                     }
+
+
+
+            if(session.getAttribute("usuarioLogado") == null){
+               %>
+                <a href="">Adicionar ao carrinho via sessao</a>
+        <%
+           }else if(session.getAttribute("usuarioLogado") != null){
+               Resultado resultado = (Resultado) session.getAttribute("usuarioLogado");    
+                List<Cliente> clientes = (List) resultado.getEntidades();
+                        if(resultado != null) {
+                             if(clientes.size() == 0) {
+                                response.sendRedirect("../login.jsp");
+                            } else {
+                               for (Cliente cliente : clientes) {         
+                                %>
+                                <a href="../Pedidos/add_carrinho.jsp?l=<%=id_livro%>&u=<%=id_usuario%>">Adicionar ao carrinho</a>
+                   
+        <%
+                }
+            }
+        }
+    }
+
+
+
         %>
         <br><br>
         <a href="../Livros/prateleira.jsp">Voltar</a>

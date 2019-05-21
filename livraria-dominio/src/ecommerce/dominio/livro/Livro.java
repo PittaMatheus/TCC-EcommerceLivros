@@ -24,9 +24,12 @@ public class Livro extends EntidadeDominio {
     private ISBN isbn;
     private Double preco;
     private Boolean ativo;
+    private String imagem;
+    private String acao;
 
     public Livro(Integer Id, String autor,String codigoBarras,String titulo,String edicao, String sinopse, String numeroPaginas, String ano,
-     List<Categoria> categorias,Dimensoes dimensoes,Editora editora, GrupoLivro grupoLivro, ISBN isbn, Double preco, Boolean ativo){
+     List<Categoria> categorias,Dimensoes dimensoes,Editora editora, GrupoLivro grupoLivro, ISBN isbn, Double preco, Boolean ativo, String imagem,
+      String acao){
         super();
         this.id = id;
         this.autor = autor;
@@ -44,6 +47,8 @@ public class Livro extends EntidadeDominio {
         this.isbn = isbn;
         this.preco = preco;
         this.ativo = ativo;
+        this.imagem = imagem;
+        this.acao = acao;
         
     }
     
@@ -123,6 +128,15 @@ public class Livro extends EntidadeDominio {
         return categorias;
     }
 
+    public String getAcao() {
+        return acao;
+    }
+
+    public void setAcao(String acao) {
+        this.acao = acao;
+    }
+
+    
     public void setCategorias(List<Categoria> categorias) {
         this.categorias = categorias;
     }
@@ -174,6 +188,15 @@ public class Livro extends EntidadeDominio {
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
+    
 
     @Override
     public String toString() {
