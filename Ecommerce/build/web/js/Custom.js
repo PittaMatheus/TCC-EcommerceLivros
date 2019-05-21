@@ -12,12 +12,16 @@ function DividePorCartao(){
     var html = "";
     var cartoes = document.getElementsByName('id_cartao')
 
+
     for (var i = 0; i < cartoes.length; i++){
         if ( cartoes[i].checked ) {
                 var nomeCartao = $(".tdNomeCartao"+cartoes[i].value+"").text(); 
-                var numeroCartao = $(".tdNumeroCartao"+cartoes[i].value+"").text();                
+                var numeroCartao = $(".tdNumeroCartao"+cartoes[i].value+"").text();
+                var dataValidade = $(".tdValidade"+cartoes[i].value+"").text();                
+                console.log(dataValidade);
                 qtCartao++;
-                html += "<label for='nomeCartao'>"+ nomeCartao + " - " + numeroCartao + "</label><br>"                
+                html += "<label for='nomeCartao'>"+ nomeCartao + " - " + numeroCartao + " - " + dataValidade + " </label><br>" 
+                html += "<input type='text'name='dataValidade' value='"+dataValidade+"'>" 
                 html += "<input type='text' name='valorCartao'  class='valor"+cartoes[i].value+"'><br>"
             }
         }  

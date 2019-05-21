@@ -56,7 +56,7 @@
                                 out.println("<td><input type='checkbox' onclick='DividePorCartao()' id='id"+cartao.getId() + "' name='id_cartao' value=" + cartao.getId() + " /></td>");
                                 out.println("<td class='tdNomeCartao"+cartao.getId()+"'>" + cartao.getBandeira().getNome() + "</td>");
                                 out.println("<td>" + cartao.getNome()+ "</td>");
-                                out.println("<td>" + cartao.getDtVencimento()+ "</td>");
+                                out.println("<td class ='tdValidade"+cartao.getId()+"'>" + cartao.getDtVencimento()+ "</td>");
                                 out.println("<td class='tdNumeroCartao"+cartao.getId()+"'>"  + cartao.getNumeroCartao()+ "</td>");
                                 out.println("<td>" + cartao.getCodSeguranca()+ "</td>");
                                 out.println("</tr>");

@@ -11,6 +11,7 @@ import ecommerce.dominio.cliente.Cliente;
 import ecommerce.dominio.EntidadeDominio;
 import livraria.core.aplicacao.Resultado;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,6 +33,7 @@ public class ViewCartao implements IViewHelper{
         Cartao cartao = new Cartao();
         Bandeira bandeira = new Bandeira();
         Cliente cliente = new Cliente();
+        DateFormat formatadorData = new SimpleDateFormat("dd/MM/yyyy");
         // PARAMETROS DA JSP
         String id = request.getParameter("id");
         String numCartao = request.getParameter("numeroCartao");
@@ -53,7 +55,17 @@ public class ViewCartao implements IViewHelper{
             cartao.setStatus(true);
         
         cartao.setNumeroCartao(numCartao);
-        cartao.setDtVencimento(dtVencimento);
+        
+        try{
+            if(null != dtVencimento){
+                Date data = formatadorData.parse(dtVencimento);
+                cartao.setDtVencimento(data);
+            }    
+        }catch(Exception e){
+            e.printStackTrace();
+
+        }
+       
         cartao.setNome(nomeCartao);
         cartao.setCodSeguranca(codSeguranca);
         cartao.setNome(nomeCartao);

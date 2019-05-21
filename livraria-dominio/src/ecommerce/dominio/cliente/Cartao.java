@@ -17,12 +17,12 @@ public class Cartao extends EntidadeDominio {
     private Integer id;
     private String numeroCartao;
     private String codSeguranca;
-    private String dtVencimento;
+    private Date dtVencimento;
     private Bandeira bandeira;
     private Cliente cliente;
     private boolean status;
     
-    public Cartao(String numeroCartao, String nome,  String dtVencimento, String codSeguranca, Bandeira bandeira, boolean status, Integer id) {
+    public Cartao(String numeroCartao, String nome,  Date dtVencimento, String codSeguranca, Bandeira bandeira, boolean status, Integer id) {
     super();
     this.numeroCartao = numeroCartao;
     this.nome = nome;
@@ -72,10 +72,10 @@ public class Cartao extends EntidadeDominio {
     public void setCodSeguranca(String codSeguranca) {
             this.codSeguranca = codSeguranca;
     }
-    public String getDtVencimento() {
+    public Date getDtVencimento() {
             return dtVencimento;
     }
-    public void setDtVencimento(String dtVencimento) {
+    public void setDtVencimento(Date dtVencimento) {
             this.dtVencimento = dtVencimento;
     }
     public Bandeira getBandeira() {

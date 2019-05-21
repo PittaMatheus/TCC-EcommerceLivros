@@ -24,17 +24,19 @@ public class ValidaCartaoCredito extends AbstractStrategy{
         Pedido pedido = (Pedido) entidade;
         PagamentoCartaoCredito pgCartao = new PagamentoCartaoCredito();
         List<PagamentoCartaoCredito> cartoesCompra = new ArrayList<>();
+        Date dataDeHoje = new Date(System.currentTimeMillis());
         String str ="";
         int aux = 0;
-        String dataValidade;
+        Date dataValidade;
         cartoesCompra = pedido.getPagamento().getPagamentosCartao();
          for(PagamentoCartaoCredito pgto: cartoesCompra) {
             pgCartao = cartoesCompra.get(aux);
                 aux++;             
-                dataValidade = pgCartao.getCartaoCredito().getDtVencimento();
+                dataValidade = new java.sql.Date(pgCartao.getCartaoCredito().getDtVencimento().getTime());
+                if(dataValidade.compareTo(dataDeHoje) < 0){
+                    str="<li>O cartão está vencido</li>";
+         }
         }
-         
-         
         return str;
     }
     

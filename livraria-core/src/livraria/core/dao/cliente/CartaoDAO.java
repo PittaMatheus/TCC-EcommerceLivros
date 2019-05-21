@@ -38,7 +38,7 @@ public class CartaoDAO extends AbstractDAO{
                                     + " VALUES(?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
                     declaracao.setString(1, cartao.getNome());
-                    declaracao.setString(2, cartao.getDtVencimento());
+                    declaracao.setDate(2, new java.sql.Date(cartao.getDtVencimento().getTime()));
                     declaracao.setString(3, cartao.getBandeira().getNome());
                     declaracao.setString(4, cartao.getNumeroCartao());
                     declaracao.setString(5, cartao.getCodSeguranca());
@@ -128,7 +128,7 @@ public class CartaoDAO extends AbstractDAO{
                 Bandeira bandeira = new Bandeira();
                 cart.setId(rs.getInt("id"));
                 cart.setNome(rs.getString("nome"));
-                cart.setDtVencimento(rs.getString("dtVencimento"));
+                cart.setDtVencimento(rs.getDate("dtVencimento"));
                 bandeira.setNome(rs.getString("bandeira"));
                 cart.setBandeira(bandeira);
                 cart.setNumeroCartao(rs.getString("numero"));

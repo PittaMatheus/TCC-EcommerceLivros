@@ -12,7 +12,10 @@ import ecommerce.dominio.livro.Livro;
 import ecommerce.dominio.pedido.PagamentoCartaoCredito;
 import ecommerce.dominio.pedido.Pedido;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.crypto.spec.IvParameterSpec;
 import javax.servlet.http.HttpServletRequest;
@@ -29,70 +32,80 @@ public class ViewPedido implements IViewHelper {
 
     @Override
     public EntidadeDominio getEntidade(HttpServletRequest request) {
-        Livro objLivro = new Livro();
-        Cliente objCliente = new Cliente();
-        Pedido pedido = new Pedido();
-        String id = request.getParameter("id_pedido");
-        String id_cliente = request.getParameter("u");
-        String tipoUsuario = request.getParameter("tipoUsuario");        
-        String id_endereco = request.getParameter("id_endereco");
-        String[] idsCartao = request.getParameterValues("id_cartao");
-        String[] valoresCartao = request.getParameterValues("valorCartao");
-        String[] datasValidade = request.getParameterValues("dataValidade");
-       
-        
-        String status = request.getParameter("status");
-        
-        List<PagamentoCartaoCredito> idsCartoes = new ArrayList<>();
-        if(tipoUsuario != null){
-            pedido.setTipo(tipoUsuario);
-        }
-        
-        String valorTotal =request.getParameter("valorTotal");
-        
-        if(valorTotal != null){
-            pedido.getPagamento().setValorTotal(Double.valueOf(valorTotal));
-        }
-        if(id_cliente != null ){
-            pedido.getCliente().setId(Integer.parseInt(id_cliente));
-        }
-        if(id_endereco != null){
-            pedido.getEndereco().setClienteId(Integer.parseInt(id_endereco));
-        }
-        
-       
-        if(id != null){
-            pedido.setId(Integer.parseInt(id));
-        }
-        if(status != null){
-            pedido.getStatusPedido().setId(Integer.parseInt(status));
-        }
-        
-        int aux = 0;
-        // Recuperando os IDS dos cartoes escolhidos pelo cliente
-        if(idsCartao != null && idsCartao.length > 0){
-            for(String idCartao: idsCartao){
-                    String valor = valoresCartao[aux];
-                    aux++;
-                    PagamentoCartaoCredito pgCartao = new PagamentoCartaoCredito();
-                    Cartao cartao = new Cartao();
-                    // Seto o id do cartao no objeto Cartao
-                    cartao.setId(Integer.parseInt(idCartao));
-                    // seta o valor do cartao
-                    pgCartao.setValor(Double.parseDouble(valor));
-                    pgCartao.setCartaoCredito(cartao);
-                    idsCartoes.add(pgCartao);
+     
+            Livro objLivro = new Livro();
+            Cliente objCliente = new Cliente();
+            Pedido pedido = new Pedido();
+            String id = request.getParameter("id_pedido");
+            String id_cliente = request.getParameter("u");
+            String tipoUsuario = request.getParameter("tipoUsuario");        
+            String id_endereco = request.getParameter("id_endereco");
+            String[] idsCartao = request.getParameterValues("id_cartao");
+            String[] valoresCartao = request.getParameterValues("valorCartao");
+            String[] datasValidade = request.getParameterValues("dataValidade");
+            DateFormat formatadorData = new SimpleDateFormat("dd/MM/yyyy");
+
+            String status = request.getParameter("status");
+
+            List<PagamentoCartaoCredito> idsCartoes = new ArrayList<>();
+            if(tipoUsuario != null){
+                pedido.setTipo(tipoUsuario);
             }
 
-            
-            
-        }
-        
+            String valorTotal =request.getParameter("valorTotal");
 
-        pedido.getPagamento().setPagamentosCartao(idsCartoes);
-        
+            if(valorTotal != null){
+                pedido.getPagamento().setValorTotal(Double.valueOf(valorTotal));
+            }
+            if(id_cliente != null ){
+                pedido.getCliente().setId(Integer.parseInt(id_cliente));
+            }
+            if(id_endereco != null){
+                pedido.getEndereco().setClienteId(Integer.parseInt(id_endereco));
+            }
+
+
+            if(id != null){
+                pedido.setId(Integer.parseInt(id));
+            }
+            if(status != null){
+                pedido.getStatusPedido().setId(Integer.parseInt(status));
+            }
+
+            int aux = 0;
+            // Recuperando os IDS dos cartoes escolhidos pelo cliente
+            if(idsCartao != null && idsCartao.length > 0){
+                for(String idCartao: idsCartao){
+                        String valor = valoresCartao[aux];
+                       
+                        PagamentoCartaoCredito pgCartao = new PagamentoCartaoCredito();
+                        Cartao cartao = new Cartao();
+                        // Seto o id do cartao no objeto Cartao
+                        cartao.setId(Integer.parseInt(idCartao));
+                        try{
+                            Date data = formatadorData.parse(datasValidade[aux]);
+                            cartao.setDtVencimento(data);
+                         }catch(Exception e){
+                            e.printStackTrace();
+                         }
+                        // seta o valor do cartao
+                        pgCartao.setValor(Double.parseDouble(valor));
+                        pgCartao.setCartaoCredito(cartao);
+                        idsCartoes.add(pgCartao);
+                         aux++;
+                }
+
+
+
+            }
+
+
+            pedido.getPagamento().setPagamentosCartao(idsCartoes);
+            
+         
         HttpSession session = request.getSession();
         session.setAttribute("pedido", pedido);
+       
         return pedido;
     }
 

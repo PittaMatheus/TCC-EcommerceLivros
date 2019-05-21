@@ -43,7 +43,7 @@ ________________________________________________________________________________
                                                             DOING
 	MATHEUS
 
-A29	- Incluir validação beck-end no valor do pedido no momento da compra(beck-end ja possui)
+A29	- Incluir validação front-end no valor do pedido no momento da compra(back-end ja possui)
 A23	- Incluir parcelas no pagamento
 A6     	- incluir validação da data de validade do cartão de credito antes de finalizar o pedido
 A19     - Incluir possibilidade do cliente adidcionar livros sem estar logado(sessao). Carrinho com login ja esta OK

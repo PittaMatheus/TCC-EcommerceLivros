@@ -11,6 +11,8 @@ import ecommerce.dominio.pedido.Pedido;
 import java.util.ArrayList;
 import java.util.List;
 import livraria.core.regras.AbstractStrategy;
+import livraria.core.util.LivroUtils;
+import livraria.core.util.PrecoUtils;
 
 /**
  *
@@ -34,6 +36,7 @@ public class ValidaValorPedido extends AbstractStrategy{
                 aux++;             
                 somaValorCartao += pgCartao.getValor();
         }
+       somaValorCartao = PrecoUtils.arredondarPreco(somaValorCartao);
         if(somaValorCartao != valorTotal){
             str="<li>O valor está incorreto</li>";
         }
