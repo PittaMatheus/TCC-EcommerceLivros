@@ -8,12 +8,14 @@ package ecommerce.dominio.pedido;
 import ecommerce.dominio.EntidadeDominio;
 import ecommerce.dominio.cliente.Cliente;
 import ecommerce.dominio.livro.Livro;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Carrinho extends EntidadeDominio{
     private Integer id;
     private int qt_itens;
     private List<Livro> livros;
+    private ArrayList<Livro> liv = new ArrayList<Livro>();
     private Livro livro;
     private Cliente cliente;
     
@@ -22,6 +24,18 @@ public class Carrinho extends EntidadeDominio{
          livro = new Livro();
          cliente = new Cliente();
     }
+
+    public void addLivro(Livro livro){
+        liv.add(livro);
+    }
+    
+    public void removeLivro(Livro livro){
+        liv.remove(livro);
+    }
+    public ArrayList<Livro> getLivs() {
+        return liv;
+    }
+    
     
     public Carrinho(Integer id, int qt_itens,  List<Livro> livros){
         this.id = id;

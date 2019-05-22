@@ -136,12 +136,10 @@ public class CarrinhoDAO extends AbstractDAO{
                 entidades.add(car);
             }
            
-            
-            
-            resultado.setMensagem("Listado com sucesso");
             resultado.setEntidades(entidades);
             resultado.setAcao("consultar");
             resultado.setStatus(true);
+            resultado.setMensagem("O livro foi recuperado");
             
             }catch(ClassNotFoundException erro) {
                 erro.printStackTrace();     

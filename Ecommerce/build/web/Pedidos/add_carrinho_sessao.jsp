@@ -18,7 +18,7 @@
 
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
 		if(resultado == null) {
-			response.sendRedirect(request.getContextPath() + "/Pedidos/AdicionarCarrinho?l="+id_livro + "&sessao=y&acao=consultarPorID");
+			response.sendRedirect(request.getContextPath() + "/Pedidos/AdicionarCarrinhoSessao?l="+id_livro + "&acao=consultarPorID");
 			return;
 		}
                 %>  

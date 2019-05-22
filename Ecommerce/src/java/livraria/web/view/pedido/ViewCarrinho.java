@@ -68,12 +68,6 @@ public class ViewCarrinho implements IViewHelper {
                        request.getRequestDispatcher("../Livros/prateleira.jsp").forward(request, response);
                     }
                 }
-            }else{// se o resultado é nulo a inserção foi feita via sessão
-                // sessão de mensagem
-                HttpSession session = request.getSession();
-                session.setAttribute("mensagem", "O livro foi adicionado ao carrinho");
-                response.sendRedirect("../index.jsp");
-                
             }
         } catch(Exception e) {
             e.printStackTrace();
