@@ -206,7 +206,7 @@ public class Fachada implements IFachada{
 
     @Override
     public Resultado listar(EntidadeDominio entidade) {
-         resultado.setEntidades(new ArrayList<EntidadeDominio>());
+             resultado.setEntidades(new ArrayList<EntidadeDominio>());
         try {
             resultado = dao.get(entidade.getClass().getName()).listar(entidade);
             resultado.setStatus(true);

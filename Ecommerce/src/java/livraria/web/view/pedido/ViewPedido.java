@@ -94,11 +94,7 @@ public class ViewPedido implements IViewHelper {
                         idsCartoes.add(pgCartao);
                          aux++;
                 }
-
-
-
             }
-
 
             pedido.getPagamento().setPagamentosCartao(idsCartoes);
             

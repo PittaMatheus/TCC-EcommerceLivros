@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import livraria.core.aplicacao.Resultado;
 import livraria.web.view.IViewHelper;
 
@@ -27,6 +28,7 @@ public class ViewCarrinho implements IViewHelper {
         
         String id_livro = request.getParameter("l");
         String id_cliente = request.getParameter("u");
+        String sessao = request.getParameter("sessao");
 
         if(id_livro != null){
             objLivro.setId(Integer.parseInt(id_livro));
@@ -40,7 +42,11 @@ public class ViewCarrinho implements IViewHelper {
         if(objLivro != null){
             carrinho.setLivro(objLivro);
         }
-
+        
+        if(sessao != null){
+            HttpSession session = request.getSession();
+            session.setAttribute("carrinho", carrinho);
+        }
         
         return carrinho;
     }
@@ -62,6 +68,12 @@ public class ViewCarrinho implements IViewHelper {
                        request.getRequestDispatcher("../Livros/prateleira.jsp").forward(request, response);
                     }
                 }
+            }else{// se o resultado é nulo a inserção foi feita via sessão
+                // sessão de mensagem
+                HttpSession session = request.getSession();
+                session.setAttribute("mensagem", "O livro foi adicionado ao carrinho");
+                response.sendRedirect("../index.jsp");
+                
             }
         } catch(Exception e) {
             e.printStackTrace();

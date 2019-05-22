@@ -37,7 +37,7 @@
           <div class="nav-wrapper">
             <a href="#!" class="brand-logo">Livraria</a>
             <ul class="right hide-on-med-and-down">
-              <li><a href="badges.html">Carrinho</a></li>
+              <li><a href="../Pedidos/carrinhoSessao.jsp">Carrinho</a></li>
               <!-- Dropdown Trigger -->
               <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Entre ou cadastre-se<i class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
@@ -45,6 +45,21 @@
         </nav>
 <!--FIM NAVBAR-->
 
+    <%
+            if(session.getAttribute("mensagem") != null){ %>
+                    <input type="text" class="btn" id="mensagem" onclick="Materialize.toast('O livro foi adicionado ao carrinho', 4000, 'green rounded')">
+                    <script>
+                        window.onload = function(){
+                            document.getElementById("mensagem").click();
+                        }
+
+                    </script>
+                    
+    <%
+        }
+        
+    %>
+    
        
       
 
@@ -71,6 +86,7 @@
             <%
         }
     }
+request.getSession().removeAttribute("mensagem");
 
 %>
 
