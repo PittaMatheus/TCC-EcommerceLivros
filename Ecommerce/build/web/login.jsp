@@ -22,18 +22,42 @@
                         }
                 }
         }
-				%>
+        String valorTotal = request.getParameter("valorTotal");
+            %>
         
+<%            // se o valorTotal não é nulo, apos o login o cliente será redirecionado para continuar a compra
+            if(valorTotal != null){ 
+%>
+                <form action="AutenticarClienteCompra" method="post">
+                    <input type='hidden' value='<%=valorTotal%>' name='valorTotal'>
+                    <label for="id">Login</label>                            
+                    <input type="text" value="email" name="email" id="usuarioLogin" required>
+                    <br><br>
+                    <label for="id">Senha</label>                            
+                    <input type="password" value="SenhaValida!@#" name="senha" id="senha" required> 
+                    <br>   <br>          
+                    <input type="submit" name="acao" value="login" class="btn btn-success"> 
+                </form>
+<%
+            }else{
+%>
+            <form action="AutenticarCliente" method="post">
+                    <label for="id" >Login</label>                            
+                    <input type="text" value="email" name="email" id="usuarioLogin" required>
+                    <br><br>
+                    <label for="id" >Senha</label>                            
+                    <input type="password" value="SenhaValida!@#" name="senha" id="senha" required> 
+                    <br>   <br>          
+                    <input type="submit" name="acao" value="login" class="btn btn-success"> 
+                </form>
+<%
+}
+%>
         
-        <form action="AutenticarCliente" method="post">
             <br>
-            <label for="id" >Login</label>                            
-            <input type="text" value="email" name="email" id="usuarioLogin" required>
-            <br><br>
-            <label for="id" >Senha</label>                            
-            <input type="password" value="SenhaValida!@#" name="senha" id="senha" required> 
-            <br>   <br>          
-            <input type="submit" name="acao" value="login" class="btn btn-success"> 
+           
+
+            
         </form>
         <br><br>
         <div><a href="Clientes/cadastro_cliente.jsp">Cadastre-se</a></div>

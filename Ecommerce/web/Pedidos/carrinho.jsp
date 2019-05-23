@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="ecommerce.dominio.livro.Livro"%>
 <%@page import="livraria.core.util.LivroUtils"%>
 <%@page import="ecommerce.dominio.pedido.Carrinho"%>
@@ -40,9 +41,13 @@
                             <th>Preço</th>
                             <th>Ação</th>
                        </tr>   
+        <form action="confirmaValorTotal.jsp" method="GET">
                            <%
                              for (Carrinho carrinho : carrinhos) {
-                                %>
+                                 %>
+                                
+                                       <input type="text" name="livros" value="<%=carrinho.getLivro().getId()%>">
+
                     <tr>
                         
                         <td><%=carrinho.getLivro().getTitulo()%></td>
@@ -50,6 +55,7 @@
                         <td><%=carrinho.getLivro().getAno()%></td>
                         <td><%=carrinho.getLivro().getEdicao()%></td>
                         <td><%=carrinho.getLivro().getPreco()%></td>
+                        
                         <td><a href="RemoverCarrinho?l=<%=carrinho.getLivro().getId()%>&u=<%=carrinho.getCliente().getId()%>&acao=desativar">Remover</a></td>
                     </tr>
 <%                      
@@ -68,10 +74,9 @@
         %>
 
         <br><br>
-        <form action="confirmaValorTotal.jsp" method="GET">
+        
             <input type="hidden" name="id_usuario" id="id_usuario" value="<%=id_usuario%>">
             <input type="hidden" name="valorTotal" value="<%= livro.getPreco() %>">
-            
             <input type="submit" value="Realizar pedido"> 
         </form>
            

@@ -42,21 +42,21 @@ ________________________________________________________________________________
 
                                                             DOING
 	MATHEUS
-
+A30	- Incluir insert na tabela itensPedido no momento do pedido
 A29	- Incluir validação front-end no valor do pedido no momento da compra(back-end ja possui)
 A23	- Incluir parcelas no pagamento
-A19     - Incluir possibilidade do cliente adidcionar livros sem estar logado(sessao). Carrinho com login ja esta OK
 A3      - Incluir a possiblidade de utilizar um cupom de desconto no pagamento
 A4      - Acrescentar pontos ao ranking do cliente após o pedido ser aprovado
 A9     - adicionar quantidade de livros	
 A11     - Ver cupons de troca(cliente)
 A12     - Criar pagina de vizualização de status(linha do tempo)
-
+---
 	EDNER
 // Escolher as atividades e colar aqui. me avisar antes 
 ________________________________________________________________________________________________________
 
                                                              DONE
+A19     - Incluir possibilidade do cliente adidcionar livros sem estar logado(sessao). Carrinho com login ja esta OK
 A2      - Incluir a possibilidade de utilizar mais de 1 cartão de crédito para dividir o valor do pedido
 A6     	- incluir validação da data de validade do cartão de credito antes de finalizar o pedido
 A1      - Exibir os livros na home

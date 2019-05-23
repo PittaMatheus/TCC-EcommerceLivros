@@ -4,6 +4,7 @@
     Author     : matheus
 --%>
 
+<%@page import="ecommerce.dominio.cliente.Cliente"%>
 <%@page import="ecommerce.dominio.pedido.Pedido"%>
 <%@page import="ecommerce.dominio.cliente.Cartao"%>
 <%@page import="ecommerce.dominio.cliente.Endereco"%>
@@ -20,18 +21,27 @@
     <body>
         <h1>Confirme seus dados para realizar a compra</h1>
         <%
-            String id_livro = request.getParameter("l");
-            String id_usuario = request.getParameter("u");
+            int usuario_id = 0;
             int id =0;
             double valorTotal = 0;
             
-
-            Resultado resultado = (Resultado) request.getAttribute("resultado");
-            if(resultado == null) {
-                response.sendRedirect(request.getContextPath() + "/Clientes/ListarEndereco?acao=listar&id=" + id_usuario + "&conf=1");
+            Resultado resultado = (Resultado) session.getAttribute("usuarioLogado");
+            List<Cliente> clientes = (List) resultado.getEntidades();
+            if(resultado != null) {
+                         if(clientes.size() == 0) {
+                            response.sendRedirect("../login.jsp");
+                        } else {
+                           for (Cliente cliente : clientes) {         
+                              usuario_id = cliente.getId();
+                           }
+                         }
+            }          
+            Resultado resultado2 = (Resultado) request.getAttribute("resultado");
+            if(resultado2 == null) {
+                response.sendRedirect(request.getContextPath() + "/Clientes/ListarEndereco?acao=listar&id=" + usuario_id + "&conf=1");
             }
             else{
-             List<Endereco> enderecos = (List) resultado.getEntidades();
+             List<Endereco> enderecos = (List) resultado2.getEntidades();
               
                          if(enderecos.size() == 0) {
                             out.print("Nenhum endereco cadastrado");
@@ -77,9 +87,9 @@
             
                     // Receber os dados do pedido : id_cliente + valor total
                     if(session.getAttribute("pedido") != null){
-                    Pedido pedido = (Pedido) session.getAttribute("pedido");
-                    id = pedido.getCliente().getId();
-                    valorTotal = pedido.getPagamento().getValorTotal();
+                        Pedido pedido = (Pedido) session.getAttribute("pedido");
+                       // id = pedido.getCliente().getId();
+                        valorTotal = pedido.getPagamento().getValorTotal();
                         }
 
 
@@ -87,12 +97,12 @@
                     <br> <br> <br>
                     
                     
-                    <a href="../Clientes/cadastro_endereco.jsp?id=<%=id%>">Adicionar endereco</a>   
+                    <a href="../Clientes/cadastro_endereco.jsp?id=<%=usuario_id%>">Adicionar endereco</a>   
                     <br><br><br>
-                     <input type="hidden" name="valorTotal" value="<%=valorTotal%>">
-                    <input type="hidden" name="u" value="<%=id%>">
+                     <input type="text" name="valorTotal" value="<%=valorTotal%>">
+                    <input type="text" name="u" value="<%=usuario_id%>">
                     <input type="submit">
-                   
+        
             </form>
 
                       

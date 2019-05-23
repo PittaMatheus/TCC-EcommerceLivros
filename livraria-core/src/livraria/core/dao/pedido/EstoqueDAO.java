@@ -46,6 +46,8 @@ public class EstoqueDAO extends AbstractDAO{
             }
             resultado.setStatus(true);
             resultado.setAcao("listarCategoria");
+        // Fecha a conexao.
+        conexao.close();
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);

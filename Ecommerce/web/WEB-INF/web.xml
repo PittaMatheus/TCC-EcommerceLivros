@@ -214,11 +214,19 @@
         <url-pattern>/Clientes/ConsultarCupomTroca</url-pattern>
     </servlet-mapping> 
     
-        <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>Control</servlet-name>
         <url-pattern>/Pedidos/AdicionarCarrinhoSessao</url-pattern>
     </servlet-mapping> 
 
+
+
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/AutenticarClienteCompra</url-pattern>
+    </servlet-mapping> 
+          
+          
           
     <session-config>
         <session-timeout>

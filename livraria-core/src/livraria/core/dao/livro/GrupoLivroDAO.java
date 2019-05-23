@@ -67,6 +67,7 @@ public class GrupoLivroDAO extends AbstractDAO{
             }
             resultado.setStatus(true);
             resultado.setAcao("listarGrupoLivro");
+            conexao.close();
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);
@@ -133,6 +134,7 @@ public class GrupoLivroDAO extends AbstractDAO{
             resultado.setStatus(true);
             resultado.setAcao("preAlterarGrupo");
             resultado.setMensagem("consulta feita com sucesso");
+            conexao.close();
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);

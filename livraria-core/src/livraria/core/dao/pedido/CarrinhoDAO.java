@@ -140,7 +140,8 @@ public class CarrinhoDAO extends AbstractDAO{
             resultado.setAcao("consultar");
             resultado.setStatus(true);
             resultado.setMensagem("O livro foi recuperado");
-            
+            // Fecha a conexao.
+            conexao.close();
             }catch(ClassNotFoundException erro) {
                 erro.printStackTrace();     
                 resultado.setStatus(false);

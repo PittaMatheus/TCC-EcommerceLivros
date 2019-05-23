@@ -43,6 +43,7 @@ public class ViewPedido implements IViewHelper {
             String[] idsCartao = request.getParameterValues("id_cartao");
             String[] valoresCartao = request.getParameterValues("valorCartao");
             String[] datasValidade = request.getParameterValues("dataValidade");
+            String [] idsLivro = request.getParameterValues("livros");
             DateFormat formatadorData = new SimpleDateFormat("dd/MM/yyyy");
 
             String status = request.getParameter("status");

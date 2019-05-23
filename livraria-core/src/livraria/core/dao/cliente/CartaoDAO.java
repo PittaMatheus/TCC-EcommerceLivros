@@ -140,6 +140,7 @@ public class CartaoDAO extends AbstractDAO{
             resultado.setStatus(true);
             resultado.setMensagem("Listado com sucesso");
             resultado.setAcao("listar");
+            conexao.close();
             if(!cartao.isStatus()){
                resultado.setAcao("confirma");
            }

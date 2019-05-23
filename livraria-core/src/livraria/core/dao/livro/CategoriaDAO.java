@@ -62,6 +62,8 @@ public class CategoriaDAO extends AbstractDAO{
                 cat.setNome(rs.getString("nome"));
                 entidades.add(cat);
             }
+            // Fecha a conexao.
+            conexao.close();
             resultado.setStatus(true);
             resultado.setAcao("listarCategoria");
         }catch(ClassNotFoundException erro) {
@@ -125,6 +127,8 @@ public class CategoriaDAO extends AbstractDAO{
                 categoria.setNome(rs.getString("nome"));   
             }
             entidades.add(categoria);
+            // Fecha a conexao.
+            conexao.close();
             resultado.setMensagem("Listado com sucesso");
             resultado.setEntidades(entidades);
             resultado.setAcao("consultar");

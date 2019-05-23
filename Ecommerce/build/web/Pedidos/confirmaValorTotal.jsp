@@ -14,8 +14,12 @@
 <%
         String valorTotal = request.getParameter("valorTotal");
         String id_usuario = request.getParameter("id_usuario");
+        String idsLivros[] = request.getParameterValues("livros");
+        
+            response.sendRedirect(request.getContextPath() + "/Pedidos/AdicionarPedido?valorTotal=" + valorTotal + "&u=" + id_usuario + "&livros=" + idsLivros);
 
-        response.sendRedirect(request.getContextPath() + "/Pedidos/AdicionarPedido?valorTotal=" + valorTotal + "&u=" + id_usuario);
+
+        
 
 %>        
     </body>

@@ -63,8 +63,7 @@
         
         %>
         <br><br>
-        <form action="confirmaValorTotal.jsp" method="GET">
-            <input type="hidden" name="id_usuario" id="id_usuario" value="">
+        <form action="../login.jsp" method="GET">
             <input type="hidden" name="valorTotal" value="<%= valorTotal %>">
             
             <input type="submit" value="Realizar pedido"> 

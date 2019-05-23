@@ -137,6 +137,8 @@ public class ClienteDAO extends AbstractDAO {
             resultado.setStatus(true);
             resultado.setAcao("listarDesativados");
             }
+            // Fecha a conexao.
+            conexao.close();
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);
@@ -227,6 +229,8 @@ public class ClienteDAO extends AbstractDAO {
                         resultado.setStatus(true);
                        }
                     }
+                // Fecha a conexao.
+            conexao.close();
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);

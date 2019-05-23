@@ -56,6 +56,7 @@ public class ViewCliente implements IViewHelper{
         String dataNascimento = request.getParameter("data_nascimento");        
         String numTelefone = request.getParameter("numTelefone");
         String tipoTelefone = request.getParameter("TipoTelefone");
+        String valorTotal = request.getParameter("valorTotal");
 
         // ENDERECO
         String cep = request.getParameter("cep");
@@ -178,13 +179,13 @@ public class ViewCliente implements IViewHelper{
                                   HttpSession session = request.getSession();
                                   request.getSession();
                                   session.invalidate();
-                                  response.sendRedirect("index.html");  
+                                  response.sendRedirect("index.jsp");  
                             }     
                             }else 
-                                    request.getRequestDispatcher("../index.html").forward(request, response);
+                                    request.getRequestDispatcher("../index.jsp").forward(request, response);
                                 
                         } else {
-                            response.sendRedirect("../index.html");
+                            response.sendRedirect("../index.jsp");
                         }
                 } catch(Exception e) {
                     e.printStackTrace();

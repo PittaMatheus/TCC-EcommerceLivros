@@ -95,7 +95,6 @@ public class EnderecoDAO extends AbstractDAO {
                 end.setComplemento(rs.getString("complemento"));
                 end.setReferencia(rs.getString("referencia"));
                 end.setTipoEndereco(rs.getString("tipoEndereco"));
-
                 resultado.setAcao("listar");
                 entidades.add(end);
 		resultado.setStatus(true);
@@ -106,6 +105,7 @@ public class EnderecoDAO extends AbstractDAO {
            if(!endereco.isStatus()){
                resultado.setAcao("confirma");
            }
+           conexao.close();
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);
@@ -150,6 +150,7 @@ public class EnderecoDAO extends AbstractDAO {
         //if(resultado.getAcao() == null){
           //  resultado.setAcao("inserir");
        // }
+        conexao.close();
         resultado.setAcao("listarEndereco");
         resultado.setStatus(true);    
         resultado.setMensagem("Listado com sucesso");

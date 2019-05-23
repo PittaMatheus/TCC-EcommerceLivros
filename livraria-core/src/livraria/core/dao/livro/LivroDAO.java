@@ -112,7 +112,8 @@ public class LivroDAO extends AbstractDAO{
 //            log.append(" PRECIFICAÇÃO: " + livro.getPreco() + ",\n ISBN: " + livro.getIsbn().getCodBarras() + ",\n");
 //            log.append(" CODIGO_BARRAS: " + livro.getCodigoBarras() + ")");
 //            LogTransacoes.executaLog(log.toString());
-          
+                      // Fecha a conexao.
+            conexao.close();
         } catch (ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);
@@ -120,6 +121,7 @@ public class LivroDAO extends AbstractDAO{
         } catch (SQLException erro) {
             erro.printStackTrace();   
         }
+        
         resultado.setMensagem("O Livro foi inserido com sucesso!");
         resultado.setStatus(true);
         resultado.setAcao("inserir");
@@ -220,6 +222,7 @@ public class LivroDAO extends AbstractDAO{
                     entidades.add(liv);
             }
             resultado.setStatus(true);
+            conexao.close();
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);
@@ -418,6 +421,7 @@ public class LivroDAO extends AbstractDAO{
                 liv.setCategorias(categorias);
                 entidades.add(liv);
             }
+            conexao.close();
             resultado.setStatus(true);
             resultado.setAcao("consultar");
             resultado.setMensagem("livro listado com sucesso");

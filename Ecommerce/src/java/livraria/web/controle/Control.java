@@ -40,6 +40,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import livraria.web.view.pedido.ViewCarrinho;
 import livraria.web.view.pedido.ViewCarrinhoSessao;
+import livraria.web.view.pedido.ViewClienteCompra;
 import livraria.web.view.pedido.ViewCupomTroca;
 import livraria.web.view.pedido.ViewPedido;
 import livraria.web.view.pedido.ViewTroca;
@@ -75,6 +76,8 @@ public class Control extends HttpServlet {
          viewHelper.put("/Ecommerce/Clientes/DesativarCliente", new ViewCliente());
          viewHelper.put("/Ecommerce/Clientes/AtivarCliente", new ViewCliente());
          viewHelper.put("/Ecommerce/AutenticarCliente", new ViewCliente());
+         viewHelper.put("/Ecommerce/AutenticarClienteCompra", new ViewClienteCompra());
+         
          viewHelper.put("/Ecommerce/LogoutCliente", new ViewCliente());
          // Views Endereco
          viewHelper.put("/Ecommerce/Clientes/InserirEndereco", new ViewEndereco());
