@@ -40,13 +40,16 @@ public class TrocaDAO extends AbstractDAO{
             resultado.setStatus(true);
             // Fecha a conexao.
             conexao.close();
+            declaracao.close();
         } catch (ClassNotFoundException erro) {
+            
             erro.printStackTrace();
             resultado.setStatus(false);
             resultado.setMensagem("Ocorreu um erro ao solicitar a troca ");
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
+        
         return resultado;
 
         
@@ -73,6 +76,8 @@ public class TrocaDAO extends AbstractDAO{
             }
             resultado.setStatus(true);
             resultado.setAcao("listarSolicitacaoTroca");
+            // Fecha a conexao.
+            conexao.close();
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);

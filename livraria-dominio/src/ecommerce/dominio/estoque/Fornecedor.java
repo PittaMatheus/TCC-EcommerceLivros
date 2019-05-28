@@ -12,14 +12,14 @@ import ecommerce.dominio.EntidadeDominio;
  * @author matheus
  */
 public class Fornecedor extends EntidadeDominio{
-    Integer id;
+    
     private String nome;
-    private String cpnj;
+    private String cnpj;
     private String razaoSocial;
     
-    public Fornecedor(String nome, String cpnj, String razaoSocial, Integer id){
+    public Fornecedor(String nome, String cnpj, String razaoSocial){
         this.nome = nome;
-        this.cpnj = cpnj;
+        this.cnpj = cnpj;
         this.razaoSocial = razaoSocial;
     }
     
@@ -34,12 +34,12 @@ public class Fornecedor extends EntidadeDominio{
         this.nome = nome;
     }
 
-    public String getCpnj() {
-        return cpnj;
+    public String getCnpj() {
+        return cnpj;
     }
 
-    public void setCpnj(String cpnj) {
-        this.cpnj = cpnj;
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
     public String getRazaoSocial() {
@@ -50,14 +50,6 @@ public class Fornecedor extends EntidadeDominio{
         this.razaoSocial = razaoSocial;
     }
     
-    @Override
-    public Integer getId() {
-        return id;
-    }
-    @Override
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    
+        
     
 }

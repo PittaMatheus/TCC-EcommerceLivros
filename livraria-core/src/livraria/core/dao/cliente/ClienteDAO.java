@@ -92,7 +92,7 @@ public class ClienteDAO extends AbstractDAO {
             Cliente cliente = (Cliente) entidade;
             if(cliente.isStatus()){
             PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome,c.sobrenome, c.data_nascimento, "
-                    + "c.ranking, c.email, c.cpf, c.rg, c.sexo, c.tipo_usuario "
+                    + "c.ranking, c.email, c.cpf, c.rg, c.sexo, c.tipo_usuario, c.senha "
                     + "FROM cliente c WHERE c.status = 1");
             ResultSet rs =  declaracao.executeQuery();
             while(rs.next()) {
@@ -107,7 +107,7 @@ public class ClienteDAO extends AbstractDAO {
                 cli.setRg(rs.getString("rg"));
                 cli.setSexo(rs.getString("sexo"));
                 cli.getPapel().setId(rs.getInt("tipo_usuario"));
-                
+                cli.setSenha(rs.getString("senha"));
                
                 entidades.add(cli);
             }
@@ -116,7 +116,7 @@ public class ClienteDAO extends AbstractDAO {
            }
             else if(!cliente.isStatus()){
             PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome,c.sobrenome, c.data_nascimento, "
-                    + "c.ranking, c.email, c.cpf, c.rg, c.sexo, c.tipo_usuario "
+                    + "c.ranking, c.email, c.cpf, c.rg, c.sexo, c.tipo_usuario, c.senha "
                     + "FROM cliente c WHERE c.status = 0");
             ResultSet rs =  declaracao.executeQuery();
             while(rs.next()) {
@@ -131,6 +131,7 @@ public class ClienteDAO extends AbstractDAO {
                 cli.setRg(rs.getString("rg"));
                 cli.setSexo(rs.getString("sexo"));
                 cli.getPapel().setId(rs.getInt("tipo_usuario"));
+                cli.setSenha(rs.getString("senha"));
                
                 entidades.add(cli);
             }
@@ -208,7 +209,7 @@ public class ClienteDAO extends AbstractDAO {
 
             }else{
                     PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome,c.sobrenome, c.data_nascimento, "
-                            + "c.ranking, c.email, c.cpf, c.rg, c.sexo, c.tipo_usuario "
+                            + "c.ranking, c.email, c.cpf, c.rg, c.sexo, c.tipo_usuario, c.senha "
                             + "FROM cliente c WHERE c.status = 1 AND c.id = ?");
                     declaracao.setInt(1, cliente.getId());
                     ResultSet rs =  declaracao.executeQuery();
@@ -224,12 +225,16 @@ public class ClienteDAO extends AbstractDAO {
                         cli.setRg(rs.getString("rg"));
                         cli.setSexo(rs.getString("sexo"));
                         cli.getPapel().setId(rs.getInt("tipo_usuario"));
+                        cli.setSenha(rs.getString("senha"));
                         resultado.setAcao("consultarCliente");
                         entidades.add(cli);
                         resultado.setStatus(true);
                        }
                     }
-                // Fecha a conexao.
+            resultado.setMensagem("Listado com sucesso");
+            resultado.setEntidades(entidades);
+            resultado.setStatus(true);
+            // Fecha a conexao.
             conexao.close();
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
@@ -238,9 +243,7 @@ public class ClienteDAO extends AbstractDAO {
         } catch (SQLException erro) {
             erro.printStackTrace();   
         }
-        resultado.setMensagem("Listado com sucesso");
-        resultado.setEntidades(entidades);
-        resultado.setStatus(true);
+        
        return resultado;
     }
 
@@ -253,7 +256,7 @@ public class ClienteDAO extends AbstractDAO {
             Cliente cliente = (Cliente) entidade;
             PreparedStatement declaracao = conexao.prepareStatement(""
                                                 + "UPDATE cliente SET nome = ?, sobrenome=?,data_nascimento=?"
-						+ ", email=?,cpf=?, rg=?, sexo=? "
+						+ ", email=?,cpf=?, rg=?, sexo=?, senha=? "
 						+ " WHERE id=?");
             
 				declaracao.setString(1, cliente.getNome());
@@ -263,10 +266,12 @@ public class ClienteDAO extends AbstractDAO {
                                 declaracao.setString(5, cliente.getCpf());
 				declaracao.setString(6, cliente.getRg());
 				declaracao.setString(7, cliente.getSexo());
-				declaracao.setInt(8, cliente.getId());
+                                declaracao.setString(8, cliente.getSenha());
+				declaracao.setInt(9, cliente.getId());
 				declaracao.execute();
             resultado.setStatus(true);
-            resultado.setMensagem("O Cliente foi inserido com sucesso!");   
+            resultado.setMensagem("O Cliente foi inserido com sucesso!");
+            resultado.setAcao("alterar");
             // Fecha a conexao.
             conexao.close();
         } catch (ClassNotFoundException erro) {

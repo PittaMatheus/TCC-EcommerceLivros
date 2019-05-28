@@ -115,6 +115,8 @@ public class CupomTrocaDAO extends AbstractDAO {
             resultado.setStatus(true);
             resultado.setMensagem("Listado com sucesso");
             resultado.setAcao("listar");
+            // Fecha a conexao.
+            conexao.close();
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);

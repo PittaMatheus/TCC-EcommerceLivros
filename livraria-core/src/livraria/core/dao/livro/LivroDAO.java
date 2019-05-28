@@ -421,11 +421,12 @@ public class LivroDAO extends AbstractDAO{
                 liv.setCategorias(categorias);
                 entidades.add(liv);
             }
-            conexao.close();
+            
             resultado.setStatus(true);
             resultado.setAcao("consultar");
             resultado.setMensagem("livro listado com sucesso");
            }
+            conexao.close();
             }catch(ClassNotFoundException erro) {
                 erro.printStackTrace();     
                 resultado.setStatus(false);

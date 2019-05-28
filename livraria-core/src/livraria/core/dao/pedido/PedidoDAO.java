@@ -41,6 +41,7 @@ public class PedidoDAO extends AbstractDAO{
             Pedido pedido = (Pedido) entidade;
             EnderecoDAO enderecoDAO = new EnderecoDAO();
             PagamentoDAO pagamentoDAO = new PagamentoDAO();
+            ItemPedidoDAO itemDAO = new ItemPedidoDAO();
             PagamentoCartaoCredito pgCartao = new PagamentoCartaoCredito();
             Pagamento pagamento = new Pagamento();
             Endereco endereco = new Endereco();
@@ -60,6 +61,9 @@ public class PedidoDAO extends AbstractDAO{
             // Seta o ID do pedido
             pedido.setId((rs.next())?rs.getInt(1):0);
             resultado = pagamentoDAO.inserir(pedido);
+            
+            resultado = itemDAO.inserir(pedido);
+
             resultado.setAcao("pedidoGerado");
             resultado.setStatus(true);
             // Fecha a conexao.
@@ -132,6 +136,8 @@ public class PedidoDAO extends AbstractDAO{
             }else{
                 resultado.setAcao("listarPedidos");
             }
+            // Fecha a conexao.
+            conexao.close();
         }catch(ClassNotFoundException erro) {
                  erro.printStackTrace();     
                  resultado.setStatus(false);

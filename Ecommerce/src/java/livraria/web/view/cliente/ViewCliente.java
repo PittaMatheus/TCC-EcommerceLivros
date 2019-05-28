@@ -180,13 +180,15 @@ public class ViewCliente implements IViewHelper{
                                   request.getSession();
                                   session.invalidate();
                                   response.sendRedirect("index.jsp");  
+                            }else if(resultado.getAcao().equals("falhaAlterar")){
+                                request.getRequestDispatcher("preAlterar_cliente.jsp").forward(request, response);
                             }     
-                            }else 
-                                    request.getRequestDispatcher("../index.jsp").forward(request, response);
+                        }else 
+                            request.getRequestDispatcher("../index.jsp").forward(request, response);
                                 
-                        } else {
-                            response.sendRedirect("../index.jsp");
-                        }
+                    } else {
+                        response.sendRedirect("../index.jsp");
+                    }
                 } catch(Exception e) {
                     e.printStackTrace();
                         }

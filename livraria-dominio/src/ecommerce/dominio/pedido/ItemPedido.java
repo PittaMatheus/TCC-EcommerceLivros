@@ -5,12 +5,27 @@
  */
 package ecommerce.dominio.pedido;
 
+import ecommerce.dominio.livro.Livro;
+
 /**
  *
  * @author matheus
  */
 public class ItemPedido extends Item{
     private Pedido pedido;
+    private Livro livro;
+    
+    public ItemPedido(){
+        livro = new Livro();
+    }
+
+    public Livro getLivro() {
+        return livro;
+    }
+
+    public void setLivro(Livro livro) {
+        this.livro = livro;
+    }
 
     public Pedido getPedido() {
         return pedido;

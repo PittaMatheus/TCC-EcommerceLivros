@@ -19,6 +19,8 @@ import ecommerce.dominio.livro.GrupoLivro;
 import livraria.core.aplicacao.Resultado;
 import ecommerce.dominio.cliente.Telefone;
 import ecommerce.dominio.Usuario;
+import ecommerce.dominio.estoque.Estoque;
+import ecommerce.dominio.estoque.Fornecedor;
 import ecommerce.dominio.livro.Livro;
 import livraria.core.util.ExcecaoAcessoDados;
 import livraria.core.util.ExcecaoLimiteTentativas;
@@ -38,6 +40,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import livraria.web.view.estoque.ViewEstoque;
 import livraria.web.view.pedido.ViewCarrinho;
 import livraria.web.view.pedido.ViewCarrinhoSessao;
 import livraria.web.view.pedido.ViewClienteCompra;
@@ -123,6 +126,11 @@ public class Control extends HttpServlet {
         viewHelper.put("/Ecommerce/adm/AutorizarTroca", new ViewCupomTroca());
         viewHelper.put("/Ecommerce/Clientes/ConsultarCupomTroca", new ViewCupomTroca());
         
+        // Estoque
+        viewHelper.put("/Ecommerce/Estoque/InserirEstoque", new ViewEstoque());
+        viewHelper.put("/Ecommerce/Estoque/ListarEstoqueLivros", new ViewEstoque());
+        viewHelper.put("/Ecommerce/Estoque/PreAlterarEstoque", new ViewEstoque());
+        viewHelper.put("/Ecommerce/Estoque/AlterarEstoque", new ViewEstoque());
 
         // View
         
@@ -168,6 +176,7 @@ public class Control extends HttpServlet {
          * 
          */
         viewHelper.get(uri).setEntidade(resultado, request, response);
+        init();
     }
     
    @Override
@@ -189,6 +198,14 @@ public class Control extends HttpServlet {
         resultado = commandListar.executar(new Livro());
         List<EntidadeDominio> livros = resultado.getEntidades();
         getServletContext().setAttribute("livros", livros);
+        
+        resultado = commandListar.executar(new Estoque());
+        List<EntidadeDominio> estoque = resultado.getEntidades();
+        getServletContext().setAttribute("estoque", estoque);
+        
+        resultado = commandListar.executar(new Fornecedor());
+        List<EntidadeDominio> fornecedor = resultado.getEntidades();
+        getServletContext().setAttribute("fornecedor", fornecedor);
         
         
         

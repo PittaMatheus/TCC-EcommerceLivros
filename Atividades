@@ -5,17 +5,17 @@ ___Atividades_____
 
 
 
-A5     - Incluir DAO estoque
+
 A7     - Remover itens do carrinho / LIMPAR carrinho
 A8     - Correção - validar pedido minimo de 5 reais
 
 A10     - Ajustar detalhes do livro (array aparecendo)
 
-A13     - Editar meu perfil(cliente e ADM)
+
 A14     - Adicionar seleção para que o ADM possa escolher entre Aprovar ou Reprovar uma solicitação de troca
 A15     - Adicionar campo de validade ao cupom de troca que foi gerado
 A16     - Gerenciar trocas(alterar status das trocas)
-A17     - Acrescentar link "Voltar" em : -cadastro de livro; -Confirmar endereco de compra; - Confirmar cartao de compra
+*A17     -Confirmar endereco de compra; - Confirmar cartao de compra
 A18     - Esconder dados na tela: - Confirmar cartão de compra
 
 A20     - Listar ranking de pontos (cliente) - e indicar possiveis descontos
@@ -60,3 +60,6 @@ A19     - Incluir possibilidade do cliente adidcionar livros sem estar logado(se
 A2      - Incluir a possibilidade de utilizar mais de 1 cartão de crédito para dividir o valor do pedido
 A6     	- incluir validação da data de validade do cartão de credito antes de finalizar o pedido
 A1      - Exibir os livros na home
+A5     - Incluir DAO estoque e fornecedor
+A13     - Editar meu perfil(cliente)
+*A17	- Acrescentar link "Voltar" em : -cadastro de livro;

@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import livraria.core.aplicacao.Resultado;
@@ -25,7 +27,40 @@ public class EstoqueDAO extends AbstractDAO{
 
     @Override
     public Resultado inserir(EntidadeDominio entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Estoque estoque = (Estoque) entidade;
+            
+            // Inserindo a editora e recuperando ID para colocar na inserção do LIVRO
+             PreparedStatement declaracao = conexao.prepareStatement(
+                    "INSERT INTO fornecedor "
+                    + "(nome_fornecedor, cnpj, razao_social) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
+             declaracao.setString(1, estoque.getItem().getFornecedor().getNome());
+             declaracao.setString(2, estoque.getItem().getFornecedor().getCnpj());
+             declaracao.setString(3, estoque.getItem().getFornecedor().getRazaoSocial());
+             declaracao.execute();
+             ResultSet rs = declaracao.getGeneratedKeys(); 
+             estoque.getItem().getFornecedor().setId((rs.next())?rs.getInt(1):0);
+            
+            PreparedStatement declaracao2 = conexao.prepareStatement("INSERT INTO estoque (id_livro, id_fornecedor, quantidade, valor_custo) VALUES(?,?,?,?)");
+            declaracao2.setInt(1, estoque.getItem().getLivro().getId());
+            declaracao2.setInt(2, estoque.getItem().getFornecedor().getId());
+            declaracao2.setInt(3, estoque.getItem().getQuantidade());
+            declaracao2.setDouble(4, estoque.getItem().getCusto());
+            declaracao2.execute();
+            resultado.setStatus(true);
+            resultado.setMensagem("O estoque foi inserido com sucesso");
+            // Fecha a conexao.
+            conexao.close();
+        } catch (ClassNotFoundException erro) {
+            erro.printStackTrace();
+            resultado.setStatus(false);
+            resultado.setMensagem("Ocorreu um erro ao inserir o estoque");
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+        return resultado;
     }
 
     @Override
@@ -35,33 +70,57 @@ public class EstoqueDAO extends AbstractDAO{
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();
             Estoque estoque = (Estoque) entidade;
-                        PreparedStatement declaracao = conexao.prepareStatement("SELECT e.id_livro,e.quantidade "
+                        PreparedStatement declaracao = conexao.prepareStatement("SELECT e.id, e.id_livro, e.id_fornecedor, e.quantidade, e.valor_custo, e.dt_entrada "
                                 + "FROM estoque e ");
             ResultSet rs =  declaracao.executeQuery();
             while(rs.next()) {
                 Estoque est = new Estoque();
+                est.setId(rs.getInt("id"));
                 est.getItem().getLivro().setId(rs.getInt("id_livro"));
+                est.getItem().getFornecedor().setId(rs.getInt("id_fornecedor"));
                 est.getItem().setQuantidade(rs.getInt("quantidade"));
+                est.getItem().setCusto(rs.getFloat("valor_custo"));
+                est.setDataCadastro(rs.getDate("dt_entrada"));
                 entidades.add(est);
             }
+            resultado.setEntidades(entidades);
             resultado.setStatus(true);
-            resultado.setAcao("listarCategoria");
-        // Fecha a conexao.
-        conexao.close();
+            resultado.setAcao("listarEstoque");
+            // Fecha a conexao.
+            conexao.close();
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);
-            resultado.setMensagem("Houve algum erro ao listar o cliente");
+            resultado.setMensagem("Houve algum erro ao listar o estoque");
         }catch (SQLException erro) {
             erro.printStackTrace();   
         }
-        resultado.setEntidades(entidades);
+        
        return resultado;
     }
 
     @Override
     public Resultado alterar(EntidadeDominio entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Estoque estoque = (Estoque) entidade;
+            PreparedStatement declaracao = conexao.prepareStatement("UPDATE estoque set quantidade = ? where id = ?");
+            declaracao.setInt(1, estoque.getItem().getQuantidade());
+            declaracao.setInt(2, estoque.getId());
+            declaracao.execute();
+            resultado.setStatus(true);
+            resultado.setMensagem("O estoque foi alterado com sucesso");
+            // Fecha a conexao.
+            conexao.close();
+        } catch (ClassNotFoundException erro) {
+            erro.printStackTrace();
+            resultado.setStatus(false);
+            resultado.setMensagem("Ocorreu um erro ao alterar o estoque");
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+        return resultado;
     }
 
     @Override
@@ -76,7 +135,41 @@ public class EstoqueDAO extends AbstractDAO{
 
     @Override
     public Resultado consultar(EntidadeDominio entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Estoque estoque = (Estoque) entidade;
+            // Se o id do objeto cliente não estiver preenchido. A funcao consultar irá consultar o CPF e EMAIL
+            PreparedStatement declaracao = conexao.prepareStatement("SELECT e.id, e.id_livro, e.id_fornecedor, e.quantidade, e.valor_custo, e.dt_entrada "
+                            + "FROM estoque e WHERE e.id = ?");
+            declaracao.setInt(1, estoque.getId());
+            ResultSet rs =  declaracao.executeQuery();
+            while(rs.next()) {
+                Estoque est = new Estoque();
+                est.setId(rs.getInt("id"));
+                est.getItem().getLivro().setId(rs.getInt("id_livro"));
+                est.getItem().getFornecedor().setId(rs.getInt("id_fornecedor"));
+                est.getItem().setQuantidade(rs.getInt("quantidade"));
+                est.getItem().setCusto(rs.getFloat("valor_custo"));
+                est.setDataCadastro(rs.getDate("dt_entrada"));
+                entidades.add(est);
+            }
+            
+            resultado.setMensagem("Listado com sucesso");
+            resultado.setEntidades(entidades);
+            resultado.setAcao("alterarEstoque");
+            resultado.setStatus(true);
+            // Fecha a conexao.
+            conexao.close();
+        }catch(ClassNotFoundException erro) {
+            erro.printStackTrace();     
+            resultado.setStatus(false);
+            resultado.setMensagem("Houve algum erro ao listar o estoque");
+        } catch (SQLException erro) {
+            erro.printStackTrace();   
+        }
+        return resultado;
     }
     
 }

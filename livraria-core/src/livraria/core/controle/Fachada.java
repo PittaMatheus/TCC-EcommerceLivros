@@ -26,6 +26,7 @@ import ecommerce.dominio.livro.GrupoLivro;
 import ecommerce.dominio.livro.Livro;
 import ecommerce.dominio.Usuario;
 import ecommerce.dominio.estoque.Estoque;
+import ecommerce.dominio.estoque.Fornecedor;
 import ecommerce.dominio.livro.Dimensoes;
 import ecommerce.dominio.livro.Editora;
 import ecommerce.dominio.livro.ISBN;
@@ -50,9 +51,11 @@ import livraria.core.dao.livro.IsbnDAO;
 import livraria.core.dao.pedido.CarrinhoDAO;
 import livraria.core.dao.pedido.CupomTrocaDAO;
 import livraria.core.dao.pedido.EstoqueDAO;
+import livraria.core.dao.pedido.FornecedorDAO;
 import livraria.core.dao.pedido.PagamentoDAO;
 import livraria.core.dao.pedido.PedidoDAO;
 import livraria.core.dao.pedido.TrocaDAO;
+import livraria.core.regras.estoque.ValidaCamposVaziosEstoque;
 import livraria.core.regras.livro.ValidarCamposVaziosLivro;
 import livraria.core.regras.livro.ValidarCategoriasLivro;
 import livraria.core.regras.livro.ValidarDimensoesLivro;
@@ -92,12 +95,14 @@ public class Fachada implements IFachada{
         dao.put(Pagamento.class.getName(), new PagamentoDAO());
         dao.put(Troca.class.getName(), new TrocaDAO());
         dao.put(CupomTroca.class.getName(), new CupomTrocaDAO());
+        dao.put(Fornecedor.class.getName(), new FornecedorDAO());
         
         RN = new HashMap<String,Map<String,List<IStrategy>>>();
         
         //Regras do cliente
         List<IStrategy> RNClienteSalvar = new ArrayList<IStrategy>();
         List<IStrategy> RNClienteAutenticar = new ArrayList<IStrategy>();
+        List<IStrategy> RNClienteAlterar = new ArrayList<IStrategy>();
         
         // Listas das Regras de negocio do cliente
         RNClienteSalvar.add(new ValidaCamposObrigatorios());
@@ -110,6 +115,14 @@ public class Fachada implements IFachada{
         
         // Regras de negocio de autenticacao cliente
         RNClienteAutenticar.add(new ValidaSenha());
+        
+        // Listas das Regras de negocio do cliente alterar
+        RNClienteAlterar.add(new ValidaCamposObrigatorios());
+        RNClienteAlterar.add(new ValidaSenhaForte());
+        RNClienteAlterar.add(new ValidaConfirmarSenha());
+        RNClienteAlterar.add(new ValidaEspacosVazios());
+        RNClienteAlterar.add(new ValidaCPF());
+        RNClienteAlterar.add(new ValidaData());
 
         // Regras de negocio do cliente
         Map<String, List<IStrategy>> regrasCliente = new HashMap<String, List<IStrategy>>();
@@ -117,6 +130,7 @@ public class Fachada implements IFachada{
         // Regra salvar e autenticar cliente
         regrasCliente.put("salvar", RNClienteSalvar);
         regrasCliente.put("autenticar", RNClienteAutenticar);
+        regrasCliente.put("alterar", RNClienteAlterar);
         
         // Regras de negocio geral
       	RN.put(Cliente.class.getName(), regrasCliente);
@@ -138,8 +152,7 @@ public class Fachada implements IFachada{
 
         // Regras de negocio geral
         RN.put(Livro.class.getName(), regrasLivro);
-        
-        
+                
         // Regras carrinho
         List<IStrategy> RNAddCarrinho = new ArrayList<IStrategy>();
         //Lista de regras de negocio do pedido
@@ -161,6 +174,18 @@ public class Fachada implements IFachada{
         // Regras de negocio geral
         RN.put(Pedido.class.getName(), regrasPedido);
         
+        // Regras do estoque
+        List<IStrategy> regrasSalvarEstoque = new ArrayList<IStrategy>();
+        
+        // Listas das regras de negocio do estoque
+        regrasSalvarEstoque.add(new ValidaCamposVaziosEstoque());
+        
+        Map<String, List<IStrategy>> regrasEstoque = new HashMap<String, List<IStrategy>>();
+        //Regras salvar estoque
+        regrasEstoque.put("salvar", regrasSalvarEstoque);
+        regrasEstoque.put("alterar", regrasSalvarEstoque);
+        // Regras de negocio geral
+        RN.put(Estoque.class.getName(), regrasEstoque);
         
         /* Gerar pedido
         List<IStrategy> RNAddPedido = new ArrayList<IStrategy>();

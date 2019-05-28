@@ -9,6 +9,7 @@ import ecommerce.dominio.EntidadeDominio;
 import ecommerce.dominio.cliente.Cartao;
 import ecommerce.dominio.cliente.Cliente;
 import ecommerce.dominio.livro.Livro;
+import ecommerce.dominio.pedido.ItemPedido;
 import ecommerce.dominio.pedido.PagamentoCartaoCredito;
 import ecommerce.dominio.pedido.Pedido;
 import java.io.IOException;
@@ -32,10 +33,20 @@ public class ViewPedido implements IViewHelper {
 
     @Override
     public EntidadeDominio getEntidade(HttpServletRequest request) {
-     
+        
+            HttpSession session = request.getSession();
+            Pedido pedido = new Pedido();
+            if(null != session.getAttribute("pedido")){
+                pedido = (Pedido)session.getAttribute("pedido");
+            }
+                           
             Livro objLivro = new Livro();
             Cliente objCliente = new Cliente();
-            Pedido pedido = new Pedido();
+            
+
+            
+            
+            List<ItemPedido> item = new ArrayList<>();
             String id = request.getParameter("id_pedido");
             String id_cliente = request.getParameter("u");
             String tipoUsuario = request.getParameter("tipoUsuario");        
@@ -97,12 +108,48 @@ public class ViewPedido implements IViewHelper {
                 }
             }
 
-            pedido.getPagamento().setPagamentosCartao(idsCartoes);
+            aux = 0;
+            int qt = 1;
+            boolean flgHouveAcrescimo;
+            int idLivroAtual;
+            int idLivroLista;
+            // Recuperando os sIDS dos livros escolhidos pelo cliente
+            if(idsLivro != null && idsLivro.length > 0){
+                for(String idLivro: idsLivro){
+                    flgHouveAcrescimo = false;
+                    ItemPedido itemPedido = new ItemPedido();
+                    itemPedido.getLivro().setId(Integer.parseInt(idLivro));
+                    itemPedido.setQuantidade(qt);
+                    idLivroAtual = itemPedido.getLivro().getId();
+                    // Lista de item preenchida com o livro/id/qt
+                    // Varrer a lista para descobrir se há algum repetido e incrementar a qtde
+
+                    for(ItemPedido itemPed: item){
+                        idLivroLista = itemPed.getLivro().getId();
+                        if(idLivroLista == itemPedido.getLivro().getId()){
+                            qt = itemPed.getQuantidade();
+                            itemPedido.setQuantidade(qt + 1);
+                            flgHouveAcrescimo = true;
+                        }
+                        aux++;
+                    }
+                    if(!flgHouveAcrescimo){
+                        item.add(itemPedido);
+                    }
+                }            
+                pedido.setItems(item);
+                
+            }
             
-         
-        HttpSession session = request.getSession();
-        session.setAttribute("pedido", pedido);
+            
+            
+            
+            
+        pedido.getPagamento().setPagamentosCartao(idsCartoes);
+        
        
+        session.setAttribute("pedido", pedido);
+
         return pedido;
     }
 
