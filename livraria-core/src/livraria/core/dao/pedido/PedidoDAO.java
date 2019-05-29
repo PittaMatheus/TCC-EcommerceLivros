@@ -66,6 +66,8 @@ public class PedidoDAO extends AbstractDAO{
 
             resultado.setAcao("pedidoGerado");
             resultado.setStatus(true);
+            resultado.setMensagem("O pedido foi gerado com sucesso");
+
             // Fecha a conexao.
             conexao.close();
         } catch (ClassNotFoundException erro) {

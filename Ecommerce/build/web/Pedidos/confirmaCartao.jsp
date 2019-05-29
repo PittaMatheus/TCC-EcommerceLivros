@@ -4,6 +4,7 @@
     Author     : matheus
 --%>
 
+<%@page import="ecommerce.dominio.cliente.Cliente"%>
 <%@page import="ecommerce.dominio.pedido.Pedido"%>
 <%@page import="java.util.List"%>
 <%@page import="ecommerce.dominio.cliente.Cartao"%>
@@ -18,16 +19,29 @@
     <body>
         <h1>Escolha o cartão de credito</h1>
         <%
-   
+            int id_usuario;
+            if(session.getAttribute("usuarioLogado") == null){
+                response.sendRedirect("../login.jsp");
+            }else if(session.getAttribute("usuarioLogado") != null){
+                Resultado resultadoLogin = (Resultado) session.getAttribute("usuarioLogado");    
+                List<Cliente> clientes = (List) resultadoLogin.getEntidades();
+                        if(resultadoLogin != null) {
+                             if(clientes.size() == 0) {
+                                response.sendRedirect("../login.jsp");
+                            } else {
+                               for (Cliente cliente : clientes) {         
+                                  id_usuario = cliente.getId();
+                              
+                                             
+                                 
             if(session.getAttribute("pedido") != null){
                 Pedido pedido = (Pedido) session.getAttribute("pedido");    
-               
+
                 
-                
-            
-            
            // String id_endereco = request.getParameter("id_endereco");
-            String id_usuario = request.getParameter("u");
+            if(null != request.getParameter("u")){
+                 id_usuario = Integer.parseInt(request.getParameter("u"));
+            }
             double valorTotal = 0;
 
             Resultado resultado = (Resultado) request.getAttribute("resultado");
@@ -60,7 +74,7 @@
                                 out.println("<td class='tdNumeroCartao"+cartao.getId()+"'>"  + cartao.getNumeroCartao()+ "</td>");
                                 out.println("<td>" + cartao.getCodSeguranca()+ "</td>");
                                 out.println("</tr>");
-                                id_usuario = String.valueOf(cartao.getCliente().getId());
+                                id_usuario = cartao.getCliente().getId();
                             }
                     }
                     // out.println("Valor total: " + pedido.getPagamento().getValorTotal());
@@ -96,6 +110,10 @@
         <a href='cadastro_cartao.jsp?id=<%=id_usuario%> '>Adicionar cartão</a>
 <%
     }
+ }
+                             }
+                        }
+            }
 %>
 <br><br>
 

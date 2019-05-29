@@ -119,32 +119,32 @@ public class ViewPedido implements IViewHelper {
                     flgHouveAcrescimo = false;
                     ItemPedido itemPedido = new ItemPedido();
                     itemPedido.getLivro().setId(Integer.parseInt(idLivro));
-                    itemPedido.setQuantidade(qt);
                     idLivroAtual = itemPedido.getLivro().getId();
                     // Lista de item preenchida com o livro/id/qt
                     // Varrer a lista para descobrir se há algum repetido e incrementar a qtde
-
-                    for(ItemPedido itemPed: item){
-                        idLivroLista = itemPed.getLivro().getId();
-                        if(idLivroLista == itemPedido.getLivro().getId()){
-                            qt = itemPed.getQuantidade();
-                            itemPedido.setQuantidade(qt + 1);
-                            flgHouveAcrescimo = true;
+                    if(item.size() == 0){
+                        itemPedido.setQuantidade(qt);
+                    }else{
+                        for(ItemPedido itemPed: item){
+                            idLivroLista = itemPed.getLivro().getId();
+                            if(idLivroLista == itemPedido.getLivro().getId()){
+                                qt = itemPed.getQuantidade();
+                                itemPedido.setQuantidade(qt + 1);
+                                itemPed.setQuantidade(qt + 1);
+                                flgHouveAcrescimo = true;
+                            }else if(idLivroLista != itemPedido.getLivro().getId()){
+                                itemPedido.setQuantidade(qt);
+                            }
                         }
-                        aux++;
                     }
                     if(!flgHouveAcrescimo){
                         item.add(itemPedido);
                     }
-                }            
-                pedido.setItems(item);
-                
+                }                            
+                pedido.setItems(item); 
             }
-            
-            
-            
-            
-            
+                
+
         pedido.getPagamento().setPagamentosCartao(idsCartoes);
         
        

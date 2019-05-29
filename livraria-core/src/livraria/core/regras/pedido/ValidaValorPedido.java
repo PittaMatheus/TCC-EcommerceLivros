@@ -36,7 +36,9 @@ public class ValidaValorPedido extends AbstractStrategy{
                 aux++;             
                 somaValorCartao += pgCartao.getValor();
         }
-       somaValorCartao = PrecoUtils.arredondarPreco(somaValorCartao);
+        somaValorCartao = PrecoUtils.arredondarPreco(somaValorCartao);
+        valorTotal = PrecoUtils.arredondarPreco(valorTotal);
+
         if(somaValorCartao != valorTotal){
             str="<li>O valor está incorreto</li>";
         }

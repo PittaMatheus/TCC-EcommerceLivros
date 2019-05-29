@@ -33,7 +33,7 @@ public class ItemPedidoDAO extends AbstractDAO{
             Pedido pedido = (Pedido) entidade;
             // Loop para inserir todos os items
             for(ItemPedido itemPed: pedido.getItems()){
-                PreparedStatement declaracao = conexao.prepareStatement("INSERT INTO item_pedido (quantidade, id_livro, id_pedido) "
+                PreparedStatement declaracao = conexao.prepareStatement("INSERT INTO itemPedido (quantidade, id_livro, id_pedido) "
                         + "VALUES (?,?,?)");
                 declaracao.setInt(1, itemPed.getQuantidade());
                 declaracao.setInt(2, itemPed.getLivro().getId());
@@ -41,9 +41,10 @@ public class ItemPedidoDAO extends AbstractDAO{
                 declaracao.execute();
                 resultado.setAcao("iTemPedidoInserido");
                 resultado.setStatus(true);
-                // Fecha a conexao.
-                conexao.close();
+                
             }
+            // Fecha a conexao.
+                conexao.close();
         } catch (ClassNotFoundException erro) {
             erro.printStackTrace();
             resultado.setStatus(false);
