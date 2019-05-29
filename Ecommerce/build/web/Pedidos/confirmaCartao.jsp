@@ -101,7 +101,7 @@
                 
                         <br><br>
                         <input type="hidden" name="u" value="<%=id_usuario%>">
-                         <input type="hidden" name="id_endereco" value="<%=pedido.getEndereco().getClienteId()%>">
+                         <input type="hidden" name="id_endereco" value="<%=pedido.getEndereco().getId()%>">
                          <input type="hidden" id="valorTotal" name="valorTotal" value="<%=pedido.getPagamento().getValorTotal()%>">
                          <button name="acao" value="inserir">Confirmar pedido</button>
                         </form>

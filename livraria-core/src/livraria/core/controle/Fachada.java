@@ -174,6 +174,8 @@ public class Fachada implements IFachada{
         // Regras de negocio geral
         RN.put(Pedido.class.getName(), regrasPedido);
         
+        
+        
         // Regras do estoque
         List<IStrategy> regrasSalvarEstoque = new ArrayList<IStrategy>();
         
@@ -334,7 +336,8 @@ public class Fachada implements IFachada{
                         resultado.setMensagem(resposta);
                     }
                 }
-            }
+            }else
+                resultado.setMensagem(new String());
         } else {
             resultado.setMensagem(new String());
         }

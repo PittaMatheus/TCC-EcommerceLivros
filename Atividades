@@ -15,9 +15,9 @@ A10     - Ajustar detalhes do livro (array aparecendo)
 A14     - Adicionar seleção para que o ADM possa escolher entre Aprovar ou Reprovar uma solicitação de troca
 A15     - Adicionar campo de validade ao cupom de troca que foi gerado
 A16     - Gerenciar trocas(alterar status das trocas)
-*A17     -Confirmar endereco de compra; - Confirmar cartao de compra
-A18     - Esconder dados na tela: - Confirmar cartão de compra
 
+A18     - Esconder dados na tela: - Confirmar cartão de compra
+A23	- Incluir parcelas no pagamento
 A20     - Listar ranking de pontos (cliente) - e indicar possiveis descontos
 A21     - Incluir a possibilidade de utilizar o ranking de pontos como desconto nas compras
 A22     - Incluir a possiblidade de utilizar um cupom de troca no pagamento
@@ -42,9 +42,9 @@ ________________________________________________________________________________
 
                                                             DOING
 	MATHEUS
-A30	- Incluir insert na tabela itensPedido no momento do pedido
+
 A29	- Incluir validação front-end no valor do pedido no momento da compra(back-end ja possui)
-A23	- Incluir parcelas no pagamento
+
 A3      - Incluir a possiblidade de utilizar um cupom de desconto no pagamento
 A4      - Acrescentar pontos ao ranking do cliente após o pedido ser aprovado
 A9     - adicionar quantidade de livros	
@@ -56,6 +56,8 @@ A12     - Criar pagina de vizualização de status(linha do tempo)
 ________________________________________________________________________________________________________
 
                                                              DONE
+*A17     -Confirmar endereco de compra; - Confirmar cartao de compra
+A30	- Incluir insert na tabela itensPedido no momento do pedido
 A19     - Incluir possibilidade do cliente adidcionar livros sem estar logado(sessao). Carrinho com login ja esta OK
 A2      - Incluir a possibilidade de utilizar mais de 1 cartão de crédito para dividir o valor do pedido
 A6     	- incluir validação da data de validade do cartão de credito antes de finalizar o pedido

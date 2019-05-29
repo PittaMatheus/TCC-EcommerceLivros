@@ -4,6 +4,7 @@
     Author     : matheus
 --%>
 
+<%@page import="ecommerce.dominio.cliente.Cliente"%>
 <%@page import="livraria.core.aplicacao.Resultado"%>
 <%@page import="java.util.List"%>
 <%@page import="ecommerce.dominio.pedido.Pedido"%>
@@ -18,10 +19,32 @@
     </head>
     <body>
         <%
+            int id_usuario = 0;
+             if(session.getAttribute("usuarioLogado") == null){
+                response.sendRedirect("../login.jsp");
+            }else if(session.getAttribute("usuarioLogado") != null){
+                Resultado resultado = (Resultado) session.getAttribute("usuarioLogado");    
+                List<Cliente> clientes = (List) resultado.getEntidades();
+                        if(resultado != null) {
+                             if(clientes.size() == 0) {
+                                response.sendRedirect("../login.jsp");
+                            } else {
+                               for (Cliente cliente : clientes) {         
+                                 id_usuario =  cliente.getId();
+                               }
+                             }
+                        }
+            }
+             
+
+            
+            
+            
+            
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
 		if(resultado == null) {
                         
-			response.sendRedirect(request.getContextPath() + "/Clientes/ListarMeusPedidos?acao=listar&tipoUsuario=1");
+			response.sendRedirect(request.getContextPath() + "/Clientes/ListarMeusPedidos?acao=consultarPorID&tipoUsuario=1&u="+id_usuario);
                         
 			return;
 		}

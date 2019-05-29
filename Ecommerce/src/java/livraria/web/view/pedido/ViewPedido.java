@@ -73,7 +73,7 @@ public class ViewPedido implements IViewHelper {
                 pedido.getCliente().setId(Integer.parseInt(id_cliente));
             }
             if(id_endereco != null){
-                pedido.getEndereco().setClienteId(Integer.parseInt(id_endereco));
+                pedido.getEndereco().setId(Integer.parseInt(id_endereco));
             }
 
 
@@ -180,7 +180,7 @@ public class ViewPedido implements IViewHelper {
              }else{
                     Pedido pedido = (Pedido) request.getSession().getAttribute("pedido");
                     request.setAttribute("pedido", pedido);
-                    if(pedido.getPagamento().getValorTotal() != null && pedido.getEndereco().getClienteId()== null){
+                    if(pedido.getPagamento().getValorTotal() != null && pedido.getEndereco().getId()== null){
                         // valor total ja foi setado. Endereço ainda nao. então é hora de confirmar os dados de endereço.
                         request.getRequestDispatcher("confirmaEndereco.jsp").forward(request, response);
                     }else if(pedido.getPagamento().getCartao().getId() == null){

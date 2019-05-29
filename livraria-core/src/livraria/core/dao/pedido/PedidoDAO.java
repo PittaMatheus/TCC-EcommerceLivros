@@ -39,22 +39,18 @@ public class PedidoDAO extends AbstractDAO{
             Connection conexao = BancoDadosOracle.getConexao();
             // Instancias
             Pedido pedido = (Pedido) entidade;
-            EnderecoDAO enderecoDAO = new EnderecoDAO();
             PagamentoDAO pagamentoDAO = new PagamentoDAO();
             ItemPedidoDAO itemDAO = new ItemPedidoDAO();
             PagamentoCartaoCredito pgCartao = new PagamentoCartaoCredito();
             Pagamento pagamento = new Pagamento();
             Endereco endereco = new Endereco();
-            endereco.setClienteId(pedido.getCliente().getId());
-            resultado = enderecoDAO.consultar(endereco);
-            
-            //pedido.getEndereco().setClienteId(resultado.getEntidades().get(0).getId());
-            int id_endereco = resultado.getEntidades().get(0).getId();
+            endereco.setId(pedido.getEndereco().getId());
+
 
             PreparedStatement declaracao = conexao.prepareStatement("INSERT INTO pedido(id_cliente, "
                     + "id_endereco, valorTotal) VALUES(?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             declaracao.setInt(1, pedido.getCliente().getId());
-            declaracao.setInt(2, id_endereco);
+            declaracao.setInt(2, endereco.getId());
             declaracao.setDouble(3, pedido.getPagamento().getValorTotal());
             declaracao.execute();
             ResultSet rs = declaracao.getGeneratedKeys();
@@ -89,14 +85,15 @@ public class PedidoDAO extends AbstractDAO{
             Connection conexao = BancoDadosOracle.getConexao();
             Pedido pedido = (Pedido) entidade;
                        PreparedStatement declaracao = conexao.prepareStatement("select p.id, p.id_cliente, p.id_statusPedido, p.id_endereco, p.dt_pedido, p.valorTotal,\n" +
-"c.email, c.cpf, c.data_nascimento, c.id, c.nome, c.ranking, c.rg, c.sexo, c.email, c.sobrenome,\n" +
-"e.bairro, e.cep, e.cidade, e.complemento, e.logradouro, e.nomeEndereco, e.numero, e.referencia,\n" +
-"e.tipoEndereco, e.tipoLogradouro, e.uf, pag.valor, pag.id_cartao \n" +
-"from pedido p\n" +
-"INNER JOIN cliente c \n" +
-"INNER JOIN endereco e \n" +
-"LEFT JOIN pagamentoCartao pag\n" +
-"on p.id = pag.id_pedido;");
+                    "c.email, c.cpf, c.data_nascimento, c.id, c.tipo_usuario, c.nome, c.ranking, c.rg, c.sexo, c.email, c.sobrenome,\n" +
+                    "e.bairro, e.cep, e.cidade, e.complemento, e.logradouro, e.nomeEndereco, e.numero, e.referencia,\n" +
+                    "e.tipoEndereco, e.tipoLogradouro, e.uf\n" +
+                    "from pedido p\n" +
+                    "INNER JOIN cliente c\n" +
+                    "INNER JOIN endereco e \n" +
+                    "on p.id_cliente = c.id \n" +
+                    "AND\n" +
+                    "e.id = p.id_endereco;");
             ResultSet rs =  declaracao.executeQuery();
             while(rs.next()) {
                 Pedido ped = new Pedido();
@@ -112,11 +109,11 @@ public class PedidoDAO extends AbstractDAO{
                 ped.getCliente().getPapel().setId(Integer.parseInt(tipoUsuario));
                 
                 // Setando dados do pagamento
-                ped.getPagamento().setId(rs.getInt("id_pagamento"));
-                ped.getPagamento().setValorTotal(rs.getDouble("valor_total"));
-                ped.getPagamento().getCartao().getBandeira().setNome(rs.getString("bandeira"));
-                ped.getPagamento().setDtPagamento(rs.getDate("dt_pagamento"));
-                ped.getPagamento().getCartao().setNumeroCartao(rs.getString("numero"));
+                //ped.getPagamento().setId(rs.getInt("id_pagamento"));
+                ped.getPagamento().setValorTotal(rs.getDouble("valorTotal"));
+                //ped.getPagamento().getCartao().getBandeira().setNome(rs.getString("bandeira"));
+               // ped.getPagamento().setDtPagamento(rs.getDate("dt_pagamento"));
+                //ped.getPagamento().getCartao().setNumeroCartao(rs.getString("numero"));
                 // Setando dados do endereco
                 ped.getEndereco().setId(rs.getInt("id_endereco"));
                 ped.getEndereco().setLogradouro(rs.getString("logradouro"));
@@ -133,6 +130,7 @@ public class PedidoDAO extends AbstractDAO{
                 entidades.add(ped);
             }
             resultado.setStatus(true);
+            resultado.setMensagem("Pedidos listados");
             if(pedido.getTipo().equals("1") && pedido.getTipo() != null){
                 resultado.setAcao("listarMeusPedidos");
             }else{
@@ -193,7 +191,75 @@ public class PedidoDAO extends AbstractDAO{
 
     @Override
     public Resultado consultar(EntidadeDominio entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Pedido pedido = (Pedido) entidade;
+                       PreparedStatement declaracao = conexao.prepareStatement("select p.id, p.id_cliente, p.id_statusPedido, p.id_endereco, p.dt_pedido, p.valorTotal,\n" +
+                    "c.email, c.cpf, c.data_nascimento, c.id, c.tipo_usuario, c.nome, c.ranking, c.rg, c.sexo, c.email, c.sobrenome,\n" +
+                    "e.bairro, e.cep, e.cidade, e.complemento, e.logradouro, e.nomeEndereco, e.numero, e.referencia,\n" +
+                    "e.tipoEndereco, e.tipoLogradouro, e.uf\n" +
+                    "from pedido p\n" +
+                    "INNER JOIN cliente c\n" +
+                    "INNER JOIN endereco e \n" +
+                    "on p.id_cliente = c.id \n" +
+                    "AND\n" +
+                    "e.id = p.id_endereco AND p.id_cliente = ?");
+                declaracao.setInt(1, pedido.getCliente().getId()); 
+            ResultSet rs =  declaracao.executeQuery();
+            while(rs.next()) {
+                Pedido ped = new Pedido();
+                // Setando dados do pedido
+                ped.setId(rs.getInt("id"));
+                ped.setDtPedido(rs.getDate("dt_pedido"));
+                ped.getStatusPedido().setId(rs.getInt("id_statusPedido"));
+                // Setando dados do cliente
+                ped.getCliente().setId(rs.getInt("id_cliente"));
+                ped.getCliente().setEmail(rs.getString("email"));
+                ped.getCliente().setNome(rs.getString("nome"));
+                String tipoUsuario = rs.getString("tipo_usuario");
+                ped.getCliente().getPapel().setId(Integer.parseInt(tipoUsuario));
+                
+                // Setando dados do pagamento
+                //ped.getPagamento().setId(rs.getInt("id_pagamento"));
+                ped.getPagamento().setValorTotal(rs.getDouble("valorTotal"));
+                //ped.getPagamento().getCartao().getBandeira().setNome(rs.getString("bandeira"));
+               // ped.getPagamento().setDtPagamento(rs.getDate("dt_pagamento"));
+                //ped.getPagamento().getCartao().setNumeroCartao(rs.getString("numero"));
+                // Setando dados do endereco
+                ped.getEndereco().setId(rs.getInt("id_endereco"));
+                ped.getEndereco().setLogradouro(rs.getString("logradouro"));
+                ped.getEndereco().setNumero(rs.getString("numero"));
+                ped.getEndereco().setBairro(rs.getString("bairro"));
+                ped.getEndereco().setCep(rs.getString("cep"));
+                ped.getEndereco().setCidade(rs.getString("cidade"));
+                ped.getEndereco().setUf(rs.getString("uf"));
+                ped.getEndereco().setTipoLogradouro(rs.getString("tipoLogradouro"));
+                ped.getEndereco().setNomeEndereco(rs.getString("nomeEndereco"));
+                ped.getEndereco().setComplemento(rs.getString("complemento"));
+                ped.getEndereco().setReferencia(rs.getString("referencia"));
+                // Adicionando o objeto preenchido na lista entidades
+                entidades.add(ped);
+            }
+            resultado.setStatus(true);
+            resultado.setMensagem("Pedidos consultados");
+            if(pedido.getTipo().equals("1") && pedido.getTipo() != null){
+                resultado.setAcao("listarMeusPedidos");
+            }else{
+                resultado.setAcao("listarPedidos");
+            }
+            // Fecha a conexao.
+            conexao.close();
+        }catch(ClassNotFoundException erro) {
+                 erro.printStackTrace();     
+                 resultado.setStatus(false);
+                 resultado.setMensagem("Houve algum erro ao listar os pedidos");
+         } catch (SQLException erro) {
+             erro.printStackTrace();   
+         }
+        resultado.setEntidades(entidades);
+        return resultado;
     }
     
 }
