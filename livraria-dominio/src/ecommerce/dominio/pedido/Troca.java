@@ -18,6 +18,7 @@ public class Troca extends EntidadeDominio {
     private Cliente cliente;
     private Pedido pedido;
     private Date dataTroca;
+    private String status;
     
     
     
@@ -44,6 +45,15 @@ public class Troca extends EntidadeDominio {
         this.id = id;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    
     public Cliente getCliente() {
         return cliente;
     }

@@ -30,7 +30,11 @@ public class ViewCupomTroca implements IViewHelper {
         CupomTroca cTroca = new CupomTroca();
         String id_cliente = request.getParameter("u");
         String id_pedido = request.getParameter("id_pedido");
+        String id_solicitacao = request.getParameter("id");
         
+        if(id_solicitacao != null){
+            cTroca.setId(Integer.parseInt(id_pedido));
+        }
         if(id_cliente != null){
             cTroca.getCliente().setId(Integer.parseInt(id_cliente));
         }

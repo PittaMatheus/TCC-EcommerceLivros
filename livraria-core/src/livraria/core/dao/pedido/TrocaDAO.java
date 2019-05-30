@@ -64,7 +64,7 @@ public class TrocaDAO extends AbstractDAO{
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();
             Troca troca = (Troca) entidade;
-                        PreparedStatement declaracao = conexao.prepareStatement("SELECT t.id, t.id_cliente ,t.id_pedido "
+                        PreparedStatement declaracao = conexao.prepareStatement("SELECT t.id, t.id_cliente ,t.id_pedido, t.status "
                                 + "FROM solicitacaoTroca t ");
             ResultSet rs =  declaracao.executeQuery();
             while(rs.next()) {
@@ -72,6 +72,7 @@ public class TrocaDAO extends AbstractDAO{
                 tr.setId(rs.getInt("id"));
                 tr.getCliente().setId(rs.getInt("id_cliente"));
                 tr.getPedido().setId(rs.getInt("id_pedido"));
+                tr.setStatus(rs.getString("status"));
                 entidades.add(tr);
             }
             resultado.setStatus(true);
@@ -95,7 +96,28 @@ public class TrocaDAO extends AbstractDAO{
 
     @Override
     public Resultado alterar(EntidadeDominio entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<EntidadeDominio> ListEntidades = new ArrayList<EntidadeDominio>();
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Troca troca = (Troca) entidade;
+            // Instancia das entidades relacionadas
+   
+            PreparedStatement declaracao = conexao.prepareStatement("UPDATE solicitacaoTroca SET status = 1 WHERE id=?");
+            declaracao.setInt(1, troca.getId());
+            declaracao.execute();
+            resultado.setStatus(true);
+            resultado.setMensagem("A solicitacao de troca foi alterarada com sucesso!");   
+            // Fecha a conexao.
+            conexao.close();
+        } catch (ClassNotFoundException erro) {
+            erro.printStackTrace();     
+            resultado.setStatus(false);
+            resultado.setMensagem("Houve algum erro ao alterar a solicitacao");
+        } catch (SQLException erro) {
+            erro.printStackTrace();   
+        }
+          return resultado;
     }
 
     @Override

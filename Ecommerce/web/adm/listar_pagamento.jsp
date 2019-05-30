@@ -58,7 +58,7 @@
                                 out.println("<td>" + pedido.getPagamento().getCartao().getBandeira().getNome()+ "</td>");                                
                                 out.println("</tr>");
                                 out.println("</tbody>");
-                                 tipoCliente = pedido.getCliente().getPapel().getId(); 
+                                tipoCliente = pedido.getCliente().getPapel().getId(); 
                                
                                 }
                             }

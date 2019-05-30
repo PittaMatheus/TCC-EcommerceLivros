@@ -1,3 +1,4 @@
+
 <%-- 
     Document   : listar_meusPedidos
     Created on : May 13, 2019, 6:37:42 PM
@@ -65,7 +66,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th><th>Email</th><th>Nome</th><th>data do pedido</th><th>Status do pedido</th><th>Endereco de entrega</th>
-                                        <th>Valor total</th><th>Pagamento</th><th>Troca</th>
+                                        <th>Valor total</th><th>Itens</th><th>Pagamento</th><th>Troca</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -75,7 +76,6 @@
                             for (Pedido pedido : pedidos) {
                                 %>
                                     <input type='hidden' name='u' value='<%=pedido.getCliente().getId()%>'>
-                                    <input type='hidden' name='id_pedido' value='<%=pedido.getId()%>'>
 
                                     
                                     <% 
@@ -97,7 +97,7 @@
                                stPedido = "TROCA FINALIZADA";
                             }
                                 out.println("<tr>");
-                                out.println("<td><input type='radio' required name='id' value=" + pedido.getId() + " /></td>");
+                                out.println("<td><input type='radio' required name='id_pedido' value=" + pedido.getId() + " /></td>");
                                 out.println("<td>" + pedido.getCliente().getEmail()+ "</td>");
                                 out.println("<td>" + pedido.getCliente().getNome()+ "</td>"); 
                                 SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -109,6 +109,7 @@
                                 DecimalFormat formatoDouble = new DecimalFormat("#.##");      
                                 valorTotal = Double.valueOf(formatoDouble.format(valorTotal));
                                 out.println("<td> R$ " + valorTotal + "</td>");
+                                out.println("<td>Livros</td>");
                                 out.println("<td><a href=../adm/listar_pagamento.jsp?id_ped=" + pedido.getId() + ">detalhar</a>");
                                 
                                 

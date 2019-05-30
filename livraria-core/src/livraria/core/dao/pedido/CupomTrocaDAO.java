@@ -35,6 +35,8 @@ public class CupomTrocaDAO extends AbstractDAO {
             CupomTroca cTroca = (CupomTroca) entidade;
             Pedido pedido = new Pedido();
             PedidoDAO pDAO = new PedidoDAO();
+            TrocaDAO trocaDAO = new TrocaDAO();
+            Troca objTroca = new Troca();
 
             PreparedStatement declaracao = conexao.prepareStatement("INSERT INTO cupomTroca (id_cliente, id_pedido) VALUES (?,?)");
             declaracao.setInt(1, cTroca.getCliente().getId());
@@ -47,6 +49,12 @@ public class CupomTrocaDAO extends AbstractDAO {
             pedido.setId(cTroca.getPedido().getId());
             pedido.getStatusPedido().setId(4);
             resultado = pDAO.alterar(pedido);
+            
+            
+           // objTroca.set
+            objTroca.setId(cTroca.getId());
+            resultado = trocaDAO.alterar(objTroca);
+            
             
             // Fecha a conexao.
             conexao.close();

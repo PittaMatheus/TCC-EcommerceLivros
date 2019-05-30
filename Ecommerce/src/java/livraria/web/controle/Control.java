@@ -166,7 +166,7 @@ public class Control extends HttpServlet {
         
         Resultado resultado = null;
         if(entidade != null && command != null) // evita erro quando as operações não irão para a fachada
-            resultado = command.executar(entidade);
+            resultado = command.executar(entidade);        
 
        
         

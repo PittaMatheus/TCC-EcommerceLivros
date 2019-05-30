@@ -28,6 +28,7 @@ public class ViewTroca implements IViewHelper {
         Troca troca = new Troca();
         String id_cliente = request.getParameter("u");
         String id_pedido = request.getParameter("id_pedido");
+
         
         if(id_cliente != null){
             troca.getCliente().setId(Integer.parseInt(id_cliente));

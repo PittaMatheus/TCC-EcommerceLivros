@@ -15,7 +15,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <%
+<%
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
 		if(resultado == null) {
                         
@@ -31,19 +31,23 @@
                         } else {
                              String stPedido = "";
                                         session.setAttribute("resultado",  resultado); 
-                                        %>
-                                <h3>Solicitações de trocas registrados</h3>
-                                  <table border="1" class="highlight striped centered responsive-table">
+%>
+                            <h3>Solicitações de trocas</h3>
+        
+<%
+                            for (Troca troca : trocas) {
+                                if(troca.getStatus().equals("1")){
+                                    out.println("Não há solicitações de troca pendentes");
+                                }else {
+                                
+%>
+                       
+                                <table border="1" class="highlight striped centered responsive-table">
                                 <thead>
                                     <tr>
                                         <th>#</th><th>Id Troca</th><th>Id Usuario</th><th>Id pedido</th><th>Autorizar</th>
-                                    </tr>
+                                    </tr>0
                                 </thead>
-        
-        <%
-                            for (Troca troca : trocas) {
-                     %>
-                       
                 <div class ="container">
                   
                     <form action="AutorizarTroca" method="POST">
@@ -60,17 +64,17 @@
                                 out.println("<td><input type='radio' required name='id' value=" + troca.getId() + " /></td>");
                                 out.println("<td>" + troca.getId() + "</td>"); 
                                 out.println("<td>" + troca.getCliente().getId()+ "</td>");
-                                out.println("<td>" + troca.getPedido().getId() + "</td>"); 
+                                out.println("<td>" + troca.getPedido().getId() + "</td>");                                                              
                                 out.println("<td><button name='acao' value='inserir'>Autorizar</button></td>");
                                 out.println("</tr>");
                             }
                          }    
-                     
+                     }
                     %>
                             </tbody>
                         </table>
                             <br>
-                            <input type="submit" name="acao" value="">
+                                
             </div>
                 </form>
                 <br><br>
