@@ -41,42 +41,43 @@
                                 }else {
                                 
 %>
-                       
-                                <table border="1" class="highlight striped centered responsive-table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th><th>Id Troca</th><th>Id Usuario</th><th>Id pedido</th><th>Autorizar</th>
-                                    </tr>0
-                                </thead>
-                <div class ="container">
-                  
-                    <form action="AutorizarTroca" method="POST">
-                        <input type='hidden' name='u' value='<%=troca.getCliente().getId()%>'>
-                        <input type='hidden' name='id_pedido' value='<%=troca.getId()%>'>
+                                    <table border="1" class="highlight striped centered responsive-table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th><th>Id Troca</th><th>Id Usuario</th><th>Id pedido</th>
+                                        </tr>
+                                    </thead>
+                                    <div class ="container">
+                                        <form action="AutorizarTroca" method="POST">
+                                            <input type='hidden' name='u' value='<%=troca.getCliente().getId()%>'>
+                                            <input type='hidden' name='id_pedido' value='<%=troca.getId()%>'>
 
                         
                             
-                                <tbody>
-                                    <%
-                                        
-
-                                out.println("<tr>");
-                                out.println("<td><input type='radio' required name='id' value=" + troca.getId() + " /></td>");
-                                out.println("<td>" + troca.getId() + "</td>"); 
-                                out.println("<td>" + troca.getCliente().getId()+ "</td>");
-                                out.println("<td>" + troca.getPedido().getId() + "</td>");                                                              
-                                out.println("<td><button name='acao' value='inserir'>Autorizar</button></td>");
-                                out.println("</tr>");
-                            }
-                         }    
-                     }
+                                    <tbody>
+<%
+                                    out.println("<tr>");
+                                    out.println("<td><input type='radio' required name='id' value=" + troca.getId() + " /></td>");
+                                    out.println("<td>" + troca.getId() + "</td>"); 
+                                    out.println("<td>" + troca.getCliente().getId()+ "</td>");
+                                    out.println("<td>" + troca.getPedido().getId() + "</td>");                                                              
+                                    out.println("</tr>");
+                            
                     %>
-                            </tbody>
-                        </table>
+                                    </tbody>
+                                </table>
+                            <br>
+                            <button name='acao' value='inserir'>Autorizar</button>
+                            <button name='acao' value='desativar'>Reprovar</button>
+
                             <br>
                                 
             </div>
                 </form>
+<%                              }  
+                              }
+                           } 
+%>
                 <br><br>
         <a href='../Clientes/home.jsp'>Voltar</a>
         
