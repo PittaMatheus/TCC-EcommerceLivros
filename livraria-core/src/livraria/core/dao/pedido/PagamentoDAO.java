@@ -36,6 +36,7 @@ public class PagamentoDAO extends AbstractDAO{
             double id_cartao;
             List<PagamentoCartaoCredito> valoresCartoes = new ArrayList<>();
             int aux = 0;
+            // Insere os pagamentos para cada cartão
             for(PagamentoCartaoCredito pgto: pedido.getPagamento().getPagamentosCartao()){
                  PreparedStatement declaracao = conexao.prepareStatement(
                     "INSERT INTO pagamentoCartao "
@@ -48,9 +49,8 @@ public class PagamentoDAO extends AbstractDAO{
                 declaracao.setDouble(3,pgCartao.getValor()); // colocar o valor do cartao com o indice certo);
                 declaracao.execute();
             }
+            
 
-         
-            // Seta o ID cliente com o ID autoincrement que foi gerado no banco de dados
             resultado.setStatus(true);
             resultado.setMensagem("O pagamento foi inserido com sucesso");
             // Fecha a conexao.

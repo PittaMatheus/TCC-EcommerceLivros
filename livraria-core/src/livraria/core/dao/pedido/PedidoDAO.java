@@ -8,6 +8,7 @@ package livraria.core.dao.pedido;
 import ecommerce.dominio.EntidadeDominio;
 import ecommerce.dominio.cliente.Endereco;
 import ecommerce.dominio.livro.Livro;
+import ecommerce.dominio.pedido.Cupom;
 import ecommerce.dominio.pedido.Pagamento;
 import ecommerce.dominio.pedido.PagamentoCartaoCredito;
 import ecommerce.dominio.pedido.Pedido;
@@ -45,6 +46,8 @@ public class PedidoDAO extends AbstractDAO{
             Pagamento pagamento = new Pagamento();
             Endereco endereco = new Endereco();
             endereco.setId(pedido.getEndereco().getId());
+            CupomDescontoDAO cupomDescDao = new CupomDescontoDAO();
+            Cupom cupom = new Cupom();
 
 
             PreparedStatement declaracao = conexao.prepareStatement("INSERT INTO pedido(id_cliente, "
@@ -56,9 +59,15 @@ public class PedidoDAO extends AbstractDAO{
             ResultSet rs = declaracao.getGeneratedKeys();
             // Seta o ID do pedido
             pedido.setId((rs.next())?rs.getInt(1):0);
+            // Salva o pagamento com seus respectivos cartões
             resultado = pagamentoDAO.inserir(pedido);
-            
+            // Salva o pedido com seus respectivos itens
             resultado = itemDAO.inserir(pedido);
+            // Salva o cupom de desconto - Se existir um na compra
+            cupom.setCodigo(pedido.getCupom().getCodigo());
+            if(pedido.getCupom().getCodigo() != null){
+                resultado = cupomDescDao.inserir(pedido);
+            }
 
             resultado.setAcao("pedidoGerado");
             resultado.setStatus(true);

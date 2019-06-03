@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.26, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
 --
--- Host: localhost    Database: Ecommerce
+-- Host: 127.0.0.1    Database: ecommerce_livros
 -- ------------------------------------------------------
--- Server version	5.7.26-0ubuntu0.18.04.1
+-- Server version	5.7.24-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -27,8 +27,8 @@ CREATE TABLE `carrinho` (
   `id_cliente` int(11) DEFAULT NULL,
   KEY `fk_carrinho_cliente_idx` (`id_cliente`),
   KEY `fk_carrinho_livro_idx` (`id_livro`),
-  CONSTRAINT `fk_carrinho_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_carrinho_livro` FOREIGN KEY (`id_livro`) REFERENCES `livro` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_carrinho_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`),
+  CONSTRAINT `fk_carrinho_livro` FOREIGN KEY (`id_livro`) REFERENCES `livro` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -38,7 +38,7 @@ CREATE TABLE `carrinho` (
 
 LOCK TABLES `carrinho` WRITE;
 /*!40000 ALTER TABLE `carrinho` DISABLE KEYS */;
-INSERT INTO `carrinho` VALUES (3,1),(1,1),(3,1);
+INSERT INTO `carrinho` VALUES (2,1),(2,1),(3,1);
 /*!40000 ALTER TABLE `carrinho` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,7 +59,7 @@ CREATE TABLE `cartao` (
   `id_cliente` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_cliente_idx` (`id_cliente`),
-  CONSTRAINT `id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -128,7 +128,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'NomeTesteasd','SobrenomeTeste','1995-01-12',1,50,'SenhaValida!@#','emailteste@teste.com','41656190869','329702760','M','1'),(2,'ALTERANDO TESTE','SobrenomeTeste','1995-01-12',1,50,'SenhaValida!@#','adm@adm.com','45296735889','329702760','M','2');
+INSERT INTO `cliente` VALUES (1,'Matheus','Pitta','1995-01-12',1,50,'SenhaValida!@#','emailteste@teste.com','41656190869','329702760','M','1'),(2,'ALTERANDO TESTE','SobrenomeTeste','1995-01-12',1,50,'SenhaValida!@#','adm@adm.com','45296735889','329702760','M','2');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,8 +144,9 @@ CREATE TABLE `cupomDesconto` (
   `nome` varchar(155) NOT NULL,
   `valor` double NOT NULL,
   `validade` date DEFAULT NULL,
+  `codigo` varchar(155) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +155,7 @@ CREATE TABLE `cupomDesconto` (
 
 LOCK TABLES `cupomDesconto` WRITE;
 /*!40000 ALTER TABLE `cupomDesconto` DISABLE KEYS */;
-INSERT INTO `cupomDesconto` VALUES (2,'radio',20,'2020-05-12');
+INSERT INTO `cupomDesconto` VALUES (1,'radio',20,'2021-05-05','QWERTY');
 /*!40000 ALTER TABLE `cupomDesconto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,7 +172,7 @@ CREATE TABLE `cupomTroca` (
   `id_pedido` int(11) NOT NULL,
   `dataGerado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +181,6 @@ CREATE TABLE `cupomTroca` (
 
 LOCK TABLES `cupomTroca` WRITE;
 /*!40000 ALTER TABLE `cupomTroca` DISABLE KEYS */;
-INSERT INTO `cupomTroca` VALUES (1,1,1,'2019-05-14 00:10:05'),(2,1,1,'2019-05-14 00:14:52'),(3,1,1,'2019-05-14 14:33:47');
 /*!40000 ALTER TABLE `cupomTroca` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,7 +258,7 @@ CREATE TABLE `endereco` (
   `id_cliente` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_cliente_idx` (`id_cliente`),
-  CONSTRAINT `fk_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -280,11 +280,17 @@ DROP TABLE IF EXISTS `estoque`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `estoque` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_livro` int(11) NOT NULL,
+  `id_fornecedor` int(11) NOT NULL,
   `quantidade` int(11) NOT NULL,
+  `valor_custo` decimal(5,2) NOT NULL,
+  `dt_entrada` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
   KEY `fk_estoque_livro_idx` (`id_livro`),
-  CONSTRAINT `fk_estoque_livro` FOREIGN KEY (`id_livro`) REFERENCES `livro` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `fk_estoque_fornecedor_idx` (`id_fornecedor`),
+  CONSTRAINT `fk_estoque_livro` FOREIGN KEY (`id_livro`) REFERENCES `livro` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -293,8 +299,34 @@ CREATE TABLE `estoque` (
 
 LOCK TABLES `estoque` WRITE;
 /*!40000 ALTER TABLE `estoque` DISABLE KEYS */;
-INSERT INTO `estoque` VALUES (1,50),(3,15),(6,15),(5,15);
+INSERT INTO `estoque` VALUES (1,2,1,20,49.99,'2019-05-24 01:07:41'),(2,4,2,20,49.99,'2019-05-24 01:08:08'),(3,3,3,20,49.99,'2019-05-24 01:08:50');
 /*!40000 ALTER TABLE `estoque` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `fornecedor`
+--
+
+DROP TABLE IF EXISTS `fornecedor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `fornecedor` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome_fornecedor` varchar(45) DEFAULT NULL,
+  `cnpj` varchar(45) DEFAULT NULL,
+  `razao_social` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `fornecedor`
+--
+
+LOCK TABLES `fornecedor` WRITE;
+/*!40000 ALTER TABLE `fornecedor` DISABLE KEYS */;
+INSERT INTO `fornecedor` VALUES (1,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(2,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(3,'RS livros','78.180.862/0001-30','Cia dos Livros ltda');
+/*!40000 ALTER TABLE `fornecedor` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -395,6 +427,7 @@ CREATE TABLE `itemPedido` (
 
 LOCK TABLES `itemPedido` WRITE;
 /*!40000 ALTER TABLE `itemPedido` DISABLE KEYS */;
+INSERT INTO `itemPedido` VALUES (2,2,1),(1,3,1),(2,2,2),(1,3,2),(2,2,3),(1,3,3),(2,2,4),(1,3,4),(2,2,5),(1,3,5),(2,2,6),(1,3,6),(2,2,7),(1,3,7),(2,2,8),(1,3,8),(2,2,9),(1,3,9),(2,2,10),(1,3,10);
 /*!40000 ALTER TABLE `itemPedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -471,33 +504,6 @@ INSERT INTO `livro_categoria` VALUES (1,1),(3,1),(4,1),(5,1),(8,1),(10,1),(5,2),
 UNLOCK TABLES;
 
 --
--- Table structure for table `pagamento`
---
-
-DROP TABLE IF EXISTS `pagamento`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pagamento` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `dt_pagamento` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `valor_total` double DEFAULT NULL,
-  `id_cupom` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_pagamento_cupom_idx` (`id_cupom`),
-  CONSTRAINT `fk_pagamento_cupom` FOREIGN KEY (`id_cupom`) REFERENCES `cupomDesconto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `pagamento`
---
-
-LOCK TABLES `pagamento` WRITE;
-/*!40000 ALTER TABLE `pagamento` DISABLE KEYS */;
-/*!40000 ALTER TABLE `pagamento` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `pagamentoCartao`
 --
 
@@ -521,7 +527,7 @@ CREATE TABLE `pagamentoCartao` (
 
 LOCK TABLES `pagamentoCartao` WRITE;
 /*!40000 ALTER TABLE `pagamentoCartao` DISABLE KEYS */;
-INSERT INTO `pagamentoCartao` VALUES (1,1,10),(1,2,15),(1,4,15),(2,1,40),(2,2,5),(2,3,4.99),(3,1,9.99),(3,2,40),(4,1,20),(4,2,20),(4,4,9.99),(5,3,20),(5,4,29.99),(6,3,20),(6,4,29.99),(7,2,10),(7,3,10),(7,4,29.99),(8,3,140),(8,4,9.97),(9,3,40),(9,4,9.99);
+INSERT INTO `pagamentoCartao` VALUES (1,2,100),(1,3,49.97),(2,4,149.97),(3,4,149.97),(4,1,149.97),(5,4,149.97),(6,4,149.97),(7,4,149.97),(8,4,149.97),(9,3,149.97),(10,4,149.97);
 /*!40000 ALTER TABLE `pagamentoCartao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -539,8 +545,9 @@ CREATE TABLE `pedido` (
   `id_endereco` int(11) NOT NULL,
   `dt_pedido` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `valorTotal` double NOT NULL,
+  `cupomDesconto` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -549,8 +556,35 @@ CREATE TABLE `pedido` (
 
 LOCK TABLES `pedido` WRITE;
 /*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
-INSERT INTO `pedido` VALUES (1,1,1,1,'2019-05-20 11:10:13',49.99),(2,1,1,1,'2019-05-20 17:39:20',49.99),(3,1,1,1,'2019-05-21 11:25:36',49.99),(4,1,1,1,'2019-05-21 11:26:49',49.99),(5,1,1,1,'2019-05-21 12:47:47',49.99),(6,1,1,1,'2019-05-21 13:17:34',49.99),(7,1,1,1,'2019-05-23 14:14:13',49.99),(8,1,1,1,'2019-05-23 14:16:01',149.97),(9,1,1,1,'2019-05-23 14:21:07',49.99);
+INSERT INTO `pedido` VALUES (1,1,1,6,'2019-06-03 00:50:21',149.97,0),(2,1,1,6,'2019-06-03 00:52:34',149.97,0),(3,1,1,5,'2019-06-03 00:53:21',149.97,0),(4,1,1,5,'2019-06-03 00:54:13',149.97,0),(5,1,1,5,'2019-06-03 00:54:43',149.97,0),(6,1,1,5,'2019-06-03 01:03:43',149.97,0),(7,1,1,5,'2019-06-03 01:14:55',149.97,0),(8,1,1,6,'2019-06-03 01:21:24',149.97,0),(9,1,1,6,'2019-06-03 01:22:56',149.97,0),(10,1,1,6,'2019-06-03 01:30:42',149.97,1);
 /*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pgtoCupomDesconto`
+--
+
+DROP TABLE IF EXISTS `pgtoCupomDesconto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pgtoCupomDesconto` (
+  `id_pedido` int(11) NOT NULL,
+  `id_cupom` int(11) NOT NULL,
+  KEY `fk_pagamento_cupom_idx` (`id_cupom`),
+  KEY `fk_pgtoCupomDesconto_pedido_idx` (`id_pedido`),
+  CONSTRAINT `fk_pgtoCupomDesconto_cupom` FOREIGN KEY (`id_cupom`) REFERENCES `cupomDesconto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pgtoCupomDesconto_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pgtoCupomDesconto`
+--
+
+LOCK TABLES `pgtoCupomDesconto` WRITE;
+/*!40000 ALTER TABLE `pgtoCupomDesconto` DISABLE KEYS */;
+INSERT INTO `pgtoCupomDesconto` VALUES (10,1);
+/*!40000 ALTER TABLE `pgtoCupomDesconto` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -565,12 +599,13 @@ CREATE TABLE `solicitacaoTroca` (
   `id_cliente` int(11) NOT NULL,
   `id_pedido` int(11) NOT NULL,
   `data_solicitacao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `fk_solicitacaoTroca_pedido_idx` (`id_pedido`),
   KEY `fk_solicitacaoTroca_cliente_idx` (`id_cliente`),
   CONSTRAINT `fk_solicitacaoTroca_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_solicitacaoTroca_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -579,7 +614,7 @@ CREATE TABLE `solicitacaoTroca` (
 
 LOCK TABLES `solicitacaoTroca` WRITE;
 /*!40000 ALTER TABLE `solicitacaoTroca` DISABLE KEYS */;
-INSERT INTO `solicitacaoTroca` VALUES (1,1,1,'2019-05-13 23:22:55'),(2,1,1,'2019-05-13 23:25:27'),(3,1,1,'2019-05-13 23:26:30'),(4,1,1,'2019-05-13 23:27:18'),(5,1,1,'2019-05-13 23:27:26'),(6,1,1,'2019-05-13 23:28:09'),(7,1,1,'2019-05-13 23:29:26'),(8,1,1,'2019-05-13 23:30:12'),(9,1,1,'2019-05-13 23:30:51'),(10,1,1,'2019-05-14 00:04:12'),(11,1,1,'2019-05-14 00:05:37'),(12,1,1,'2019-05-14 00:07:07'),(13,1,1,'2019-05-14 00:08:26'),(14,1,1,'2019-05-14 14:33:04'),(15,1,1,'2019-05-14 14:35:48'),(16,1,1,'2019-05-14 14:38:08');
+INSERT INTO `solicitacaoTroca` VALUES (1,1,12,'2019-05-30 22:52:34',1);
 /*!40000 ALTER TABLE `solicitacaoTroca` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -632,11 +667,11 @@ INSERT INTO `usuario` VALUES (1,'comum'),(2,'adm'),(3,'root');
 UNLOCK TABLES;
 
 --
--- Dumping events for database 'Ecommerce'
+-- Dumping events for database 'ecommerce_livros'
 --
 
 --
--- Dumping routines for database 'Ecommerce'
+-- Dumping routines for database 'ecommerce_livros'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -648,4 +683,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-23 14:58:17
+-- Dump completed on 2019-06-02 22:40:34

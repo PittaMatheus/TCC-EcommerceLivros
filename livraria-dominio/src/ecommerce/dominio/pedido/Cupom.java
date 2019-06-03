@@ -6,6 +6,7 @@
 package ecommerce.dominio.pedido;
 
 import ecommerce.dominio.EntidadeDominio;
+import java.util.Date;
 
 /**
  *
@@ -16,7 +17,8 @@ public class Cupom extends EntidadeDominio {
         private Integer id;
 	private String nome;
 	private Double valorDesconto;
-        
+        private String codigo;
+        private Date validade;
         
         public Cupom(){
         }
@@ -26,8 +28,19 @@ public class Cupom extends EntidadeDominio {
             this.id = id;
             this.nome = nome;
             this.valorDesconto = valorDesconto;
+            this.codigo = codigo;
+            this.validade = validade;
         }
-	
+
+        public Date getValidade() {
+            return validade;
+        }
+
+        public void setValidade(Date validade) {
+            this.validade = validade;
+        }
+
+
 	public String getNome() {
 		return nome;
 	}
@@ -40,6 +53,23 @@ public class Cupom extends EntidadeDominio {
 	public void setValorDesconto(Double valorDesconto) {
 		this.valorDesconto = valorDesconto;
 	}
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+        public String getCodigo() {
+            return codigo;
+        }
+
+        public void setCodigo(String codigo) {
+            this.codigo = codigo;
+        }
+        
 
 	@Override
 	public String toString() {

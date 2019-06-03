@@ -87,7 +87,13 @@
 %>
                                 </tbody>
                              </table>
-                                <br>
+                                <br><br>
+                                <label for="cupomDesconto">Cupom de desconto</label><br>
+                                <input type="text" name="cupomDesconto">
+                                <button type="submit" value="aplicarDesconto">Aplicar</button>
+                                 <br>
+                                <hr>
+                                
                 o valor total é: <%=valorTotal %><br><br>
 
                 <div id="DivideValor" style="height:auto;width:auto;">

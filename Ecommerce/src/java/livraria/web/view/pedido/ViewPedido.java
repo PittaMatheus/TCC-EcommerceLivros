@@ -56,7 +56,8 @@ public class ViewPedido implements IViewHelper {
             String[] datasValidade = request.getParameterValues("dataValidade");
             String [] idsLivro = request.getParameterValues("livros");
             DateFormat formatadorData = new SimpleDateFormat("dd/MM/yyyy");
-
+            String cupomDesconto = request.getParameter("cupomDesconto");
+            String valorTotal =request.getParameter("valorTotal");
             String status = request.getParameter("status");
 
             List<PagamentoCartaoCredito> idsCartoes = new ArrayList<>();
@@ -64,8 +65,11 @@ public class ViewPedido implements IViewHelper {
                 pedido.setTipo(tipoUsuario);
             }
 
-            String valorTotal =request.getParameter("valorTotal");
-
+            if(cupomDesconto != null){
+                pedido.getCupom().setCodigo(cupomDesconto);
+           }
+            
+            
             if(valorTotal != null){
                 pedido.getPagamento().setValorTotal(Double.valueOf(valorTotal));
             }
