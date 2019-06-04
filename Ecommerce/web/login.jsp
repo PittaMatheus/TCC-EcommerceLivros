@@ -5,8 +5,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login</title>
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="css/Custom.css"  media="screen,projection"/>
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ 
     </head>
     <body>
+         <div class="center box-login espacamento_div">
         <%
         Resultado resultado = (Resultado) request.getAttribute("resultado");
         if(resultado != null) {
@@ -25,42 +34,61 @@
         String valorTotal = request.getParameter("valorTotal");
             %>
         
+            
 <%            // se o valorTotal não é nulo, apos o login o cliente será redirecionado para continuar a compra
             if(valorTotal != null){ 
-%>
+%>              
+                <br><br><br><br><br><br>
                 <form action="AutenticarClienteCompra" method="post">
-                    <input type='hidden' value='<%=valorTotal%>' name='valorTotal'>
+                    <div class="container-login">
+                        <input type='hidden' value='<%=valorTotal%>' name='valorTotal'>
+                        <label for="id">Login</label>                            
+                        <input type="text" value="email" name="email" id="usuarioLogin" required>
+                        <br><br>
+                        <label for="id">Senha</label>                            
+                        <input type="password" value="SenhaValida!@#" name="senha" id="senha" required> 
+                        <br>   <br>          
+                        <input type="submit" name="acao" value="login" class="btn grey darken-3 espacamento_button">
+                    </div>
+                </form>
+              
+<%
+            }else{
+%>
+            <form action="AutenticarCliente" method="post">
+                <br><br><br><br><br><br>
+                <div class="container-login">
                     <label for="id">Login</label>                            
                     <input type="text" value="email" name="email" id="usuarioLogin" required>
                     <br><br>
                     <label for="id">Senha</label>                            
                     <input type="password" value="SenhaValida!@#" name="senha" id="senha" required> 
                     <br>   <br>          
-                    <input type="submit" name="acao" value="login" class="btn btn-success"> 
-                </form>
-<%
-            }else{
-%>
-            <form action="AutenticarCliente" method="post">
-                    <label for="id" >Login</label>                            
-                    <input type="text" value="email" name="email" id="usuarioLogin" required>
-                    <br><br>
-                    <label for="id" >Senha</label>                            
-                    <input type="password" value="SenhaValida!@#" name="senha" id="senha" required> 
-                    <br>   <br>          
-                    <input type="submit" name="acao" value="login" class="btn btn-success"> 
-                </form>
+                    <input type="submit" name="acao" value="login" class="btn grey darken-3 espacamento_button">
+                </div>
+            </form>
+                
 <%
 }
 %>
         
-            <br>
-           
+    
 
             
-        </form>
-        <br><br>
-        <div><a href="Clientes/cadastro_cliente.jsp">Cadastre-se</a></div>
-        <div><a href="index.html">Voltar</a></div>  
+       
+            <a href="Clientes/cadastro_cliente.jsp">Cadastre-se</a> | <a href="index.jsp">Voltar</a>
+        </div>
+         
+        <!-- PLANO DE FUNDO COM CSS -->
+        <div class="box-image"></div>
+        
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.js"></script>
+        <script src="../js/Custom.js"></script>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     </body>
 </html>

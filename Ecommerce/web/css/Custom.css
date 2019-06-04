@@ -20,8 +20,409 @@
 
 
 .carousel .carousel-item {
-width:500px !important;
-height:300px !important;
+width: 300px !important;
+height:400px !important;
 }
 
+.container2 {
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 92%;
+}
+
+
+.preto {
+    background-color: black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* FORMATAÇÃO DOS ELEMENTOS */
+
+*  {
+    margin:0;
+    padding:0;
+}
+
+.cor_movida {
+    background-color: #f26522;
+}
+
+.cor_movida:hover {
+    background-color: #f26522;
+}
+
+.espacamento_div {
+    padding: 26px;
+}
+
+.espacamento_formulario {
+    padding-top: 480px;
+}
+
+html, body {
+    height: 100%;
+}
+
+footer {
+    bottom: 0px;
+}
+
+
+input {
+    text-align: center;
+}
+
+.titulo {
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+.titulo::after {
+    content: '';
+    display: block;
+    width: 200px;
+    border-top: 2px solid #d41822;
+    margin: 15px auto; 
+}
+
+.titulo_pequeno {
+    font-size: 1.3rem;
+    text-transform: uppercase;
+}
+
+.titulo_pequeno::after {
+    content: '';
+    display: block;
+    width: 100px;
+    border-top: 2px solid #d41822;
+    margin: 15px auto; 
+}
+
+
+.side-nav .user-view, .side-nav .userView {
+    padding-top: 20px;
+    display: block;
+    text-align: left;
+}
+
+.forma_redonda{
+    padding: 5px;
+    text-align: center;
+    color: #fff;
+    border-radius: 12px;
+    background-color:#f26522;
+}
+
+
+
+/* COR DOS INPUT */
+.input-field input:focus + label {
+    color: #f26522 !important;
+}
+  
+/* COR DOS INPUT FOCUS */
+.input-field input:focus {
+    border-bottom: 1px solid #f26522 !important;
+    box-shadow: 0 1px 0 0 #f26522 !important
+}
+
+
+
+
+/* COR DOS RADIO */
+[type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:before, [type="radio"].with-gap:checked+label:after {
+    border: 2px solid #f26522;
+}
+
+[type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:after {
+    background-color: #f26522;
+}
+
+
+/* COR DAS OP�OES DO SELECT */
+.dropdown-content li>a, .dropdown-content li>span {
+    font-size: 16px;
+    color: #000;
+    display: block;
+    line-height: 22px;
+    padding: 14px 16px;
+}
+
+/* COR DAS OP�OES DO SELECT HOVER */
+.dropdown-content li>a, .dropdown-content li>span:hover {
+    font-size: 16px;
+    background-color: #f26522;
+    color: #fff;
+    display: block;
+    line-height: 22px;
+    padding: 14px 16px;
+}
+
+/* COR DAS OP�OES DO SELECT HOVER PARA O DISABLED */
+.select-dropdown li.disabled, .select-dropdown li.disabled>span, .select-dropdown li.optgroup:hover {
+    color: rgba(0,0,0,0.3);
+    background-color: transparent;
+    cursor: not-allowed;
+    
+}
+
+/* COR DAS OP�OES DO SELECT HOVER PARA O DISABLED QUANDO ESTIVER SELECIONADO */
+.select-dropdown li.disabled, .select-dropdown li.disabled>span, .select-dropdown li.optgroup .selected:hover {
+    color: rgba(0,0,0,0.3);
+    background-color: #f1f1f1;
+    cursor: not-allowed;
+    
+}
+
+
+/* COR DAS OP�OES DA TABLE QUANDO PASSAR O MOUSE HOVER */
+table.highlight>tbody>tr:hover {
+    background-color: #ffcc80;
+}
+
+/* COR DAS OP�OES DO SELECT QUANDO FOR SELECIONADA */
+.select-dropdown.dropdown-content li.selected {
+    background-color:#ffcc80;
+}
+
+
+
+
+
+
+.container-login {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 75%;
+}
+
+
+
+.forma_redonda_vermelho {
+    padding: 5px;
+    background-color: #d41822;
+    text-align: center;
+    color: #fff;
+    border-radius: 12px;
+}
+
+.forma_redonda_vermelho :a {
+    color: #fff;
+}
+
+
+
+.container2 {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 94%;
+  }
+
+
+.box-login {
+    position: absolute;
+    text-align: center;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 35%;
+}
+
+
+.box-image {
+    position: absolute;
+    background: url(../imagens/banner.jpeg) no-repeat ;
+    background-size: 100%;
+    background-position: center;
+    top: 0;
+    min-width: 65%;
+    right: 0;
+    bottom: 0;
+}
+
+
+div {
+    display: block;
+}
+
+.espacamento_button {
+    width: 270px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.espacamento_button2 {
+    width: 200px;
+}
+
+.espacamento_button_redefinir {
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+
+.centro {
+   
+    position: absolute;
+    border-radius: 40px;
+    background-color: white; 
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+
+}
+
+.fundo {
+    background-color: #f26522; 
+}
+
+.container_redefinir_senha {
+    margin: 0 auto;
+    max-width: 490px;
+    width: 97%;
+}
+
+.container_msg {
+    margin: 0 auto;
+    max-width: 700px;
+    width: 97%;
+}
+
+.container_msg2 {
+    margin: 0 auto;
+    max-width: 550px;
+    width: 97%;
+    padding-top: 20px;
+}
+
+
+.container3 {
+    margin: 0 auto;
+    max-width: 600px;
+    width: 97%;
+}
+
+
+nav .nav-wrapper {
+    position: relative;
+    padding-top: 15px;
+    padding-bottom: 80px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+
+
+.btn-border {
+    border:none;
+}
+
+
+input[type=search]:not(.browser-default) {
+    background-color: white;
+    color: #f26522;
+    border: none;
+    border-bottom: 1px solid #f26522;
+    border-radius: 0;
+    outline: none;
+    height: 3rem;
+    width: 100%;
+    font-size: 1rem;
+    margin: 0 0 20px 0;
+    padding: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+input[type=search]:focus {
+    border-bottom: 2px solid #8a2e03 !important;
+    box-shadow: 0 1px 0 0 #8a2e03 !important
+}
+/* 
+::-webkit-input-placeholder {
+    color: #f26522 ;
+ }
  
+ :-moz-placeholder {
+    color: #f26522 ;
+ }
+ 
+ ::-moz-placeholder {
+    color: #f26522 ;  
+ }
+ 
+ :-ms-input-placeholder {  
+    color: #f26522 ;  
+ } */
+
+.espaco_busca {
+    padding-right: 10px;
+}
+
+
+.footer-fixo {
+    position:absolute;
+    bottom:0;
+    width:100%;
+}
+
+
+.bloco {
+    padding-bottom: 9%;
+}
+
+
+.modal-grande { 
+    width: 65% !important ; 
+    height: 2005px !important; 
+} 
+
+.celula_fixa {
+    width: 250px;
+    height: 50px;
+    overflow: auto;
+}
+
+.celula_fixa2 {
+    width: 200px;
+    height: 50px;
+    overflow: auto;
+}
+
+.celula_fixa3 {
+    width: 350px;
+    height: 50px;
+    overflow: auto;
+}
+
+.celula_fixa4 {
+    width: 100px;
+    height: 50px;
+    overflow: auto;
+}
+
+.texto_pequeno {
+   font-size: 12px;
+}
+
+.espamento_p {
+    padding-top: 10px;
+}
+
