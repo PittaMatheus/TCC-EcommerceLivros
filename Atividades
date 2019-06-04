@@ -4,32 +4,17 @@ ___Atividades_____
 
 
 
-
-
+MATHEUS
 A7     - Remover itens do carrinho / LIMPAR carrinho
-A8     - Correção - validar pedido minimo de 5 reais
-
-A10     - Ajustar detalhes do livro (array aparecendo)
-
-
 A14     - Adicionar seleção para que o ADM possa escolher entre Aprovar ou Reprovar uma solicitação de troca
 A15     - Adicionar campo de validade ao cupom de troca que foi gerado
 A16     - Gerenciar trocas(alterar status das trocas)
-
 A18     - Esconder dados na tela: - Confirmar cartão de compra
-A23	- Incluir parcelas no pagamento
-A20     - Listar ranking de pontos (cliente) - e indicar possiveis descontos
-A21     - Incluir a possibilidade de utilizar o ranking de pontos como desconto nas compras
+A20     - Listar ranking de pontos (cliente)
 A22     - Incluir a possiblidade de utilizar um cupom de troca no pagamento
-A23	- Incluir visualização do preço parcelado em tempo real com javaScript
+A40	 -Inativar livro de forma automática. O sistema deve inativar livros sem estoque que possuam venda com valor inferior a
+parâmetro predefinido no sistema.
 
-_____ ANALISE__________
-A23     - Relatorio: -Quantidade de pedidos feitos por mês
-A24     - Relatório: -Categorias de livros com mais pedidos de compra
-A25     - Relatório: -Quantidade de trocas solicitas por mês
-A26     - Relatório: -Categorias de livros com mais solicitações de trocas
-A27     - Relatório: -Quantidade de compras realizadas com cupom de desconto promocional por mês
-A28     - Relatório: -Grupo de precificação com mais solicitações de pedidos por mês
 
 
 _____ BUGS_____________
@@ -37,23 +22,48 @@ _____ BUGS_____________
 B01 - Ao solicitar uma troca, o id_pedido que é enviado como parametro sempre é 1.
 B02 - Após solicitar uma troca, nao é possivel solicitar outra troca para o mesmo pedido
 B03 - Exibir campo cupom de desconto em "pedidos realizados" apenas se o cupom de desconto foi utilizado
+B04 - Validação estoque após add item no carrinho
+B05 - Retirar a opção de incluir valor de custo ao adicionar um livro no estoque
 
 _________________________________________________________________________________________________________
 
                                                             DOING
-	MATHEUS
+			MATHEUS
+A41 	- Definir qtde de itens no carrinho de compra
 A31	-Incluir calculo do valor total utilizando o cupomDesconto
 A29	- Incluir validação front-end no valor do pedido no momento da compra(back-end ja possui)
 A4      - Acrescentar pontos ao ranking do cliente após o pedido ser aprovado
 A9     - adicionar quantidade de livros	
 A11     - Ver cupons de troca(cliente)
 A12     - Criar pagina de vizualização de status(linha do tempo)
----
-	EDNER
-// Escolher as atividades e colar aqui. me avisar antes 
+A32	-Subtrair item da compra no estoque no momento da compra
+A42	-Calcular frete
+A44	-Ver trocas
+A45	-Reentrada de estoque após troca finalizada
+A46	-Bandeiras permitidas Todo cartão de crédito associado a um cliente para registro de cartões
+a47	-Validação valor minimo para cada cartãod de credito: 10 conto
+A48	- Exibir preço dos livros e calcular valor Total com base no valor de custo(tabela livro) e a margem de lucro(grupoPrecificacao)
+*********
+Apresentar itens
+(apresentar o tempo conforme parâmetro do
+retirados do carrinho)
+
+
+
+			EDNER
+_____ ANALISE__________
+A23     - Relatorio: -Quantidade de pedidos feitos por mês
+A24     - Relatório: -Categorias de livros com mais pedidos de compra
+A25     - Relatório: -Quantidade de 
+ solicitas por mês
+A26     - Relatório: -Categorias de livros com mais solicitações de trocas
+A27     - Relatório: -Quantidade de compras realizadas com cupom de desconto promocional por mês
+A28     - Relatório: -Grupo de precificação com mais solicitações de pedidos por mês
 ________________________________________________________________________________________________________
 
                                                              DONE
+
+A10     - Ajustar detalhes do livro (array aparecendo)
 A3      - Incluir a possiblidade de utilizar um cupom de desconto no pagamento
 *A17     -Confirmar endereco de compra; - Confirmar cartao de compra
 A30	- Incluir insert na tabela itensPedido no momento do pedido

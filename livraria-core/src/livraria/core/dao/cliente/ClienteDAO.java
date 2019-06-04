@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import livraria.core.util.SenhaCriptografada;
 
 public class ClienteDAO extends AbstractDAO {
 
@@ -37,7 +38,7 @@ public class ClienteDAO extends AbstractDAO {
                     declaracao.setString(2, cliente.getSobrenome());
                     declaracao.setDate(3, new java.sql.Date(cliente.getData_nascimento().getTime()));
                     declaracao.setDouble(4, 50);           // inicia com 50 pontos                    
-                    declaracao.setString(5, cliente.getSenha());
+                    declaracao.setString(5, SenhaCriptografada.CriptografaSenha(cliente.getSenha()));
                     declaracao.setString(6, cliente.getEmail());                    
                     declaracao.setString(7, cliente.getCpf());
                     declaracao.setString(8, cliente.getRg());
@@ -181,7 +182,7 @@ public class ClienteDAO extends AbstractDAO {
                             + "c.ranking, c.email, c.cpf, c.rg, c.sexo, c.senha, c.tipo_usuario "
                             + "FROM cliente c WHERE c.status = 1 AND c.email=? AND c.senha=?");
                     declaracao.setString(1, cliente.getEmail());
-                    declaracao.setString(2, cliente.getSenha());
+                    declaracao.setString(2, SenhaCriptografada.CriptografaSenha(cliente.getSenha()));
 
                     ResultSet rs =  declaracao.executeQuery();
 
@@ -266,7 +267,7 @@ public class ClienteDAO extends AbstractDAO {
                                 declaracao.setString(5, cliente.getCpf());
 				declaracao.setString(6, cliente.getRg());
 				declaracao.setString(7, cliente.getSexo());
-                                declaracao.setString(8, cliente.getSenha());
+                                declaracao.setString(8, SenhaCriptografada.CriptografaSenha(cliente.getSenha()));
 				declaracao.setInt(9, cliente.getId());
 				declaracao.execute();
             resultado.setStatus(true);
