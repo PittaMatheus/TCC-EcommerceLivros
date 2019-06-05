@@ -16,27 +16,6 @@
         <title>Home</title>
     </head>
     <body>
-        
-        <!-- MENU -->
-        <ul id="slide-out" class="side-nav">
-            <li><div class="user-view">
-                <div class="background black"></div>
-                    <a href="#!user"><img class="circle" src="../imagens/borja.jpg"></a>
-                    <a href="#!name"><span class="white-text name">Miguel Borja</span></a>
-                    <a href="#!email"><span class="white-text email">borja@adm.com</span></a>
-                </div>
-            </li>
-            <li><a href="#!"><i class="material-icons">house</i>Home</a></li>
-            <li><div class="divider"></div></li>
-            <li><a href="#!"><i class="material-icons">description</i>Gerencia de clientes</a></li>
-            <li><a href="#!"><i class="material-icons">description</i>Gerencia de livros</a></li>
-            <li><a href="#!"><i class="material-icons">description</i>Gerencia de pedidos</a></li>
-            <li><a href="#!"><i class="material-icons">description</i>Gerencia de estoque</a></li>
-               <li><a href="/Ecommerce/LogoutCliente?acao=logout"><i class="material-icons">close</i>Sair</a></li>
-        </ul>
-        <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-        
-        
         <%  
             if(session.getAttribute("usuarioLogado") == null){
                 response.sendRedirect("../login.jsp");
@@ -48,68 +27,122 @@
                                 response.sendRedirect("../login.jsp");
                             } else {
                                for (Cliente cliente : clientes) {         
-                                 out.print("Seja bem vindo " + cliente.getNome());
-
-                                 //Cliente com perfil de ADM
-                                 if(cliente.getPapel().getId() == 2){ %>
-                                 
-                                 <br><br><br>
-                                 <fieldset>
-                                     <legend>Gerencia de clientes</legend>
-                                     <br>
-                                    <div><a href='listar_clientes.jsp'>Listar clientes</a></div>
-                                    <div><a href='listar_clientes.jsp'>Desativar clientes</a></div>
-                                    <div><a href='listar_clientesInativos.jsp'>Ativar clientes</a></div>
-                                </fieldset>
-                                <fieldset>
-                                    <legend>Gerencia de livros</legend>
-                                    <br>
-                                    <div><a href='../Livros/cadastro_livro.jsp'>Cadastrar livro</a></div>
-                                    <div><a href='../Livros/listar_livros.jsp'>Listar livro</a></div>
-                                    <div><a href='../Livros/listar_livros.jsp'>Desativar livro</a></div>
-                                    <div><a href='../Livros/listar_livrosInativos.jsp'>Ativar livro</a></div>
-                                    <div><a href='../Livros/cadastro_categoria.jsp'>Inserir Categoria de livro</a></div>
-                                    <div><a href='../Livros/listar_categorias.jsp'>Listar Categorias de livro</a></div>
-                                    <div><a href='../Livros/cadastro_grupoLivro.jsp'>Inserir grupo de precificação</a></div>
-                                    <div><a href='../Livros/listar_grupoPrecificacao.jsp'>Listar grupo de precificação</a></div>
-                                    
-                                </fieldset>
-                                <fieldset>
-                                    <br>
-                                    <legend>Gerencia de pedidos</legend>
-                                    <div><a href='../adm/listar_pedidos.jsp'>Ver pedidos</a></div>
-                                    <div><a href='../adm/listar_pedidos.jsp'>Gerenciar pedidos</a></div>
-                                    <div><a href='../adm/listar_SolicitacaoTrocas.jsp'>Ver Solicitações de trocas </a></div>
-                                    <div><a href=''>Gerenciar trocas </a></div>
-                                    <div><a href=''>Editar meu perfil </a></div>
-                                </fieldset>
-                                <fieldset>
-                                    <legend>Gerencia de estoque</legend>
-                                    <br>
-                                    <div><a href='../Estoque/entrada_estoqueLivro.jsp'>Entrada em estoque de livro</a></div>
-                                    <div><a href='../Estoque/listar_estoqueLivros.jsp'>Listar estoque de livro</a></div>
-                                    <div><a href='../Estoque/listar_fornecedores.jsp'>Listar fornecedores</a></div>
-                                </fieldset>
-                                     <%
-                                    }
-                                 // Perfil comum
-                                 else if(cliente.getPapel().getId() == 1){ %>
-                                 <br><br>
-                                <fieldset>
-                                    <br>
-                                    <legend>Ações</legend>
-                                    <div><a href='../Livros/prateleira.jsp'>Home</a></div>
-                                    <div><a href='ListarCupomTroca.jsp'>Ver Cupons de troca</a></div>                                   
-                                    <div><a href='../Pedidos/carrinho.jsp?u=<%=cliente.getId()%>'>Ver carrinho</a></div>
-                                    <div><a href='../Clientes/listar_meusPedidos.jsp'>Ver pedidos</a></div>
-                                    <div><a href=''>Solicitar troca</a></div>
-                                    <div><a href=''>Consultar andamento da troca</a></div>
-                                    <div><a href=''>Consultar pontos acumulativos</a></div>
-                                    
-                                    
-                                    
-                                    <div><a href='preAlterar_cliente.jsp?id=<%=cliente.getId()%>'>Editar meu perfil</a></div>
-                                </fieldset>
+                                 //out.print("Seja bem vindo " + cliente.getNome());
+                                 %>
+          
+         
+        <!-- MENU DO ISISTEMA-->
+        <ul id="slide-out" class="side-nav espaco">
+            <li><div class="user-view">
+                <div class="background black"></div>
+                    <a href="#!user"><img class="circle" src="../imagens/borja.jpg"></a>
+                    <a href="#!name"><span class="white-text name"><%= cliente.getNome()%></span></a>
+                    <a href="#!email"><span class="white-text email"><%= cliente.getEmail()%></span></a>
+                </div>
+            </li>
+            
+            <%
+                //Cliente com perfil de ADM
+                if(cliente.getPapel().getId() == 2){ 
+            %>
+            
+            <li class="white">
+                <ul class="collapsible collapsible-accordion">
+                    <li>
+                      <a class="collapsible-header"><i class="material-icons">folder_special</i>Gerencia de clientes <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+                      <div class="collapsible-body">
+                        <ul>
+                          <li><a class="" href='listar_clientes.jsp'><i class="material-icons">fullscreen</i>Listar clientes</a></li>
+                          <li><a class="" href='listar_clientes.jsp'><i class="material-icons">fullscreen</i>Desativar clientes</a></li>
+                           <li><a class="" href='listar_clientesInativos.jsp'><i class="material-icons">fullscreen</i>Ativar clientes</a></li>
+                          <li><div class="divider"></div></li>
+                        </ul>
+                      </div>
+                    </li>
+                </ul>
+            </li>
+            
+            <li class="white">
+                <ul class="collapsible collapsible-accordion">
+                    <li>
+                      <a class="collapsible-header"><i class="material-icons">folder_special</i>Gerencia de livros<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+                      <div class="collapsible-body">
+                        <ul>
+                          <li><a class="" href='../Livros/cadastro_livro.jsp'><i class="material-icons">fullscreen</i>Cadastrar livro</a></li>
+                          <li><a class="" href='../Livros/listar_livros.jsp'><i class="material-icons">fullscreen</i>Desativar livro</a></li>
+                          <li><a class="" href='../Livros/listar_livrosInativos.jsp'><i class="material-icons">fullscreen</i>Ativar livro</a></li>
+                          <li><a class="" href='../Livros/listar_categorias.jsp'><i class="material-icons">fullscreen</i>Listar Categorias de livro</a></li>
+                          <li><a class="" href='../Livros/listar_livrosInativos.jsp'><i class="material-icons">fullscreen</i>Ativar livro</a></li>
+                          <li><a class="" href='../Livros/cadastro_grupoLivro.jsp'><i class="material-icons">fullscreen</i>Inserir grupo de precificação</a></li>
+                          <li><a class="" href='../Livros/listar_grupoPrecificacao.jsp'><i class="material-icons">fullscreen</i>Listar grupo de precificação</a></li>
+                          <li><div class="divider"></div></li>
+                        </ul>
+                      </div>
+                    </li>
+                </ul>
+            </li>
+            
+            <li class="white">
+                <ul class="collapsible collapsible-accordion">
+                    <li>
+                      <a class="collapsible-header"><i class="material-icons">folder_special</i>Gerencia de pedidos<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+                      <div class="collapsible-body">
+                        <ul>
+                          <li><a class="" href='../adm/listar_pedidos.jsp'><i class="material-icons">fullscreen</i>Ver pedidos</a></li>
+                          <li><a class="" href='../adm/listar_pedidos.jsp'><i class="material-icons">fullscreen</i>Gerenciar pedidos</a></li>
+                          <li><a class="" href='../adm/listar_SolicitacaoTrocas.jsp'><i class="material-icons">fullscreen</i>Ver Solicitações de trocas </a></li>
+                          <li><a class="" href='#'><i class="material-icons">fullscreen</i>Gerenciar trocas</a></li>
+                          <li><a class="" href='#'><i class="material-icons">fullscreen</i>Editar meu perfil</a></li>
+                          <li><div class="divider"></div></li>
+                        </ul>
+                      </div>
+                    </li>
+                </ul>
+            </li>
+            
+            <li class="white">
+                <ul class="collapsible collapsible-accordion">
+                    <li>
+                      <a class="collapsible-header"><i class="material-icons">folder_special</i>Gerencia de estoque<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+                      <div class="collapsible-body">
+                        <ul>
+                          <li><a class="" href='../Estoque/entrada_estoqueLivro.jsp'><i class="material-icons">fullscreen</i>Entrada em estoque de livro</a></li>
+                          <li><a class="" href='../Estoque/listar_estoqueLivros.jsp'><i class="material-icons">fullscreen</i>Listar estoque de livro</a></li>
+                          <li><a class="" href='../Estoque/listar_fornecedores.jsp'><i class="material-icons">fullscreen</i>Listar fornecedores</a></li>
+                          <li><div class="divider"></div></li>
+                        </ul>
+                      </div>
+                    </li>
+                </ul>
+            </li>
+            
+            
+            <%
+                }
+             // Perfil comum
+             else if(cliente.getPapel().getId() == 1){ %>
+             
+             
+            <li class="white">
+                <ul class="collapsible collapsible-accordion">
+                    <li>
+                      <a class="collapsible-header"><i class="material-icons">folder_special</i>Ações<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+                      <div class="collapsible-body">
+                        <ul>
+                          <li><a class="" href='../Livros/prateleira.jsp'><i class="material-icons">fullscreen</i>Home</a></li>
+                          <li><a class="" href='ListarCupomTroca.jsp'><i class="material-icons">fullscreen</i>Ver Cupons de troca</a></li>
+                          <li><a class="" href='../Pedidos/carrinho.jsp?u=<%=cliente.getId()%>'><i class="material-icons">fullscreen</i>Ver carrinho</a></li>
+                          <li><a class="" href='../Clientes/listar_meusPedidos.jsp'><i class="material-icons">fullscreen</i>Ver pedidos</a></li>
+                          <li><a class="" href='#'><i class="material-icons">fullscreen</i>Solicitar troca</a></li>
+                          <li><a class="" href='#'><i class="material-icons">fullscreen</i>Consultar andamento da troca</a></li>
+                          <li><a class="" href='#'><i class="material-icons">fullscreen</i>Consultar pontos acumulativos</a></li>
+                          <li><a class="" href='preAlterar_cliente.jsp?id=<%=cliente.getId()%>'><i class="material-icons">fullscreen</i>Editar meu perfil</a></li>
+                          <li><div class="divider"></div></li>
+                        </ul>
+                      </div>
+                    </li>
+                </ul>
+            </li>
                                     <%
                                      }
                         }
@@ -117,10 +150,38 @@
         }
     }
          %>
-        <br><br>
-         <div><a href="/Ecommerce/LogoutCliente?acao=logout">Sair</a></div> 
-        
-        
+         
+            <li class="white">
+                <ul class="collapsible collapsible-accordion">
+                    <li>
+                        <a class="collapsible-header" href='/Ecommerce/LogoutCliente?acao=logout'><i class="material-icons">close</i>Sair</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+         
+         
+         
+<!--            TOPO DO SITE 
+       <div class="navbar-fixed">
+            <nav class=" indigo darken-4">
+                <div class="nav-wrapper indigo darken-4">
+                     <h3>LIVROS BORJA</h3>
+                     LISTA DO LADO ESQUERDO 
+                    <ul>
+                        <li>
+                             BOTAO FLUTUANTE 
+                             
+                        </li>
+                      
+                    </ul>
+                </div>
+            </nav>
+        </div>-->
+          
+          <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+       
+         
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="../js/materialize.min.js"></script>
