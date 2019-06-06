@@ -266,7 +266,7 @@ public class Fachada implements IFachada{
         }
     return resultado;
     }
-
+    
     @Override
     public Resultado alterar(EntidadeDominio entidade) {
         resultado.setEntidades(new ArrayList<EntidadeDominio>());
@@ -324,8 +324,8 @@ public class Fachada implements IFachada{
     return resultado;
     }
     
-    
-    private void RegrasDeNegocio(EntidadeDominio entidade, String operacao){ 
+    @Override
+    public void RegrasDeNegocio(EntidadeDominio entidade, String operacao){ 
         String nomeClasse = entidade.getClass().getName();
 	StringBuilder msg = new StringBuilder();
 
@@ -381,7 +381,8 @@ public class Fachada implements IFachada{
         resultado.setMensagem("fechando a sessao");  
         return resultado;
     }
-    
+
+
     
 }
 

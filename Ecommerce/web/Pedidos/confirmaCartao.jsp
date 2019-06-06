@@ -89,8 +89,8 @@
                              </table>
                                 <br><br>
                                 <label for="cupomDesconto">Cupom de desconto</label><br>
-                                <input type="text" name="cupomDesconto">
-                                <button type="submit" value="aplicarDesconto">Aplicar</button>
+                                <input type="text">
+                                <button type="submit" name="acao" value="aplicarDesconto">Aplicar</button>
                                  <br>
                                 <hr>
                                 

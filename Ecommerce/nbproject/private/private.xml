@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/moraes/NetBeansProjects/ecommerce_prod/Ecommerce/web/Clientes/cadastro_cliente.jsp</file>
-            <file>file:/home/moraes/NetBeansProjects/ecommerce_prod/Ecommerce/web/index.jsp</file>
-            <file>file:/home/moraes/NetBeansProjects/ecommerce_prod/Ecommerce/web/css/Custom.css</file>
-            <file>file:/home/moraes/NetBeansProjects/ecommerce_prod/Ecommerce/web/login.jsp</file>
-            <file>file:/home/moraes/NetBeansProjects/ecommerce_prod/Ecommerce/web/Clientes/home.jsp</file>
-            <file>file:/home/moraes/NetBeansProjects/ecommerce_prod/Ecommerce/web/js/Custom.js</file>
+            <file>file:/home/matheus/NetBeansProjects/ecommerce_prod/Ecommerce/src/java/livraria/web/commands/CommandAplicarDesconto.java</file>
+            <file>file:/home/matheus/NetBeansProjects/ecommerce_prod/Ecommerce/src/java/livraria/web/view/cliente/ViewCartao.java</file>
+            <file>file:/home/matheus/NetBeansProjects/ecommerce_prod/Ecommerce/web/Pedidos/confirmaCartao.jsp</file>
+            <file>file:/home/matheus/NetBeansProjects/ecommerce_prod/Ecommerce/src/java/livraria/web/controle/Control.java</file>
+            <file>file:/home/matheus/NetBeansProjects/ecommerce_prod/Ecommerce/src/java/livraria/web/view/pedido/ViewPedido.java</file>
         </group>
     </open-files>
 </project-private>

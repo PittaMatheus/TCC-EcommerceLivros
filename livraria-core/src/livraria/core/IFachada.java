@@ -17,4 +17,5 @@ public interface IFachada {
     public Resultado ativar(EntidadeDominio entidade);
     public Resultado autenticar(EntidadeDominio entidade);
     public Resultado logout(EntidadeDominio entidade);
+    public void RegrasDeNegocio(EntidadeDominio entidade, String operacao);
 }

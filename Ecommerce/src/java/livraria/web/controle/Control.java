@@ -40,6 +40,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import livraria.web.commands.CommandAplicarDesconto;
 import livraria.web.view.estoque.ViewEstoque;
 import livraria.web.view.pedido.ViewCarrinho;
 import livraria.web.view.pedido.ViewCarrinhoSessao;
@@ -68,6 +69,8 @@ public class Control extends HttpServlet {
         commands.put("ativar", new CommandAtivar());
         commands.put("login", new CommandAutenticar());
         commands.put("logout", new CommandLogout());
+        commands.put("aplicarDesconto", new CommandAplicarDesconto());
+        
         
         // MAPA DAS VIEWS DO SISTEMA
         // Views Cliente
