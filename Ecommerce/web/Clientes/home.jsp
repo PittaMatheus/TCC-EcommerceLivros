@@ -8,8 +8,8 @@
         <!--Import Google Icon Font-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-        <link type="text/css" rel="stylesheet" href="css/Custom.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="../css/Custom.css"  media="screen,projection"/>
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -30,12 +30,23 @@
                                  //out.print("Seja bem vindo " + cliente.getNome());
                                  %>
           
+        <!-- NAV FIXO DO TOPO-->
+        <div class="navbar-fixed indigo darken-4">
+            <nav>
+                <div class="nav-wrapper indigo darken-4">
+                  <a href="#" class="brand-logo"><img src="https://img.icons8.com/clouds/75/000000/literature.png"></a>
+                  <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="#" data-activates="slide-out"  class="menu"><i class="material-icons">menu</i></a></li>
+                  </ul>
+                </div>
+              </nav>
+        </div>
          
-        <!-- MENU DO ISISTEMA-->
+        <!-- MENU DO SISTEMA-->
         <ul id="slide-out" class="side-nav espaco">
             <li><div class="user-view">
                 <div class="background black"></div>
-                    <a href="#!user"><img class="circle" src="../imagens/borja.jpg"></a>
+                    <a href="#!user"><img class="circle" src="https://img.icons8.com/clouds/75/000000/literature.png"></a>
                     <a href="#!name"><span class="white-text name"><%= cliente.getNome()%></span></a>
                     <a href="#!email"><span class="white-text email"><%= cliente.getEmail()%></span></a>
                 </div>
@@ -159,27 +170,6 @@
                 </ul>
             </li>
         </ul>
-         
-         
-         
-<!--            TOPO DO SITE 
-       <div class="navbar-fixed">
-            <nav class=" indigo darken-4">
-                <div class="nav-wrapper indigo darken-4">
-                     <h3>LIVROS BORJA</h3>
-                     LISTA DO LADO ESQUERDO 
-                    <ul>
-                        <li>
-                             BOTAO FLUTUANTE 
-                             
-                        </li>
-                      
-                    </ul>
-                </div>
-            </nav>
-        </div>-->
-          
-          <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
        
          
         <!--Import jQuery before materialize.js-->

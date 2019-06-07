@@ -35,7 +35,9 @@ height:400px !important;
     background-color: black;
 }
 
-
+.negrito {
+    font-weight: bold;
+}
 
 
 
@@ -326,6 +328,7 @@ nav .nav-wrapper {
 
 .btn-border {
     border:none;
+    background-color: rgba(0,0,0,0);
 }
 
 

@@ -14,13 +14,34 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="../css/Custom.css"  media="screen,projection"/>
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Detalhe item</title>
-        <link rel="stylesheet" type="text/css" href="../css/Custom.css"/> 
+        <title>Detalhes Item</title>
     </head>
-    <body class="fundo">
+    <body>
+         <!-- NAV FIXO DO TOPO-->
+        <div class="navbar-fixed indigo darken-4">
+            <nav>
+                <div class="nav-wrapper indigo darken-4">
+                  <a href="#" class="brand-logo center">DETALHES DO LIVRO</a>
+                  <ul id="nav-mobile" class="right hide-on-med-and-down">
+                      <li><button type="submit" class="btn-border" value="Realizar pedido">Realizar pedido</button></li>
+                  </ul>
+                  <ul class="left">
+                      <li><a href="../index.jsp"><i class="material-icons">arrow_back</i></a></li>
+                  </ul>
+                </div>
+              </nav>
+        </div>
+         
+         <br><br><br><br><br><br><br>
         <div class="centro">
-            <h1>Detalhes</h1>
 <%
             int id_livro = Integer.parseInt(request.getParameter("l"));
             String id_usuario = request.getParameter("u");
