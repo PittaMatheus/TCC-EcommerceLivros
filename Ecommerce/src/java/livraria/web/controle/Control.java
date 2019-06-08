@@ -45,6 +45,7 @@ import livraria.web.view.estoque.ViewEstoque;
 import livraria.web.view.pedido.ViewCarrinho;
 import livraria.web.view.pedido.ViewCarrinhoSessao;
 import livraria.web.view.pedido.ViewClienteCompra;
+import livraria.web.view.pedido.ViewCupomDesconto;
 import livraria.web.view.pedido.ViewCupomTroca;
 import livraria.web.view.pedido.ViewPedido;
 import livraria.web.view.pedido.ViewTroca;
@@ -70,6 +71,8 @@ public class Control extends HttpServlet {
         commands.put("login", new CommandAutenticar());
         commands.put("logout", new CommandLogout());
         commands.put("aplicarDesconto", new CommandAplicarDesconto());
+        
+
         
         
         // MAPA DAS VIEWS DO SISTEMA
@@ -128,13 +131,14 @@ public class Control extends HttpServlet {
         viewHelper.put("/Ecommerce/adm/ListarTrocas", new ViewTroca());
         viewHelper.put("/Ecommerce/adm/AutorizarTroca", new ViewCupomTroca());
         viewHelper.put("/Ecommerce/Clientes/ConsultarCupomTroca", new ViewCupomTroca());
+        viewHelper.put("/Ecommerce/Clientes/AplicarDesconto", new ViewCupomDesconto());
         
         // Estoque
         viewHelper.put("/Ecommerce/Estoque/InserirEstoque", new ViewEstoque());
         viewHelper.put("/Ecommerce/Estoque/ListarEstoqueLivros", new ViewEstoque());
         viewHelper.put("/Ecommerce/Estoque/PreAlterarEstoque", new ViewEstoque());
         viewHelper.put("/Ecommerce/Estoque/AlterarEstoque", new ViewEstoque());
-
+        
         // View
         
 

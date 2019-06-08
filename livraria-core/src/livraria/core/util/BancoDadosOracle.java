@@ -17,7 +17,11 @@ public class BancoDadosOracle {
         //return DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce_livros","root","root");
         //Edner
         //return DriverManager.getConnection("jdbc:mysql://localhost:3306/Ecommerce","root","admin123");
+<<<<<<< HEAD
             return DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce_livros","root","root");
+=======
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce_livros","root","root");
+>>>>>>> master
     }
 
         public void devolverConexao(Connection conexao) throws SQLException {

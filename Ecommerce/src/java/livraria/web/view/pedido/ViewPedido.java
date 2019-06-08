@@ -42,10 +42,7 @@ public class ViewPedido implements IViewHelper {
                            
             Livro objLivro = new Livro();
             Cliente objCliente = new Cliente();
-            
 
-            
-            
             List<ItemPedido> item = new ArrayList<>();
             String id = request.getParameter("id_pedido");
             String id_cliente = request.getParameter("u");
@@ -176,8 +173,12 @@ public class ViewPedido implements IViewHelper {
                             request.getRequestDispatcher("../Clientes/listar_meusPedidos.jsp").forward(request, response);
                         }else if(resultado.getAcao().equals("falhaInserir")){
                             request.getRequestDispatcher("../clienteBurlou.jsp").forward(request, response);
-
+                            //request.getRequestDispatcher("../clienteBurlou.jsp").forward(request, response);
                     }
+                        else if(resultado.getAcao().equals("descontoValidado")){
+                            request.getRequestDispatcher("../confirmaCartao.jsp").forward(request, response);
+                            
+                        }
                     }else if(resultado.getAcao().equals("alterar")){
                          request.setAttribute("alterado", "status do pedido ");
                     }

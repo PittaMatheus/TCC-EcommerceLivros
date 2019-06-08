@@ -16,10 +16,7 @@ public class CommandAplicarDesconto extends AbstractCommand{
 
     @Override
     public Resultado executar(EntidadeDominio entidade) {
-        String str = "";
-        fachada.RegrasDeNegocio(entidade,"salvar");
-        Resultado resultado = new Resultado();
-        return resultado;
+        return fachada.aplicarDesconto(entidade);
     }
     
 }

@@ -164,20 +164,25 @@ public class Fachada implements IFachada{
         RNAddCarrinho.add(new ValidaEstoque());
         Map<String, List<IStrategy>> regrasCarrinho = new HashMap<String, List<IStrategy>>();
         regrasCarrinho.put("salvar", RNAddCarrinho);
+        
         // Regras de negocio geral
         RN.put(Carrinho.class.getName(), regrasCarrinho);
         
         
          // Regras carrinho
         List<IStrategy> RNPedido = new ArrayList<IStrategy>();
+        List<IStrategy> RNCupom = new ArrayList<IStrategy>();
+
         //Lista de regras de negocio do pedido
         RNPedido.add(new ValidaValorPedido());
         RNPedido.add(new ValidaCartaoCredito());
         RNPedido.add(new ValidaCupomDesconto());
-        RNPedido.add(new AplicaCupomDesconto());
+        
+        RNCupom.add(new AplicaCupomDesconto());
         
         Map<String, List<IStrategy>> regrasPedido = new HashMap<String, List<IStrategy>>();
         regrasPedido.put("salvar", RNPedido);
+        regrasPedido.put("cupom", RNCupom);
         // Regras de negocio geral
         RN.put(Pedido.class.getName(), regrasPedido);
         
@@ -348,6 +353,7 @@ public class Fachada implements IFachada{
         } else {
             resultado.setMensagem(new String());
         }
+        
     }
     
     @Override
@@ -384,7 +390,11 @@ public class Fachada implements IFachada{
         return resultado;
     }
 
-
+    @Override
+    public Resultado aplicarDesconto(EntidadeDominio entidade){
+        RegrasDeNegocio(entidade, "cupom");
+        return resultado;
+    }
     
 }
 
