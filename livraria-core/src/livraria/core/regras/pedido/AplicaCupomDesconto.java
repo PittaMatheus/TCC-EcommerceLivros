@@ -21,6 +21,7 @@ public class AplicaCupomDesconto extends AbstractStrategy {
         Pedido pedido = (Pedido) entidade;
         ValidaCupomDesconto validaCupom = new ValidaCupomDesconto();
         str = validaCupom.validar(pedido);
+        return str;
     }
     
 }
