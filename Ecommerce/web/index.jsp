@@ -35,9 +35,11 @@
             <li class="divider"></li>
             <li><a href="../Clientes/cadastro_cliente.jsp">Cadastre-se</a></li>
         </ul>
+    
+    <div class="navbar-fixed">
         <nav class="indigo darken-4">
-          <div class="nav-wrapper">
-            <a href="#!" class="brand-logo">Livraria</a>
+          <div class="nav-wrapper indigo darken-4">
+            <a href="#!" class="brand-logo"><img src="https://img.icons8.com/clouds/75/000000/literature.png"></a>
             <ul class="right hide-on-med-and-down">
               <li><a href="../Pedidos/carrinhoSessao.jsp">Carrinho</a></li>
               <!-- DROPDOWN DO LOGIN -->
@@ -45,6 +47,7 @@
             </ul>
           </div>
         </nav>
+    </div>
 <!--FIM NAVBAR-->
 
     <%

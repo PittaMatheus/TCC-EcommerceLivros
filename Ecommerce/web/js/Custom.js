@@ -7,7 +7,7 @@
  $(document).ready(function(){
       $('.carousel').carousel();
       $('select').material_select();
-      $(".button-collapse").sideNav({
+      $(".menu").sideNav({
       menuWidth: 350, // Default is 300
       edge: 'left', // Choose the horizontal origin
       closeOnClick: false, // Closes side-nav on <a> clicks, useful for Angular/Meteor
