@@ -41,9 +41,9 @@
           <div class="nav-wrapper indigo darken-4">
             <a href="#!" class="brand-logo"><img src="https://img.icons8.com/clouds/75/000000/literature.png"></a>
             <ul class="right hide-on-med-and-down">
-              <li><a href="../Pedidos/carrinhoSessao.jsp">Carrinho</a></li>
+              <li><a href="../Pedidos/carrinhoSessao.jsp"><i class="material-icons left">local_grocery_store</i>Carrinho</a></li>
               <!-- DROPDOWN DO LOGIN -->
-              <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Entre ou cadastre-se<i class="material-icons right">arrow_drop_down</i></a></li>
+              <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons left">face</i>Entre ou cadastre-se<i class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
           </div>
         </nav>

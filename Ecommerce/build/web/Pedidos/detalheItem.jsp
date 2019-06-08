@@ -40,7 +40,7 @@
                 <div class="nav-wrapper indigo darken-4">
                   <a href="#" class="brand-logo center maiusculo">Detalhes do livro</a>
                   <ul id="nav-mobile" class="right hide-on-med-and-down">
-                      <li>  <a href="../Pedidos/add_carrinho_sessao.jsp?l=<%=id_livro%>">Adicionar ao carrinho via sessao</a></li>
+                      <li>  <a href="../Pedidos/add_carrinho_sessao.jsp?l=<%=id_livro%>"><i class="material-icons left">add_shopping_cart</i>Adicionar ao carrinho</a></li>
                   </ul>
                   <ul class="left">
                       <li><a href="../Livros/prateleira.jsp"><i class="material-icons">arrow_back</i></a></li>

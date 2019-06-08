@@ -29,19 +29,35 @@
             String precoFormatado="";
             Carrinho carrinho = (Carrinho) session.getAttribute("carrinho");
             if(carrinho == null){
-                out.println("Não há livros no carrinho");
-                out.println("<br><a href='../index.jsp'>Adicionar livros</a>");
+        %>
+        <!-- NAV FIXO DO TOPO-->
+        <div class="navbar-fixed indigo darken-4">
+            <nav>
+                <div class="nav-wrapper indigo darken-4">
+                  <a href="#" class="brand-logo center">CARRINHO ESTÁ VAZIO</a>
+                  <ul class="left">
+                      <li><a href="../index.jsp"><i class="material-icons">arrow_back</i></a></li>
+                  </ul>
+                </div>
+              </nav>
+        </div>
+        <br><br><br><br>
+    
+        <div class="container center">        
+            <img src="https://img.icons8.com/clouds/400/000000/add-shopping-cart.png">
+        </div>
+        <%
             }else{
         %>
         
     <form action="../login.jsp" method="GET">
-         <!-- NAV FIXO DO TOPO-->
+        <!-- NAV FIXO DO TOPO-->
         <div class="navbar-fixed indigo darken-4">
             <nav>
                 <div class="nav-wrapper indigo darken-4">
                   <a href="#" class="brand-logo center">CARRINHO DA SESSÃO</a>
                   <ul id="nav-mobile" class="right hide-on-med-and-down">
-                      <li><button type="submit" class="btn-border" value="Realizar pedido">Realizar pedido</button></li>
+                      <li><button type="submit" class="btn-border" value="Realizar pedido"><i class="material-icons left">done</i>Finalizar pedido</button></li>
                   </ul>
                   <ul class="left">
                       <li><a href="../index.jsp"><i class="material-icons">arrow_back</i></a></li>
