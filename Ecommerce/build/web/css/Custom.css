@@ -39,7 +39,9 @@ height:400px !important;
     font-weight: bold;
 }
 
-
+.maiusculo {
+     text-transform: uppercase;
+}
 
 
 

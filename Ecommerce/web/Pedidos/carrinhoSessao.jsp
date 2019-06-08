@@ -24,7 +24,7 @@
     </head>
     <body>
        
-<%           
+        <%           
             double valorTotal = 0;
             String precoFormatado="";
             Carrinho carrinho = (Carrinho) session.getAttribute("carrinho");
@@ -32,7 +32,7 @@
                 out.println("Não há livros no carrinho");
                 out.println("<br><a href='../index.jsp'>Adicionar livros</a>");
             }else{
-            %>
+        %>
         
     <form action="../login.jsp" method="GET">
          <!-- NAV FIXO DO TOPO-->
