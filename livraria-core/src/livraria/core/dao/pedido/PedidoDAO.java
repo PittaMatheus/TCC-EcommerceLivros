@@ -48,13 +48,19 @@ public class PedidoDAO extends AbstractDAO{
             endereco.setId(pedido.getEndereco().getId());
             CupomDescontoDAO cupomDescDao = new CupomDescontoDAO();
             Cupom cupom = new Cupom();
-
+            double houveCupom;
+            if(pedido.getCupom().getCodigo() == null){
+                houveCupom = 0;
+            }else
+                houveCupom = 1;
 
             PreparedStatement declaracao = conexao.prepareStatement("INSERT INTO pedido(id_cliente, "
-                    + "id_endereco, valorTotal) VALUES(?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+                    + "id_endereco, valorTotal,cupomDesconto) VALUES(?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             declaracao.setInt(1, pedido.getCliente().getId());
             declaracao.setInt(2, endereco.getId());
             declaracao.setDouble(3, pedido.getPagamento().getValorTotal());
+            declaracao.setDouble(4, houveCupom);
+
             declaracao.execute();
             ResultSet rs = declaracao.getGeneratedKeys();
             // Seta o ID do pedido

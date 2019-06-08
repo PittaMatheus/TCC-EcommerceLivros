@@ -19,6 +19,7 @@
     <body>
         <h1>Escolha o cartão de credito</h1>
         <%
+            
             int id_usuario;
             if(session.getAttribute("usuarioLogado") == null){
                 response.sendRedirect("../login.jsp");
@@ -45,6 +46,10 @@
             double valorTotal = 0;
 
             Resultado resultado = (Resultado) request.getAttribute("resultado");
+           
+            
+            
+
             if(resultado == null) {
                 response.sendRedirect(request.getContextPath() + "/Clientes/ListarCartao?acao=consultarPorID&id=" + id_usuario + "&conf=1");
             }
@@ -55,7 +60,7 @@
                             out.print("Nenhum cartão cadastrado");
                         } else {
                              %>
-                        <form action="AdicionarPedido" name="formCartao" id="formCartao" method="POST">
+                          <form action="AdicionarPedido" name="formCartao" id="formCartao" method="POST">
                              <table border='1'>
                                 <thead>
                                     <tr>
@@ -88,14 +93,10 @@
                                 </tbody>
                              </table>
                                 <br><br>
-                                <label for="cupomDesconto">Cupom de desconto</label><br>
-                                <input type="text">
-                                <button type="submit" name="acao" value="aplicarDesconto">Aplicar</button>
-                                 <br>
-                                <hr>
+                               
                                 
                 o valor total é: <%=valorTotal %><br><br>
-
+      
                 <div id="DivideValor" style="height:auto;width:auto;">
                     
                 </div>  
@@ -111,6 +112,37 @@
                          <input type="hidden" id="valorTotal" name="valorTotal" value="<%=pedido.getPagamento().getValorTotal()%>">
                          <button name="acao" value="inserir">Confirmar pedido</button>
                         </form>
+                         <br><br>
+                          <form action="AplicarDesconto">
+                                    <label for="cupomDesconto">Cupom de desconto</label><br>
+                                    <input <%
+                                        if(session.getAttribute("aplicado") != null){
+                                            Resultado aplicado = (Resultado)session.getAttribute("aplicado"); 
+                                            if(aplicado != null) {
+                                                if(aplicado.getMensagem().equals("cupomAplicado"))
+                                            {%>
+                                        disabled 
+                                         <%}
+                                          }
+                                        }%>type="text" name="cupomDesconto">
+                                    
+                                    
+                                     <button type="submit" name="acao" value="aplicarDesconto"
+                                    <%
+                                        if(session.getAttribute("aplicado") != null){
+                                            Resultado aplicado = (Resultado)session.getAttribute("aplicado"); 
+                                            if(aplicado != null) {
+                                                if(aplicado.getMensagem().equals("cupomAplicado"))
+                                            {%>
+                                            disabled
+                                            
+                                            <%}
+                                          }
+                                        }%>
+                                   >Aplicar</button>
+                                     <br>
+                                    <hr>
+                                </form>
                                 <br>
 
         <a href='cadastro_cartao.jsp?id=<%=id_usuario%> '>Adicionar cartão</a>
@@ -118,8 +150,11 @@
     }
  }
                              }
+
                         }
             }
+            
+            
 %>
 <br><br>
 

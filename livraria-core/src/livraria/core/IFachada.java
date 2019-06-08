@@ -18,4 +18,6 @@ public interface IFachada {
     public Resultado autenticar(EntidadeDominio entidade);
     public Resultado logout(EntidadeDominio entidade);
     public void RegrasDeNegocio(EntidadeDominio entidade, String operacao);
+    public Resultado aplicarDesconto(EntidadeDominio entidade);
+
 }

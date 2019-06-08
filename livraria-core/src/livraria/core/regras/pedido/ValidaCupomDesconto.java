@@ -27,11 +27,13 @@ public class ValidaCupomDesconto extends AbstractStrategy{
         Resultado resultado = new Resultado();
         CupomDescontoDAO cupomDescDAO = new CupomDescontoDAO();
         String codigoCupom = pedido.getCupom().getCodigo();
-        cupom.setCodigo(codigoCupom);
-        resultado = cupomDescDAO.consultar(cupom);
-        List<Cupom> cupons = (List) resultado.getEntidades();
-        if(cupons.isEmpty()){
-            str = "<li>Cupom inválido</li>";
+        if(codigoCupom != null){
+            cupom.setCodigo(codigoCupom);
+            resultado = cupomDescDAO.consultar(cupom);
+            List<Cupom> cupons = (List) resultado.getEntidades();
+            if(cupons.isEmpty()){
+                str = "<li>Cupom inválido</li>";
+            }
         }
         
         return str;
