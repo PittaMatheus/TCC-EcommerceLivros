@@ -21,65 +21,89 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <div class="container">
-            <div class="row">
-                
+        
+        <!-- NAV FIXO DO TOPO-->
+        <div class="navbar-fixed indigo darken-4">
+            <form action="InserirCliente" name="acao" value="inserir">
+            <nav>
+                <div class="nav-wrapper indigo darken-4">
+                  <a href="#" class="brand-logo center maiusculo">cadastro de cliente</a>
+                  <ul id="nav-mobile" class="right hide-on-med-and-down">
+                      <li> <button type="submit" name="acao" value="inserir" class="btn-border"><i class='material-icons left'>done</i>Cadastrar cliente</button>                    
+                  </ul>             
+                  <ul class="left">
+                      <li><a href="../index.jsp"><i class="material-icons">arrow_back</i></a></li>
+                  </ul>
+                </div>
+            </nav>
+        </div>
+        <br> <br> <br>
+
                 <%
                 Resultado resultado = (Resultado) request.getAttribute("resultado");
                 if(resultado != null) {
                         if(!resultado.isStatus() && !resultado.getMensagem().isEmpty()) {
-                                out.print("<div class='alert alert-danger'>");
+                                out.print("<div class='container'><h5 class='forma_redonda_vermelho  negrito center'>Atenção com os campos</h5><div class='card-panel grey lighten-2'>");
                                 out.print(resultado.getMensagem());
-                                out.print("</div>");
+                                out.print("</div></div><br>");
                         } else {
                                 if(!resultado.getMensagem().isEmpty()) {
-                                        out.print("<div class='alert alert-success'>");
+                                        out.print("<div class=container card-panel teal lighten-2'>");
                                         out.print(resultado.getMensagem());
                                         out.print("</div>");
                                 }
                         }
                 }
             %>
-        
+        <div class ="container row">
         <!-- Clientes/InserirCliente?nome=edner&sobrenome=SobrenomeTeste&cpf=41656190869&rg=329702760&data_nascimento=12%2F01%2F1995&email=emailteste%40teste.com&numTelefone=47223322&senha=SenhaValida%21%40%23&senhaConfirmada=SenhaValida%21%40%23&sexo=M&tipoEndereco=cobranca&tipoLogradouro=vila&cep=12312312312312&cidade=Mogi&bairro=cubas&uf=SP&pais=brasil&logradouro=Rua+tranças+do+rei+careca&numero=12312&complemento=apt+2&nomeEndereco=Casa+da+avó&acao=inserir -->
-        <h1 class="titulo center">Informe seus dados pessoais</h1>
-        <form action="InserirCliente" name="acao" value="inserir">
+        <h5 class="forma_redonda negrito center">Dados pessoais</h5>
+        <br>
             <div class="input-field col s12 l6">
                 <label for="nome" data-error="Informe o nome!">Nome</label>
                 <input type="text" name="nome" id="nome" value="NomeTeste" class="validate" required>
-            </div>          
+            </div>
+        
             <div class="input-field col s12 l6">
                 <label for="sobrenome" data-error="Informe o sobrenome!" >Sobrenome</label>
                 <input type="text" name="sobrenome" id="sobrenome" value="SobrenomeTeste" class="validate" required>
             </div> 
+        
             <div class="input-field col s12 l6">
                 <label for="cpf" data-error="Informe o CPF!">CPF</label>
                 <input type="text" name="cpf" id="cpf" value="41656190869" class="validate" required>
             </div>
+        
             <div class="input-field col s12 l6">
                 <label for="rg" data-error="Informe o RG!" >RG</label>
                 <input type="text" name="rg" id="rg" value="329702760" class="validate" required>
             </div>
+        
             <div class="input-field col s12 l4">
                 <label for="data_nascimento" data-error="Informe a data de nascimento!" >Data de nascimento</label>
                 <input type="text" name="data_nascimento" id="data_nascimento" value="12/01/1995"class="validate"  required>
-            </div>    
+            </div>   
+        
             <div class="input-field col s12 l4">
                 <label for="email" data-error="Informe o email!" >Email</label>
                 <input type="email" name="email" id="email" value="emailteste@teste.com" class="validate" required>
             </div>
+        
             <div class="input-field col s12 l4">
                 <label for="telefone" data-error="Informe o telefone!" >Telefone</label>
                 <input type="text" name="numTelefone" id="numTelefone" value="47223322" class="validate" required>
             </div> 
+        
             <div class="input-field col s12 l6">           
                 <label for="senha" data-error="Informe a senha" >Senha</label>
                 <input type="password" name="senha" id="senha" value="SenhaValida!@#" class="validate" required>
             </div>
+        
             <div class="input-field col s12 l6">           
                 <label for="senhaConfirmada" data-error="Informe a senha confirmada">Confirme a senha</label>
                 <input type="password" name="senhaConfirmada" id="senhaConfirmada" value="SenhaValida!@#" class="validate" required>                       
-            </div>         
+            </div> 
+        
             <div class="input-field col s12">
                 <select id="sexo" name="sexo"class="validate">
                     <option value="" disabled selected> ESCOLHA O SEXO </option>
@@ -87,10 +111,12 @@
                     <option value="F">Feminino</option>
                 </select>
             </div>
-        
-            
-            <!-- DADOS ENDERECO--> 
-               <h1 class="titulo center espacamento_formulario">Endereço</h1>
+        </div>
+        <br><br>
+         <div class ="container row">
+         <!-- DADOS ENDERECO--> 
+            <h5 class="forma_redonda negrito center">Dados do endereço</h5>
+               <br>
                <div class="input-field col s6">
                    <select id="tipoEndereco" name="tipoEndereco" class="validate" value="${param['tipoEndereco']}">
                        <option value="" disabled >Escolha o tipo</option>
@@ -160,15 +186,9 @@
                    <label for="nomeEndereco" data-error="Informe o nome do endereco!">Nome do endereço: (Ex: Casa da avó)</label>
                    <input type="text" value="Casa da avó" name="nomeEndereco" id="nomeEndereco">
                </div>
-
-              <div class="input-field col s12">
-                    <a href="../index.jsp" class="btn col s4 indigo darken-4">Voltar</a>
-                   <input type="submit" name="acao" value="inserir" class="btn col s8 green darken-4">
-              </div>
             </form>
         </div>
-    </div>     
-
+   
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="../js/materialize.min.js"></script>
