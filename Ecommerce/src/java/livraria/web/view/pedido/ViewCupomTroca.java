@@ -55,7 +55,7 @@ public class ViewCupomTroca implements IViewHelper {
                             request.setAttribute("acao", "Autorizacao da troca");
                             request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
                           }else if(resultado.getAcao().equals("listar")){
-                              request.getRequestDispatcher("../ListarCupomTroca.jsp").forward(request, response);
+                              request.getRequestDispatcher("../Clientes/ListarCupomTroca.jsp").forward(request, response);
                           }
                         
                         
