@@ -48,7 +48,14 @@
                     <div class="background black">
                         <img src="../imagens/bg.jpg">
                     </div>
-                    <a href="#!user"><img class="circle" src="https://img.icons8.com/clouds/75/000000/literature.png"></a>
+                    <a href="#!user">
+                        <% 
+                        if (cliente.getSexo().equals("M")) {
+                            out.println("<img src='https://img.icons8.com/office/48/000000/collaborator-male.png' class='circle'>");
+                        }else {
+                              out.println("<img src='https://img.icons8.com/office/48/000000/collaborator-female.png' class='circle'>");
+                        }%>
+                        </a>
                     <a href="#!name"><span class="white-text name"><%= cliente.getNome()%></span></a>
                     <a href="#!email"><span class="white-text email"><%= cliente.getEmail()%></span></a>
                 </div>
@@ -87,7 +94,6 @@
                           <li><a class="" href='../Livros/listar_livros.jsp'><i class="material-icons">fullscreen</i>Desativar livro</a></li>
                           <li><a class="" href='../Livros/listar_livrosInativos.jsp'><i class="material-icons">fullscreen</i>Ativar livro</a></li>
                           <li><a class="" href='../Livros/listar_categorias.jsp'><i class="material-icons">fullscreen</i>Listar Categorias de livro</a></li>
-                          <li><a class="" href='../Livros/listar_livrosInativos.jsp'><i class="material-icons">fullscreen</i>Ativar livro</a></li>
                           <li><a class="" href='../Livros/cadastro_grupoLivro.jsp'><i class="material-icons">fullscreen</i>Inserir grupo de precificação</a></li>
                           <li><a class="" href='../Livros/listar_grupoPrecificacao.jsp'><i class="material-icons">fullscreen</i>Listar grupo de precificação</a></li>
                           <li><div class="divider"></div></li>

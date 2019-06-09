@@ -3,11 +3,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-         <!-- Compiled and minified CSS -->
-         
-      <!--  <link rel="stylesheet" href="../css/materialize.min.css"> -->
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cadastre -se </title>
         <!--Import Google Icon Font-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
@@ -19,6 +14,7 @@
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Cadastre -se </title>
     </head>
     <body>
         
@@ -28,8 +24,8 @@
             <nav>
                 <div class="nav-wrapper indigo darken-4">
                   <a href="#" class="brand-logo center maiusculo">cadastro de cliente</a>
-                  <ul id="nav-mobile" class="right hide-on-med-and-down">
-                      <li> <button type="submit" name="acao" value="inserir" class="btn-border"><i class='material-icons left'>done</i>Cadastrar cliente</button>                    
+                  <ul id="nav-mobile" class="right">
+                      <li> <button type="submit" name="acao" value="inserir" class="btn-border"><i class='material-icons left'>done</i>Cadastrar cliente</button></li>                    
                   </ul>             
                   <ul class="left">
                       <li><a href="../index.jsp"><i class="material-icons">arrow_back</i></a></li>
@@ -197,7 +193,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
         <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-
         
     </body>
 </html>
