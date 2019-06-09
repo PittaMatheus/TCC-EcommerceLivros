@@ -7,6 +7,7 @@ package livraria.core.dao.pedido;
 
 import ecommerce.dominio.EntidadeDominio;
 import ecommerce.dominio.cliente.Endereco;
+import ecommerce.dominio.estoque.Estoque;
 import ecommerce.dominio.livro.Livro;
 import ecommerce.dominio.pedido.Cupom;
 import ecommerce.dominio.pedido.Pagamento;
@@ -51,9 +52,24 @@ public class PedidoDAO extends AbstractDAO{
             double houveCupom;
             if(pedido.getCupom().getCodigo() == null){
                 houveCupom = 0;
-            }else
+            }else{
                 houveCupom = 1;
+            }
+            
+            // Verificar se tem livro no estoque
+            EstoqueDAO estoqueDAO = new EstoqueDAO();
+            Estoque estoque = new Estoque();
+            //Recupera a quantidade dos livros do pedido no estoque 
+            resultado = estoqueDAO.consultarLivros(pedido);
+            List<Estoque> estoques = (List) resultado.getEntidades();
+            //loop para alterar o estoque no banco para cada livro
+            for(Estoque est: estoques){
+                estoque.setId(est.getItem().getLivro().getId());
+                estoque.getItem().setQuantidade(est.getItem().getQuantidade());
+                estoqueDAO.baixaLivro(estoque);
+            }
 
+            
             PreparedStatement declaracao = conexao.prepareStatement("INSERT INTO pedido(id_cliente, "
                     + "id_endereco, valorTotal,cupomDesconto) VALUES(?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             declaracao.setInt(1, pedido.getCliente().getId());

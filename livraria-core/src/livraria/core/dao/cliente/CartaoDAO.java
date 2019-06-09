@@ -78,18 +78,19 @@ public class CartaoDAO extends AbstractDAO{
 
     @Override
     public Resultado desativar(EntidadeDominio entidade) {
+        int status = 0;
+
         List<EntidadeDominio> ListEntidades = new ArrayList<EntidadeDominio>();
         try {
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();
             Cartao cartao = (Cartao) entidade;
-            PreparedStatement declaracao = conexao.prepareStatement(""
-                                                + "DELETE from cartao"
+            PreparedStatement declaracao = conexao.prepareStatement("UPDATE cartao set status = 0"
 						+ " WHERE id=?");
            
             System.out.println("ID CARTAO: " + cartao.getCliente().getId());
-				declaracao.setInt(1, cartao.getCliente().getId());
-				declaracao.execute();
+            declaracao.setInt(1, cartao.getCliente().getId());
+            declaracao.executeUpdate();
 
             resultado.setStatus(true);
             resultado.setMensagem("O Cartao foi excluido com sucesso!");   
