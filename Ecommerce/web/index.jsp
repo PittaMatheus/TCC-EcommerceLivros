@@ -72,6 +72,7 @@
        <% 
     Resultado resultado = (Resultado) request.getAttribute("resultado");
     if(resultado == null) {
+        
             response.sendRedirect(request.getContextPath() + "/Livros/ListarLivros?acao=listar&status=1&menu=ok");
             return;
     }
