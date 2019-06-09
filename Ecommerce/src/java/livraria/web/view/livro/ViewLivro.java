@@ -180,7 +180,7 @@ public class ViewLivro implements IViewHelper{
                             }else if(resultado.getAcao().equals("ativar")){
                                 request.setAttribute("acao", "ativação");
                                 request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
-                            }else if(resultado.getAcao().equals("falhaAlterar")){
+                            }else if(resultado.getAcao().equals("consultar")){
                                 request.getRequestDispatcher("preAlterar_livro.jsp").forward(request, response);
                             }else if(resultado.getAcao().equals("listarHome")){
                                 request.getRequestDispatcher("../index.jsp").forward(request, response);
