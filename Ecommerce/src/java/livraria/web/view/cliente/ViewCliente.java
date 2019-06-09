@@ -45,13 +45,13 @@ public class ViewCliente implements IViewHelper{
 
 
         //CLIENTE
+        String sexo = request.getParameter("sexo");
         String nome = request.getParameter("nome");
         String sobrenome = request.getParameter("sobrenome");
         String cpf = request.getParameter("cpf");
         String rg = request.getParameter("rg");
         String senha = request.getParameter("senha");
         String senhaConfirmada = request.getParameter("senhaConfirmada");        
-        String sexo = request.getParameter("sexo");
         String email = request.getParameter("email");
         String dataNascimento = request.getParameter("data_nascimento");        
         String numTelefone = request.getParameter("numTelefone");

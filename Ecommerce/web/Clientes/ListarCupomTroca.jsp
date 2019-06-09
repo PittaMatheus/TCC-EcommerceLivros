@@ -4,6 +4,7 @@
     Author     : matheus
 --%>
 
+<%@page import="livraria.core.util.Random"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
@@ -50,44 +51,45 @@
                          
                          if(cupons.size() == 0) {
                             out.print("Nenhum cupons cadastrado");                            
-                        } else { %>
+                        } else {
+                             
+                             
+%>
+                            <li>Atenção: o cupom de troca tem validade de 1 Mês</li>
+
+<%
+                            for (CupomTroca cuponsTroca : cupons) {
+                              if(cuponsTroca.getStatus() == 1){
+%>
             <form action=''>
                 <table border='1'>
                     <thead>
                         <tr>
-                            <th>id cupom</th> <th>id Cliente</th><th>Id pedido</th><th>Valor do cupom</th><th>Data da geração</th><th>Validade</th>
+                            <th>Pedido</th><th>Valor do cupom</th><th>Validade</th><th>Codigo</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <li>Atenção: o cupom de troca tem validade de 1 Mês</li>
                     
-                        <%
-                            for (CupomTroca cuponsTroca : cupons) {
+<%
+
                                 out.println("<tr>");
-                                out.println("<td> "+ cuponsTroca.getId() + "</td>");
-                                out.println("<td>" + cuponsTroca.getCliente().getId() + "</td>");
                                 out.println("<td>" + cuponsTroca.getPedido().getId()+ "</td>");
                                 out.println("<td>" + cuponsTroca.getPedido().getPagamento().getValorTotal( )+ "</td>");
-                                out.println("<td>" + FormatadorData.formatarData(cuponsTroca.getDataTroca()) + "</td>");
-                                
                                 Date validade =  new java.sql.Date(cuponsTroca.getDataTroca().getTime());
-                                out.println("<td>" + validade + "</td>");
-
                                 Calendar cal = Calendar.getInstance();
                                 cal.setTime(validade);
                                 cal.add(Calendar.MONTH, 1);
-                                out.println(cal.getTime()); //daqui a 1 mês
-                                
-
-
-                                
-                                
- 
-                                
+                                out.println("<td>" + FormatadorData.formatarData(cal.getTime()) + "</td>");
+                                out.println("<td>" + cuponsTroca.getCodigo() + "</td>");                                
                                 out.println("</tr>");
+                                out.println("</br></br>");
+                                
+                               
+                                
+                                }
                             }
-                         }                       
-                    %>
+                        }                       
+%>
             </tbody>
         </table>
             </form>
@@ -95,6 +97,6 @@
 
         
         <br><br>
-        <a href=''>Voltar</a>
+        <a href='home.jsp'>Voltar</a>
     </body>
 </html>

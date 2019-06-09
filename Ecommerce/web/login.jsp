@@ -45,7 +45,7 @@
                     <div class="container-login">
                         <input type='hidden' value='<%=valorTotal%>' name='valorTotal'>
                         <label for="id">Login</label>                            
-                        <input type="text" value="email" name="email" id="usuarioLogin" required>
+                        <input type="text" value="emailteste@teste.com" name="email" id="usuarioLogin" required>
                         <br><br>
                         <label for="id">Senha</label>                            
                         <input type="password" value="SenhaValida!@#" name="senha" id="senha" required> 
@@ -63,7 +63,7 @@
                     <img src="https://img.icons8.com/clouds/150/000000/literature.png">
                     <br>
                     <label for="id">Login</label>                            
-                    <input type="text" value="email" name="email" id="usuarioLogin" required>
+                    <input type="text" value="emailteste@teste.com" name="email" id="usuarioLogin" required>
                     <br><br>
                     <label for="id">Senha</label>                            
                     <input type="password" value="SenhaValida!@#" name="senha" id="senha" required> 
