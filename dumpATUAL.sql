@@ -173,7 +173,8 @@ CREATE TABLE `cupomTroca` (
   `id_cliente` int(11) NOT NULL,
   `id_pedido` int(11) NOT NULL,
   `dataGerado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` int(11) DEFAULT '1',
+  `status` int(11) NOT NULL DEFAULT '1',
+  `codigo` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -184,7 +185,7 @@ CREATE TABLE `cupomTroca` (
 
 LOCK TABLES `cupomTroca` WRITE;
 /*!40000 ALTER TABLE `cupomTroca` DISABLE KEYS */;
-INSERT INTO `cupomTroca` VALUES (1,1,2,'2019-06-03 23:11:22',1),(2,1,3,'2019-06-05 20:51:52',1);
+INSERT INTO `cupomTroca` VALUES (1,1,2,'2019-06-03 23:11:22',1,'ZXCVBA'),(2,1,3,'2019-06-05 20:51:52',1,'SADFAS');
 /*!40000 ALTER TABLE `cupomTroca` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -303,7 +304,7 @@ CREATE TABLE `estoque` (
 
 LOCK TABLES `estoque` WRITE;
 /*!40000 ALTER TABLE `estoque` DISABLE KEYS */;
-INSERT INTO `estoque` VALUES (1,2,1,-1,49.99,'2019-05-24 01:07:41'),(2,4,2,20,49.99,'2019-05-24 01:08:08'),(3,3,3,19,49.99,'2019-05-24 01:08:50'),(4,1,4,0,49.99,'2019-06-03 23:13:50');
+INSERT INTO `estoque` VALUES (1,2,1,20,49.99,'2019-05-24 01:07:41'),(2,4,2,20,49.99,'2019-05-24 01:08:08'),(3,3,3,19,49.99,'2019-05-24 01:08:50'),(4,1,4,20,49.99,'2019-06-03 23:13:50');
 /*!40000 ALTER TABLE `estoque` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -467,7 +468,7 @@ CREATE TABLE `livro` (
   CONSTRAINT `fk_livro_editora` FOREIGN KEY (`id_editora`) REFERENCES `editora` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_livro_grupoLivro` FOREIGN KEY (`id_grupolivro`) REFERENCES `grupolivro` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_livro_isbn` FOREIGN KEY (`id_isbn`) REFERENCES `isbn` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -476,7 +477,7 @@ CREATE TABLE `livro` (
 
 LOCK TABLES `livro` WRITE;
 /*!40000 ALTER TABLE `livro` DISABLE KEYS */;
-INSERT INTO `livro` VALUES (1,'20','sei la','O exorcista','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,15,13,13,6,'exorcista.jpg'),(2,'20','autor teste','Pelé eterno','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,16,14,14,5,'pele.jpg'),(3,'20','autor teste','Java para burros','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,17,15,15,3,'java.jpg'),(4,'20','autor teste','Livro livro','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,18,16,16,4,'livro1.jpg');
+INSERT INTO `livro` VALUES (1,'20','sei la','O exorcista','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,15,13,13,6,'exorcista.jpg'),(2,'20','autor teste','Pelé eterno','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,16,14,14,5,'pele.jpg'),(3,'20','autor teste','Java para burros','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,17,15,15,3,'java.jpg'),(4,'20','autor teste','Livro livro','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,18,16,16,4,'livro1.jpg'),(5,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa1'),(6,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa2.jpg'),(7,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa3.jpg'),(8,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa4.jpg'),(9,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa5.jpg'),(10,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa6.jpg'),(11,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa7.jpg'),(12,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa8.jpg'),(13,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa9.jpg'),(14,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa10.jpg'),(15,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa11.jpg'),(16,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa12.jpg'),(17,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa13.jpg'),(18,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa14.jpg'),(19,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa15.jpg'),(20,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa16.jpg'),(21,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa17.jpg'),(22,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa18.jpg'),(23,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa19.jpg'),(24,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa20.jpg'),(25,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa21.jpg');
 /*!40000 ALTER TABLE `livro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -503,7 +504,7 @@ CREATE TABLE `livro_categoria` (
 
 LOCK TABLES `livro_categoria` WRITE;
 /*!40000 ALTER TABLE `livro_categoria` DISABLE KEYS */;
-INSERT INTO `livro_categoria` VALUES (1,1),(3,1),(4,1),(5,1),(8,1),(10,1),(5,2),(6,2),(7,2),(8,2),(10,2),(2,3),(3,3),(4,3),(6,3),(7,3),(11,5),(2,6),(4,6),(12,6),(4,7),(9,7),(11,7),(12,7);
+INSERT INTO `livro_categoria` VALUES (1,1),(3,1),(4,1),(5,1),(8,1),(10,1),(5,2),(6,2),(7,2),(8,2),(10,2),(2,3),(3,3),(4,3),(6,3),(7,3),(11,5),(2,6),(4,6),(12,6),(13,6),(14,6),(15,6),(16,6),(17,6),(18,6),(4,7),(9,7),(11,7),(12,7),(18,8),(19,8),(20,8),(21,8),(22,8),(23,8),(24,8);
 /*!40000 ALTER TABLE `livro_categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -687,4 +688,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-09 15:27:10
+-- Dump completed on 2019-06-09 19:55:54

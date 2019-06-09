@@ -255,8 +255,12 @@
         <servlet-name>Control</servlet-name>
         <url-pattern>/adm/ListarItemPedido</url-pattern>
     </servlet-mapping>   
-                        
-                                                                
+    
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/adm/ListarPagamentoPedido</url-pattern>
+    </servlet-mapping>                       
+                                                           
          
     <session-config>
         <session-timeout>

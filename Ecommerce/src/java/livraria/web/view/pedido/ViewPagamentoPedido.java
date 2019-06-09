@@ -6,12 +6,11 @@
 package livraria.web.view.pedido;
 
 import ecommerce.dominio.EntidadeDominio;
-import ecommerce.dominio.pedido.ItemPedido;
+import ecommerce.dominio.pedido.Pagamento;
 import ecommerce.dominio.pedido.Pedido;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import livraria.core.aplicacao.Resultado;
 import livraria.web.view.IViewHelper;
 
@@ -19,33 +18,21 @@ import livraria.web.view.IViewHelper;
  *
  * @author matheus
  */
-public class ViewItensPedido implements IViewHelper {
+public class ViewPagamentoPedido implements IViewHelper{
 
     @Override
     public EntidadeDominio getEntidade(HttpServletRequest request) {
         String id_pedido = request.getParameter("p");
-        ItemPedido itemPedido = new ItemPedido();
+        Pedido pedido = new Pedido();
         if(id_pedido != null){
-            itemPedido.getPedido().setId(Integer.parseInt(id_pedido));
+            pedido.setId(Integer.parseInt(id_pedido));
         }
-        return itemPedido;
+        return pedido;
     }
 
     @Override
     public void setEntidade(Resultado resultado, HttpServletRequest request, HttpServletResponse response) throws IOException {
-         try {
-             if(resultado != null && !resultado.getMensagem().isEmpty()) {
-                    request.setAttribute("resultado2", resultado);
-                    if(resultado.getAcao() != null) {
-                        if(resultado.getAcao().equals("listar")){   
-                            request.getRequestDispatcher("../Clientes/itensPedido.jsp").forward(request, response);
-                        }
-                    }
-            }
-        } catch(Exception e) {
-            e.printStackTrace();
-            }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
     
 }
