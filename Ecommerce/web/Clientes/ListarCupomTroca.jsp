@@ -4,6 +4,11 @@
     Author     : matheus
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Date"%>
+<%@page import="livraria.core.util.FormatadorData"%>
+<%@page import="ecommerce.dominio.cliente.Cliente"%>
 <%@page import="ecommerce.dominio.pedido.CupomTroca"%>
 <%@page import="java.util.List"%>
 <%@page import="livraria.core.aplicacao.Resultado"%>
@@ -16,9 +21,26 @@
     </head>
     <body>
       <%
+            int id_usuario = 0;
+                if(session.getAttribute("usuarioLogado") == null){
+                    response.sendRedirect("../login.jsp");
+                }else if(session.getAttribute("usuarioLogado") != null){
+                    Resultado resultado = (Resultado) session.getAttribute("usuarioLogado");    
+                    List<Cliente> clientes = (List) resultado.getEntidades();
+                    if(resultado != null) {
+                         if(clientes.size() == 0) {
+                            response.sendRedirect("../login.jsp");
+                        } else {
+                           for (Cliente cliente : clientes) {
+                               id_usuario = cliente.getId();
+                           }
+                         }
+                    }
+                }
+          
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
 		if(resultado == null) {
-			response.sendRedirect(request.getContextPath() + "/Clientes/ConsultarCupomTroca?acao=consultarPorID");
+			response.sendRedirect(request.getContextPath() + "/Clientes/ConsultarCupomTroca?acao=consultarPorID&u=" + id_usuario + "");
 			return;
 		}
                
@@ -33,16 +55,30 @@
                 <table border='1'>
                     <thead>
                         <tr>
-                            <th>id cupom</th> <th>id Cliente</th><th>Id pedido</th>
+                            <th>id cupom</th> <th>id Cliente</th><th>Id pedido</th><th>Valor do cupom</th><th>Data da geração</th><th>Validade</th>
                         </tr>
                     </thead>
                     <tbody>
+                    <li>Atenção: o cupom de troca tem validade de 1 Mês</li>
+                    
                         <%
                             for (CupomTroca cuponsTroca : cupons) {
                                 out.println("<tr>");
-                                out.println("<td> "+ cuponsTroca.getId() + " /></td>");
+                                out.println("<td> "+ cuponsTroca.getId() + "</td>");
                                 out.println("<td>" + cuponsTroca.getCliente().getId() + "</td>");
                                 out.println("<td>" + cuponsTroca.getPedido().getId()+ "</td>");
+                                out.println("<td>" + cuponsTroca.getPedido().getPagamento().getValorTotal( )+ "</td>");
+                                out.println("<td>" + FormatadorData.formatarData(cuponsTroca.getDataTroca()) + "</td>");
+                                
+                                Date validade =  new java.sql.Date(cuponsTroca.getDataTroca().getTime());
+                                out.println("<td>" + validade + "</td>");
+
+                                Calendar cal = Calendar.getInstance();
+                                cal.setTime(validade);
+                                cal.add(Calendar.MONTH, 1);
+                                out.println(cal.getTime()); //daqui a 1 mês
+                                
+
 
                                 
                                 

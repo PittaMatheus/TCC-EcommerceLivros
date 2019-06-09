@@ -24,7 +24,7 @@ public class ViewEstoque implements IViewHelper{
     public EntidadeDominio getEntidade(HttpServletRequest request) {
         Estoque estoque = new Estoque();
         
-        // Recebe o ID do cliente que deseja inserir o endereço de cobrança
+        
         String id = request.getParameter("id");
         String id_livro = request.getParameter("idLivro");
         String id_fornecedor = request.getParameter("idFornecedor");

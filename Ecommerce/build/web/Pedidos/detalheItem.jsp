@@ -26,6 +26,27 @@
     </head>
     <body>
         <%
+                   boolean flgLogado = false;
+                
+                   if(session.getAttribute("usuarioLogado") != null){
+                Resultado resultado = (Resultado) session.getAttribute("usuarioLogado");    
+                List<Cliente> clientes = (List) resultado.getEntidades();
+                if(resultado != null) {
+                    if(clientes.size() == 0) {
+                        response.sendRedirect("../login.jsp");
+                    }
+                    else {
+                        for (Cliente cliente : clientes) {
+                            flgLogado = true;
+%>
+  
+<%
+                }
+            }
+        }
+    }
+            
+
             int id_livro = Integer.parseInt(request.getParameter("l"));
             String id_usuario = request.getParameter("u");
             List<EntidadeDominio> livros = (List<EntidadeDominio>) getServletContext().getAttribute("livros"); 
@@ -40,7 +61,22 @@
                 <div class="nav-wrapper indigo darken-4">
                   <a href="#" class="brand-logo center maiusculo">Detalhes do livro</a>
                   <ul id="nav-mobile" class="right hide-on-med-and-down">
+                      
+                      
+               
+                      
+                      <%
+                          if(flgLogado){
+                      %>
+                      <li> <a href="../Pedidos/add_carrinho.jsp?l=<%=id_livro%>&u=<%=id_usuario%>"><i class="material-icons left">add_shopping_cart</i>Adicionar ao carrinho</a> </li>
+                      <%
+                          }else{
+                      %>
                       <li>  <a href="../Pedidos/add_carrinho_sessao.jsp?l=<%=id_livro%>"><i class="material-icons left">add_shopping_cart</i>Adicionar ao carrinho</a></li>
+                      <%
+                      }
+                      %>
+                      
                   </ul>
                   <ul class="left">
                       <li><a href="../Livros/prateleira.jsp"><i class="material-icons">arrow_back</i></a></li>
@@ -108,27 +144,10 @@
 %>
               
 <%
-           }else if(session.getAttribute("usuarioLogado") != null){
-                Resultado resultado = (Resultado) session.getAttribute("usuarioLogado");    
-                List<Cliente> clientes = (List) resultado.getEntidades();
-                if(resultado != null) {
-                    if(clientes.size() == 0) {
-                        response.sendRedirect("../login.jsp");
-                    }
-                    else {
-                        for (Cliente cliente : clientes) {         
-%>
-                            <a href="../Pedidos/add_carrinho.jsp?l=<%=id_livro%>&u=<%=id_usuario%>">Adicionar ao carrinho</a>
-                            
-                    
-<%
-                }
-            }
-        }
-    }
+           }
+
+
 }
-
-
 
 %>
         <!--Import jQuery before materialize.js-->

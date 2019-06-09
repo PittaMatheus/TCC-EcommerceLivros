@@ -33,10 +33,10 @@ A41 	- Definir qtde de itens no carrinho de compra
 
 A29	- Incluir validação front-end no valor do pedido no momento da compra(back-end ja possui)
 A4      - Acrescentar pontos ao ranking do cliente após o pedido ser aprovado
-A9     - adicionar quantidade de livros	
+A9     	- adicionar quantidade de livros	
 A11     - Ver cupons de troca(cliente)
 A12     - Criar pagina de vizualização de status(linha do tempo)
-A32	-Subtrair item da compra no estoque no momento da compra
+
 A42	-Calcular frete
 A44	-Ver trocas
 A45	-Reentrada de estoque após troca finalizada
@@ -62,7 +62,7 @@ A28     - Relatório: -Grupo de precificação com mais solicitações de pedido
 ________________________________________________________________________________________________________
 
                                                              DONE
-
+A32	-Subtrair item da compra no estoque no momento da compra
 A31	-Incluir calculo do valor total utilizando o cupomDesconto
 A10     - Ajustar detalhes do livro (array aparecendo)
 A3      - Incluir a possiblidade de utilizar um cupom de desconto no pagamento

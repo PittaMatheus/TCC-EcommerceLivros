@@ -35,7 +35,7 @@ public class ViewCartao implements IViewHelper{
         Cliente cliente = new Cliente();
         DateFormat formatadorData = new SimpleDateFormat("dd/MM/yyyy");
         // PARAMETROS DA JSP
-        String id = request.getParameter("id");
+        String id_cliente = request.getParameter("id");
         String numCartao = request.getParameter("numeroCartao");
         String dtVencimento = request.getParameter("dtVencimento");
         String codSeguranca = request.getParameter("codSeguranca");
@@ -44,8 +44,8 @@ public class ViewCartao implements IViewHelper{
         String conf = request.getParameter("conf");
         
         // Preenche objeto cartao
-        if(id != null){
-           cartao.getCliente().setId(Integer.parseInt(id));
+        if(id_cliente != null){
+           cartao.getCliente().setId(Integer.parseInt(id_cliente));
         }
         
         

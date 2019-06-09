@@ -3,17 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/moraes/NetBeansProjects/ecommerce_prod/Ecommerce/web/Clientes/cadastro_cliente.jsp</file>
-            <file>file:/home/moraes/NetBeansProjects/ecommerce_prod/Ecommerce/web/Livros/listar_categorias.jsp</file>
-            <file>file:/home/moraes/NetBeansProjects/ecommerce_prod/Ecommerce/web/index.jsp</file>
-            <file>file:/home/moraes/NetBeansProjects/ecommerce_prod/Ecommerce/web/Clientes/listar_clientes.jsp</file>
-            <file>file:/home/moraes/NetBeansProjects/ecommerce_prod/Ecommerce/web/Clientes/preAlterarEndereco.jsp</file>
-            <file>file:/home/moraes/NetBeansProjects/ecommerce_prod/Ecommerce/web/login.jsp</file>
-            <file>file:/home/moraes/NetBeansProjects/ecommerce_prod/Ecommerce/web/Pedidos/carrinhoSessao.jsp</file>
-            <file>file:/home/moraes/NetBeansProjects/ecommerce_prod/Ecommerce/web/css/Custom.css</file>
-            <file>file:/home/moraes/NetBeansProjects/ecommerce_prod/Ecommerce/web/Clientes/home.jsp</file>
-            <file>file:/home/moraes/NetBeansProjects/ecommerce_prod/Ecommerce/web/Pedidos/detalheItem.jsp</file>
-            <file>file:/home/moraes/NetBeansProjects/ecommerce_prod/Ecommerce/web/js/Custom.js</file>
+            <file>file:/home/matheus/NetBeansProjects/Ecommerce_prod/Ecommerce/src/java/livraria/web/controle/Control.java</file>
         </group>
     </open-files>
 </project-private>

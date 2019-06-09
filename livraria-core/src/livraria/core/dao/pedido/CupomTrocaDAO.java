@@ -103,9 +103,10 @@ public class CupomTrocaDAO extends AbstractDAO {
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();
             CupomTroca cTroca = (CupomTroca) entidade;
-            PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.id_cliente,c.id_pedido, "
-                    + "c.dataGerado "
-                    + "FROM cupomTroca c WHERE c.id_cliente = ?");
+            PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.id_cliente,c.id_pedido, c.dataGerado, p.ValorTotal\n" +
+                "FROM cupomTroca c \n" +
+                "left JOIN pedido p\n" +
+                "ON c.id_cliente = ? AND c.id_pedido = p.id");
            declaracao.setInt(1, cTroca.getCliente().getId());
            ResultSet rs =  declaracao.executeQuery();
             while(rs.next()) {
@@ -115,7 +116,8 @@ public class CupomTrocaDAO extends AbstractDAO {
                 cupom.setId(rs.getInt("id"));
                 cupom.getCliente().setId(rs.getInt("id_cliente"));
                 cupom.getPedido().setId(rs.getInt("id_pedido"));
-                cupom.setDataTroca(rs.getDate("id_cliente"));
+                cupom.setDataTroca(rs.getDate("dataGerado"));
+                cupom.getPedido().getPagamento().setValorTotal(rs.getDouble("valorTotal"));
                
                 entidades.add(cupom);	
             }

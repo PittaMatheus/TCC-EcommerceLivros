@@ -7,6 +7,9 @@ package livraria.core.dao.pedido;
 
 import ecommerce.dominio.EntidadeDominio;
 import ecommerce.dominio.estoque.Estoque;
+import ecommerce.dominio.livro.Livro;
+import ecommerce.dominio.pedido.ItemPedido;
+import ecommerce.dominio.pedido.Pedido;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -140,7 +143,6 @@ public class EstoqueDAO extends AbstractDAO{
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();
             Estoque estoque = (Estoque) entidade;
-            // Se o id do objeto cliente não estiver preenchido. A funcao consultar irá consultar o CPF e EMAIL
             PreparedStatement declaracao = conexao.prepareStatement("SELECT e.id, e.id_livro, e.id_fornecedor, e.quantidade, e.valor_custo, e.dt_entrada "
                             + "FROM estoque e WHERE e.id = ?");
             declaracao.setInt(1, estoque.getId());
@@ -172,4 +174,63 @@ public class EstoqueDAO extends AbstractDAO{
         return resultado;
     }
     
+    public Resultado consultarLivros(EntidadeDominio entidade){
+        List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+        try {
+            Pedido pedido = (Pedido) entidade;
+            Connection conexao = BancoDadosOracle.getConexao();
+            for(ItemPedido itemPed: pedido.getItems()){
+                PreparedStatement declaracao = conexao.prepareStatement("SELECT quantidade, id, id_livro FROM estoque WHERE id_livro = ?");
+                declaracao.setInt(1, itemPed.getLivro().getId());
+                declaracao.execute();
+                ResultSet rs =  declaracao.executeQuery();
+                while(rs.next()) {
+                    Estoque est = new Estoque();
+                    est.setId(rs.getInt("id"));
+                    est.getItem().getLivro().setId(rs.getInt("id_livro"));
+                    est.getItem().setQuantidade(rs.getInt("quantidade"));
+                    //est.getItem().setCusto(rs.getFloat("valor_custo"));
+                    //est.setDataCadastro(rs.getDate("dt_entrada"));
+                    entidades.add(est);
+                }
+                resultado.setEntidades(entidades);
+                resultado.setAcao("LivroConsultado");
+                resultado.setStatus(true);  
+            }
+            // Fecha a conexao.
+            conexao.close();
+        } catch (ClassNotFoundException erro) {
+            erro.printStackTrace();
+            resultado.setStatus(false);
+            resultado.setMensagem("Ocorreu um erro ao consultar o estoque");
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+        return resultado;
+    }
+    
+    public Resultado baixaLivro(EntidadeDominio entidade){
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            Estoque estoque = (Estoque) entidade;
+            PreparedStatement declaracao = conexao.prepareStatement("UPDATE estoque set quantidade = ? where id = ?");
+            declaracao.setInt(1, (estoque.getItem().getQuantidade()) - 1);
+            declaracao.setInt(2, estoque.getId());
+            declaracao.execute();
+            resultado.setStatus(true);
+            resultado.setMensagem("Baixa no estoque OK");
+            // Fecha a conexao.
+            conexao.close();
+        } catch (ClassNotFoundException erro) {
+            erro.printStackTrace();
+            resultado.setStatus(false);
+            resultado.setMensagem("Ocorreu um erro ao dar baixa no estoque");
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+        return resultado;
+    
+    }
 }
+    
