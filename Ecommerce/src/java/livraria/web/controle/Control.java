@@ -47,6 +47,7 @@ import livraria.web.view.pedido.ViewCarrinhoSessao;
 import livraria.web.view.pedido.ViewClienteCompra;
 import livraria.web.view.pedido.ViewCupomDesconto;
 import livraria.web.view.pedido.ViewCupomTroca;
+import livraria.web.view.pedido.ViewItensPedido;
 import livraria.web.view.pedido.ViewPedido;
 import livraria.web.view.pedido.ViewTroca;
 
@@ -121,7 +122,7 @@ public class Control extends HttpServlet {
         viewHelper.put("/Ecommerce/Pedidos/RemoverCarrinho", new ViewCarrinho());
         viewHelper.put("/Ecommerce/Clientes/AdicionarPedido", new ViewPedido());
         
-        
+        viewHelper.put("/Ecommerce/adm/ListarItemPedido", new ViewItensPedido());
         viewHelper.put("/Ecommerce/Clientes/AuxilioPedido", new ViewPedido());
         viewHelper.put("/Ecommerce/Pedidos/AdicionarPedido", new ViewPedido());
         viewHelper.put("/Ecommerce/adm/ListarPedidos", new ViewPedido());

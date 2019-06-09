@@ -109,7 +109,7 @@
                                 DecimalFormat formatoDouble = new DecimalFormat("#.##");      
                                 valorTotal = Double.valueOf(formatoDouble.format(valorTotal));
                                 out.println("<td> R$ " + valorTotal + "</td>");
-                                out.println("<td><a href=itensPedido.jsp>Livros</a></td>");
+                                out.println("<td><a href=itensPedido.jsp?u="+id_usuario+"&p="+pedido.getId()+">Livros</a></td>");
                                 out.println("<td><a href=../adm/listar_pagamento.jsp?id_ped=" + pedido.getId() + ">detalhar</a>");
                                 
                                 

@@ -57,7 +57,35 @@ public class ItemPedidoDAO extends AbstractDAO{
         
     @Override
     public Resultado listar(EntidadeDominio entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            ItemPedido itemPed = (ItemPedido) entidade;
+            PreparedStatement declaracao = conexao.prepareStatement("select quantidade, id_livro, id_pedido from itemPedido where id_pedido = ?");
+            declaracao.setInt(1, itemPed.getPedido().getId());
+            ResultSet rs =  declaracao.executeQuery();
+            while(rs.next()) {
+                ItemPedido item = new ItemPedido();
+                item.setQuantidade(rs.getInt("quantidade"));
+                item.getLivro().setId(rs.getInt("id_livro"));
+                item.getPedido().setId(rs.getInt("id_pedido"));
+                entidades.add(item);	
+            }
+            resultado.setEntidades(entidades);
+            resultado.setStatus(true);
+            resultado.setMensagem("Items Pedido listados com sucesso");
+            resultado.setAcao("listar");
+            // Fecha a conexao.
+            conexao.close();
+        }catch(ClassNotFoundException erro) {
+            erro.printStackTrace();     
+            resultado.setStatus(false);
+            resultado.setMensagem("Houve algum erro ao listar os itens pedidos");
+        } catch (SQLException erro) {
+            erro.printStackTrace();   
+        }
+    return resultado;
     }
 
     @Override

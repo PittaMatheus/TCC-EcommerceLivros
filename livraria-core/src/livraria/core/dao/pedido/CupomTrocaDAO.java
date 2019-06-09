@@ -19,6 +19,7 @@ import java.util.List;
 import livraria.core.aplicacao.Resultado;
 import livraria.core.dao.AbstractDAO;
 import livraria.core.util.BancoDadosOracle;
+import livraria.core.util.Random;
 
 /**
  *
@@ -38,9 +39,11 @@ public class CupomTrocaDAO extends AbstractDAO {
             TrocaDAO trocaDAO = new TrocaDAO();
             Troca objTroca = new Troca();
 
-            PreparedStatement declaracao = conexao.prepareStatement("INSERT INTO cupomTroca (id_cliente, id_pedido) VALUES (?,?)");
+            PreparedStatement declaracao = conexao.prepareStatement("INSERT INTO cupomTroca (id_cliente, id_pedido, codigo) VALUES (?, ?, ?)");
             declaracao.setInt(1, cTroca.getCliente().getId());
             declaracao.setInt(2, cTroca.getPedido().getId());
+            declaracao.setString(3, Random.gerar(8));
+            
             declaracao.execute();
             resultado.setAcao("CupomTrocaInserido");
             resultado.setMensagem("inseriu ");
@@ -103,7 +106,8 @@ public class CupomTrocaDAO extends AbstractDAO {
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();
             CupomTroca cTroca = (CupomTroca) entidade;
-            PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.id_cliente,c.id_pedido, c.dataGerado, p.ValorTotal\n" +
+            PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.id_cliente,c.id_pedido, c.dataGerado, c.codigo, "
+                    + "c.status, p.ValorTotal\n" +
                 "FROM cupomTroca c \n" +
                 "left JOIN pedido p\n" +
                 "ON c.id_cliente = ? AND c.id_pedido = p.id");
@@ -117,6 +121,8 @@ public class CupomTrocaDAO extends AbstractDAO {
                 cupom.getCliente().setId(rs.getInt("id_cliente"));
                 cupom.getPedido().setId(rs.getInt("id_pedido"));
                 cupom.setDataTroca(rs.getDate("dataGerado"));
+                cupom.setStatus(rs.getInt("status"));
+                cupom.setCodigo(rs.getString("codigo"));
                 cupom.getPedido().getPagamento().setValorTotal(rs.getDouble("valorTotal"));
                
                 entidades.add(cupom);	

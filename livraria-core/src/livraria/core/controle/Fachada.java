@@ -33,6 +33,7 @@ import ecommerce.dominio.livro.ISBN;
 import ecommerce.dominio.pedido.Carrinho;
 import ecommerce.dominio.pedido.Cupom;
 import ecommerce.dominio.pedido.CupomTroca;
+import ecommerce.dominio.pedido.ItemPedido;
 import ecommerce.dominio.pedido.Pagamento;
 import ecommerce.dominio.pedido.Pedido;
 import ecommerce.dominio.pedido.Troca;
@@ -54,6 +55,7 @@ import livraria.core.dao.pedido.CupomDescontoDAO;
 import livraria.core.dao.pedido.CupomTrocaDAO;
 import livraria.core.dao.pedido.EstoqueDAO;
 import livraria.core.dao.pedido.FornecedorDAO;
+import livraria.core.dao.pedido.ItemPedidoDAO;
 import livraria.core.dao.pedido.PagamentoDAO;
 import livraria.core.dao.pedido.PedidoDAO;
 import livraria.core.dao.pedido.TrocaDAO;
@@ -101,6 +103,7 @@ public class Fachada implements IFachada{
         dao.put(CupomTroca.class.getName(), new CupomTrocaDAO());
         dao.put(Fornecedor.class.getName(), new FornecedorDAO());
         dao.put(Cupom.class.getName(),new CupomDescontoDAO());
+        dao.put(ItemPedido.class.getName(), new ItemPedidoDAO());
         
         RN = new HashMap<String,Map<String,List<IStrategy>>>();
         

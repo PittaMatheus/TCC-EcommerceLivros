@@ -18,6 +18,8 @@ public class CupomTroca extends EntidadeDominio{
     private Cliente cliente;
     private Pedido pedido;
     private Date dataTroca;
+    private int status;
+    String codigo;
     
     
     
@@ -27,6 +29,24 @@ public class CupomTroca extends EntidadeDominio{
         cliente = new Cliente();
     }
 
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    
     public Date getDataTroca() {
         return dataTroca;
     }
