@@ -57,19 +57,31 @@ public class ItemPedidoDAO extends AbstractDAO{
         
     @Override
     public Resultado listar(EntidadeDominio entidade) {
+        
        List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
         try {
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();
             ItemPedido itemPed = (ItemPedido) entidade;
-            PreparedStatement declaracao = conexao.prepareStatement("select quantidade, id_livro, id_pedido from itemPedido where id_pedido = ?");
+            PreparedStatement declaracao = conexao.prepareStatement("select quantidade, id_livro, id_pedido, l.titulo, l.preco, l.autor, l.imagem\n" +
+                "from itemPedido\n" +
+                "INNER JOIN livro l\n" +
+                "where id_pedido = ? AND\n" +
+                "id_livro = l.id;");
             declaracao.setInt(1, itemPed.getPedido().getId());
             ResultSet rs =  declaracao.executeQuery();
             while(rs.next()) {
                 ItemPedido item = new ItemPedido();
                 item.setQuantidade(rs.getInt("quantidade"));
                 item.getLivro().setId(rs.getInt("id_livro"));
+                item.getLivro().setTitulo(rs.getString("titulo"));
+                item.getLivro().setPreco(rs.getDouble("preco"));
                 item.getPedido().setId(rs.getInt("id_pedido"));
+                item.getLivro().setImagem(rs.getString("imagem"));
+                item.getLivro().setAutor(rs.getString("autor"));
+
+                
+                
                 entidades.add(item);	
             }
             resultado.setEntidades(entidades);

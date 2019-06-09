@@ -4,6 +4,7 @@
     Author     : matheus
 --%>
 
+<%@page import="ecommerce.dominio.pedido.ItemPedido"%>
 <%@page import="ecommerce.dominio.pedido.Pedido"%>
 <%@page import="java.util.List"%>
 <%@page import="livraria.core.aplicacao.Resultado"%>
@@ -32,16 +33,33 @@
             <li>Status do pedido:  </li>
 
         </ul>
-        <h3>Detalhes do pagamento do pedido</h3>
+        <h3>Itens do pedido</h3>
         <table border="1" class="highlight striped centered responsive-table">
             <thead>
                 <tr>
                     <th>Imagem</th><th>Titulo do livro</th><th>Autor</th><th>Valor</th>
                 </tr>
             </thead>
+<%
+                List<ItemPedido> itens = (List) resultado2.getEntidades();
+                for(ItemPedido itemPedido: itens){
+%>
             <tbody>
+            <td><img src="../imagens/<%=itemPedido.getLivro().getImagem()%>"></td>
+            <td><%=itemPedido.getLivro().getTitulo()%></td>
+            <td><%=itemPedido.getLivro().getAutor()%></td>
+            <td><%=itemPedido.getLivro().getPreco()%></td>
+            
+
+
+<%
+                }
+%>
+           
             </tbody>     
         </table>
+<br><br>
+<a href="../Clientes/home.jsp">Voltar</a>
 
     </body>
 </html>
