@@ -16,19 +16,20 @@
         <title>Home</title>
         <!--Import Google Icon Font-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
-        <link type="text/css" rel="stylesheet" href="../css/Custom.css"  media="screen,projection"/>
          <!-- CSS CAROUSEL-->
          <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick-theme.css" media="screen,projection"/>
          <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick.css" media="screen,projection"/>
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-       
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="../css/Custom.css"  media="screen,projection"/>
+        <!-- LOGO -->
+        <link rel="icon" href="../imagens/logo.png">
         
     </head>
-    <body class="preto">
+    <body>
     <!-- DROPDOWN DO LOGIN -->
         <ul id="dropdown1" class="dropdown-content">
             <li><a href="../login.jsp">Login</a></li>
@@ -39,7 +40,7 @@
     <div class="navbar-fixed">
         <nav class="indigo darken-4">
           <div class="nav-wrapper indigo darken-4">
-            <a href="#!" class="brand-logo"><img src="https://img.icons8.com/clouds/75/000000/literature.png"></a>
+            <a href="#!" class="brand-logo left"><img src="https://img.icons8.com/clouds/75/000000/literature.png"></a>
             <ul class="right hide-on-med-and-down">
               <li><a href="../Pedidos/carrinhoSessao.jsp"><i class="material-icons left">local_grocery_store</i>Carrinho</a></li>
               <!-- DROPDOWN DO LOGIN -->
@@ -52,7 +53,7 @@
 
     <%
             if(session.getAttribute("mensagem") != null){ %>
-                    <input type="text" class="btn" id="mensagem" onclick="Materialize.toast('O livro foi adicionado ao carrinho', 4000, 'green rounded')">
+                    <input type="text" class="btn" id="mensagem" onclick="Materialize.toast('<b>O livro foi adicionado ao carrinho!</b>', 4000, 'green rounded')">
                     <script>
                         window.onload = function(){
                             document.getElementById("mensagem").click();
@@ -65,19 +66,21 @@
         
     %>
     
-    <br><br><br><br>
+    <br><br><br>
+    <div class="container2 maiusculo"><h4 class="negrito">Livros de Comédia</h4></div>
     <div class="container2 carousel_livros">
-        <div><img src="../imagens/pele.jpg" width="200px" alt="js" /></div>
-        <div><img src="../imagens/exorcista.jpg" width="200px" alt="java" /></div>
-        <div><img src="../imagens/java.jpg" width="212px" alt="python"/></div>
-        <div><img src="../imagens/pele.jpg" width="200px" alt="kotlin" /></div>
-        <div><img src="../imagens/pele.jpg" width="200px" alt="scala" /></div>
-        <div><img src="../imagens/pele.jpg" width="200px" alt="C#" /></div>
-        <div><img src="../imagens/pele.jpg" width="200px" alt="PHP" /></div>
-        <div><img src="../imagens/pele.jpg"  width="200px" alt="dotnet" /></div>
+        <div><img src="../imagens/pele.jpg" style='width: 98%' alt="js" /></div>
+        <div><img src="../imagens/exorcista.jpg" style='width: 98%' alt="java" /></div>
+        <div><img src="../imagens/java.jpg" style='width: 98%' alt="python"/></div>
+        <div><img src="../imagens/pele.jpg" style='width: 98%' alt="kotlin" /></div>
+        <div><img src="../imagens/pele.jpg" style='width: 98%' alt="scala" /></div>
+        <div><img src="../imagens/pele.jpg" style='width: 98%' alt="C#" /></div>
+        <div><img src="../imagens/pele.jpg" style='width: 98%' alt="PHP" /></div>
+        <div><img src="../imagens/pele.jpg" style='width: 98%' alt="dotnet" /></div>
     </div>
         
     <br><br><br><br>
+     <div class="container2 maiusculo"><h4 class="negrito">Livros de Terror</h4></div>
         <div class="container2 carousel_livros">
        <% 
     Resultado resultado = (Resultado) request.getAttribute("resultado");
@@ -93,7 +96,7 @@
     }else { 
         for (Livro livro : livros) {
             %>
-            <a href="../Pedidos/detalheItem.jsp?l=<%=livro.getId()%>"> <div><img src="../imagens/<%=livro.getImagem()%>"  width="200px" /></div></a>
+            <a href="../Pedidos/detalheItem.jsp?l=<%=livro.getId()%>"> <div><img src="../imagens/<%=livro.getImagem()%>" class="z-depth-1" style='width: 98%' /></div></a>
             <%
         }
     }

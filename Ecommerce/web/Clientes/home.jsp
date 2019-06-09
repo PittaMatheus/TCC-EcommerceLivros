@@ -45,7 +45,9 @@
         <!-- MENU DO SISTEMA-->
         <ul id="slide-out" class="side-nav espaco">
             <li><div class="user-view">
-                <div class="background black"></div>
+                    <div class="background black">
+                        <img src="../imagens/bg.jpg">
+                    </div>
                     <a href="#!user"><img class="circle" src="https://img.icons8.com/clouds/75/000000/literature.png"></a>
                     <a href="#!name"><span class="white-text name"><%= cliente.getNome()%></span></a>
                     <a href="#!email"><span class="white-text email"><%= cliente.getEmail()%></span></a>
@@ -57,6 +59,8 @@
                 if(cliente.getPapel().getId() == 2){ 
             %>
             
+            <li><a class="collapsible-header" href='../Livros/prateleira.jsp'><i class="material-icons">home</i>Home</a></li>
+            <li><div class="divider"></div></li>
             <li class="white">
                 <ul class="collapsible collapsible-accordion">
                     <li>
@@ -133,27 +137,20 @@
              // Perfil comum
              else if(cliente.getPapel().getId() == 1){ %>
              
-             
-            <li class="white">
-                <ul class="collapsible collapsible-accordion">
-                    <li>
-                      <a class="collapsible-header"><i class="material-icons">folder_special</i>Ações<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
-                      <div class="collapsible-body">
-                        <ul>
-                          <li><a class="" href='../Livros/prateleira.jsp'><i class="material-icons">fullscreen</i>Home</a></li>
-                          <li><a class="" href='ListarCupomTroca.jsp'><i class="material-icons">fullscreen</i>Ver Cupons de troca</a></li>
-                          <li><a class="" href='../Pedidos/carrinho.jsp?u=<%=cliente.getId()%>'><i class="material-icons">fullscreen</i>Ver carrinho</a></li>
-                          <li><a class="" href='../Clientes/listar_meusPedidos.jsp'><i class="material-icons">fullscreen</i>Ver pedidos</a></li>
-                          <li><a class="" href='#'><i class="material-icons">fullscreen</i>Solicitar troca</a></li>
-                          <li><a class="" href='#'><i class="material-icons">fullscreen</i>Consultar andamento da troca</a></li>
-                          <li><a class="" href='#'><i class="material-icons">fullscreen</i>Consultar pontos acumulativos</a></li>
-                          <li><a class="" href='preAlterar_cliente.jsp?id=<%=cliente.getId()%>'><i class="material-icons">fullscreen</i>Editar meu perfil</a></li>
-                          <li><div class="divider"></div></li>
-                        </ul>
-                      </div>
-                    </li>
-                </ul>
-            </li>
+         
+                        
+            <li><a class="collapsible-header" href='../Livros/prateleira.jsp'><i class="material-icons">home</i>Home</a></li>
+            <li><div class="divider"></div></li>
+            <li><a class="collapsible-header" href='ListarCupomTroca.jsp'><i class="material-icons">description</i>Ver Cupons de troca</a></li>
+            <li><a class="collapsible-header" href='../Pedidos/carrinho.jsp?u=<%=cliente.getId()%>'><i class="material-icons">shopping_cart</i>Ver carrinho</a></li>
+            <li><a class="collapsible-header" href='../Clientes/listar_meusPedidos.jsp'><i class="material-icons">library_books</i>Ver pedidos</a></li>
+            <li><a class="collapsible-header" href='#'><i class="material-icons">loop</i>Solicitar troca</a></li>
+            <li><a class="collapsible-header" href='#'><i class="material-icons">find_in_page</i>Consultar andamento da troca</a></li>
+            <li><a class="collapsible-header" href='#'><i class="material-icons">search</i>Consultar pontos acumulativos</a></li>
+            <li><a class="collapsible-header" href='preAlterar_cliente.jsp?id=<%=cliente.getId()%>'><i class="material-icons">person</i>Editar meu perfil</a></li>
+            
+                       
+        
                                     <%
                                      }
                         }
@@ -165,7 +162,7 @@
             <li class="white">
                 <ul class="collapsible collapsible-accordion">
                     <li>
-                        <a class="collapsible-header" href='/Ecommerce/LogoutCliente?acao=logout'><i class="material-icons">close</i>Sair</a>
+                        <a class="collapsible-header" href='/Ecommerce/LogoutCliente?acao=logout'><i class="material-icons">power_settings_new</i>Sair</a>
                     </li>
                 </ul>
             </li>

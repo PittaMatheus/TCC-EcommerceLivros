@@ -32,7 +32,7 @@ height:400px !important;
 
 
 .preto {
-    background-color: black;
+    background-color: white;
 }
 
 .negrito {
@@ -42,6 +42,24 @@ height:400px !important;
 .maiusculo {
      text-transform: uppercase;
 }
+
+
+
+.zero_espacamento {
+    padding: 0;
+    margin: 0;
+}
+
+
+.slick-prev:before, .slick-next:before{
+    color: black; 
+}
+
+
+body {
+    background-image: url('../imagens/textura1.png');
+}
+
 
 
 
@@ -165,7 +183,7 @@ input {
 /* COR DAS OP�OES DO SELECT HOVER */
 .dropdown-content li>a, .dropdown-content li>span:hover {
     font-size: 16px;
-    background-color: #f26522;
+    background-color: none;
     color: #fff;
     display: block;
     line-height: 22px;
@@ -245,7 +263,7 @@ table.highlight>tbody>tr:hover {
 
 .box-image {
     position: absolute;
-    background: url(../imagens/banner.jpeg) no-repeat ;
+    background: url(../imagens/banner-livro.jpg) no-repeat ;
     background-size: 100%;
     background-position: center;
     top: 0;

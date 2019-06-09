@@ -38,8 +38,10 @@
 <%            // se o valorTotal não é nulo, apos o login o cliente será redirecionado para continuar a compra
             if(valorTotal != null){ 
 %>              
-                <br><br><br><br><br><br>
+            <br><br>
                 <form action="AutenticarClienteCompra" method="post">
+                    <img src="https://img.icons8.com/clouds/150/000000/literature.png">
+                    <br>
                     <div class="container-login">
                         <input type='hidden' value='<%=valorTotal%>' name='valorTotal'>
                         <label for="id">Login</label>                            
@@ -56,8 +58,10 @@
             }else{
 %>
             <form action="AutenticarCliente" method="post">
-                <br><br><br><br><br><br>
+                <br><br>
                 <div class="container-login">
+                    <img src="https://img.icons8.com/clouds/150/000000/literature.png">
+                    <br>
                     <label for="id">Login</label>                            
                     <input type="text" value="email" name="email" id="usuarioLogin" required>
                     <br><br>

@@ -50,23 +50,21 @@
         </div>
          
                   <div class="container2">
-                      <br><br><br>
-                    <table class="bordered ">
+                      <br><br>
+                    <table class="">
                         <tr>
-                            <td class="center" width="30%">
-                                <img src="../imagens/<%=livro.getImagem()%>"width="320">
+                            <td class="center zero_espacamento" width="30%">
+                                <img src="../imagens/<%=livro.getImagem()%>" class="z-depth-4" style='width: 88%'>
                             </td>
                     
-                            <td width="70%">
+                            <td width="70%" style="padding: 0px; margin: 0;">
                                 <ul class="collection with-header">
-                                    <li class="collection-header center maiusculo"><h4><%=livro.getTitulo()%></h4></li>
-                                    <li class="collection-item">Impulsionado pela restauração de sua fé na humanidade e inspirado pelo ato altruísta do Superman, Bruce Wayne convoca sua nova aliada Diana Prince para o combate contra um inimigo ainda maior, recém-despertado. Juntos, Batman e Mulher-Maravilha buscam e recrutam com agilidade um time de meta-humanos, mas mesmo com a formação da liga de heróis sem precedentes, poderá ser tarde demais para salvar o planeta de um catastrófico ataque.</li>
+                                    <li class="collection-header center maiusculo"><h5 class="negrito"><%=livro.getTitulo()%></h5></li>
+                                    <li class="collection-item">Impulsionado pela restauração de sua fé na humanidade e inspirado pelo ato altruísta do Superman, Bruce Wayne convoca sua nova aliada Diana Prince para o combate contra um inimigo ainda maior, recém-despertado. nova aliada Diana Prince para o combate contra um inimigo ainda maior, recém-despertado. </li>
                                 </ul>
                                 <ul class="collapsible" data-collapsible="accordion">
                                   <li>
-                                    <div class="collapsible-header negrito"><i class="material-icons">bookmark_border</i>Mais detalhes</div>
-                                    <div class="collapsible-body">
-                                        <table class="bordered centered">
+                                   <table class="bordered centered">
                                             <tr class="grey lighten-3">
                                                <td colspan="8"><b>Informações Básicas</b></td>
                                             </tr>
@@ -90,12 +88,11 @@
                                                 <td colspan="2"><b>Profundidade(cm):</b> <%= livro.getDimensoes().getProfundidade()%></td>
                                                 <td colspan="2"><b>largura(cm):</b> <%= livro.getDimensoes().getLargura() %></td>
                                             </tr>
-                                        </table>          
-                                    </div>
+                                        </table>         
                                   </li>
                                 </ul>
                                 <ul class="collection with-header">
-                                    <li class="collection-header right maiusculo"><h4><b class="red-text darken-4">R$ <%=livro.getPreco()%></b></h4></li>
+                                    <li class="collection-header right maiusculo"><h5><b class="red-text darken-4">R$ <%=livro.getPreco()%></b></h5></li>
                                 </ul>
 
                                
