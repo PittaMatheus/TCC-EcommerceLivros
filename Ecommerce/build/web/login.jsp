@@ -17,20 +17,7 @@
     <body>
          <div class="center box-login espacamento_div">
         <%
-        Resultado resultado = (Resultado) request.getAttribute("resultado");
-        if(resultado != null) {
-                if(!resultado.isStatus() && !resultado.getMensagem().isEmpty()) {
-                        out.print("<div class='alert alert-danger'>");
-                        out.print(resultado.getMensagem());
-                        out.print("</div>");
-                } else {
-                        if(!resultado.getMensagem().isEmpty()) {
-                                out.print("<div class='alert alert-success'>");
-                                out.print(resultado.getMensagem());
-                                out.print("</div>");
-                        }
-                }
-        }
+
         String valorTotal = request.getParameter("valorTotal");
             %>
         
@@ -67,7 +54,24 @@
                     <br><br>
                     <label for="id">Senha</label>                            
                     <input type="password" value="SenhaValida!@#" name="senha" id="senha" required> 
-                    <br>   <br>          
+                    
+                    <%
+                            Resultado resultado = (Resultado) request.getAttribute("resultado");
+        if(resultado != null) {
+                if(!resultado.isStatus() && !resultado.getMensagem().isEmpty()) {
+                        out.print("<div class='container2 forma_redonda_vermelho'>");
+                        out.print(resultado.getMensagem());
+                        out.print("</div>");
+                } else {
+                        if(!resultado.getMensagem().isEmpty()) {
+                                out.print("<div class='container2 forma_redonda_vermelho'>");
+                                out.print(resultado.getMensagem());
+                                out.print("</div>");
+                        }
+                }
+        }
+                    %>
+                    <br>
                     <input type="submit" name="acao" value="login" class="btn grey darken-3 espacamento_button">
                 </div>
             </form>
