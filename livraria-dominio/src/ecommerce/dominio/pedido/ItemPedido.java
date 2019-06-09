@@ -17,6 +17,8 @@ public class ItemPedido extends Item{
     
     public ItemPedido(){
         livro = new Livro();
+        pedido = new Pedido();
+        
     }
 
     public Livro getLivro() {

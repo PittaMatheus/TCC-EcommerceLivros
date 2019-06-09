@@ -4,6 +4,9 @@
     Author     : matheus
 --%>
 
+<%@page import="ecommerce.dominio.pedido.Pedido"%>
+<%@page import="java.util.List"%>
+<%@page import="livraria.core.aplicacao.Resultado"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,17 +15,28 @@
         <title>Itens do meu pedido</title>
     </head>
     <body>
+<%          Resultado resultado = (Resultado) session.getAttribute("resultado");    
+            List<Pedido> pedidos = (List) resultado.getEntidades();
+            String id_pedido = request.getParameter("p");
+            String id_cliente = request.getParameter("u");
+            Resultado resultado2 = (Resultado) request.getAttribute("resultado2");
+		if(resultado2 == null) {
+			response.sendRedirect(request.getContextPath() + "/adm/ListarItemPedido?p="+id_pedido+"&acao=listar");
+			return;
+		}
+%>
+            
         <ul>
-            <li>Cliente:     </li>
-            <li>Numero do pedido:   </li>
-            <li>Status do pedido:  ></li>
+            <li>Cliente:   <%=id_cliente%>   </li>
+            <li>Pedido: <%=id_pedido%>  </li>
+            <li>Status do pedido:  </li>
 
         </ul>
         <h3>Detalhes do pagamento do pedido</h3>
         <table border="1" class="highlight striped centered responsive-table">
             <thead>
                 <tr>
-                    <th>Id do pedido</th><th>Data de pagamento</th><th>Valor total</th><th>Cupom de desconto</th><th>Numero do cartão</th><th>Bandeira do cartão</th>
+                    <th>Imagem</th><th>Titulo do livro</th><th>Autor</th><th>Valor</th>
                 </tr>
             </thead>
             <tbody>
