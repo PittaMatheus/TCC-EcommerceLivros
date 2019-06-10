@@ -38,7 +38,7 @@ CREATE TABLE `carrinho` (
 
 LOCK TABLES `carrinho` WRITE;
 /*!40000 ALTER TABLE `carrinho` DISABLE KEYS */;
-INSERT INTO `carrinho` VALUES (3,1),(3,1),(1,1),(1,1);
+INSERT INTO `carrinho` VALUES (3,1),(3,1),(1,1),(1,1),(1,2);
 /*!40000 ALTER TABLE `carrinho` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -304,7 +304,7 @@ CREATE TABLE `estoque` (
 
 LOCK TABLES `estoque` WRITE;
 /*!40000 ALTER TABLE `estoque` DISABLE KEYS */;
-INSERT INTO `estoque` VALUES (1,2,1,20,49.99,'2019-05-24 01:07:41'),(2,4,2,20,49.99,'2019-05-24 01:08:08'),(3,3,3,19,49.99,'2019-05-24 01:08:50'),(4,1,4,20,49.99,'2019-06-03 23:13:50');
+INSERT INTO `estoque` VALUES (1,2,1,19,49.99,'2019-05-24 01:07:41'),(2,4,2,20,49.99,'2019-05-24 01:08:08'),(3,3,3,18,49.99,'2019-05-24 01:08:50'),(4,1,4,20,49.99,'2019-06-03 23:13:50');
 /*!40000 ALTER TABLE `estoque` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -432,7 +432,7 @@ CREATE TABLE `itemPedido` (
 
 LOCK TABLES `itemPedido` WRITE;
 /*!40000 ALTER TABLE `itemPedido` DISABLE KEYS */;
-INSERT INTO `itemPedido` VALUES (2,2,1),(1,3,1),(2,2,2),(1,3,2),(2,2,3),(1,3,3),(2,2,4),(1,3,4),(2,2,5),(1,3,5),(2,2,6),(1,3,6),(2,2,7),(1,3,7),(2,2,8),(1,3,8),(2,2,9),(1,3,9),(2,2,10),(1,3,10),(2,2,11),(1,3,11),(2,2,12),(1,3,12),(1,1,14),(2,3,14),(1,1,15),(2,3,15),(1,1,16),(2,3,16),(1,1,17),(2,3,17),(1,1,18),(2,3,18),(1,1,19),(2,3,19),(1,1,20),(2,3,20),(1,1,21),(2,3,21),(1,1,22),(2,3,22),(1,1,23),(2,3,23),(1,1,24),(2,3,24),(1,1,25),(2,3,25),(2,1,26),(2,3,26),(2,1,27),(2,3,27),(2,1,28),(2,3,28),(2,1,29),(2,3,29),(2,1,30),(2,3,30),(2,1,31),(2,3,31);
+INSERT INTO `itemPedido` VALUES (2,3,1),(2,1,1);
 /*!40000 ALTER TABLE `itemPedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -477,7 +477,7 @@ CREATE TABLE `livro` (
 
 LOCK TABLES `livro` WRITE;
 /*!40000 ALTER TABLE `livro` DISABLE KEYS */;
-INSERT INTO `livro` VALUES (1,'20','sei la','O exorcista','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,15,13,13,6,'exorcista.jpg'),(2,'20','autor teste','Pelé eterno','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,16,14,14,5,'pele.jpg'),(3,'20','autor teste','Java para burros','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,17,15,15,3,'java.jpg'),(4,'20','autor teste','Livro livro','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,18,16,16,4,'livro1.jpg'),(5,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa1'),(6,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa2.jpg'),(7,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa3.jpg'),(8,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa4.jpg'),(9,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa5.jpg'),(10,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa6.jpg'),(11,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa7.jpg'),(12,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa8.jpg'),(13,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa9.jpg'),(14,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa10.jpg'),(15,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa11.jpg'),(16,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa12.jpg'),(17,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa13.jpg'),(18,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa14.jpg'),(19,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa15.jpg'),(20,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa16.jpg'),(21,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa17.jpg'),(22,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa18.jpg'),(23,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa19.jpg'),(24,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa20.jpg'),(25,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa21.jpg');
+INSERT INTO `livro` VALUES (1,'20','sei la','O exorcista','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,15,13,13,6,'exorcista.jpg'),(2,'20','autor teste','Pelé eterno','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,16,14,14,5,'pele.jpg'),(3,'20','autor teste','Java para burros','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,17,15,15,3,'java.jpg'),(4,'20','autor teste','Livro livro','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,18,16,16,4,'livro1.jpg'),(5,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa1.jpg'),(6,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa2.jpg'),(7,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa3.jpg'),(8,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa4.jpg'),(9,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa5.jpg'),(10,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa6.jpg'),(11,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa7.jpg'),(12,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa8.jpg'),(13,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa9.jpg'),(14,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa10.jpg'),(15,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa11.jpg'),(16,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa12.jpg'),(17,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa13.jpg'),(18,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa14.jpg'),(19,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa15.jpg'),(20,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa16.jpg'),(21,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa17.jpg'),(22,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa18.jpg'),(23,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa19.jpg'),(24,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa20.jpg'),(25,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa21.jpg');
 /*!40000 ALTER TABLE `livro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -532,7 +532,7 @@ CREATE TABLE `pagamentoCartao` (
 
 LOCK TABLES `pagamentoCartao` WRITE;
 /*!40000 ALTER TABLE `pagamentoCartao` DISABLE KEYS */;
-INSERT INTO `pagamentoCartao` VALUES (1,3,49.97),(2,4,149.97),(3,4,149.97),(4,1,149.97),(5,4,149.97),(6,4,149.97),(7,4,149.97),(8,4,149.97),(9,3,149.97),(10,4,149.97),(11,3,100),(12,3,149.97),(13,4,99.98),(14,4,149.97),(15,4,149.97),(16,4,149.97),(17,4,149.97),(18,4,149.97),(19,4,119.976),(20,3,10),(20,4,9.976),(21,3,19.976),(21,4,100),(22,4,149.97),(23,4,149.97),(24,4,119.976),(25,4,119.976),(26,4,199.96),(27,4,199.96),(28,3,199.96),(29,1,199.96),(30,4,199.96),(31,4,199.96);
+INSERT INTO `pagamentoCartao` VALUES (1,3,99.96),(1,4,100);
 /*!40000 ALTER TABLE `pagamentoCartao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -552,7 +552,7 @@ CREATE TABLE `pedido` (
   `valorTotal` double NOT NULL,
   `cupomDesconto` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -561,7 +561,7 @@ CREATE TABLE `pedido` (
 
 LOCK TABLES `pedido` WRITE;
 /*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
-INSERT INTO `pedido` VALUES (1,1,3,6,'2019-06-03 00:50:21',149.97,0),(2,1,5,6,'2019-06-03 00:52:34',149.97,0),(3,1,5,5,'2019-06-03 00:53:21',149.97,0),(4,1,1,5,'2019-06-03 00:54:13',149.97,0),(5,1,1,5,'2019-06-03 00:54:43',149.97,0),(6,1,1,5,'2019-06-03 01:03:43',149.97,0),(7,1,1,5,'2019-06-03 01:14:55',149.97,0),(8,1,1,6,'2019-06-03 01:21:24',149.97,0),(9,1,1,6,'2019-06-03 01:22:56',149.97,0),(10,1,1,6,'2019-06-03 01:30:42',149.97,1),(11,1,1,6,'2019-06-03 22:59:38',149.97,0),(12,1,1,6,'2019-06-03 23:02:51',149.97,0),(13,1,1,5,'2019-06-03 23:07:22',99.98,0),(14,1,1,5,'2019-06-05 21:04:34',149.97,0),(15,1,1,5,'2019-06-05 21:05:39',149.97,0),(16,1,1,6,'2019-06-05 21:11:02',149.97,0),(17,1,1,6,'2019-06-05 21:11:32',149.97,0),(18,1,1,6,'2019-06-05 22:29:20',149.97,0),(19,1,1,6,'2019-06-08 22:37:11',119.976,0),(20,1,1,6,'2019-06-08 22:47:54',119.976,0),(21,1,1,6,'2019-06-08 22:55:24',119.976,1),(22,1,1,5,'2019-06-08 22:57:53',149.97,1),(23,1,1,6,'2019-06-08 23:06:23',149.97,0),(24,1,1,6,'2019-06-08 23:07:21',119.976,1),(25,1,1,6,'2019-06-08 23:13:45',119.976,1),(26,1,1,6,'2019-06-09 16:39:08',199.96,0),(27,1,1,6,'2019-06-09 16:41:53',199.96,0),(28,1,1,6,'2019-06-09 16:43:10',199.96,0),(29,1,1,6,'2019-06-09 16:45:54',199.96,0),(30,1,1,5,'2019-06-09 16:55:09',199.96,0),(31,1,1,5,'2019-06-09 17:20:15',199.96,0);
+INSERT INTO `pedido` VALUES (1,1,1,5,'2019-06-10 00:45:43',199.96,0);
 /*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -588,7 +588,6 @@ CREATE TABLE `pgtoCupomDesconto` (
 
 LOCK TABLES `pgtoCupomDesconto` WRITE;
 /*!40000 ALTER TABLE `pgtoCupomDesconto` DISABLE KEYS */;
-INSERT INTO `pgtoCupomDesconto` VALUES (10,1),(12,1),(14,1),(15,1),(16,1),(17,1),(18,1),(19,1),(20,1),(21,1),(24,1),(25,1);
 /*!40000 ALTER TABLE `pgtoCupomDesconto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -610,7 +609,7 @@ CREATE TABLE `solicitacaoTroca` (
   KEY `fk_solicitacaoTroca_cliente_idx` (`id_cliente`),
   CONSTRAINT `fk_solicitacaoTroca_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_solicitacaoTroca_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -619,7 +618,6 @@ CREATE TABLE `solicitacaoTroca` (
 
 LOCK TABLES `solicitacaoTroca` WRITE;
 /*!40000 ALTER TABLE `solicitacaoTroca` DISABLE KEYS */;
-INSERT INTO `solicitacaoTroca` VALUES (1,1,12,'2019-05-30 22:52:34',1),(2,1,1,'2019-06-03 23:10:34',1),(3,1,1,'2019-06-05 20:51:27',1);
 /*!40000 ALTER TABLE `solicitacaoTroca` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -688,4 +686,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-09 19:55:54
+-- Dump completed on 2019-06-10  7:43:30
