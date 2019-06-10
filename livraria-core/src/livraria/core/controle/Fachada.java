@@ -25,6 +25,7 @@ import ecommerce.dominio.livro.Categoria;
 import ecommerce.dominio.livro.GrupoLivro;
 import ecommerce.dominio.livro.Livro;
 import ecommerce.dominio.Usuario;
+import ecommerce.dominio.analise.Analise;
 import ecommerce.dominio.estoque.Estoque;
 import ecommerce.dominio.estoque.Fornecedor;
 import ecommerce.dominio.livro.Dimensoes;
@@ -48,6 +49,7 @@ import livraria.core.regras.cliente.ValidaEspacosVazios;
 import livraria.core.regras.cliente.ValidaSenha;
 import livraria.core.regras.cliente.ValidaSenhaForte;
 import java.util.List;
+import livraria.core.dao.analise.vendasDAO;
 import livraria.core.dao.livro.DimensoesDAO;
 import livraria.core.dao.livro.EditoraDAO;
 import livraria.core.dao.livro.IsbnDAO;
@@ -106,6 +108,7 @@ public class Fachada implements IFachada{
         dao.put(Cupom.class.getName(),new CupomDescontoDAO());
         dao.put(ItemPedido.class.getName(), new ItemPedidoDAO());
         dao.put(PagamentoCartaoCredito.class.getName(), new PagamentoDAO());
+        dao.put(Analise.class.getName(), new vendasDAO());
         
         
         RN = new HashMap<String,Map<String,List<IStrategy>>>();

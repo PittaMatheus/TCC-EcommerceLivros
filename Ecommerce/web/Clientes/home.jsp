@@ -180,6 +180,12 @@
              <iframe width="660" height="355" src="https://www.youtube.com/embed/nADbKyhyEsg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
          </div>
          
+         <a href="../adm/analise.jsp">Analise</a>
+
+            
+         
+         
+         
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="../js/materialize.min.js"></script>

@@ -26,6 +26,7 @@ public class Livro extends EntidadeDominio {
     private Boolean ativo;
     private String imagem;
     private String acao;
+    private Categoria categoria;
 
     public Livro(Integer Id, String autor,String codigoBarras,String titulo,String edicao, String sinopse, String numeroPaginas, String ano,
      List<Categoria> categorias,Dimensoes dimensoes,Editora editora, GrupoLivro grupoLivro, ISBN isbn, Double preco, Boolean ativo, String imagem,
@@ -58,6 +59,15 @@ public class Livro extends EntidadeDominio {
         isbn = new ISBN();
         dimensoes = new Dimensoes();
         grupoLivro = new GrupoLivro();
+        categoria = new Categoria();
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
     
     public Integer getId() {

@@ -26,6 +26,7 @@ public class Pedido extends EntidadeDominio{
     private Date dtPedido;
     private StatusPedido statusPedido;
     private Cupom cupom;
+    private Item item;
 
 	
 	public Pedido() {
@@ -33,13 +34,24 @@ public class Pedido extends EntidadeDominio{
                 endereco = new Endereco();
                 cupom = new Cupom();
                 statusPedido = new StatusPedido();
+                item = new Item();
 		Pagamento pagamento = new Pagamento();
 		List<PagamentoCartaoCredito> pagamentos = new ArrayList<PagamentoCartaoCredito>();
 		pagamento.setPagamentosCartao(pagamentos);
 		this.setPagamento(pagamento);
 
 	}
-   
+
+        
+        
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
         
         
     public String getTipo() {

@@ -41,6 +41,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import livraria.web.commands.CommandAplicarDesconto;
+import livraria.web.view.analise.ViewAnaliseVendas;
 import livraria.web.view.estoque.ViewEstoque;
 import livraria.web.view.pedido.ViewCarrinho;
 import livraria.web.view.pedido.ViewCarrinhoSessao;
@@ -144,7 +145,10 @@ public class Control extends HttpServlet {
         viewHelper.put("/Ecommerce/Estoque/PreAlterarEstoque", new ViewEstoque());
         viewHelper.put("/Ecommerce/Estoque/AlterarEstoque", new ViewEstoque());
         
-        // View
+        // Analises
+        viewHelper.put("/Ecommerce/adm/AnaliseVendas", new ViewAnaliseVendas());
+        
+        
         
 
     }

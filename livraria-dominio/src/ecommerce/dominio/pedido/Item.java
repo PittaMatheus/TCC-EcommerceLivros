@@ -15,6 +15,10 @@ import ecommerce.dominio.livro.Livro;
 public class Item extends EntidadeDominio {
     private Integer quantidade;
     private Livro livro;
+    
+    public Item(){
+        livro = new Livro();
+    }
 
     public Integer getQuantidade() {
         return quantidade;
