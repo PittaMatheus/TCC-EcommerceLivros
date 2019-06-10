@@ -46,7 +46,7 @@
                              for (Carrinho carrinho : carrinhos) {
                                  %>
                                 
-                                       <input type="text" name="livros" value="<%=carrinho.getLivro().getId()%>">
+                                       <input type="hidden" name="livros" value="<%=carrinho.getLivro().getId()%>">
 
                     <tr>
                         

@@ -138,6 +138,9 @@ public class Control extends HttpServlet {
         viewHelper.put("/Ecommerce/adm/AutorizarTroca", new ViewCupomTroca());
         viewHelper.put("/Ecommerce/Clientes/ConsultarCupomTroca", new ViewCupomTroca());
         viewHelper.put("/Ecommerce/Clientes/AplicarDesconto", new ViewCupomDesconto());
+        viewHelper.put("/Ecommerce/Clientes/RetirarDesconto", new ViewCupomDesconto());
+        
+        
         
         // Estoque
         viewHelper.put("/Ecommerce/Estoque/InserirEstoque", new ViewEstoque());

@@ -4,6 +4,8 @@
     Author     : matheus
 --%>
 
+<%@page import="livraria.core.util.FormatadorData"%>
+<%@page import="livraria.core.util.PrecoUtils"%>
 <%@page import="ecommerce.dominio.cliente.Cliente"%>
 <%@page import="ecommerce.dominio.pedido.Pedido"%>
 <%@page import="java.util.List"%>
@@ -75,7 +77,7 @@
                                 out.println("<td><input type='checkbox' onclick='DividePorCartao()' id='id"+cartao.getId() + "' name='id_cartao' value=" + cartao.getId() + " /></td>");
                                 out.println("<td class='tdNomeCartao"+cartao.getId()+"'>" + cartao.getBandeira().getNome() + "</td>");
                                 out.println("<td>" + cartao.getNome()+ "</td>");
-                                out.println("<td class ='tdValidade"+cartao.getId()+"'>" + cartao.getDtVencimento()+ "</td>");
+                                out.println("<td class ='tdValidade"+cartao.getId()+"'>" + FormatadorData.formatarData(cartao.getDtVencimento())+ "</td>");
                                 out.println("<td class='tdNumeroCartao"+cartao.getId()+"'>"  + cartao.getNumeroCartao()+ "</td>");
                                 out.println("<td>" + cartao.getCodSeguranca()+ "</td>");
                                 out.println("</tr>");
@@ -85,9 +87,24 @@
                     // out.println("Valor total: " + pedido.getPagamento().getValorTotal());
                     // out.println("id do cliente: " + pedido.getCliente().getId());
                     // out.println("id do endereco " + pedido.getEndereco().getClienteId());
-                    valorTotal = pedido.getPagamento().getValorTotal();
-               
-        }
+
+                    
+                                   if(session.getAttribute("aplicado") != null){
+                                   //Com cupom recupera o valor descontado
+                                        valorTotal = pedido.getPagamento().getValorTotal();
+                                 }else if(session.getAttribute("aplicado") == null){
+                                        //Sem cupom recupera o valor Original
+                                         if(session.getAttribute("pedidoOriginal") != null){
+                                             valorTotal = (double) session.getAttribute("pedidoOriginal");  
+                                         }
+                                         else{
+                                              valorTotal = pedido.getPagamento().getValorTotal();
+                                          }                                   
+                                    }
+                    }
+
+
+     
             
 %>
                                 </tbody>
@@ -95,7 +112,7 @@
                                 <br><br>
                                
                                 
-                o valor total é: <%=valorTotal %><br><br>
+                                o valor total é: <%=PrecoUtils.arredondarPreco(valorTotal) %><br><br>
       
                 <div id="DivideValor" style="height:auto;width:auto;">
                     
@@ -109,7 +126,7 @@
                         <br><br>
                         <input type="hidden" name="u" value="<%=id_usuario%>">
                          <input type="hidden" name="id_endereco" value="<%=pedido.getEndereco().getId()%>">
-                         <input type="hidden" id="valorTotal" name="valorTotal" value="<%=pedido.getPagamento().getValorTotal()%>">
+                         <input type="hidden" id="valorTotal" name="valorTotal" value="<%=valorTotal%>">
                          <button name="acao" value="inserir">Confirmar pedido</button>
                         </form>
                          <br><br>
@@ -140,9 +157,25 @@
                                           }
                                         }%>
                                    >Aplicar</button>
-                                     <br>
-                                    <hr>
+                                   
+                                   
                                 </form>
+                                        <br>
+<%
+                                   if(session.getAttribute("aplicado") != null){
+                                       %>
+                                   <form action="RetirarDesconto">
+                                       
+                                       <button type="submit" name="acao" value="retirarDesconto">Retirar cupom</button>
+                                       
+                                   </form>
+                                          <% }
+%>
+                                   
+                                   <br>
+                                    <hr>
+                                   
+                                   
                                 <br>
 
         <a href='cadastro_cartao.jsp?id=<%=id_usuario%> '>Adicionar cartão</a>

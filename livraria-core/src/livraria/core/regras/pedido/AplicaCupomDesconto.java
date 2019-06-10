@@ -42,7 +42,7 @@ public class AplicaCupomDesconto extends AbstractStrategy {
                  desconto = cup.getValorDesconto();
              }
              valorTotal = valorTotal - (valorTotal * desconto / 100);
-             pedido.getPagamento().setValorTotal(valorTotal);
+             //pedido.getPagamento().setValorTotal(valorTotal);
         }
         str = String.valueOf(valorTotal);
         

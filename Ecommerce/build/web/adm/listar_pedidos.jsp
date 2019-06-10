@@ -84,7 +84,7 @@
                                 DecimalFormat formatoDouble = new DecimalFormat("#.##");      
                                 valorTotal = Double.valueOf(formatoDouble.format(valorTotal));
                                 out.println("<td> R$ " + valorTotal + "</td>");
-                                out.println("<td><a href=listar_pagamento.jsp?id_ped=" + pedido.getId() + ">detalhar</a>");
+                                out.println("<td><a href=listar_pagamento.jsp?p=" + pedido.getId() + ">detalhar</a>");
                                 out.println("</tr>");
                             }
                          }    

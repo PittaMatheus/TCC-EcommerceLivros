@@ -36,12 +36,7 @@
                              }
                         }
             }
-             
 
-            
-            
-            
-            
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
 		if(resultado == null) {
                         

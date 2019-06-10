@@ -75,7 +75,7 @@
             </tbody>     
         </table>
 <br><br>
-<a href="../Clientes/home.jsp">Voltar</a>
+<a href="../Clientes/listar_meusPedidos.jsp">Voltar</a>
 
     </body>
 </html>

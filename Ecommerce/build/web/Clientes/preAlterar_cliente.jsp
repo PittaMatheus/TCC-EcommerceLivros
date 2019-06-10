@@ -10,7 +10,7 @@
     <head>
          <!--Import Google Icon Font-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!--Import materialize.css-->
+        <!--Import materialize.css
         <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
         <link type="text/css" rel="stylesheet" href="../css/Custom.css"  media="screen,projection"/>
         <!--Let browser know website is optimized for mobile-->
@@ -80,7 +80,7 @@
             
             <div class="input-field col s4">
                 <label for="sexo" data-error="Informe o sexo"  >Sexo:</label>
-                <select id="sexo" name="sexo"class="validate" value="">
+                <select id="sexo" name="sexo" class="validate" value="<%=cliente.getSexo()%>">
                     <% if(cliente.getSexo().equals("M")){
                         %> <option selected value="M">Masculino</option>
                             <option value="F">Feminino</option>
@@ -118,25 +118,25 @@
             
             <div class="input-field col s6">
                 <label for="senha" data-error="Informe a senha" >Senha</label>
-                <input type="password" name="senha" id="senha" value="<%=cliente.getSenha()%>" class="validate" required>
+                <input type="password" name="senha" id="senha"class="validate" required>
             </div>
             
             <div class="input-field col s6">
                 <label for="senhaConfirmada" data-error="Informe a senha confirmada">Confirme a senha</label>
-                <input type="password" name="senhaConfirmada" id="senhaConfirmada" value="<%=cliente.getSenha()%>" class="validate" required>                       
+                <input type="password" name="senhaConfirmada" id="senhaConfirmada"  class="validate" required>                       
             </div>
         </div>
         </form>
                 <%}
             }%>
             <br>
-        <!--Import jQuery before materialize.js-->
+        <!--Import jQuery before materialize.js
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="js/materialize.js"></script>
         <script src="../js/Custom.js"></script>
-        <!-- Compiled and minified CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-        <!-- Compiled and minified JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+        <!-- Compiled and minified CSS
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"> -->
+        <!-- Compiled and minified JavaScript 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script> -->
     </body>
 </html>
