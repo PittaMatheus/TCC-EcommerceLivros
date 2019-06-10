@@ -66,25 +66,13 @@
         
     %>
     
-    <br><br><br>
-    <div class="container2 maiusculo"><h4 class="negrito">Livros de Comédia</h4></div>
-    <div class="container2 carousel_livros">
-        <div><img src="../imagens/pele.jpg" style='width: 98%' alt="js" /></div>
-        <div><img src="../imagens/exorcista.jpg" style='width: 98%' alt="java" /></div>
-        <div><img src="../imagens/java.jpg" style='width: 98%' alt="python"/></div>
-        <div><img src="../imagens/pele.jpg" style='width: 98%' alt="kotlin" /></div>
-        <div><img src="../imagens/pele.jpg" style='width: 98%' alt="scala" /></div>
-        <div><img src="../imagens/pele.jpg" style='width: 98%' alt="C#" /></div>
-        <div><img src="../imagens/pele.jpg" style='width: 98%' alt="PHP" /></div>
-        <div><img src="../imagens/pele.jpg" style='width: 98%' alt="dotnet" /></div>
-    </div>
-        
-    <br><br><br><br>
-     <div class="container2 maiusculo"><h4 class="negrito">Livros de Terror</h4></div>
+    <br><br>
+     <div class="container2 maiusculo"><h4 class="negrito">Livros em promoção</h4></div>
         <div class="container2 carousel_livros">
        <% 
     Resultado resultado = (Resultado) request.getAttribute("resultado");
     if(resultado == null) {
+        
             response.sendRedirect(request.getContextPath() + "/Livros/ListarLivros?acao=listar&status=1&menu=ok");
             return;
     }
@@ -95,7 +83,8 @@
        out.print("<br><br>Nenhum livro cadastrado");
     }else { 
         for (Livro livro : livros) {
-            %>
+            
+       %>
             <a href="../Pedidos/detalheItem.jsp?l=<%=livro.getId()%>"> <div><img src="../imagens/<%=livro.getImagem()%>" class="z-depth-1" style='width: 98%' /></div></a>
             <%
         }
