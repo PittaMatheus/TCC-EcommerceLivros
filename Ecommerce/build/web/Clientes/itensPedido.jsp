@@ -4,6 +4,7 @@
     Author     : matheus
 --%>
 
+<%@page import="ecommerce.dominio.cliente.Cliente"%>
 <%@page import="ecommerce.dominio.pedido.ItemPedido"%>
 <%@page import="ecommerce.dominio.pedido.Pedido"%>
 <%@page import="java.util.List"%>
@@ -16,10 +17,27 @@
         <title>Itens do meu pedido</title>
     </head>
     <body>
-<%          Resultado resultado = (Resultado) session.getAttribute("resultado");    
+<%          
+        int id_cliente = 0;
+                if(session.getAttribute("usuarioLogado") == null){
+                    response.sendRedirect("../login.jsp");
+                }else if(session.getAttribute("usuarioLogado") != null){
+                    Resultado resultado = (Resultado) session.getAttribute("usuarioLogado");    
+                    List<Cliente> clientes = (List) resultado.getEntidades();
+                            if(resultado != null) {
+                                 if(clientes.size() == 0) {
+                                    response.sendRedirect("../login.jsp");
+                                } else {
+                                   for (Cliente cliente : clientes) {         
+                                     id_cliente = cliente.getId();
+                                     out.println(cliente.getNome());
+                                   }
+                                 }
+                            }
+                }
+             Resultado resultado = (Resultado) session.getAttribute("resultado");    
             List<Pedido> pedidos = (List) resultado.getEntidades();
             String id_pedido = request.getParameter("p");
-            String id_cliente = request.getParameter("u");
             Resultado resultado2 = (Resultado) request.getAttribute("resultado2");
 		if(resultado2 == null) {
 			response.sendRedirect(request.getContextPath() + "/adm/ListarItemPedido?p="+id_pedido+"&acao=listar");
@@ -28,9 +46,7 @@
 %>
             
         <ul>
-            <li>Cliente:   <%=id_cliente%>   </li>
             <li>Pedido: <%=id_pedido%>  </li>
-            <li>Status do pedido:  </li>
 
         </ul>
         <h3>Itens do pedido</h3>

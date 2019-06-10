@@ -21,4 +21,14 @@ public class PrecoUtils {
         return bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 
     }
+     
+       public static String Sifrao(String preco){
+        if(preco == null)
+            return null;
+
+        BigDecimal bd = new BigDecimal(preco);
+         preco = ("R$ " + bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
+         return preco;
+
+    }
 }

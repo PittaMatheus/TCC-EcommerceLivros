@@ -35,6 +35,7 @@ import ecommerce.dominio.pedido.Cupom;
 import ecommerce.dominio.pedido.CupomTroca;
 import ecommerce.dominio.pedido.ItemPedido;
 import ecommerce.dominio.pedido.Pagamento;
+import ecommerce.dominio.pedido.PagamentoCartaoCredito;
 import ecommerce.dominio.pedido.Pedido;
 import ecommerce.dominio.pedido.Troca;
 import livraria.core.IStrategy;
@@ -104,6 +105,8 @@ public class Fachada implements IFachada{
         dao.put(Fornecedor.class.getName(), new FornecedorDAO());
         dao.put(Cupom.class.getName(),new CupomDescontoDAO());
         dao.put(ItemPedido.class.getName(), new ItemPedidoDAO());
+        dao.put(PagamentoCartaoCredito.class.getName(), new PagamentoDAO());
+        
         
         RN = new HashMap<String,Map<String,List<IStrategy>>>();
         

@@ -7,6 +7,7 @@ package livraria.web.view.pedido;
 
 import ecommerce.dominio.EntidadeDominio;
 import ecommerce.dominio.pedido.Pagamento;
+import ecommerce.dominio.pedido.PagamentoCartaoCredito;
 import ecommerce.dominio.pedido.Pedido;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,16 +24,29 @@ public class ViewPagamentoPedido implements IViewHelper{
     @Override
     public EntidadeDominio getEntidade(HttpServletRequest request) {
         String id_pedido = request.getParameter("p");
-        Pedido pedido = new Pedido();
+        PagamentoCartaoCredito pgto = new PagamentoCartaoCredito();
+      
         if(id_pedido != null){
-            pedido.setId(Integer.parseInt(id_pedido));
+            pgto.setId(Integer.parseInt(id_pedido));
         }
-        return pedido;
+        return pgto;
     }
 
     @Override
     public void setEntidade(Resultado resultado, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+             if(resultado != null && !resultado.getMensagem().isEmpty()) {
+                    request.setAttribute("resultado2", resultado);
+                    if(resultado.getAcao() != null) {
+                        if(resultado.getAcao().equals("listar")){
+                              request.getRequestDispatcher("../adm/listar_pagamento.jsp").forward(request, response);
+                          }
+                        }
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+            }
     }
+
     
 }

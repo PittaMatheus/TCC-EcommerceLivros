@@ -69,8 +69,46 @@ public class PagamentoDAO extends AbstractDAO{
 
     @Override
     public Resultado listar(EntidadeDominio entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+         
+       List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            PagamentoCartaoCredito pgto = (PagamentoCartaoCredito) entidade;
+            PreparedStatement declaracao = conexao.prepareStatement("select pg.id_pedido, pg.id_cartao, pg.valor, c.nome as nomeCartao, c.bandeira,\n" +
+                        "c.numero, c.dtVencimento\n" +
+                        "from pagamentoCartao pg\n" +
+                        "INNER JOIN cartao c\n" +
+                        "where id_pedido = ? AND\n" +
+                        "pg.id_cartao = c.id;");
+            declaracao.setInt(1, pgto.getId());
+            ResultSet rs =  declaracao.executeQuery();
+            while(rs.next()) {
+                Pedido ped = new Pedido();
+                ped.setId(rs.getInt("id_pedido"));
+                ped.getPagamento().getCartao().setId(rs.getInt("id_cartao"));
+                ped.getPagamento().setValorTotal(rs.getDouble("valor"));
+                ped.getPagamento().getCartao().setNome(rs.getString("nomeCartao"));
+                ped.getPagamento().getCartao().getBandeira().setNome(rs.getString("bandeira"));
+                ped.getPagamento().getCartao().setNumeroCartao(rs.getString("numero"));
+                ped.getPagamento().getCartao().setDtVencimento(rs.getDate("dtVencimento"));           
+                entidades.add(ped);	
+            }
+            resultado.setEntidades(entidades);
+            resultado.setStatus(true);
+            resultado.setMensagem("PagamentoPedido listados com sucesso");
+            resultado.setAcao("listar");
+            // Fecha a conexao.
+            conexao.close();
+        }catch(ClassNotFoundException erro) {
+            erro.printStackTrace();     
+            resultado.setStatus(false);
+            resultado.setMensagem("Houve algum erro ao listar os pagamentos do pedido");
+        } catch (SQLException erro) {
+            erro.printStackTrace();   
+        }
+        return resultado;
+   }
 
     @Override
     public Resultado alterar(EntidadeDominio entidade) {
