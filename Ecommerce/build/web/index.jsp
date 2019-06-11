@@ -53,7 +53,7 @@
 
     <%
             if(session.getAttribute("mensagem") != null){ %>
-                    <input type="text" class="btn" id="mensagem" onclick="Materialize.toast('<b>O livro foi adicionado ao carrinho!</b>', 4000, 'green rounded')">
+                    <input type="hidden" class="btn" id="mensagem" onclick="Materialize.toast('<b>O livro foi adicionado ao carrinho!</b>', 4000, 'green rounded')">
                     <script>
                         window.onload = function(){
                             document.getElementById("mensagem").click();

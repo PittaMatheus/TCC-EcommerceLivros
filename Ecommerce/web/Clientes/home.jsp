@@ -71,12 +71,12 @@
             <li class="white">
                 <ul class="collapsible collapsible-accordion">
                     <li>
-                      <a class="collapsible-header"><i class="material-icons">folder_special</i>Gerencia de clientes <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+                      <a class="collapsible-header"><i class="material-icons">folder</i>Gerencia de clientes <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
                       <div class="collapsible-body">
                         <ul>
-                          <li><a class="" href='listar_clientes.jsp'><i class="material-icons">fullscreen</i>Listar clientes</a></li>
-                          <li><a class="" href='listar_clientes.jsp'><i class="material-icons">fullscreen</i>Desativar clientes</a></li>
-                           <li><a class="" href='listar_clientesInativos.jsp'><i class="material-icons">fullscreen</i>Ativar clientes</a></li>
+                          <li><a class="" href='listar_clientes.jsp'><i class="material-icons">description</i>Listar clientes</a></li>
+                          <li><a class="" href='listar_clientes.jsp'><i class="material-icons">description</i>Desativar clientes</a></li>
+                           <li><a class="" href='listar_clientesInativos.jsp'><i class="material-icons">description</i>Ativar clientes</a></li>
                           <li><div class="divider"></div></li>
                         </ul>
                       </div>
@@ -87,15 +87,15 @@
             <li class="white">
                 <ul class="collapsible collapsible-accordion">
                     <li>
-                      <a class="collapsible-header"><i class="material-icons">folder_special</i>Gerencia de livros<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+                      <a class="collapsible-header"><i class="material-icons">folder</i>Gerencia de livros<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
                       <div class="collapsible-body">
                         <ul>
-                          <li><a class="" href='../Livros/cadastro_livro.jsp'><i class="material-icons">fullscreen</i>Cadastrar livro</a></li>
-                          <li><a class="" href='../Livros/listar_livros.jsp'><i class="material-icons">fullscreen</i>Desativar livro</a></li>
-                          <li><a class="" href='../Livros/listar_livrosInativos.jsp'><i class="material-icons">fullscreen</i>Ativar livro</a></li>
-                          <li><a class="" href='../Livros/listar_categorias.jsp'><i class="material-icons">fullscreen</i>Listar Categorias de livro</a></li>
-                          <li><a class="" href='../Livros/cadastro_grupoLivro.jsp'><i class="material-icons">fullscreen</i>Inserir grupo de precificação</a></li>
-                          <li><a class="" href='../Livros/listar_grupoPrecificacao.jsp'><i class="material-icons">fullscreen</i>Listar grupo de precificação</a></li>
+                          <li><a class="" href='../Livros/cadastro_livro.jsp'><i class="material-icons">description</i>Cadastrar livro</a></li>
+                          <li><a class="" href='../Livros/listar_livros.jsp'><i class="material-icons">description</i>Desativar livro</a></li>
+                          <li><a class="" href='../Livros/listar_livrosInativos.jsp'><i class="material-icons">description</i>Ativar livro</a></li>
+                          <li><a class="" href='../Livros/listar_categorias.jsp'><i class="material-icons">description</i>Listar Categorias de livro</a></li>
+                          <li><a class="" href='../Livros/cadastro_grupoLivro.jsp'><i class="material-icons">description</i>Inserir grupo de precificação</a></li>
+                          <li><a class="" href='../Livros/listar_grupoPrecificacao.jsp'><i class="material-icons">description</i>Listar grupo de precificação</a></li>
                           <li><div class="divider"></div></li>
                         </ul>
                       </div>
@@ -106,14 +106,14 @@
             <li class="white">
                 <ul class="collapsible collapsible-accordion">
                     <li>
-                      <a class="collapsible-header"><i class="material-icons">folder_special</i>Gerencia de pedidos<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+                      <a class="collapsible-header"><i class="material-icons">folder</i>Gerencia de pedidos<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
                       <div class="collapsible-body">
                         <ul>
-                          <li><a class="" href='../adm/listar_pedidos.jsp'><i class="material-icons">fullscreen</i>Ver pedidos</a></li>
-                          <li><a class="" href='../adm/listar_pedidos.jsp'><i class="material-icons">fullscreen</i>Gerenciar pedidos</a></li>
-                          <li><a class="" href='../adm/listar_SolicitacaoTrocas.jsp'><i class="material-icons">fullscreen</i>Ver Solicitações de trocas </a></li>
-                          <li><a class="" href='#'><i class="material-icons">fullscreen</i>Gerenciar trocas</a></li>
-                          <li><a class="" href='#'><i class="material-icons">fullscreen</i>Editar meu perfil</a></li>
+                          <li><a class="" href='../adm/listar_pedidos.jsp'><i class="material-icons">description</i>Ver pedidos</a></li>
+                          <li><a class="" href='../adm/listar_pedidos.jsp'><i class="material-icons">description</i>Gerenciar pedidos</a></li>
+                          <li><a class="" href='../adm/listar_SolicitacaoTrocas.jsp'><i class="material-icons">description</i>Ver Solicitações de trocas </a></li>
+                          <li><a class="" href='#'><i class="material-icons">description</i>Gerenciar trocas</a></li>
+                          <li><a class="" href='#'><i class="material-icons">description</i>Editar meu perfil</a></li>
                           <li><div class="divider"></div></li>
                         </ul>
                       </div>
@@ -124,12 +124,12 @@
             <li class="white">
                 <ul class="collapsible collapsible-accordion">
                     <li>
-                      <a class="collapsible-header"><i class="material-icons">folder_special</i>Gerencia de estoque<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+                      <a class="collapsible-header"><i class="material-icons">folder</i>Gerencia de estoque<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
                       <div class="collapsible-body">
                         <ul>
-                          <li><a class="" href='../Estoque/entrada_estoqueLivro.jsp'><i class="material-icons">fullscreen</i>Entrada em estoque de livro</a></li>
-                          <li><a class="" href='../Estoque/listar_estoqueLivros.jsp'><i class="material-icons">fullscreen</i>Listar estoque de livro</a></li>
-                          <li><a class="" href='../Estoque/listar_fornecedores.jsp'><i class="material-icons">fullscreen</i>Listar fornecedores</a></li>
+                          <li><a class="" href='../Estoque/entrada_estoqueLivro.jsp'><i class="material-icons">description</i>Entrada em estoque de livro</a></li>
+                          <li><a class="" href='../Estoque/listar_estoqueLivros.jsp'><i class="material-icons">description</i>Listar estoque de livro</a></li>
+                          <li><a class="" href='../Estoque/listar_fornecedores.jsp'><i class="material-icons">description</i>Listar fornecedores</a></li>
                           <li><div class="divider"></div></li>
                         </ul>
                       </div>
@@ -147,7 +147,7 @@
                         
             <li><a class="collapsible-header" href='../Livros/prateleira.jsp'><i class="material-icons">home</i>Home</a></li>
             <li><div class="divider"></div></li>
-            <li><a class="collapsible-header" href='ListarCupomTroca.jsp'><i class="material-icons">description</i>Ver Cupons de troca</a></li>
+            <li><a class="collapsible-header" href='ListarCupomTroca.jsp'><i class="material-icons">description</i>Ver cupons de troca</a></li>
             <li><a class="collapsible-header" href='../Pedidos/carrinho.jsp?u=<%=cliente.getId()%>'><i class="material-icons">shopping_cart</i>Ver carrinho</a></li>
             <li><a class="collapsible-header" href='../Clientes/listar_meusPedidos.jsp'><i class="material-icons">library_books</i>Ver pedidos</a></li>
             <li><a class="collapsible-header" href='#'><i class="material-icons">loop</i>Solicitar troca</a></li>
