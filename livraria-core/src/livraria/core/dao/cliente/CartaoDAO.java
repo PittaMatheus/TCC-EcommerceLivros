@@ -34,12 +34,12 @@ public class CartaoDAO extends AbstractDAO{
             Connection conexao = BancoDadosOracle.getConexao();
             Cartao cartao = (Cartao) entidade;
             PreparedStatement declaracao = conexao.prepareStatement("INSERT INTO cartao "
-                    + "(nome, dtVencimento, bandeira, numero, codSeguranca, id_cliente)"
+                    + "(nome, dtVencimento, id_bandeira, numero, codSeguranca, id_cliente)"
                                     + " VALUES(?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
                     declaracao.setString(1, cartao.getNome());
                     declaracao.setDate(2, new java.sql.Date(cartao.getDtVencimento().getTime()));
-                    declaracao.setString(3, cartao.getBandeira().getNome());
+                    declaracao.setInt(3, cartao.getBandeira().getId());
                     declaracao.setString(4, cartao.getNumeroCartao());
                     declaracao.setString(5, cartao.getCodSeguranca());
                     declaracao.setInt(6, cartao.getCliente().getId());
@@ -120,7 +120,7 @@ public class CartaoDAO extends AbstractDAO{
             Connection conexao = BancoDadosOracle.getConexao();
             Cartao cartao = (Cartao) entidade;
             PreparedStatement declaracao = conexao.prepareStatement("SELECT c.id,c.nome,c.dtVencimento, "
-                    + "bandeira, numero, codSeguranca, id_cliente "
+                    + "id_bandeira, numero, codSeguranca, id_cliente "
                     + "FROM cartao c WHERE c.id_cliente = ?");
            declaracao.setInt(1, cartao.getCliente().getId());
            ResultSet rs =  declaracao.executeQuery();
@@ -130,8 +130,9 @@ public class CartaoDAO extends AbstractDAO{
                 cart.setId(rs.getInt("id"));
                 cart.setNome(rs.getString("nome"));
                 cart.setDtVencimento(rs.getDate("dtVencimento"));
-                bandeira.setNome(rs.getString("bandeira"));
-                cart.setBandeira(bandeira);
+//                bandeira.setNome(rs.getString("bandeira"));
+//                cart.setBandeira(bandeira);
+                cart.getBandeira().setId(rs.getInt("id_bandeira"));
                 cart.setNumeroCartao(rs.getString("numero"));
                 cart.setCodSeguranca(rs.getString("codSeguranca"));
                 cart.getCliente().setId(rs.getInt("id_cliente"));

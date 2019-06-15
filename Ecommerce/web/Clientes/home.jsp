@@ -112,7 +112,7 @@
                           <li><a class="" href='../adm/listar_pedidos.jsp'><i class="material-icons">fullscreen</i>Ver pedidos</a></li>
                           <li><a class="" href='../adm/listar_pedidos.jsp'><i class="material-icons">fullscreen</i>Gerenciar pedidos</a></li>
                           <li><a class="" href='../adm/listar_SolicitacaoTrocas.jsp'><i class="material-icons">fullscreen</i>Ver Solicitações de trocas </a></li>
-                          <li><a class="" href='#'><i class="material-icons">fullscreen</i>Gerenciar trocas</a></li>
+                          <li><a class="" href='../adm/listar_trocas.jsp'><i class="material-icons">fullscreen</i>Gerenciar trocas</a></li>
                           <li><a class="" href='#'><i class="material-icons">fullscreen</i>Editar meu perfil</a></li>
                           <li><div class="divider"></div></li>
                         </ul>
@@ -137,6 +137,21 @@
                 </ul>
             </li>
             
+            <li class="white">
+                <ul class="collapsible collapsible-accordion">
+                    <li>
+                      <a class="collapsible-header"><i class="material-icons">folder_special</i>Análise<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+                      <div class="collapsible-body">
+                        <ul>
+                          <li><a class="" href='../adm/analise_categoriaMaisVendida.jsp'><i class="material-icons">fullscreen</i>Análise de categoria mais vendida</a></li>
+                          <li><a class="" href='../adm/analise_custoReceitaLucroMes.jsp'><i class="material-icons">fullscreen</i>Análise de custo, receita e lucro por mês</a></li>
+                          <li><a class="" href="../adm/analise.jsp"><i class="material-icons">fullscreen</i>Análise Mateus</a></li>
+                          <li><div class="divider"></div></li>
+                        </ul>
+                      </div>
+                    </li>
+                </ul>
+            </li>
             
             <%
                 }
@@ -154,6 +169,7 @@
             <li><a class="collapsible-header" href='#'><i class="material-icons">find_in_page</i>Consultar andamento da troca</a></li>
             <li><a class="collapsible-header" href='#'><i class="material-icons">search</i>Consultar pontos acumulativos</a></li>
             <li><a class="collapsible-header" href='preAlterar_cliente.jsp?id=<%=cliente.getId()%>'><i class="material-icons">person</i>Editar meu perfil</a></li>
+            <li><a class="collapsible-header" href='preAlterarSenha_cliente.jsp?id=<%=cliente.getId()%>'><i class="material-icons">person</i>Alterar senha</a></li>
             
                        
         
@@ -180,7 +196,7 @@
              <iframe width="660" height="355" src="https://www.youtube.com/embed/nADbKyhyEsg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
          </div>
          
-         <a href="../adm/analise.jsp">Analise</a>
+         <!--<a href="../adm/analise.jsp">Analise</a>-->
 
             
          

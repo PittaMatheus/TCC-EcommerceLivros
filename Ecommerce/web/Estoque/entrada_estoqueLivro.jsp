@@ -59,13 +59,15 @@
                             
                             for(EntidadeDominio li : livros){
                                 Livro liv = (Livro) li; %>
-                               <option id ="cbTitulo<%=liv.getId()%>"value="<%=liv.getId()%>"><%=liv.getTitulo()%></option> 
+                               <option id ="cbTitulo<%=liv.getId()%>"value="<%=liv.getId()%>"><%=liv.getTitulo()%></option>
+                               <input type="hidden" value="<%=livro.getPreco()%>" id="txtValorCusto" name="txtValorCusto" />
                             <%}
                         }else{
                             for(EntidadeDominio edLivro:livros){
                                 Livro livro = (Livro)edLivro;
                     %>
                                 <option id ="cbTitulo<%=livro.getId()%>"value="<%=livro.getId()%>"><%=livro.getTitulo()%></option>
+                                <input type="hidden" value="<%=livro.getPreco()%>" id="txtValorCusto" name="txtValorCusto" />
                     <%  
                             }
                         }    
@@ -86,16 +88,14 @@
                  <label for="txtQuantidade">Quantidade:</label>
                  <input type="text"  value="20"id="txtQuantidade" name="txtQuantidade" /> <br>
 
-                 <label for="txtValorCusto">Valor de custo:</label> 
-                 <input type="text" value="49.99" id="txtValorCusto" name="txtValorCusto" /> <br>
-
                  <br> 
                  <input type="submit" name="acao" value="inserir" placeholder="SALVAR" id="btSalvar"/>
                  
              </form>
                 <a href='${pageContext.request.contextPath}/Clientes/home.jsp'>Voltar</a>
             <%}else{%>
-                <h1>Você não possui nenhum livro cadastrado, volte ao menu principal e cadastre um livro</h1>
+                <h1>Você não possui mas nehuma entrada de livro no estoque,  </h1>
+                <h1>volte ao menu principal!</h1>
                 <a href='${pageContext.request.contextPath}/Clientes/home.jsp'>Voltar</a>
             <%}%>
     </body>

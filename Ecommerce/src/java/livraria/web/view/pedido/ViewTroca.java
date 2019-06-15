@@ -28,8 +28,11 @@ public class ViewTroca implements IViewHelper {
         Troca troca = new Troca();
         String id_cliente = request.getParameter("u");
         String id_pedido = request.getParameter("id_pedido");
-
+        String status = request.getParameter("status");
         
+        if(status != null){
+            troca.setStatus(status);
+        }        
         if(id_cliente != null){
             troca.getCliente().setId(Integer.parseInt(id_cliente));
         }
@@ -54,6 +57,8 @@ public class ViewTroca implements IViewHelper {
                         }else if(resultado.getAcao().equals("CupomTrocaInserido")){
                             request.setAttribute("acao", "A geração do cupom de troca");
                             request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
+                        }else if(resultado.getAcao().equals("listarTroca")){
+                            request.getRequestDispatcher("listar_trocas.jsp").forward(request, response);
                         }
                         
                         

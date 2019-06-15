@@ -19,7 +19,7 @@
         List<Livro> livros = (List<Livro>) getServletContext().getAttribute("livros");
         List<Fornecedor> fornecedores = (List<Fornecedor>) getServletContext().getAttribute("fornecedor");
         
-        if(resultado == null) {
+        if(resultado == null || livros.size() == 0 || fornecedores.size() == 0) {
             response.sendRedirect(request.getContextPath() + "/Estoque/ListarEstoqueLivros?acao=listar");
             return;
         }

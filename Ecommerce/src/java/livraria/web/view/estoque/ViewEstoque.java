@@ -24,7 +24,6 @@ public class ViewEstoque implements IViewHelper{
     public EntidadeDominio getEntidade(HttpServletRequest request) {
         Estoque estoque = new Estoque();
         
-        
         String id = request.getParameter("id");
         String id_livro = request.getParameter("idLivro");
         String id_fornecedor = request.getParameter("idFornecedor");
@@ -73,7 +72,8 @@ public class ViewEstoque implements IViewHelper{
         if(preco != null && !preco.trim().isEmpty()){
             estoque.getItem().setCusto(Float.valueOf(preco));
         }else{
-            estoque.getItem().setCusto(null);
+            float prec = 0;
+            estoque.getItem().setCusto(prec);
         }
         
         

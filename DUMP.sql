@@ -16,6 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `bandeira`
+--
+
+DROP TABLE IF EXISTS `bandeira`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bandeira` (
+  `id_bandeira` int(11) NOT NULL AUTO_INCREMENT,
+  `nome_bandeira` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id_bandeira`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bandeira`
+--
+
+LOCK TABLES `bandeira` WRITE;
+/*!40000 ALTER TABLE `bandeira` DISABLE KEYS */;
+INSERT INTO `bandeira` VALUES (1,'American Express'),(2,'Aura'),(3,'Diners Club'),(4,'Elo'),(5,'Hipercard'),(6,'Mastercard'),(7,'Sorocred'),(8,'Visa');
+/*!40000 ALTER TABLE `bandeira` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `carrinho`
 --
 
@@ -53,15 +77,17 @@ CREATE TABLE `cartao` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(155) NOT NULL,
   `dtVencimento` date NOT NULL,
-  `bandeira` varchar(155) NOT NULL,
+  `id_bandeira` int(11) NOT NULL,
   `numero` varchar(155) NOT NULL,
   `codSeguranca` varchar(155) NOT NULL,
   `id_cliente` int(11) NOT NULL,
   `status` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `id_cliente_idx` (`id_cliente`),
+  KEY `id_bandeira_idx` (`id_bandeira`),
+  CONSTRAINT `id_bandeira` FOREIGN KEY (`id_bandeira`) REFERENCES `bandeira` (`id_bandeira`),
   CONSTRAINT `id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +96,7 @@ CREATE TABLE `cartao` (
 
 LOCK TABLES `cartao` WRITE;
 /*!40000 ALTER TABLE `cartao` DISABLE KEYS */;
-INSERT INTO `cartao` VALUES (1,'JOAO DA SILVA','2019-09-09','mastercard','2321321','033',1,0),(3,'2','2019-09-09','Visa','2321321','2123',1,0),(4,'JOAO DA SILVA','2019-09-09','elo','123123113','033',1,0);
+INSERT INTO `cartao` VALUES (1,'JOAO DA SILVA','2019-09-09',1,'2321321','033',1,0),(3,'2','2019-09-09',2,'2321321','2123',1,0);
 /*!40000 ALTER TABLE `cartao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -85,7 +111,7 @@ CREATE TABLE `categoria` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(155) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,7 +120,7 @@ CREATE TABLE `categoria` (
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
-INSERT INTO `categoria` VALUES (1,'2terror2'),(2,'comedia'),(3,'didatico'),(4,'suspense'),(5,'drama'),(6,'acao'),(7,'faroeste2'),(8,'romance');
+INSERT INTO `categoria` VALUES (1,'Ação'),(2,'Aventura'),(3,'Biografia'),(4,'Comédia'),(5,'Didático'),(6,'Drama'),(7,'Faroeste'),(8,'Ficção'),(9,'Romance'),(10,'Suspense'),(11,'Terror');
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,7 +155,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'MatheusS','Pitta','1995-01-12',1,50,'010A34C29C82D3A8159134DBCCB36F7DB9CA4AE52AFF3B3E9E4AB1AD3912674C','emailteste@teste.com','41656190869','329702760','M','1'),(2,'ALTERANDO TESTE','SobrenomeTeste','1995-01-12',1,50,'862022A260F770176C8916D7A17D85A6634F3EB790A2A5E2D0F2999483CF1DFE','adm@adm.com','45296735889','329702760','M','2'),(4,'Cliente','criptografado','1995-01-12',1,50,'862022A260F770176C8916D7A17D85A6634F3EB790A2A5E2D0F2999483CF1DFE','matheus.pitta2@gmail.com','34003847040','329702760','M','1');
+INSERT INTO `cliente` VALUES (1,'MatheusS','Pitta','1995-01-12',1,50,'862022A260F770176C8916D7A17D85A6634F3EB790A2A5E2D0F2999483CF1DFE','emailteste@teste.com','41656190869','329702760','M','1'),(2,'ALTERANDO TESTE','SobrenomeTeste','1995-01-12',1,50,'862022A260F770176C8916D7A17D85A6634F3EB790A2A5E2D0F2999483CF1DFE','adm@adm.com','45296735889','329702760','M','2'),(4,'Cliente','criptografado','1995-01-12',1,50,'862022A260F770176C8916D7A17D85A6634F3EB790A2A5E2D0F2999483CF1DFE','matheus.pitta2@gmail.com','34003847040','329702760','M','1');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -304,7 +330,7 @@ CREATE TABLE `estoque` (
 
 LOCK TABLES `estoque` WRITE;
 /*!40000 ALTER TABLE `estoque` DISABLE KEYS */;
-INSERT INTO `estoque` VALUES (1,2,1,19,49.99,'2019-05-24 01:07:41'),(2,4,2,20,49.99,'2019-05-24 01:08:08'),(3,3,3,18,49.99,'2019-05-24 01:08:50'),(4,1,4,20,49.99,'2019-06-03 23:13:50');
+INSERT INTO `estoque` VALUES (1,2,1,19,49.99,'2019-05-24 01:07:41'),(2,4,2,20,49.99,'2019-05-24 01:08:08'),(3,3,3,17,49.99,'2019-05-24 01:08:50'),(4,1,4,20,49.99,'2019-06-03 23:13:50');
 /*!40000 ALTER TABLE `estoque` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -394,7 +420,7 @@ CREATE TABLE `item` (
   `id_livro` int(11) NOT NULL,
   `qt_livros` int(11) NOT NULL,
   KEY `fk_item_livro_idx` (`id_livro`),
-  CONSTRAINT `fk_item_livro` FOREIGN KEY (`id_livro`) REFERENCES `livro` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_item_livro` FOREIGN KEY (`id_livro`) REFERENCES `livro` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -421,8 +447,8 @@ CREATE TABLE `itemPedido` (
   `id_pedido` int(11) NOT NULL,
   KEY `fk_itemPedido_livro_idx` (`id_livro`),
   KEY `fk_itemPedido_pedido_idx` (`id_pedido`),
-  CONSTRAINT `fk_itemPedido_livro` FOREIGN KEY (`id_livro`) REFERENCES `livro` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_itemPedido_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_itemPedido_livro` FOREIGN KEY (`id_livro`) REFERENCES `livro` (`id`),
+  CONSTRAINT `fk_itemPedido_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -432,7 +458,7 @@ CREATE TABLE `itemPedido` (
 
 LOCK TABLES `itemPedido` WRITE;
 /*!40000 ALTER TABLE `itemPedido` DISABLE KEYS */;
-INSERT INTO `itemPedido` VALUES (2,3,1),(2,1,1);
+INSERT INTO `itemPedido` VALUES (2,3,1),(2,1,1),(2,3,2),(2,1,2);
 /*!40000 ALTER TABLE `itemPedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -464,10 +490,10 @@ CREATE TABLE `livro` (
   KEY `fk_livro_isbn_idx` (`id_isbn`),
   KEY `fk_livro_grupoLivro_idx` (`id_grupolivro`),
   KEY `fk_livro_dimensoes_idx` (`id_dimensao`),
-  CONSTRAINT `fk_livro_dimensoes` FOREIGN KEY (`id_dimensao`) REFERENCES `dimensoes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_livro_editora` FOREIGN KEY (`id_editora`) REFERENCES `editora` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_livro_grupoLivro` FOREIGN KEY (`id_grupolivro`) REFERENCES `grupolivro` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_livro_isbn` FOREIGN KEY (`id_isbn`) REFERENCES `isbn` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_livro_dimensoes` FOREIGN KEY (`id_dimensao`) REFERENCES `dimensoes` (`id`),
+  CONSTRAINT `fk_livro_editora` FOREIGN KEY (`id_editora`) REFERENCES `editora` (`id`),
+  CONSTRAINT `fk_livro_grupoLivro` FOREIGN KEY (`id_grupolivro`) REFERENCES `grupolivro` (`id`),
+  CONSTRAINT `fk_livro_isbn` FOREIGN KEY (`id_isbn`) REFERENCES `isbn` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -493,8 +519,8 @@ CREATE TABLE `livro_categoria` (
   `id_categoria` int(11) NOT NULL,
   PRIMARY KEY (`id_livro`,`id_categoria`),
   KEY `fk_categoria_idx` (`id_categoria`),
-  CONSTRAINT `fk_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_livro` FOREIGN KEY (`id_livro`) REFERENCES `livro` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`),
+  CONSTRAINT `fk_livro` FOREIGN KEY (`id_livro`) REFERENCES `livro` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -522,7 +548,7 @@ CREATE TABLE `pagamentoCartao` (
   KEY `fk_pagamentoCartao_pedido_idx` (`id_pedido`),
   KEY `fk_pagamentoCartao_cartao_idx` (`id_cartao`),
   CONSTRAINT `fk_pagamentoCartao_cartao` FOREIGN KEY (`id_cartao`) REFERENCES `cartao` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_pagamentoCartao_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_pagamentoCartao_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -532,7 +558,7 @@ CREATE TABLE `pagamentoCartao` (
 
 LOCK TABLES `pagamentoCartao` WRITE;
 /*!40000 ALTER TABLE `pagamentoCartao` DISABLE KEYS */;
-INSERT INTO `pagamentoCartao` VALUES (1,3,99.96),(1,4,100);
+INSERT INTO `pagamentoCartao` VALUES (1,3,99.96),(2,3,199.96);
 /*!40000 ALTER TABLE `pagamentoCartao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -552,7 +578,7 @@ CREATE TABLE `pedido` (
   `valorTotal` double NOT NULL,
   `cupomDesconto` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -561,7 +587,7 @@ CREATE TABLE `pedido` (
 
 LOCK TABLES `pedido` WRITE;
 /*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
-INSERT INTO `pedido` VALUES (1,1,1,5,'2019-06-10 00:45:43',199.96,0);
+INSERT INTO `pedido` VALUES (1,1,3,5,'2019-06-10 00:45:43',199.96,0),(2,1,4,6,'2019-06-15 21:12:22',199.96,0);
 /*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -577,8 +603,8 @@ CREATE TABLE `pgtoCupomDesconto` (
   `id_cupom` int(11) NOT NULL,
   KEY `fk_pagamento_cupom_idx` (`id_cupom`),
   KEY `fk_pgtoCupomDesconto_pedido_idx` (`id_pedido`),
-  CONSTRAINT `fk_pgtoCupomDesconto_cupom` FOREIGN KEY (`id_cupom`) REFERENCES `cupomDesconto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_pgtoCupomDesconto_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_pgtoCupomDesconto_cupom` FOREIGN KEY (`id_cupom`) REFERENCES `cupomDesconto` (`id`),
+  CONSTRAINT `fk_pgtoCupomDesconto_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -607,8 +633,8 @@ CREATE TABLE `solicitacaoTroca` (
   PRIMARY KEY (`id`),
   KEY `fk_solicitacaoTroca_pedido_idx` (`id_pedido`),
   KEY `fk_solicitacaoTroca_cliente_idx` (`id_cliente`),
-  CONSTRAINT `fk_solicitacaoTroca_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_solicitacaoTroca_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_solicitacaoTroca_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`),
+  CONSTRAINT `fk_solicitacaoTroca_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -686,4 +712,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-10  7:43:30
+-- Dump completed on 2019-06-15 19:53:46

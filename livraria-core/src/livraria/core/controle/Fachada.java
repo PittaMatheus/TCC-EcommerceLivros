@@ -26,6 +26,9 @@ import ecommerce.dominio.livro.GrupoLivro;
 import ecommerce.dominio.livro.Livro;
 import ecommerce.dominio.Usuario;
 import ecommerce.dominio.analise.Analise;
+import ecommerce.dominio.analise.AnaliseCategoriaMaisVendida;
+import ecommerce.dominio.analise.AnaliseCustoReceitaLucroMes;
+import ecommerce.dominio.cliente.Bandeira;
 import ecommerce.dominio.estoque.Estoque;
 import ecommerce.dominio.estoque.Fornecedor;
 import ecommerce.dominio.livro.Dimensoes;
@@ -49,7 +52,10 @@ import livraria.core.regras.cliente.ValidaEspacosVazios;
 import livraria.core.regras.cliente.ValidaSenha;
 import livraria.core.regras.cliente.ValidaSenhaForte;
 import java.util.List;
+import livraria.core.dao.analise.AnaliseCategoriaMaisVendidaDAO;
+import livraria.core.dao.analise.AnaliseCustoReceitaLucroMesDAO;
 import livraria.core.dao.analise.vendasDAO;
+import livraria.core.dao.cliente.BandeiraDAO;
 import livraria.core.dao.livro.DimensoesDAO;
 import livraria.core.dao.livro.EditoraDAO;
 import livraria.core.dao.livro.IsbnDAO;
@@ -62,6 +68,7 @@ import livraria.core.dao.pedido.ItemPedidoDAO;
 import livraria.core.dao.pedido.PagamentoDAO;
 import livraria.core.dao.pedido.PedidoDAO;
 import livraria.core.dao.pedido.TrocaDAO;
+import livraria.core.regras.analise.ValidarDatasAnalise;
 import livraria.core.regras.estoque.ValidaCamposVaziosEstoque;
 import livraria.core.regras.livro.ValidarCamposVaziosLivro;
 import livraria.core.regras.livro.ValidarCategoriasLivro;
@@ -90,6 +97,7 @@ public class Fachada implements IFachada{
         dao.put(Cliente.class.getName(),new ClienteDAO());
         dao.put(Endereco.class.getName(),new EnderecoDAO());
         dao.put(Cartao.class.getName(),new CartaoDAO());
+        dao.put(Bandeira.class.getName(),new BandeiraDAO());
         
         //DAO de livros
         dao.put(Livro.class.getName(), new LivroDAO());
@@ -108,8 +116,11 @@ public class Fachada implements IFachada{
         dao.put(Cupom.class.getName(),new CupomDescontoDAO());
         dao.put(ItemPedido.class.getName(), new ItemPedidoDAO());
         dao.put(PagamentoCartaoCredito.class.getName(), new PagamentoDAO());
-        dao.put(Analise.class.getName(), new vendasDAO());
         
+        // analise
+        dao.put(AnaliseCategoriaMaisVendida.class.getName(), new AnaliseCategoriaMaisVendidaDAO());
+        dao.put(AnaliseCustoReceitaLucroMes.class.getName(), new AnaliseCustoReceitaLucroMesDAO());
+        dao.put(Analise.class.getName(), new vendasDAO());
         
         RN = new HashMap<String,Map<String,List<IStrategy>>>();
         
@@ -209,6 +220,18 @@ public class Fachada implements IFachada{
         regrasEstoque.put("alterar", regrasSalvarEstoque);
         // Regras de negocio geral
         RN.put(Estoque.class.getName(), regrasEstoque);
+        
+        // Regra p/ data da análise 
+        ValidarDatasAnalise validarDatasAnalise = new ValidarDatasAnalise();
+
+        List<IStrategy> regrasValidarDatasAnalise = new ArrayList<IStrategy>();
+        regrasValidarDatasAnalise.add(validarDatasAnalise);
+
+        Map<String, List<IStrategy>> rnsValidarDatasAnalise = new HashMap<String, List<IStrategy>>();
+
+        rnsValidarDatasAnalise.put("listar", regrasValidarDatasAnalise);
+
+        RN.put(AnaliseCategoriaMaisVendida.class.getName(), rnsValidarDatasAnalise);
         
         /* Gerar pedido
         List<IStrategy> RNAddPedido = new ArrayList<IStrategy>();

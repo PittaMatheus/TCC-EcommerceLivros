@@ -20,7 +20,6 @@
     </head>
 <%  
             int id_cliente = 0;
-            int tipo = 0;
             if(session.getAttribute("usuarioLogado") == null){
                 response.sendRedirect("../login.jsp");
             }else if(session.getAttribute("usuarioLogado") != null){
@@ -32,7 +31,6 @@
                             } else {
                                for (Cliente cliente : clientes) {         
                                  id_cliente = cliente.getId();
-                                 tipo = cliente.getPapel().getId();
                                  out.println(cliente.getNome());
                                }
                              }
@@ -45,7 +43,6 @@
             List<Pedido> pedidos = (List) resultado.getEntidades();
             String id_pedido = request.getParameter("p");
             
-            
             Resultado resultado2 = (Resultado) request.getAttribute("resultado2");
 		if(resultado2 == null) {
 			response.sendRedirect(request.getContextPath() + "/adm/ListarPagamentoPedido?p="+id_pedido+"&acao=listar");
@@ -54,7 +51,10 @@
                 
 %>
             
+        <ul>
+            <li>Pedido: <%=id_pedido%>  </li>
 
+        </ul>
         <h3>Cartões Utilizados no pedido</h3>
         <table border="1" class="highlight striped centered responsive-table">
             <thead>
@@ -79,24 +79,13 @@
 
 <%
                 }
-                
+
 %>
            
             </tbody>     
         </table>
 <br><br>
-
-<%
-    if(tipo == 2){
-%>
-<a href="../adm/listar_pedidos.jsp">Voltar</a>
-<%
-    }else if(tipo == 1){
-%>
 <a href="../Clientes/listar_meusPedidos.jsp">Voltar</a>
 
-<%
-}
-%>
     </body>
 </html>

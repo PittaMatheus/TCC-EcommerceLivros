@@ -19,6 +19,8 @@ import ecommerce.dominio.livro.GrupoLivro;
 import livraria.core.aplicacao.Resultado;
 import ecommerce.dominio.cliente.Telefone;
 import ecommerce.dominio.Usuario;
+import ecommerce.dominio.analise.AnaliseCustoReceitaLucroMes;
+import ecommerce.dominio.cliente.Bandeira;
 import ecommerce.dominio.estoque.Estoque;
 import ecommerce.dominio.estoque.Fornecedor;
 import ecommerce.dominio.livro.Livro;
@@ -41,7 +43,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import livraria.web.commands.CommandAplicarDesconto;
+import livraria.web.view.analise.AnalisarCategoriaMaisVendidaViewHelper;
 import livraria.web.view.analise.ViewAnaliseVendas;
+import livraria.web.view.cliente.ViewClienteSenha;
 import livraria.web.view.estoque.ViewEstoque;
 import livraria.web.view.pedido.ViewCarrinho;
 import livraria.web.view.pedido.ViewCarrinhoSessao;
@@ -89,6 +93,8 @@ public class Control extends HttpServlet {
          viewHelper.put("/Ecommerce/Clientes/AtivarCliente", new ViewCliente());
          viewHelper.put("/Ecommerce/AutenticarCliente", new ViewCliente());
          viewHelper.put("/Ecommerce/AutenticarClienteCompra", new ViewClienteCompra());
+         viewHelper.put("/Ecommerce/Clientes/PreAlterarSenhaCliente", new ViewClienteSenha());
+         viewHelper.put("/Ecommerce/Clientes/AlterarSenhaCliente", new ViewClienteSenha());
          
          viewHelper.put("/Ecommerce/LogoutCliente", new ViewCliente());
          // Views Endereco
@@ -134,11 +140,14 @@ public class Control extends HttpServlet {
         viewHelper.put("/Ecommerce/adm/GerenciarPedido", new ViewPedido());
         viewHelper.put("/Ecommerce/Clientes/ListarMeusPedidos", new ViewPedido());
         viewHelper.put("/Ecommerce/Clientes/SolicitarTroca", new ViewTroca());
-        viewHelper.put("/Ecommerce/adm/ListarTrocas", new ViewTroca());
+        viewHelper.put("/Ecommerce/adm/ListarSolicitacaoTrocas", new ViewTroca());
         viewHelper.put("/Ecommerce/adm/AutorizarTroca", new ViewCupomTroca());
         viewHelper.put("/Ecommerce/Clientes/ConsultarCupomTroca", new ViewCupomTroca());
         viewHelper.put("/Ecommerce/Clientes/AplicarDesconto", new ViewCupomDesconto());
         viewHelper.put("/Ecommerce/Clientes/RetirarDesconto", new ViewCupomDesconto());
+        viewHelper.put("/Ecommerce/adm/ListarTrocas", new ViewTroca());
+
+        
         
         
         
@@ -150,7 +159,7 @@ public class Control extends HttpServlet {
         
         // Analises
         viewHelper.put("/Ecommerce/adm/AnaliseVendas", new ViewAnaliseVendas());
-        
+        viewHelper.put("/Ecommerce/adm/Analisar", new AnalisarCategoriaMaisVendidaViewHelper());
         
         
 
@@ -226,7 +235,13 @@ public class Control extends HttpServlet {
         List<EntidadeDominio> fornecedor = resultado.getEntidades();
         getServletContext().setAttribute("fornecedor", fornecedor);
         
+        resultado = commandListar.executar(new AnaliseCustoReceitaLucroMes());
+        List<EntidadeDominio> analise = resultado.getEntidades();
+        getServletContext().setAttribute("analise", analise);
         
+        resultado = commandListar.executar(new Bandeira());
+        List<EntidadeDominio> bandeira = resultado.getEntidades();
+        getServletContext().setAttribute("bandeira", bandeira);
         
         
     }

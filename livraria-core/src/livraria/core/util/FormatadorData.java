@@ -32,7 +32,7 @@ public class FormatadorData {
     }
     
     public static String formatarDataTimeSt(Timestamp tsData) {
-        return formatarDataTimeSt(tsData, "dd/MM/yyyy");
+        return formatarDataTimeSt(tsData, "dd/MM/yyyy-HH:mm:ss");
 
     }
 
