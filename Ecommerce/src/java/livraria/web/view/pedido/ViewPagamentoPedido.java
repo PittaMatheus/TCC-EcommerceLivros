@@ -24,10 +24,15 @@ public class ViewPagamentoPedido implements IViewHelper{
     @Override
     public EntidadeDominio getEntidade(HttpServletRequest request) {
         String id_pedido = request.getParameter("p");
+        String cupom = request.getParameter("cupom");
+        
         PagamentoCartaoCredito pgto = new PagamentoCartaoCredito();
       
         if(id_pedido != null){
             pgto.setId(Integer.parseInt(id_pedido));
+        }
+        if(cupom != null){
+            pgto.setAcao("cupom");
         }
         return pgto;
     }
@@ -40,8 +45,11 @@ public class ViewPagamentoPedido implements IViewHelper{
                     if(resultado.getAcao() != null) {
                         if(resultado.getAcao().equals("listar")){
                               request.getRequestDispatcher("../adm/listar_pagamento.jsp").forward(request, response);
+                          }else if(resultado.getAcao().equals("listarCupomDesconto")){
+                            request.getRequestDispatcher("../adm/CupomDescontoPagamento.jsp").forward(request, response);
+
                           }
-                        }
+                    }
             }
         } catch(Exception e) {
             e.printStackTrace();

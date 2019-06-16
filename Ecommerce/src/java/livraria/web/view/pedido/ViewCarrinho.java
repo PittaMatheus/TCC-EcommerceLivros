@@ -56,16 +56,26 @@ public class ViewCarrinho implements IViewHelper {
         try {
             if(resultado != null && !resultado.getMensagem().isEmpty()) {
                 request.setAttribute("resultado", resultado);
+                HttpSession session = request.getSession();
                 if(resultado.getAcao() != null) {
                     if(resultado.getAcao().equals("inserir")){
-                        request.getRequestDispatcher("../Livros/prateleira.jsp").forward(request, response);
+                        // sessão de mensagem
+                        if(!resultado.getMensagem().isEmpty()) {
+                        String msg = resultado.getMensagem();
+                        request.removeAttribute("resultado");
+                        session.setAttribute("mensagem", "O livro foi adicionado ao carrinho!");
+                        }
+                        request.getRequestDispatcher("../Clientes/home.jsp").forward(request, response);
                     }else if(resultado.getAcao().equals("consultar")){
                         request.getRequestDispatcher("../Pedidos/carrinho.jsp").forward(request, response);
                     }else if(resultado.getAcao().equals("desativar")){
                         request.setAttribute("acao", "remoção do carrinho");
                         request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
-                    }else if(resultado.getAcao().equals("falhaInserir")){     
-                       request.getRequestDispatcher("../Livros/prateleira.jsp").forward(request, response);
+                    }else if(resultado.getAcao().equals("falhaInserir")){
+                        String msg = resultado.getMensagem();
+                        request.removeAttribute("resultado");
+                        session.setAttribute("mensagem", "O livro esta em falta no estoque!");
+                       request.getRequestDispatcher("../Clientes/home.jsp").forward(request, response);
                     }
                 }
             }

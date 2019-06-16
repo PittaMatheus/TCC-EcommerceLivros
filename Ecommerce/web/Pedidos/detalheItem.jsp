@@ -79,7 +79,7 @@
                       
                   </ul>
                   <ul class="left">
-                      <li><a href="../Livros/prateleira.jsp"><i class="material-icons">arrow_back</i></a></li>
+                      <li><a href="../Clientes/home.jsp"><i class="material-icons">arrow_back</i></a></li>
                   </ul>
                 </div>
               </nav>

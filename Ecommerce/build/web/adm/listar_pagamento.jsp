@@ -16,10 +16,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Pagamento</title>
     </head>
 <%  
             int id_cliente = 0;
+            int papel = 0;
+            
+            int houveCupom = 0;
             if(session.getAttribute("usuarioLogado") == null){
                 response.sendRedirect("../login.jsp");
             }else if(session.getAttribute("usuarioLogado") != null){
@@ -32,6 +35,7 @@
                                for (Cliente cliente : clientes) {         
                                  id_cliente = cliente.getId();
                                  out.println(cliente.getNome());
+                                 papel = cliente.getPapel().getId();
                                }
                              }
                         }
@@ -41,7 +45,7 @@
     
             Resultado resultado = (Resultado) session.getAttribute("resultado");    
             List<Pedido> pedidos = (List) resultado.getEntidades();
-            String id_pedido = request.getParameter("p");
+            String id_pedido = request.getParameter("id_ped");
             
             Resultado resultado2 = (Resultado) request.getAttribute("resultado2");
 		if(resultado2 == null) {
@@ -51,10 +55,7 @@
                 
 %>
             
-        <ul>
-            <li>Pedido: <%=id_pedido%>  </li>
-
-        </ul>
+        
         <h3>Cartões Utilizados no pedido</h3>
         <table border="1" class="highlight striped centered responsive-table">
             <thead>
@@ -65,6 +66,7 @@
 <%
                 List<Pedido> pagamentos = (List) resultado2.getEntidades();
                 for(Pedido ped : pagamentos){
+                    id_pedido = String.valueOf(ped.getId());
 %>
             <tbody>
                 
@@ -73,19 +75,39 @@
             <td><%=FormatadorData.formatarData(ped.getPagamento().getCartao().getDtVencimento())%></td>                  
             <td><%=PrecoUtils.Sifrao(String.valueOf(ped.getPagamento().getValorTotal())) %></td>
             
+<%
+            houveCupom = ped.getPagamento().getCupom().getId();
+                     
+%>
 
-            
 
 
 <%
                 }
+%>
+            </tbody>     
+        </table>
+            <%
+
+                if(houveCupom == 1){
+%>
+<br>           <p>Você utilizou um cupom de desconto. <a href="CupomDescontoPagamento.jsp?p=<%=id_pedido%>">Detalhes</a></p>
+<%              }
 
 %>
            
-            </tbody>     
-        </table>
-<br><br>
-<a href="../Clientes/listar_meusPedidos.jsp">Voltar</a>
 
+<br><br>
+
+<%
+    if(papel == 1){
+%>
+    <a href="../Clientes/listar_meusPedidos.jsp">Voltar</a>
+<%
+    } else{
+%>
+<a href="../adm/listar_pedidos.jsp">Voltar</a>
+<% }
+%>
     </body>
 </html>

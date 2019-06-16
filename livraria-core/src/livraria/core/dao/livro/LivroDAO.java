@@ -216,7 +216,9 @@ public class LivroDAO extends AbstractDAO{
                         resultado.setAcao("listarLivrosInativos");
                     }
                 }
-                else{
+                else if(livro.getAcao().equals("menu")){
+                    resultado.setAcao("listarIndex");
+                }else if(livro.getAcao().equals("home")){
                     resultado.setAcao("listarHome");
                 }
                     entidades.add(liv);

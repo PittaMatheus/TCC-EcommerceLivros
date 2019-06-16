@@ -73,31 +73,60 @@ public class PagamentoDAO extends AbstractDAO{
        List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
         try {
             // Abre uma conexao com o banco.
+            
             Connection conexao = BancoDadosOracle.getConexao();
             PagamentoCartaoCredito pgto = (PagamentoCartaoCredito) entidade;
-            PreparedStatement declaracao = conexao.prepareStatement("select pg.id_pedido, pg.id_cartao, pg.valor, c.nome as nomeCartao, c.bandeira,\n" +
-                        "c.numero, c.dtVencimento\n" +
-                        "from pagamentoCartao pg\n" +
-                        "INNER JOIN cartao c\n" +
-                        "where id_pedido = ? AND\n" +
-                        "pg.id_cartao = c.id;");
-            declaracao.setInt(1, pgto.getId());
-            ResultSet rs =  declaracao.executeQuery();
-            while(rs.next()) {
-                Pedido ped = new Pedido();
-                ped.setId(rs.getInt("id_pedido"));
-                ped.getPagamento().getCartao().setId(rs.getInt("id_cartao"));
-                ped.getPagamento().setValorTotal(rs.getDouble("valor"));
-                ped.getPagamento().getCartao().setNome(rs.getString("nomeCartao"));
-                ped.getPagamento().getCartao().getBandeira().setNome(rs.getString("bandeira"));
-                ped.getPagamento().getCartao().setNumeroCartao(rs.getString("numero"));
-                ped.getPagamento().getCartao().setDtVencimento(rs.getDate("dtVencimento"));           
-                entidades.add(ped);	
+            if(pgto.getAcao() == null){
+                PreparedStatement declaracao = conexao.prepareStatement("select pg.id_pedido, pg.id_cartao, pg.valor, c.nome as nomeCartao,\n" +
+                    "c.numero, c.dtVencimento, b.nome_bandeira, ped.cupomDesconto\n" +
+                    "from pagamentoCartao pg\n" +
+                    "INNER JOIN cartao c\n" +
+                    "INNER JOIN bandeira b\n" +
+                    "INNER JOIN pedido ped\n" +
+                    "where pg.id_pedido = ? AND\n" +
+                    "pg.id_cartao = c.id \n" +
+                    "AND c.id_bandeira = b.id_bandeira\n" +
+                    "AND pg.id_pedido = ped.id;");                
+                declaracao.setInt(1, pgto.getId());
+                ResultSet rs =  declaracao.executeQuery();
+                while(rs.next()) {
+                    Pedido ped = new Pedido();
+                    ped.setId(rs.getInt("id_pedido"));
+                    ped.getPagamento().getCartao().setId(rs.getInt("id_cartao"));
+                    ped.getPagamento().setValorTotal(rs.getDouble("valor"));
+                    ped.getPagamento().getCartao().setNome(rs.getString("nomeCartao"));
+                    ped.getPagamento().getCartao().getBandeira().setNome(rs.getString("nome_bandeira"));
+                    ped.getPagamento().getCartao().setNumeroCartao(rs.getString("numero"));
+                    ped.getPagamento().getCartao().setDtVencimento(rs.getDate("dtVencimento"));
+                    ped.getPagamento().getCupom().setId(rs.getInt("cupomDesconto"));
+                    entidades.add(ped);	
+                }
+                resultado.setAcao("listar");
+            }else{
+                PreparedStatement declaracao = conexao.prepareStatement("select ped.id,\n" +
+                        "cup.nome, cup.valor\n" +
+                        "from pedido ped\n" +
+                        "INNER JOIN pgtoCupomDesconto pgC      \n" +
+                        "INNER JOIN cupomDesconto cup\n" +
+                        "WHERE ped.id = pgC.id_pedido\n" +
+                        "AND\n" +
+                        "pgC.id_cupom = cup.id\n" +
+                        "AND ped.id = ?");                
+                declaracao.setInt(1, pgto.getId());
+                ResultSet rs =  declaracao.executeQuery();
+                while(rs.next()) {
+                    Pedido ped = new Pedido();
+                    ped.setId(rs.getInt("id"));
+                    ped.getPagamento().getCupom().setNome(rs.getString("nome"));
+                    ped.getPagamento().getCupom().setValorDesconto(rs.getDouble("valor"));
+                    entidades.add(ped);	
+                }
+                resultado.setAcao("listarCupomDesconto");
             }
             resultado.setEntidades(entidades);
             resultado.setStatus(true);
             resultado.setMensagem("PagamentoPedido listados com sucesso");
-            resultado.setAcao("listar");
+            
             // Fecha a conexao.
             conexao.close();
         }catch(ClassNotFoundException erro) {

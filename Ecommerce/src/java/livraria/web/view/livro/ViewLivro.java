@@ -64,6 +64,8 @@ public class ViewLivro implements IViewHelper{
         String menu = request.getParameter("menu");
         if(null != menu && menu.equals("ok")){
             livro.setAcao("menu");
+        }else if(null != menu && menu.equals("n")){
+            livro.setAcao("home");
         }
         
         
@@ -182,8 +184,10 @@ public class ViewLivro implements IViewHelper{
                                 request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
                             }else if(resultado.getAcao().equals("consultar")){
                                 request.getRequestDispatcher("preAlterar_livro.jsp").forward(request, response);
-                            }else if(resultado.getAcao().equals("listarHome")){
+                            }else if(resultado.getAcao().equals("listarIndex")){
                                 request.getRequestDispatcher("../index.jsp").forward(request, response);
+                            }else if(resultado.getAcao().equals("listarHome")){
+                                request.getRequestDispatcher("../Clientes/home.jsp").forward(request, response);
                             }
                         } 
                     }

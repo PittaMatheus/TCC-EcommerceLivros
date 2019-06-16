@@ -16,9 +16,9 @@
         <title>Home</title>
         <!--Import Google Icon Font-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-         <!-- CSS CAROUSEL-->
-         <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick-theme.css" media="screen,projection"/>
-         <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick.css" media="screen,projection"/>
+        <!-- CSS CAROUSEL-->
+        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick-theme.css" media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick.css" media="screen,projection"/>
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -27,7 +27,6 @@
         <link type="text/css" rel="stylesheet" href="../css/Custom.css"  media="screen,projection"/>
         <!-- LOGO -->
         <link rel="icon" href="../imagens/logo.png">
-        
     </head>
     <body>
     <!-- DROPDOWN DO LOGIN -->
@@ -36,7 +35,6 @@
             <li class="divider"></li>
             <li><a href="../Clientes/cadastro_cliente.jsp">Cadastre-se</a></li>
         </ul>
-    
     <div class="navbar-fixed">
         <nav class="indigo darken-4">
           <div class="nav-wrapper indigo darken-4">
@@ -51,21 +49,18 @@
     </div>
 <!--FIM NAVBAR-->
 
-    <%
+<%
             if(session.getAttribute("mensagem") != null){ %>
                     <input type="hidden" class="btn" id="mensagem" onclick="Materialize.toast('<b>O livro foi adicionado ao carrinho!</b>', 4000, 'green rounded')">
                     <script>
                         window.onload = function(){
                             document.getElementById("mensagem").click();
                         }
-
                     </script>
-                    
-    <%
-        }
+<%
+            }
         
-    %>
-    
+%>
     <br><br>
      <div class="container2 maiusculo"><h4 class="negrito">Livros em promoção</h4></div>
         <div class="container2 carousel_livros">
