@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="livraria.core.util.FormatadorData"%>
+<%@page import="ecommerce.dominio.cliente.Bandeira"%>
 <%@page import="livraria.core.util.PrecoUtils"%>
 <%@page import="ecommerce.dominio.cliente.Cliente"%>
 <%@page import="ecommerce.dominio.pedido.Pedido"%>
@@ -48,11 +49,11 @@
             double valorTotal = 0;
 
             Resultado resultado = (Resultado) request.getAttribute("resultado");
-           
+            List<Bandeira> bandeiras = (List<Bandeira>) getServletContext().getAttribute("bandeira");
             
             
 
-            if(resultado == null) {
+            if(resultado == null || bandeiras.size() == 0) {
                 response.sendRedirect(request.getContextPath() + "/Clientes/ListarCartao?acao=consultarPorID&id=" + id_usuario + "&conf=1");
             }
             else{
@@ -75,7 +76,7 @@
                                 
                                 out.println("<tr>");
                                 out.println("<td><input type='checkbox' onclick='DividePorCartao()' id='id"+cartao.getId() + "' name='id_cartao' value=" + cartao.getId() + " /></td>");
-                                out.println("<td class='tdNomeCartao"+cartao.getId()+"'>" + cartao.getBandeira().getNome() + "</td>");
+                                out.println("<td class='tdNomeCartao"+cartao.getId()+"'>" + bandeiras.get(cartao.getBandeira().getId()-1).getNome() + "</td>");
                                 out.println("<td>" + cartao.getNome()+ "</td>");
                                 out.println("<td class ='tdValidade"+cartao.getId()+"'>" + FormatadorData.formatarData(cartao.getDtVencimento())+ "</td>");
                                 out.println("<td class='tdNumeroCartao"+cartao.getId()+"'>"  + cartao.getNumeroCartao()+ "</td>");
@@ -126,7 +127,7 @@
                         <br><br>
                         <input type="hidden" name="u" value="<%=id_usuario%>">
                          <input type="hidden" name="id_endereco" value="<%=pedido.getEndereco().getId()%>">
-                         <input type="hidden" id="valorTotal" name="valorTotal" value="<%=valorTotal%>">
+                         <input type="hidden" id="valorTotal" name="valorTotal" value="<%=pedido.getPagamento().getValorTotal()%>">
                          <button name="acao" value="inserir">Confirmar pedido</button>
                         </form>
                          <br><br>

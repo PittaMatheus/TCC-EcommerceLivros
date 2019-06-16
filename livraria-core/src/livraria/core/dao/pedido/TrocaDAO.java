@@ -62,23 +62,79 @@ public class TrocaDAO extends AbstractDAO{
          List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
         try {
             // Abre uma conexao com o banco.
-            Connection conexao = BancoDadosOracle.getConexao();
+           
             Troca troca = (Troca) entidade;
-                        PreparedStatement declaracao = conexao.prepareStatement("SELECT t.id, t.id_cliente ,t.id_pedido, t.status "
-                                + "FROM solicitacaoTroca t ");
+            if(troca.getStatus() != null && troca.getStatus().equals("1")){
+                Connection conexao = BancoDadosOracle.getConexao();
+                       PreparedStatement declaracao = conexao.prepareStatement("select p.id, p.id_cliente, p.id_statusPedido, p.id_endereco, p.dt_pedido, p.valorTotal,\n" +
+                    "c.email, c.cpf, c.data_nascimento, c.id, c.tipo_usuario, c.nome, c.ranking, c.rg, c.sexo, c.email, c.sobrenome,\n" +
+                    "e.bairro, e.cep, e.cidade, e.complemento, e.logradouro, e.nomeEndereco, e.numero, e.referencia,\n" +
+                    "e.tipoEndereco, e.tipoLogradouro, e.uf\n" +
+                    "from pedido p\n" +
+                    "INNER JOIN cliente c\n" +
+                    "INNER JOIN endereco e \n" +
+                    "on p.id_cliente = c.id \n" +
+                    "AND\n" +
+                    "e.id = p.id_endereco AND p.id_statusPedido > 3");
             ResultSet rs =  declaracao.executeQuery();
             while(rs.next()) {
-                Troca tr = new Troca();
-                tr.setId(rs.getInt("id"));
-                tr.getCliente().setId(rs.getInt("id_cliente"));
-                tr.getPedido().setId(rs.getInt("id_pedido"));
-                tr.setStatus(rs.getString("status"));
-                entidades.add(tr);
+                Pedido ped = new Pedido();
+                // Setando dados do pedido
+                ped.setId(rs.getInt("id"));
+                ped.setDtPedido(rs.getDate("dt_pedido"));
+                ped.getStatusPedido().setId(rs.getInt("id_statusPedido"));
+                // Setando dados do cliente
+                ped.getCliente().setId(rs.getInt("id_cliente"));
+                ped.getCliente().setEmail(rs.getString("email"));
+                ped.getCliente().setNome(rs.getString("nome"));
+                String tipoUsuario = rs.getString("tipo_usuario");
+                ped.getCliente().getPapel().setId(Integer.parseInt(tipoUsuario));
+                
+                // Setando dados do pagamento
+                //ped.getPagamento().setId(rs.getInt("id_pagamento"));
+                ped.getPagamento().setValorTotal(rs.getDouble("valorTotal"));
+                //ped.getPagamento().getCartao().getBandeira().setNome(rs.getString("bandeira"));
+               // ped.getPagamento().setDtPagamento(rs.getDate("dt_pagamento"));
+                //ped.getPagamento().getCartao().setNumeroCartao(rs.getString("numero"));
+                // Setando dados do endereco
+                ped.getEndereco().setId(rs.getInt("id_endereco"));
+                ped.getEndereco().setLogradouro(rs.getString("logradouro"));
+                ped.getEndereco().setNumero(rs.getString("numero"));
+                ped.getEndereco().setBairro(rs.getString("bairro"));
+                ped.getEndereco().setCep(rs.getString("cep"));
+                ped.getEndereco().setCidade(rs.getString("cidade"));
+                ped.getEndereco().setUf(rs.getString("uf"));
+                ped.getEndereco().setTipoLogradouro(rs.getString("tipoLogradouro"));
+                ped.getEndereco().setNomeEndereco(rs.getString("nomeEndereco"));
+                ped.getEndereco().setComplemento(rs.getString("complemento"));
+                ped.getEndereco().setReferencia(rs.getString("referencia"));
+                // Adicionando o objeto preenchido na lista entidades
+                entidades.add(ped);
+                }
+                resultado.setStatus(true);
+                resultado.setAcao("listarTroca");
+                // Fecha a conexao.
+                conexao.close();
+                
+            }else{
+                        Connection conexao = BancoDadosOracle.getConexao();
+                        PreparedStatement declaracao = conexao.prepareStatement("SELECT t.id, t.id_cliente ,t.id_pedido, t.status "
+                                + "FROM solicitacaoTroca t ");
+                ResultSet rs =  declaracao.executeQuery();
+                while(rs.next()) {
+                    Troca tr = new Troca();
+                    tr.setId(rs.getInt("id"));
+                    tr.getCliente().setId(rs.getInt("id_cliente"));
+                    tr.getPedido().setId(rs.getInt("id_pedido"));
+                    tr.setStatus(rs.getString("status"));
+                    entidades.add(tr);
+                }
+                resultado.setStatus(true);
+                resultado.setAcao("listarSolicitacaoTroca");
+                // Fecha a conexao.
+                conexao.close();
             }
-            resultado.setStatus(true);
-            resultado.setAcao("listarSolicitacaoTroca");
-            // Fecha a conexao.
-            conexao.close();
+            
         }catch(ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);

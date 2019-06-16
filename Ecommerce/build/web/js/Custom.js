@@ -32,7 +32,7 @@ function DividePorCartao(){
                 console.log(dataValidade);
                 qtCartao++;
                 html += "<label for='nomeCartao'>"+ nomeCartao + " - " + numeroCartao + " - " + dataValidade + " </label><br>" 
-                html += "<input type='hidden'name='dataValidade' value='"+dataValidade+"'>" 
+                html += "<input type='text'name='dataValidade' value='"+dataValidade+"'>" 
                 html += "<input type='text' name='valorCartao'  class='valor"+cartoes[i].value+"'><br>"
             }
         }  

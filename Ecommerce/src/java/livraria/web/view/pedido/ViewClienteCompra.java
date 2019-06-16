@@ -40,7 +40,10 @@ public class ViewClienteCompra implements IViewHelper {
         }
         pedido.setCliente(cliente);
         HttpSession session = request.getSession();
-        session.setAttribute("pedido", pedido);
+        if(null != session.getAttribute("pedido")){
+                pedido = (Pedido)session.getAttribute("pedido");
+            }
+        
         return cliente;
     }
 

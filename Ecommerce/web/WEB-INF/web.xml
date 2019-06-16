@@ -201,7 +201,7 @@
     
     <servlet-mapping>
         <servlet-name>Control</servlet-name>
-        <url-pattern>/adm/ListarTrocas</url-pattern>
+        <url-pattern>/adm/ListarSolicitacaoTrocas</url-pattern>
     </servlet-mapping>  
     
     <servlet-mapping>
@@ -270,8 +270,26 @@
         <servlet-name>Control</servlet-name>
         <url-pattern>/Clientes/RetirarDesconto</url-pattern>
     </servlet-mapping>                                                     
-                                                                              
-                                                                                                                                  
+    
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/adm/Analisar</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Clientes/PreAlterarSenhaCliente</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Clientes/AlterarSenhaCliente</url-pattern>
+    </servlet-mapping>                                                                                                                                                       
+ 
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/adm/ListarTrocas</url-pattern>
+    </servlet-mapping>                                                                                                                                                                                                                                                                      
          
     <session-config>
         <session-timeout>

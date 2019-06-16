@@ -6,7 +6,6 @@
 package livraria.core.util;
 
 import java.security.MessageDigest;
-import sun.security.util.DerEncoder;
 
 /**
  *

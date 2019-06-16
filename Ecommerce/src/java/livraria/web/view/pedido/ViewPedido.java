@@ -185,17 +185,19 @@ public class ViewPedido implements IViewHelper {
              }else{
                     Pedido pedido = (Pedido) request.getSession().getAttribute("pedido");
                     request.setAttribute("pedido", pedido);
-                    if(pedido.getPagamento().getValorTotal() != null && pedido.getEndereco().getId()== null){
-                        // valor total ja foi setado. Endereço ainda nao. então é hora de confirmar os dados de endereço.
-                        request.getRequestDispatcher("confirmaEndereco.jsp").forward(request, response);
-                    }else if(pedido.getPagamento().getCartao().getId() == null){
-                        // o cartão de credito ainda não foi escolhido. hora de confirma-lo
-                        request.getRequestDispatcher("../Pedidos/confirmaCartao.jsp").forward(request, response);
+                    Resultado cliente = (Resultado) request.getSession().getAttribute("usuarioLogado");
+                    if(cliente != null){
+                        if(pedido.getPagamento().getValorTotal() != null && pedido.getEndereco().getId()== null){
+                            // valor total ja foi setado. Endereço ainda nao. então é hora de confirmar os dados de endereço.
+                            request.getRequestDispatcher("confirmaEndereco.jsp").forward(request, response);
+                        }else if(pedido.getPagamento().getCartao().getId() == null){
+                            // o cartão de credito ainda não foi escolhido. hora de confirma-lo
+                            request.getRequestDispatcher("../Pedidos/confirmaCartao.jsp").forward(request, response);
+                        }
+                    }else
+                        response.sendRedirect("../login.jsp");
 
-                  //  }else
-                     //  request.setAttribute("acao", "pedido");
-                       // request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
-             }
+             
              } 
         } catch(Exception e) {
             e.printStackTrace();

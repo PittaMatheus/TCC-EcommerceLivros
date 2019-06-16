@@ -33,7 +33,7 @@ public class ViewCartao implements IViewHelper{
         Cartao cartao = new Cartao();
         Bandeira bandeira = new Bandeira();
         Cliente cliente = new Cliente();
-        DateFormat formatadorData = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat formatadorData = new SimpleDateFormat("yyyy-MM-dd");
         // PARAMETROS DA JSP
         String id_cliente = request.getParameter("id");
         String numCartao = request.getParameter("numeroCartao");
@@ -69,8 +69,14 @@ public class ViewCartao implements IViewHelper{
         cartao.setNome(nomeCartao);
         cartao.setCodSeguranca(codSeguranca);
         cartao.setNome(nomeCartao);
-        bandeira.setNome(idBandeira);
+        
+        if(idBandeira != null && !idBandeira.isEmpty()){
+            bandeira.setId(Integer.parseInt(idBandeira));
+        }else{
+            bandeira.setId(0);
+        }
         cartao.setBandeira(bandeira);
+        
         return cartao;
     }
 

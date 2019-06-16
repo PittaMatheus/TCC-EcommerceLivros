@@ -50,7 +50,7 @@
             }else{
         %>
         
-    <form action="../login.jsp" method="GET">
+    <form action="AdicionarPedido" method="POST">
         <!-- NAV FIXO DO TOPO-->
         <div class="navbar-fixed indigo darken-4">
             <nav>
@@ -80,7 +80,7 @@
                        for(Livro livro : carrinho.getLivs()){
                            %>
                <tr>
-
+               <input type="hidden" name="livros" value="<%=livro.getId()%>"
                    <td><%=livro.getTitulo()%></td>
                    <td><%=livro.getAutor()%></td>
                    <td><%=livro.getAno()%></td>

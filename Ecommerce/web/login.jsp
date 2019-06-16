@@ -1,3 +1,4 @@
+<%@page import="ecommerce.dominio.pedido.Pedido"%>
 <%@page import="livraria.core.aplicacao.Resultado"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,7 +19,13 @@
          <div class="center box-login espacamento_div">
         <%
 
-        String valorTotal = request.getParameter("valorTotal");
+            String valorTotal = request.getParameter("valorTotal");
+            
+            Pedido pedido = (Pedido) request.getSession().getAttribute("pedido");
+            if(pedido != null){
+                valorTotal = String.valueOf(pedido.getPagamento().getValorTotal());
+                
+            }
             %>
         
             

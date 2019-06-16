@@ -1,3 +1,4 @@
+<%@page import="ecommerce.dominio.cliente.Bandeira"%>
 <%@page import="ecommerce.dominio.cliente.Cartao"%>
 <%@page import="java.util.List"%>
 <%@page import="livraria.core.aplicacao.Resultado"%>
@@ -22,7 +23,8 @@
                 <%
                 String id = request.getParameter("id");    
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
-		if(resultado == null) {
+                List<Bandeira> bandeiras = (List<Bandeira>) getServletContext().getAttribute("bandeira");
+		if(resultado == null || bandeiras.size() == 0) {
 			response.sendRedirect(request.getContextPath() + "/Clientes/ListarCartao?acao=consultarPorID&id=" + id);
 			return;
 		}
@@ -82,7 +84,7 @@
                                             for (Cartao cartao : cartoes) {
                                                 out.println("<tr>");
                                                 out.println("<td><input type='radio' required name='id' value='" + cartao.getId() + "' id='" + cartao.getId() + "' /><label for='"+ cartao.getId() +"'></td></td>");
-                                                out.println("<td>" + cartao.getBandeira().getNome() + "</td>");
+                                                out.println("<td>" + bandeiras.get(cartao.getBandeira().getId()-1).getNome() + "</td>");
                                                 out.println("<td>" + cartao.getNome()+ "</td>");
                                                 out.println("<td>" + cartao.getDtVencimento()+ "</td>");
                                                 out.println("<td>" + cartao.getNumeroCartao()+ "</td>");

@@ -19,7 +19,7 @@
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
 		if(resultado == null) {
                         
-			response.sendRedirect(request.getContextPath() + "/adm/ListarTrocas?acao=listar&tipoUsuario=2");
+			response.sendRedirect(request.getContextPath() + "/adm/ListarSolicitacaoTrocas?acao=listar&tipoUsuario=2");
                         
 			return;
 		}

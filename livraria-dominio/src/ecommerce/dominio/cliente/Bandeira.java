@@ -5,11 +5,13 @@
  */
 package ecommerce.dominio.cliente;
 
+import ecommerce.dominio.EntidadeDominio;
+
 /**
  *
  * @author matheus
  */
-public class Bandeira {
+public class Bandeira extends EntidadeDominio{
     
     	private String nome;
 	public String getNome() {
