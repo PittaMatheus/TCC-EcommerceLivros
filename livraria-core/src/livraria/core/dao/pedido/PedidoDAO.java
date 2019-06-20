@@ -9,6 +9,7 @@ import ecommerce.dominio.EntidadeDominio;
 import ecommerce.dominio.cliente.Endereco;
 import ecommerce.dominio.estoque.Estoque;
 import ecommerce.dominio.livro.Livro;
+import ecommerce.dominio.pedido.Carrinho;
 import ecommerce.dominio.pedido.Cupom;
 import ecommerce.dominio.pedido.Pagamento;
 import ecommerce.dominio.pedido.PagamentoCartaoCredito;
@@ -90,7 +91,13 @@ public class PedidoDAO extends AbstractDAO{
             if(pedido.getCupom().getCodigo() != null){
                 resultado = cupomDescDao.inserir(pedido);
             }
-
+            
+            CarrinhoDAO carrinhoDAO = new CarrinhoDAO();
+            Carrinho carrinho = new Carrinho();
+            carrinho.getCliente().setId(pedido.getCliente().getId());
+            carrinho.setAcao("limpar");
+            carrinhoDAO.desativar(carrinho);
+            
             resultado.setAcao("pedidoGerado");
             resultado.setStatus(true);
             resultado.setMensagem("O pedido foi gerado com sucesso");

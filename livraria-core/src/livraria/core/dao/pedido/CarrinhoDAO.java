@@ -73,20 +73,32 @@ public class CarrinhoDAO extends AbstractDAO{
     public Resultado desativar(EntidadeDominio entidade) {
        List<EntidadeDominio> ListEntidades = new ArrayList<EntidadeDominio>();
         try {
-            // Abre uma conexao com o banco.
-            Connection conexao = BancoDadosOracle.getConexao();
-            Carrinho carrinho = (Carrinho) entidade;
-            PreparedStatement declaracao = conexao.prepareStatement(""
-                                                + "DELETE FROM carrinho WHERE id_livro =? AND id_cliente = ?");
             
-				declaracao.setInt(1, carrinho.getLivro().getId());
-				declaracao.setInt(2, carrinho.getCliente().getId());                                
-				declaracao.execute();
+            Carrinho carrinho = (Carrinho) entidade;
+            if(carrinho.getAcao() == null){
+                // Abre uma conexao com o banco.
+                Connection conexao = BancoDadosOracle.getConexao();
+                PreparedStatement declaracao = conexao.prepareStatement(""
+                                                    + "DELETE FROM carrinho WHERE id_livro =? AND id_cliente = ?");
 
-            resultado.setStatus(true);
-            resultado.setMensagem("O carrinho foi excluido com sucesso!");   
-            // Fecha a conexao.
-            conexao.close();
+                                    declaracao.setInt(1, carrinho.getLivro().getId());
+                                    declaracao.setInt(2, carrinho.getCliente().getId());                                
+                                    declaracao.execute();
+
+                resultado.setStatus(true);
+                resultado.setMensagem("O carrinho foi excluido com sucesso!");   
+                // Fecha a conexao.
+                conexao.close();
+            }else if(carrinho.getAcao() != null && carrinho.getAcao().equals("limpar")){
+                Connection conexao = BancoDadosOracle.getConexao();
+                PreparedStatement declaracao = conexao.prepareStatement("DELETE FROM carrinho WHERE id_cliente = ?");
+                                    declaracao.setInt(1, carrinho.getCliente().getId());                                
+                                    declaracao.execute();
+                resultado.setStatus(true);
+                resultado.setMensagem("O carrinho foi esvaziado com sucesso!");   
+                // Fecha a conexao.
+                conexao.close();
+            }
         } catch (ClassNotFoundException erro) {
             erro.printStackTrace();     
             resultado.setStatus(false);

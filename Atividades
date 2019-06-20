@@ -35,7 +35,7 @@ A12     - Criar pagina de vizualização de status(linha do tempo)
 A42	-Calcular frete
 A45	-Reentrada de estoque após troca finalizada
 a47	-Validação valor minimo para cada cartãod de credito: 10 conto
-A48	- Exibir preço dos livros e calcular valor Total com base no valor de custo(tabela livro) e a margem de lucro(grupoPrecificacao)
+
 *********
 Apresentar itens
 (apresentar o tempo conforme parâmetro do
@@ -56,6 +56,8 @@ ________________________________________________________________________________
 
                    
                                           DONE
+A49 - Esvaziar carrinho automaticamente após um pedido ser gerado
+A48	- Exibir preço dos livros e calcular valor Total com base no valor de custo(tabela livro) e a margem de lucro(grupoPrecificacao)
 A46	-Bandeiras permitidas Todo cartão de crédito associado a um cliente para registro de cartões
 A44	-Ver trocas
 A11     - Ver cupons de troca(cliente)
