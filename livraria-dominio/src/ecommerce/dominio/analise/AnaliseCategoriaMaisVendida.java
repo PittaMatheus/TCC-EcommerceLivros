@@ -9,8 +9,11 @@ import ecommerce.dominio.EntidadeDominio;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  *
@@ -218,6 +221,7 @@ public class AnaliseCategoriaMaisVendida extends EntidadeDominio {
             
             Map<String, String> quantLivrosVendCat = new HashMap<String, String>();
             Map<String, String> aux = new HashMap<String, String>();
+            SortedMap reverso = new TreeMap();
             
             for(String dataPedido : getDatasPedidos()) {
                 String dataPedidoFormat[] = dataPedido.split("-");
@@ -252,8 +256,14 @@ public class AnaliseCategoriaMaisVendida extends EntidadeDominio {
                 }    
                 quantLivrosVendCat.put(key, qtde);
                 acao = aventura = biografia = comedia = didatico = drama = faroeste = ficcao = romance = suspense = terror =0;
+//                quantLivrosVendCat
+                
+		 for (Iterator iter = quantLivrosVendCat.keySet().iterator(); iter.hasNext();) {
+			 Object obj = iter.next();
+		     reverso.put (obj, quantLivrosVendCat.get(obj));
+		 }
             }
-            for(String key : quantLivrosVendCat.keySet()){
+            for(Object key : reverso.keySet()){
                 sb.append("['");
                 sb.append(key).append("', ");
                 sb.append(quantLivrosVendCat.get(key)).append("]");

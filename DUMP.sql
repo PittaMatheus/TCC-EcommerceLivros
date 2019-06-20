@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.16, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: ecommerce_livros
 -- ------------------------------------------------------
--- Server version	5.7.24-0ubuntu0.18.04.1
+-- Server version	8.0.16
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8 ;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `bandeira`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `bandeira` (
   `id_bandeira` int(11) NOT NULL AUTO_INCREMENT,
   `nome_bandeira` varchar(45) DEFAULT NULL,
@@ -45,7 +45,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `carrinho`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `carrinho` (
   `id_livro` int(11) DEFAULT NULL,
   `id_cliente` int(11) DEFAULT NULL,
@@ -62,7 +62,6 @@ CREATE TABLE `carrinho` (
 
 LOCK TABLES `carrinho` WRITE;
 /*!40000 ALTER TABLE `carrinho` DISABLE KEYS */;
-INSERT INTO `carrinho` VALUES (3,1),(3,1),(1,1),(1,1),(1,2);
 /*!40000 ALTER TABLE `carrinho` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -72,7 +71,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cartao`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `cartao` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(155) NOT NULL,
@@ -87,7 +86,7 @@ CREATE TABLE `cartao` (
   KEY `id_bandeira_idx` (`id_bandeira`),
   CONSTRAINT `id_bandeira` FOREIGN KEY (`id_bandeira`) REFERENCES `bandeira` (`id_bandeira`),
   CONSTRAINT `id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +95,7 @@ CREATE TABLE `cartao` (
 
 LOCK TABLES `cartao` WRITE;
 /*!40000 ALTER TABLE `cartao` DISABLE KEYS */;
-INSERT INTO `cartao` VALUES (1,'JOAO DA SILVA','2019-09-09',1,'2321321','033',1,0),(3,'2','2019-09-09',2,'2321321','2123',1,0);
+INSERT INTO `cartao` VALUES (1,'JOAO DA SILVA','2019-09-09',1,'2321321','033',1,0),(2,'2','2019-09-09',2,'2321321','2123',1,0);
 /*!40000 ALTER TABLE `cartao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,7 +105,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `categoria`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `categoria` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(155) NOT NULL,
@@ -130,7 +129,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cliente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `cliente` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(155) NOT NULL,
@@ -165,7 +164,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cupomDesconto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `cupomDesconto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(155) NOT NULL,
@@ -193,7 +192,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cupomTroca`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `cupomTroca` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_cliente` int(11) NOT NULL,
@@ -202,7 +201,7 @@ CREATE TABLE `cupomTroca` (
   `status` int(11) NOT NULL DEFAULT '1',
   `codigo` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -211,7 +210,6 @@ CREATE TABLE `cupomTroca` (
 
 LOCK TABLES `cupomTroca` WRITE;
 /*!40000 ALTER TABLE `cupomTroca` DISABLE KEYS */;
-INSERT INTO `cupomTroca` VALUES (1,1,2,'2019-06-03 23:11:22',1,'ZXCVBA'),(2,1,3,'2019-06-05 20:51:52',1,'SADFAS');
 /*!40000 ALTER TABLE `cupomTroca` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,7 +219,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `dimensoes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `dimensoes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `altura` decimal(5,2) DEFAULT NULL,
@@ -229,7 +227,7 @@ CREATE TABLE `dimensoes` (
   `peso` decimal(5,2) DEFAULT NULL,
   `profundidade` decimal(5,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,7 +236,7 @@ CREATE TABLE `dimensoes` (
 
 LOCK TABLES `dimensoes` WRITE;
 /*!40000 ALTER TABLE `dimensoes` DISABLE KEYS */;
-INSERT INTO `dimensoes` VALUES (1,20.00,14.00,20.00,4.00),(2,20.00,14.00,1.50,4.00),(3,20.00,14.00,20.00,4.00),(4,20.00,14.00,1.50,4.00),(5,20.00,14.00,1.50,4.00),(6,20.00,14.00,1.50,4.00),(7,20.00,14.00,1.50,4.00),(8,20.00,14.00,1.50,4.00),(9,20.00,1.33,1.50,4.00),(10,20.00,14.00,1.50,4.00),(11,20.00,14.00,1.50,4.00),(12,20.00,14.00,1.50,4.00),(13,20.00,14.00,1.50,4.00),(14,20.00,14.00,1.50,4.00),(15,20.00,14.00,1.50,4.00),(16,20.00,14.00,1.50,4.00);
+INSERT INTO `dimensoes` VALUES (1,1.16,1.13,2.73,0.58),(2,1.55,1.26,3.65,1.75),(3,1.58,0.48,1.27,0.16),(4,0.66,1.00,4.16,1.12),(5,1.73,0.46,0.36,1.34),(6,1.13,0.19,4.18,1.39),(7,0.04,0.74,2.32,0.01),(8,1.81,1.67,4.18,1.33),(9,1.35,0.74,4.06,1.13),(10,1.49,1.37,2.31,0.32),(11,0.97,0.86,0.31,1.46),(12,1.60,2.00,1.04,0.03),(13,1.72,1.91,0.12,1.18),(14,1.68,1.95,1.82,1.62),(15,0.71,0.38,3.93,0.14),(16,1.69,1.42,2.13,1.21),(17,0.70,1.08,1.51,0.82),(18,0.01,1.39,1.56,1.25),(19,0.04,0.94,2.77,0.15),(20,0.83,1.79,3.05,0.49),(21,1.53,1.92,2.28,0.06),(22,0.15,0.79,2.33,1.36),(23,0.31,1.26,1.02,1.04),(24,1.88,1.46,3.58,0.69),(25,0.08,0.36,3.82,1.21),(26,0.71,0.14,1.92,0.19),(27,0.84,1.73,2.92,1.11),(28,0.97,1.09,0.07,0.04),(29,1.53,0.08,1.64,0.18),(30,0.28,0.09,0.19,1.47),(31,0.76,0.50,3.97,0.60),(32,0.78,1.67,0.18,0.32),(33,0.83,0.94,0.73,0.47),(34,0.06,0.89,0.51,0.16),(35,1.43,0.58,3.19,1.88),(36,1.59,0.11,5.00,0.62),(37,1.87,1.64,3.77,1.35),(38,1.54,0.29,2.49,1.88),(39,1.61,0.61,2.99,1.95),(40,0.13,1.40,2.39,0.32),(41,1.13,0.54,2.74,0.40),(42,0.91,0.13,4.05,1.30),(43,1.43,1.53,2.70,1.45),(44,0.02,0.96,1.98,1.49),(45,1.81,0.52,4.70,1.36),(46,1.51,1.90,1.35,1.58),(47,0.61,0.97,0.86,0.77),(48,0.33,0.18,4.62,1.23),(49,1.97,1.89,3.38,0.30),(50,0.34,0.09,3.84,0.84),(51,0.02,0.85,1.87,0.22),(52,1.46,1.29,0.08,1.92),(53,1.57,0.98,4.62,1.18),(54,1.40,0.77,1.90,1.36),(55,0.55,0.45,4.82,1.40),(56,0.68,0.23,3.20,0.31),(57,1.29,1.56,4.71,0.82),(58,0.39,0.86,2.04,0.06),(59,0.72,1.37,2.80,1.57),(60,1.10,0.27,3.39,1.57);
 /*!40000 ALTER TABLE `dimensoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -248,12 +246,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `editora`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `editora` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome_editora` varchar(155) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -262,7 +260,7 @@ CREATE TABLE `editora` (
 
 LOCK TABLES `editora` WRITE;
 /*!40000 ALTER TABLE `editora` DISABLE KEYS */;
-INSERT INTO `editora` VALUES (1,'Abril'),(2,'Abril'),(3,'Abril'),(4,'Abril'),(5,'Abril'),(6,'Abril'),(7,'Abril'),(8,'Abril'),(9,'Abril'),(10,'Abril'),(11,'Abril'),(12,'Abril'),(13,'Abril'),(14,'Abril'),(15,'Abril'),(16,'Abril'),(17,'Abril'),(18,'Abril');
+INSERT INTO `editora` VALUES (1,'Mazza'),(2,'Edelbra'),(3,'Paulinas'),(4,'Cortez'),(5,'Zit'),(6,'Salamandra'),(7,'Biruta'),(8,'DCL'),(9,'Saraiva'),(10,'Autêntica'),(11,'Globo'),(12,'La Fonte'),(13,'DCL'),(14,'Salamandra'),(15,'Jorge Zahar'),(16,'Nova Fronteira'),(17,'Jorge Zahar'),(18,'Rovelle'),(19,'Pulo do Gato'),(20,'ÔZé Editora'),(21,'Verus'),(22,'Edições SM'),(23,'Edelbra'),(24,'Panda Books'),(25,'Pallas'),(26,'Biruta'),(27,'Editora 34'),(28,'Leya'),(29,'Paz e Terra'),(30,'Global'),(31,'Cia das Letrinhas'),(32,'Abril'),(33,'Ática'),(34,'Leya'),(35,'Leya'),(36,'Salamandra'),(37,'Editora 34'),(38,'Projeto'),(39,'Cortez'),(40,'Editora do Brasil'),(41,'Salamandra'),(42,'Positivo'),(43,'La Fonte'),(44,'Editora 34'),(45,'Abril'),(46,'DSOP'),(47,'Peirópolis'),(48,'Manati'),(49,'Mundo-Mirim'),(50,'Paulus'),(51,'Ediouro'),(52,'Planeta do Brasil'),(53,'Zit'),(54,'Sextante'),(55,'Paulinas'),(56,'Callis'),(57,'Dedo de Prosa'),(58,'Zit'),(59,'La Fonte'),(60,'Cortez');
 /*!40000 ALTER TABLE `editora` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -272,7 +270,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `endereco`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `endereco` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `logradouro` varchar(155) NOT NULL,
@@ -309,7 +307,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `estoque`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `estoque` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_livro` int(11) NOT NULL,
@@ -321,7 +319,7 @@ CREATE TABLE `estoque` (
   KEY `fk_estoque_livro_idx` (`id_livro`),
   KEY `fk_estoque_fornecedor_idx` (`id_fornecedor`),
   CONSTRAINT `fk_estoque_livro` FOREIGN KEY (`id_livro`) REFERENCES `livro` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -330,7 +328,7 @@ CREATE TABLE `estoque` (
 
 LOCK TABLES `estoque` WRITE;
 /*!40000 ALTER TABLE `estoque` DISABLE KEYS */;
-INSERT INTO `estoque` VALUES (1,2,1,19,49.99,'2019-05-24 01:07:41'),(2,4,2,20,49.99,'2019-05-24 01:08:08'),(3,3,3,17,49.99,'2019-05-24 01:08:50'),(4,1,4,20,49.99,'2019-06-03 23:13:50');
+INSERT INTO `estoque` VALUES (1,1,1,20,30.09,'2019-01-20 02:50:25'),(2,2,2,20,35.90,'2019-01-20 02:51:15'),(3,3,3,20,97.90,'2019-01-20 02:52:11'),(4,4,4,20,95.68,'2019-01-20 02:52:27'),(5,5,5,20,88.44,'2019-01-20 02:53:01'),(6,6,6,20,78.09,'2019-01-20 02:53:37'),(7,7,7,20,78.37,'2019-01-20 02:54:12'),(8,8,8,20,80.45,'2019-01-20 02:54:35'),(9,9,9,20,31.71,'2019-01-20 02:54:53'),(10,10,10,20,34.67,'2019-01-20 02:55:11'),(11,11,11,20,35.63,'2019-02-20 04:00:59'),(12,12,12,20,63.20,'2019-02-20 04:01:35'),(13,13,13,20,90.24,'2019-02-20 04:03:44'),(14,14,14,20,45.10,'2019-02-20 04:04:07'),(15,15,15,20,31.04,'2019-02-20 04:04:19'),(16,16,16,20,42.34,'2019-02-20 04:04:33'),(17,17,17,20,35.85,'2019-02-20 04:04:47'),(18,18,18,20,43.36,'2019-02-20 04:05:10'),(19,19,19,20,92.17,'2019-02-20 04:05:26'),(20,20,20,20,31.25,'2019-02-20 04:05:44'),(21,21,21,20,70.92,'2019-03-20 04:06:39'),(22,22,22,20,52.56,'2019-03-20 04:07:39'),(23,23,23,20,49.00,'2019-03-20 04:08:23'),(24,24,24,20,52.85,'2019-03-20 04:08:34'),(25,25,25,20,95.98,'2019-03-20 04:08:44'),(26,26,26,20,33.45,'2019-03-20 04:08:54'),(27,27,27,20,32.38,'2019-03-20 04:09:44'),(28,28,28,20,70.17,'2019-03-20 04:09:52'),(29,29,29,20,82.02,'2019-03-20 04:10:01'),(30,30,30,20,64.10,'2019-03-20 04:10:16'),(31,31,31,20,49.98,'2019-04-20 04:10:51'),(32,32,32,20,67.97,'2019-04-20 04:10:59'),(33,33,33,20,90.07,'2019-04-20 04:11:08'),(34,34,34,20,80.68,'2019-04-20 04:11:16'),(35,35,35,20,63.51,'2019-04-20 04:11:25'),(36,36,36,20,31.57,'2019-04-20 04:11:34'),(37,37,37,20,82.30,'2019-04-20 04:11:41'),(38,38,38,20,44.90,'2019-04-20 04:12:22'),(39,39,39,20,71.50,'2019-04-20 04:12:32'),(40,40,40,20,87.21,'2019-04-20 04:12:40'),(41,41,41,20,33.02,'2019-05-20 04:13:22'),(42,42,42,20,60.13,'2019-05-20 04:13:33'),(43,43,43,20,99.43,'2019-05-20 04:13:44'),(44,44,44,20,80.98,'2019-05-20 04:13:52'),(45,45,45,20,39.07,'2019-05-20 04:14:00'),(46,46,46,20,90.30,'2019-05-20 04:14:11'),(47,47,47,20,94.21,'2019-05-20 04:14:30'),(48,48,48,20,33.74,'2019-05-20 04:16:40'),(49,49,49,20,83.28,'2019-05-20 04:16:48'),(50,50,50,20,37.22,'2019-05-20 04:17:12'),(51,51,51,20,78.46,'2019-06-20 04:18:04'),(52,52,52,20,38.21,'2019-06-20 04:18:13'),(53,53,53,20,81.95,'2019-06-20 04:18:23'),(54,54,54,20,57.74,'2019-06-20 04:18:39'),(55,55,55,20,93.33,'2019-06-20 04:18:48'),(56,56,56,20,60.15,'2019-06-20 04:18:56'),(57,57,57,20,73.18,'2019-06-20 04:19:07'),(58,58,58,20,54.56,'2019-06-20 04:19:14'),(59,59,59,20,47.79,'2019-06-20 04:19:23'),(60,60,60,20,79.18,'2019-06-20 04:19:33');
 /*!40000 ALTER TABLE `estoque` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -340,14 +338,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `fornecedor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `fornecedor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome_fornecedor` varchar(45) DEFAULT NULL,
   `cnpj` varchar(45) DEFAULT NULL,
   `razao_social` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -356,7 +354,7 @@ CREATE TABLE `fornecedor` (
 
 LOCK TABLES `fornecedor` WRITE;
 /*!40000 ALTER TABLE `fornecedor` DISABLE KEYS */;
-INSERT INTO `fornecedor` VALUES (1,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(2,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(3,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(4,'RS livros','78.180.862/0001-30','Cia dos Livros ltda');
+INSERT INTO `fornecedor` VALUES (1,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(2,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(3,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(4,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(5,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(6,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(7,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(8,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(9,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(10,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(11,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(12,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(13,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(14,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(15,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(16,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(17,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(18,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(19,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(20,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(21,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(22,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(23,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(24,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(25,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(26,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(27,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(28,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(29,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(30,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(31,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(32,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(33,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(34,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(35,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(36,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(37,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(38,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(39,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(40,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(41,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(42,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(43,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(44,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(45,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(46,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(47,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(48,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(49,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(50,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(51,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(52,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(53,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(54,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(55,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(56,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(57,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(58,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(59,'RS livros','78.180.862/0001-30','Cia dos Livros ltda'),(60,'RS livros','78.180.862/0001-30','Cia dos Livros ltda');
 /*!40000 ALTER TABLE `fornecedor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -366,7 +364,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `grupolivro`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `grupolivro` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome_grupolivro` varchar(155) DEFAULT NULL,
@@ -381,7 +379,7 @@ CREATE TABLE `grupolivro` (
 
 LOCK TABLES `grupolivro` WRITE;
 /*!40000 ALTER TABLE `grupolivro` DISABLE KEYS */;
-INSERT INTO `grupolivro` VALUES (1,NULL,0),(2,'Lancamento23',13),(3,'lancamento',45),(4,'liquidacao',20),(5,'teste',12),(6,'serial',11),(7,'rarissimos',90),(8,'nerds',22);
+INSERT INTO `grupolivro` VALUES (1,NULL,0),(2,'Lancamento23',13),(3,'Lancamento',45),(4,'Liquidacao',20),(5,'Teste',12),(6,'Serial',11),(7,'Rarissimos',90),(8,'Nerds',22);
 /*!40000 ALTER TABLE `grupolivro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -391,12 +389,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `isbn`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `isbn` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cod_barras` varchar(155) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -405,7 +403,7 @@ CREATE TABLE `isbn` (
 
 LOCK TABLES `isbn` WRITE;
 /*!40000 ALTER TABLE `isbn` DISABLE KEYS */;
-INSERT INTO `isbn` VALUES (1,'2423432'),(2,'242343212'),(3,'2423123432'),(4,'2423432'),(5,'2423432'),(6,'2423432'),(7,'2423432'),(8,'2423432'),(9,'2423432'),(10,'2423432'),(11,'2423432'),(12,'2423432'),(13,'2423432'),(14,'2423432'),(15,'2423432'),(16,'2423432');
+INSERT INTO `isbn` VALUES (1,'87'),(2,'74'),(3,'40'),(4,'15'),(5,'95'),(6,'73'),(7,'56'),(8,'79'),(9,'7'),(10,'54'),(11,'89'),(12,'96'),(13,'4'),(14,'55'),(15,'88'),(16,'18'),(17,'11'),(18,'7'),(19,'3'),(20,'71'),(21,'93'),(22,'67'),(23,'19'),(24,'56'),(25,'90'),(26,'40'),(27,'74'),(28,'14'),(29,'55'),(30,'45'),(31,'92'),(32,'18'),(33,'94'),(34,'12'),(35,'31'),(36,'62'),(37,'16'),(38,'63'),(39,'52'),(40,'43'),(41,'57'),(42,'44'),(43,'30'),(44,'28'),(45,'59'),(46,'22'),(47,'70'),(48,'52'),(49,'33'),(50,'53'),(51,'8'),(52,'86'),(53,'84'),(54,'60'),(55,'58'),(56,'87'),(57,'33'),(58,'98'),(59,'38'),(60,'26');
 /*!40000 ALTER TABLE `isbn` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -415,7 +413,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `item`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `item` (
   `id_livro` int(11) NOT NULL,
   `qt_livros` int(11) NOT NULL,
@@ -430,7 +428,6 @@ CREATE TABLE `item` (
 
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` VALUES (2,40),(1,10);
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -440,7 +437,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `itemPedido`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `itemPedido` (
   `quantidade` int(11) NOT NULL,
   `id_livro` int(11) NOT NULL,
@@ -458,7 +455,6 @@ CREATE TABLE `itemPedido` (
 
 LOCK TABLES `itemPedido` WRITE;
 /*!40000 ALTER TABLE `itemPedido` DISABLE KEYS */;
-INSERT INTO `itemPedido` VALUES (2,3,1),(2,1,1),(2,3,2),(2,1,2);
 /*!40000 ALTER TABLE `itemPedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -468,7 +464,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `livro`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `livro` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `codigo_barras` varchar(155) NOT NULL,
@@ -494,7 +490,7 @@ CREATE TABLE `livro` (
   CONSTRAINT `fk_livro_editora` FOREIGN KEY (`id_editora`) REFERENCES `editora` (`id`),
   CONSTRAINT `fk_livro_grupoLivro` FOREIGN KEY (`id_grupolivro`) REFERENCES `grupolivro` (`id`),
   CONSTRAINT `fk_livro_isbn` FOREIGN KEY (`id_isbn`) REFERENCES `isbn` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -503,7 +499,7 @@ CREATE TABLE `livro` (
 
 LOCK TABLES `livro` WRITE;
 /*!40000 ALTER TABLE `livro` DISABLE KEYS */;
-INSERT INTO `livro` VALUES (1,'20','sei la','O exorcista','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,15,13,13,6,'exorcista.jpg'),(2,'20','autor teste','Pelé eterno','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,16,14,14,5,'pele.jpg'),(3,'20','autor teste','Java para burros','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,17,15,15,3,'java.jpg'),(4,'20','autor teste','Livro livro','02/02/1999','2','222','Esse exemplo da sinopse de um livro',1,49.99,18,16,16,4,'livro1.jpg'),(5,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa1.jpg'),(6,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa2.jpg'),(7,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa3.jpg'),(8,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa4.jpg'),(9,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa5.jpg'),(10,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa6.jpg'),(11,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa7.jpg'),(12,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa8.jpg'),(13,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa9.jpg'),(14,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa10.jpg'),(15,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa11.jpg'),(16,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa12.jpg'),(17,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa13.jpg'),(18,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa14.jpg'),(19,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa15.jpg'),(20,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa16.jpg'),(21,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa17.jpg'),(22,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa18.jpg'),(23,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa19.jpg'),(24,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa20.jpg'),(25,'2022','autor','titulo','2010/05/02','3','333','Sinopse do livro que estou cadastrando no banco de dados',1,15.00,13,16,5,5,'capa21.jpg');
+INSERT INTO `livro` VALUES (1,'87','Cooper U. Owens','Primavera Silenciosa','14/09/2018','8','5139','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada id,',1,30.09,7,1,1,2,'1.jpg'),(2,'74','Mannix Y. Hess','Uma Dobra no Tempo','26/12/2019','2','4061','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada id, erat. Etiam vestibulum massa rutrum',1,35.90,6,2,2,7,'2.jpg'),(3,'40','Noble G. Dunlap','Amada','01/04/2019','6','6936','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor.',1,97.90,9,3,3,3,'3.jpg'),(4,'15','Willa T. Maynard','Cozinhar: Uma História Natural Da Transformação','12/06/2020','2','7341','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada id, erat.',1,95.68,10,4,4,1,'4.jpg'),(5,'95','Ingrid U. Sparks','A Vida Imortal de Henrietta Lacks','06/09/2018','4','2738','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam',1,88.44,9,5,5,3,'5.jpg'),(6,'73','Yasir D. Weaver','O Sol Também Se Levanta','10/04/2020','1','0331','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet',1,78.09,3,6,6,4,'6.jpg'),(7,'56','Quinn E. Quinn','Uma Comovente Obra de Espantoso Talento','17/02/2020','3','6126','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus',1,78.37,9,7,7,5,'7.jpg'),(8,'79','Ferdinand T. Frye','O Ano do Pensamento Mágico','02/09/2018','8','2014','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at',1,80.45,4,8,8,8,'8.jpg'),(9,'7','Oprah J. Klein','As Incríveis Aventuras de Kavalier e Clay','17/08/2018','9','7488','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada id, erat. Etiam vestibulum massa rutrum magna.',1,31.71,6,9,9,2,'9.jpg'),(10,'54','Irma U. Browning','O Fio da Vida','15/08/2018','2','3747','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada id, erat. Etiam vestibulum massa rutrum magna.',1,34.67,10,10,10,1,'10.jpg'),(11,'89','Cleo Z. Bowers','Os Filhos da Meia-Noite','30/04/2019','2','9334','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed',1,35.63,5,11,11,7,'11.jpg'),(12,'96','Shad J. Patton','A Menina Que Roubava Livros','09/09/2019','4','9635','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor.',1,63.20,2,12,12,7,'12.jpg'),(13,'4','Samuel K. Lawson','Love Medicine','15/05/2020','4','8958','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et',1,90.24,7,13,13,7,'13.jpg'),(14,'55','Salvador S. Oneill','Uma Casa na Campina','04/03/2020','6','4007','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque',1,45.10,6,14,14,4,'14.jpg'),(15,'88','Louis G. Mason','O Iluminado','29/09/2019','7','4084','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis',1,31.04,3,15,15,7,'15.jpg'),(16,'18','Gage P. Leon','The Right Stuff','11/07/2019','8','6127','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing',1,42.34,5,16,16,4,'16.jpg'),(17,'11','Meredith S. Carroll','Todos os Homens do Presidente','05/03/2020','5','0902','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada id, erat. Etiam vestibulum massa rutrum magna.',1,35.85,4,17,17,7,'17.jpg'),(18,'7','Dexter G. Keith','Where the Sidewalk Ends','02/10/2019','7','7714','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam',1,43.36,2,18,18,7,'18.jpg'),(19,'3','Steel U. Washington','Invencível','15/04/2019','3','4230','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada id, erat. Etiam vestibulum',1,92.17,5,19,19,2,'19.jpg'),(20,'71','Martha U. Maxwell','Homem Invisível','01/10/2018','6','9905','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer',1,31.25,10,20,20,2,'20.jpg'),(21,'93','Ross N. Horn','A Casa no Cantinho do Puff','21/02/2019','2','7512','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec',1,70.92,3,21,21,8,'21.jpg'),(22,'67','Fallon T. Joseph','Jogos Vorazes','01/10/2018','9','6957','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor.',1,52.56,3,22,22,2,'22.jpg'),(23,'19','Jennifer G. Richards','Where the Sidewalk Ends','21/05/2019','1','7074','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada',1,49.00,8,23,23,7,'23.jpg'),(24,'56','Tallulah I. Carney','Moneyball: O Homem que Mudou o Jogo','19/01/2019','5','7914','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien,',1,52.85,7,24,24,6,'24.jpg'),(25,'90','Keefe J. Blanchard','Out of Africa','10/11/2019','6','6191','Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',1,95.98,6,25,25,7,'25.jpg'),(26,'40','Clementine C. Landry','Tudo Depende de Como Você Vê As Coisas','23/10/2019','2','6566','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada id, erat. Etiam vestibulum massa rutrum',1,33.45,9,26,26,7,'26.jpg'),(27,'74','Price X. Moody','The Liars’ Club: A Memoir','23/10/2019','9','2464','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada id, erat. Etiam vestibulum massa',1,32.38,10,27,27,3,'27.jpg'),(28,'14','Timon R. Lyons','Uma Casa na Campina','10/09/2018','6','1222','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada',1,70.17,7,28,28,7,'28.jpg'),(29,'55','Eric H. Jordan','O Ladrão de Raios (Percy Jackson e Os Olimpianos)','01/09/2018','3','6309','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus',1,82.02,7,29,29,2,'29.jpg'),(30,'45','Yolanda K. Barber','A Menina e o Porquinho','18/10/2019','2','1144','Lorem ipsum dolor sit',1,64.10,10,30,30,8,'30.jpg'),(31,'92','Keane A. Mccray','Love Medicine','15/08/2018','7','3293','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at',1,49.98,8,31,31,1,'31.jpg'),(32,'18','Chandler I. Montoya','Onde Vivem os Monstros','05/12/2019','4','4689','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada',1,67.97,7,32,32,8,'32.jpg'),(33,'94','Uriah Y. Hogan','Boa Noite, Lua','09/11/2019','7','5024','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer',1,90.07,8,33,33,8,'33.jpg'),(34,'12','Alma S. Alexander','Homem Invisível','18/04/2020','5','5286','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada id, erat.',1,80.68,6,34,34,3,'34.jpg'),(35,'31','Rama U. Carter','O Sol Também Se Levanta','05/01/2019','5','8731','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada id, erat. Etiam vestibulum massa',1,63.51,4,35,35,1,'35.jpg'),(36,'62','Uma H. Waters','A Bíblia Envenenada','16/12/2018','4','8627','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam',1,31.57,4,36,36,7,'36.jpg'),(37,'16','Nichole Q. Perry','Os Filhos da Meia-Noite','12/04/2019','9','0981','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut',1,82.30,2,37,37,3,'37.jpg'),(38,'63','Raja L. Carrillo','O Pequeno Príncipe','21/09/2018','9','7673','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada id, erat. Etiam vestibulum',1,44.90,6,38,38,2,'38.jpg'),(39,'52','Hayley T. Stephens','Uma Casa na Campina','14/10/2019','1','2390','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada id,',1,71.50,2,39,39,2,'39.jpg'),(40,'43','Abigail V. Rhodes','A Sangue Frio','01/09/2018','7','2607','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque',1,87.21,6,40,40,1,'40.jpg'),(41,'57','MacKensie I. Harper','The Things They Carried','18/08/2019','2','0852','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada id,',1,33.02,7,41,41,2,'41.jpg'),(42,'44','Georgia V. Daniels','As Cinzas de Angela','26/05/2019','5','5721','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus.',1,60.13,6,42,42,4,'42.jpg'),(43,'30','Shelley E. Vazquez','Cozinhar: Uma História Natural Da Transformação','17/07/2019','3','2262','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper.',1,99.43,8,43,43,1,'43.jpg'),(44,'28','Alexis J. Mccullough','O Mundo se Despedaça','08/08/2018','5','4995','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien,',1,80.98,2,44,44,8,'44.jpg'),(45,'59','Yvonne K. Odonnell','Harry Potter e a Pedra Filosofal','23/09/2018','7','8904','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus.',1,39.07,5,45,45,3,'45.jpg'),(46,'22','Ulla I. Morin','A Menina Que Roubava Livros','30/11/2018','5','2588','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis',1,90.30,6,46,46,1,'46.jpg'),(47,'70','Sopoline N. Franklin','The Right Stuff','27/12/2019','2','0258','Lorem ipsum dolor sit amet,',1,94.21,6,47,47,5,'47.jpg'),(48,'52','Aidan C. Atkins','Love Medicine','16/04/2019','6','7448','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada',1,33.74,8,48,48,8,'48.jpg'),(49,'33','Sierra C. Barnes','A Bússola De Ouro','15/05/2019','8','8235','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada id, erat. Etiam vestibulum massa rutrum magna.',1,83.28,6,49,49,7,'49.jpg'),(50,'53','Galena Q. Hickman','Lincoln','17/07/2018','3','1024','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada id, erat. Etiam vestibulum massa rutrum',1,37.22,9,50,50,3,'50.jpg'),(51,'8','Hedley S. Benjamin','The Right Stuff','30/07/2018','4','7396','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non,',1,78.46,3,51,51,2,'51.jpg'),(52,'86','Lacy Y. Kim','O Fio da Vida','01/04/2020','7','2479','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus',1,38.21,8,52,52,2,'52.jpg'),(53,'84','Fuller W. Wise','Tudo Depende de Como Você Vê As Coisas','13/04/2020','5','4032','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing',1,81.95,10,53,53,5,'53.jpg'),(54,'60','Calvin X. Zimmerman','Orgulho e Preconceito','26/06/2019','6','9493','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed',1,57.74,1,54,54,3,'54.jpg'),(55,'58','Gloria J. Bell','O Mundo Segundo Garp','29/01/2019','4','2504','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada id, erat. Etiam vestibulum',1,93.33,9,55,55,2,'55.jpg'),(56,'87','Wang A. Thomas','Mau Começo','03/05/2019','9','9232','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at lacus. Quisque purus sapien, gravida non, sollicitudin a, malesuada id, erat. Etiam',1,60.15,10,56,56,2,'56.jpg'),(57,'33','Karleigh R. Murray','O Décimo Primeiro Mandamento','21/03/2020','1','4390','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at',1,73.18,4,57,57,4,'57.jpg'),(58,'98','Solomon N. Stark','O Ano do Pensamento Mágico','03/03/2019','3','0265','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut',1,54.56,8,58,58,1,'58.jpg'),(59,'38','Demetrius S. Pennington','Uma Casa na Campina','09/08/2019','1','9435','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis',1,47.79,6,59,59,5,'59.jpg'),(60,'26','Anne L. Obrien','Lolita','27/03/2020','9','0972','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet ullamcorper. Duis at',1,79.18,2,60,60,6,'60.jpg');
 /*!40000 ALTER TABLE `livro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -513,7 +509,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `livro_categoria`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `livro_categoria` (
   `id_livro` int(11) NOT NULL,
   `id_categoria` int(11) NOT NULL,
@@ -530,7 +526,7 @@ CREATE TABLE `livro_categoria` (
 
 LOCK TABLES `livro_categoria` WRITE;
 /*!40000 ALTER TABLE `livro_categoria` DISABLE KEYS */;
-INSERT INTO `livro_categoria` VALUES (1,1),(3,1),(4,1),(5,1),(8,1),(10,1),(5,2),(6,2),(7,2),(8,2),(10,2),(2,3),(3,3),(4,3),(6,3),(7,3),(11,5),(2,6),(4,6),(12,6),(13,6),(14,6),(15,6),(16,6),(17,6),(18,6),(4,7),(9,7),(11,7),(12,7),(18,8),(19,8),(20,8),(21,8),(22,8),(23,8),(24,8);
+INSERT INTO `livro_categoria` VALUES (11,1),(12,1),(23,1),(27,1),(38,1),(40,1),(44,1),(45,1),(50,1),(25,2),(28,2),(43,2),(46,2),(54,2),(56,2),(14,3),(16,3),(20,3),(21,3),(26,3),(30,3),(37,3),(57,3),(2,4),(5,4),(8,4),(10,4),(13,4),(17,4),(34,4),(41,4),(60,4),(42,5),(3,6),(22,6),(31,6),(35,6),(52,6),(55,6),(18,7),(39,7),(48,7),(15,8),(32,8),(33,8),(49,8),(51,8),(53,8),(6,9),(7,9),(1,10),(24,10),(29,10),(36,10),(4,11),(9,11),(19,11),(47,11),(58,11),(59,11);
 /*!40000 ALTER TABLE `livro_categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -540,7 +536,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `pagamentoCartao`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `pagamentoCartao` (
   `id_pedido` int(11) NOT NULL,
   `id_cartao` int(11) NOT NULL,
@@ -558,7 +554,6 @@ CREATE TABLE `pagamentoCartao` (
 
 LOCK TABLES `pagamentoCartao` WRITE;
 /*!40000 ALTER TABLE `pagamentoCartao` DISABLE KEYS */;
-INSERT INTO `pagamentoCartao` VALUES (1,3,99.96),(2,3,199.96);
 /*!40000 ALTER TABLE `pagamentoCartao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -568,7 +563,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `pedido`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `pedido` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_cliente` int(11) NOT NULL,
@@ -578,7 +573,7 @@ CREATE TABLE `pedido` (
   `valorTotal` double NOT NULL,
   `cupomDesconto` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -587,7 +582,6 @@ CREATE TABLE `pedido` (
 
 LOCK TABLES `pedido` WRITE;
 /*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
-INSERT INTO `pedido` VALUES (1,1,3,5,'2019-06-10 00:45:43',199.96,0),(2,1,4,6,'2019-06-15 21:12:22',199.96,0);
 /*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -597,7 +591,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `pgtoCupomDesconto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `pgtoCupomDesconto` (
   `id_pedido` int(11) NOT NULL,
   `id_cupom` int(11) NOT NULL,
@@ -623,7 +617,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `solicitacaoTroca`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `solicitacaoTroca` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_cliente` int(11) NOT NULL,
@@ -653,7 +647,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `statusPedido`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `statusPedido` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `status` varchar(155) NOT NULL,
@@ -677,7 +671,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `usuario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `papel` varchar(155) DEFAULT NULL,
@@ -696,10 +690,6 @@ INSERT INTO `usuario` VALUES (1,'comum'),(2,'adm'),(3,'root');
 UNLOCK TABLES;
 
 --
--- Dumping events for database 'ecommerce_livros'
---
-
---
 -- Dumping routines for database 'ecommerce_livros'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -712,4 +702,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-15 19:53:46
+-- Dump completed on 2019-06-20  2:14:13

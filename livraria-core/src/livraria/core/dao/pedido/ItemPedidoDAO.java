@@ -63,9 +63,10 @@ public class ItemPedidoDAO extends AbstractDAO{
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();
             ItemPedido itemPed = (ItemPedido) entidade;
-            PreparedStatement declaracao = conexao.prepareStatement("select quantidade, id_livro, id_pedido, l.titulo, l.preco, l.autor, l.imagem\n" +
+            PreparedStatement declaracao = conexao.prepareStatement("select quantidade, id_livro, id_pedido, l.titulo, l.preco, l.autor, l.imagem, gp.margem_lucro\n" +
                 "from itemPedido\n" +
                 "INNER JOIN livro l\n" +
+                "INNER JOIN grupolivro gp on l.id_grupolivro = gp.id\n" +
                 "where id_pedido = ? AND\n" +
                 "id_livro = l.id;");
             declaracao.setInt(1, itemPed.getPedido().getId());
@@ -79,6 +80,7 @@ public class ItemPedidoDAO extends AbstractDAO{
                 item.getPedido().setId(rs.getInt("id_pedido"));
                 item.getLivro().setImagem(rs.getString("imagem"));
                 item.getLivro().setAutor(rs.getString("autor"));
+                item.getLivro().getGrupoLivro().setMargemLucro(rs.getDouble("margem_lucro"));
 
                 
                 

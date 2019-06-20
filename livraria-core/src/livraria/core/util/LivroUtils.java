@@ -55,6 +55,24 @@ public class LivroUtils {
         Double precos = Double.parseDouble(preco);
         return String.format("R$%s", df.format(arredondarPreco(precos)));
     }
+    
+    public static Float arredondarPreco(Float preco){
+        if(preco == null)
+            return null;
+
+        BigDecimal bd = new BigDecimal(preco);
+        return bd.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
+
+    }
+
+    public static String formatarPreco(Float preco){		
+        return String.format("R$%s", df.format(arredondarPreco(preco)));
+    }
+    
+    public static String formatarPrecoFloat(String preco){
+        Float precos = Float.parseFloat(preco);
+        return String.format("R$%s", df.format(arredondarPreco(precos)));
+    }
 
 //    public static String gerarNumeroCupom(Pedido pedido) {
 //        StringBuilder sb = new StringBuilder();

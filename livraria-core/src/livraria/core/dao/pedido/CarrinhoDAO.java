@@ -22,6 +22,7 @@ import livraria.core.dao.AbstractDAO;
 import livraria.core.dao.cliente.ClienteDAO;
 import livraria.core.dao.livro.LivroDAO;
 import livraria.core.util.BancoDadosOracle;
+import livraria.core.util.LivroUtils;
 
 /**
  *
@@ -111,14 +112,16 @@ public class CarrinhoDAO extends AbstractDAO{
             // Abre uma conexao com o banco.
             Connection conexao = BancoDadosOracle.getConexao();
             Carrinho carrinho = (Carrinho) entidade;
+            Livro livro = new Livro();
             // Se o id do objeto cliente não estiver preenchido. A funcao consultar irá consultar o CPF e EMAIL
-            PreparedStatement declaracao = conexao.prepareStatement("select livro.id as id_livro, livro.titulo, livro.autor, livro.ano,"
-                    + " livro.edicao, livro.sinopse,\n" +
-                        "livro.preco, livro.id_grupolivro, cliente.id as id_cliente,\n" +
-                        "cliente.nome as nome_cliente from carrinho\n" +
-                        "INNER JOIN livro on livro.id = carrinho.id_livro\n" +
-                        "INNER JOIN cliente on cliente.id = carrinho.id_cliente\n" +
-                        "where carrinho.id_cliente = ?;");
+            PreparedStatement declaracao = conexao.prepareStatement("select livro.id as id_livro, livro.titulo, livro.autor, livro.ano,\n" +
+            "livro.edicao, livro.sinopse,\n" +
+            "livro.preco, livro.id_grupolivro, cliente.id as id_cliente, gp.margem_lucro,\n" +
+            "cliente.nome as nome_cliente from carrinho\n" +
+            "INNER JOIN livro on livro.id = carrinho.id_livro\n" +
+            "INNER JOIN cliente on cliente.id = carrinho.id_cliente\n" +
+            "INNER JOIN grupolivro gp on livro.id_grupoLivro = gp.id\n" +
+            "where carrinho.id_cliente = ?");
             declaracao.setInt(1, carrinho.getCliente().getId());
             ResultSet rs =  declaracao.executeQuery();
             while(rs.next()) {
@@ -131,7 +134,11 @@ public class CarrinhoDAO extends AbstractDAO{
                 car.getLivro().setId(rs.getInt("id_livro"));
                 car.getLivro().setPreco(rs.getDouble("preco"));
                 car.getCliente().setId(rs.getInt("id_cliente"));
-                precoTotal += car.getLivro().getPreco();
+                car.getLivro().getGrupoLivro().setMargemLucro(rs.getInt("margem_lucro"));
+                livro.setPreco(car.getLivro().getPreco());
+                livro.getGrupoLivro().setMargemLucro(car.getLivro().getGrupoLivro().getMargemLucro());
+                precoTotal += LivroUtils.calcularPrecoLivro(livro);
+                car.getLivro().setPreco(LivroUtils.calcularPrecoLivro(livro));
                 car.setSubTotal(precoTotal);
                 entidades.add(car);
             }

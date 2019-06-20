@@ -4,6 +4,7 @@
     Author     : matheus
 --%>
 
+<%@page import="livraria.core.util.LivroUtils"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="ecommerce.dominio.pedido.Pedido"%>
@@ -70,10 +71,7 @@
                                     out.println("<td>" + dataFormatPedido+ "</td>");
                                     out.println("<td>" + stPedido + "</td>");
                                     out.println("<td><a href=../adm/listar_enderecoEntrega.jsp?id_end=" + pedido.getEndereco().getId()+ "&id_ped=" + pedido.getId() + ">Ver</a></td>");
-                                    double valorTotal= pedido.getPagamento().getValorTotal();
-                                    DecimalFormat formatoDouble = new DecimalFormat("#.##");      
-                                    valorTotal = Double.valueOf(formatoDouble.format(valorTotal));
-                                    out.println("<td> R$ " + valorTotal + "</td>");
+                                    out.println("<td> " + LivroUtils.formatarPreco(pedido.getPagamento().getValorTotal()) + "</td>");
                                     out.println("<td><a href=listar_pagamento.jsp?id_ped=" + pedido.getId() + ">detalhar</a>");
                                     out.println("</tr>");
                                 }

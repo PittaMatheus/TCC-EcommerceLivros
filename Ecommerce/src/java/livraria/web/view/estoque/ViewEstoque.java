@@ -9,9 +9,24 @@ import ecommerce.dominio.EntidadeDominio;
 import ecommerce.dominio.estoque.Estoque;
 import ecommerce.dominio.livro.Livro;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Set;
+import javax.servlet.GenericServlet;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.Servlet;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import livraria.core.aplicacao.Resultado;
+import livraria.core.util.PrecoUtils;
+import livraria.web.commands.CommandListar;
+import livraria.web.commands.ICommand;
 import livraria.web.view.IViewHelper;
 
 /**
@@ -19,11 +34,15 @@ import livraria.web.view.IViewHelper;
  * @author matheus
  */
 public class ViewEstoque implements IViewHelper{
-
+    
     @Override
     public EntidadeDominio getEntidade(HttpServletRequest request) {
         Estoque estoque = new Estoque();
+        ICommand commandListar = new CommandListar();
+        Resultado resultado =  commandListar.executar(new Livro());
+        List<EntidadeDominio> livros = resultado.getEntidades();
         
+               
         String id = request.getParameter("id");
         String id_livro = request.getParameter("idLivro");
         String id_fornecedor = request.getParameter("idFornecedor");
@@ -31,7 +50,6 @@ public class ViewEstoque implements IViewHelper{
         String cnpjFornecedor = request.getParameter("txtCnpj");
         String razaoSocialFornecedor = request.getParameter("txtRazaoSocial");
         String quantidade = request.getParameter("txtQuantidade");
-        String preco = request.getParameter("txtValorCusto");
         
         if(id != null && !id.trim().isEmpty()){
             estoque.setId(Integer.parseInt(id));
@@ -69,13 +87,13 @@ public class ViewEstoque implements IViewHelper{
             estoque.getItem().setQuantidade(null);
         }
         
-        if(preco != null && !preco.trim().isEmpty()){
-            estoque.getItem().setCusto(Float.valueOf(preco));
-        }else{
-            float prec = 0;
-            estoque.getItem().setCusto(prec);
+        for(EntidadeDominio liv: livros){
+            Livro l = (Livro) liv;
+            if(l.getId().equals(estoque.getItem().getLivro().getId())){
+                String preco = String.valueOf(l.getPreco());
+                estoque.getItem().setCusto(Float.valueOf(preco));
+            }
         }
-        
         
         return estoque;
     }
@@ -108,5 +126,7 @@ public class ViewEstoque implements IViewHelper{
             e.printStackTrace();  
         }
     }
+
+    
     
 }

@@ -125,13 +125,15 @@ public class AnaliseCustoReceitaLucroMes extends EntidadeDominio{
             
             for(Enum m : Mes.values()){
                 Mes ms = (Mes) m; 
-            
+                int i = 0;
+                i = ms.ordinal() + 1;
+                
                 for(String entDomCusto: getDatasCusto()){
                     String mes[] = entDomCusto.split("/");
                     int aux;
                     aux = Integer.valueOf(mes[1]);
                     
-                    if(ms.ordinal() == aux){
+                    if(i == aux){
                         contValorCusto+= getRow("Custo", entDomCusto);
                     }
                 }
@@ -141,7 +143,7 @@ public class AnaliseCustoReceitaLucroMes extends EntidadeDominio{
                     int aux;
                     aux = Integer.valueOf(mes[1]);
                     
-                    if(ms.ordinal() == aux){
+                    if(i == aux){
                         contValorReceita+= getRow("Receita", entDomPedido);
                     }
                 }
@@ -156,6 +158,8 @@ public class AnaliseCustoReceitaLucroMes extends EntidadeDominio{
             sb.append("[['MÊS', 'CUSTO', 'VENDA', 'LUCRO'],");
             for(Enum m : Mes.values()){
                 Mes ms = (Mes) m; 
+                int i = 0;
+                i = ms.ordinal() + 1;
                 sb.append("['").append(ms.getValue()).append("',");
                 
                 for(String entDomCusto: getDatasCusto()){
@@ -163,7 +167,7 @@ public class AnaliseCustoReceitaLucroMes extends EntidadeDominio{
                     int aux;
                     aux = Integer.valueOf(mes[1]);
                     
-                    if(ms.ordinal() == aux){
+                    if(i == aux){
                         contValorCusto+= getRow("Custo", entDomCusto);
                     }
                 }
@@ -173,7 +177,7 @@ public class AnaliseCustoReceitaLucroMes extends EntidadeDominio{
                     int aux;
                     aux = Integer.valueOf(mes[1]);
                     
-                    if(ms.ordinal() == aux){
+                    if(i == aux){
                         contValorReceita+= getRow("Receita", entDomPedido);
                     }
                 }

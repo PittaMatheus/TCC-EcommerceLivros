@@ -4,6 +4,8 @@
     Author     : matheus
 --%>
 
+<%@page import="livraria.core.util.LivroUtils"%>
+<%@page import="livraria.core.util.PrecoUtils"%>
 <%@page import="ecommerce.dominio.cliente.Cliente"%>
 <%@page import="livraria.core.aplicacao.Resultado"%>
 <%@page import="ecommerce.dominio.livro.Livro"%>
@@ -128,7 +130,8 @@
                                   </li>
                                 </ul>
                                 <ul class="collection with-header">
-                                    <li class="collection-header right maiusculo"><h5><b class="red-text darken-4">R$ <%=livro.getPreco()%></b></h5></li>
+                                    <li class="collection-header right maiusculo"><h5><b class="red-text darken-4"><%=LivroUtils.formatarPreco(LivroUtils.calcularPrecoLivro(livro)) %></b></h5></li>
+
                                 </ul>
 
                                

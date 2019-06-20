@@ -25,7 +25,8 @@ public class LogTransacoes {
             //File file = new File("/home/bocao/Documentos/6_sem/Lab Rodrigo/TrabRodrigo/Ecommerce_livro/Livraria/livraria-core/log4j2.properties");
             //Matteus
             //
-            File file = new File("/home/bocao/Documentos/6_sem/Lab Rodrigo/TrabRodrigo/Ecommerce_livro/Livraria/livraria-core/log4j2.properties");
+            
+            File file = new File("/home/bocao/Documentos/6_sem/Lab Rodrigo/TrabalhoRodrigo4/livros/livraria-core/log4j2.properties");
             
             // this will force a reconfiguration
             context.setConfigLocation(file.toURI());

@@ -117,9 +117,9 @@
                       <a class="collapsible-header"><i class="material-icons">folder</i>Gerencia de clientes <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
                       <div class="collapsible-body">
                         <ul>
-                          <li><a class="" href='listar_clientes.jsp'><i class="material-icons">description</i>Listar clientes</a></li>
-                          <li><a class="" href='listar_clientes.jsp'><i class="material-icons">description</i>Desativar clientes</a></li>
-                           <li><a class="" href='listar_clientesInativos.jsp'><i class="material-icons">description</i>Ativar clientes</a></li>
+                          <li><a class="" href='../Clientes/listar_clientes.jsp'><i class="material-icons">description</i>Listar clientes</a></li>
+                          <li><a class="" href='../Clientes/listar_clientes.jsp'><i class="material-icons">description</i>Desativar clientes</a></li>
+                           <li><a class="" href='../Clientes/listar_clientesInativos.jsp'><i class="material-icons">description</i>Ativar clientes</a></li>
                           <li><div class="divider"></div></li>
                         </ul>
                       </div>
@@ -157,7 +157,6 @@
                           <li><a class="" href='../adm/listar_pedidos.jsp'><i class="material-icons">fullscreen</i>Gerenciar pedidos</a></li>
                           <li><a class="" href='../adm/listar_SolicitacaoTrocas.jsp'><i class="material-icons">fullscreen</i>Ver Solicitações de trocas </a></li>
                           <li><a class="" href='../adm/listar_trocas.jsp'><i class="material-icons">fullscreen</i>Gerenciar trocas</a></li>
-                          <li><a class="" href='#'><i class="material-icons">fullscreen</i>Editar meu perfil</a></li>
                           <li><div class="divider"></div></li>
                         </ul>
                       </div>
@@ -189,7 +188,6 @@
                         <ul>
                           <li><a class="" href='../adm/analise_categoriaMaisVendida.jsp'><i class="material-icons">fullscreen</i>Análise de categoria mais vendida</a></li>
                           <li><a class="" href='../adm/analise_custoReceitaLucroMes.jsp'><i class="material-icons">fullscreen</i>Análise de custo, receita e lucro por mês</a></li>
-                          <li><a class="" href="../adm/analise.jsp"><i class="material-icons">fullscreen</i>Análise Mateus</a></li>
                           <li><div class="divider"></div></li>
                         </ul>
                       </div>
@@ -206,14 +204,14 @@
                         
             <li><a class="collapsible-header" href='../Livros/prateleira.jsp'><i class="material-icons">home</i>Home</a></li>
             <li><div class="divider"></div></li>
-            <li><a class="collapsible-header" href='ListarCupomTroca.jsp'><i class="material-icons">description</i>Ver cupons de troca</a></li>
+            <li><a class="collapsible-header" href='../Clientes/ListarCupomTroca.jsp'><i class="material-icons">description</i>Ver cupons de troca</a></li>
             <li><a class="collapsible-header" href='../Pedidos/carrinho.jsp?u=<%=cliente.getId()%>'><i class="material-icons">shopping_cart</i>Ver carrinho</a></li>
             <li><a class="collapsible-header" href='../Clientes/listar_meusPedidos.jsp'><i class="material-icons">library_books</i>Ver pedidos</a></li>
             <li><a class="collapsible-header" href='#'><i class="material-icons">loop</i>Solicitar troca</a></li>
             <li><a class="collapsible-header" href='#'><i class="material-icons">find_in_page</i>Consultar andamento da troca</a></li>
             <li><a class="collapsible-header" href='#'><i class="material-icons">search</i>Consultar pontos acumulativos</a></li>
-            <li><a class="collapsible-header" href='preAlterar_cliente.jsp?id=<%=cliente.getId()%>'><i class="material-icons">person</i>Editar meu perfil</a></li>
-            <li><a class="collapsible-header" href='preAlterarSenha_cliente.jsp?id=<%=cliente.getId()%>'><i class="material-icons">person</i>Alterar senha</a></li>
+            <li><a class="collapsible-header" href='../Clientes/preAlterar_cliente.jsp?id=<%=cliente.getId()%>'><i class="material-icons">person</i>Editar meu perfil</a></li>
+            <li><a class="collapsible-header" href='../Clientes/preAlterarSenha_cliente.jsp?id=<%=cliente.getId()%>'><i class="material-icons">person</i>Alterar senha</a></li>
             
                        
         

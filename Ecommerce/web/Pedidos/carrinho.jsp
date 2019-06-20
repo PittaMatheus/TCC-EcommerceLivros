@@ -54,7 +54,8 @@
                         <td><%=carrinho.getLivro().getAutor()%></td>
                         <td><%=carrinho.getLivro().getAno()%></td>
                         <td><%=carrinho.getLivro().getEdicao()%></td>
-                        <td><%=carrinho.getLivro().getPreco()%></td>
+                        <% livro.setPreco(carrinho.getLivro().getPreco()); %>
+                        <td><%=LivroUtils.formatarPrecoLivro(livro)%></td>
                         
                         <td><a href="RemoverCarrinho?l=<%=carrinho.getLivro().getId()%>&u=<%=carrinho.getCliente().getId()%>&acao=desativar">Remover</a></td>
                     </tr>
@@ -68,7 +69,7 @@
         
         <%
             livro.setPreco(preco);
-        out.println("Preco total: " + LivroUtils.formatarPrecoLivro(livro));
+            out.println("Preco total: " + LivroUtils.formatarPrecoLivro(livro));
         
         
         %>

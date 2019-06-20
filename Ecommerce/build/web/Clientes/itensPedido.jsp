@@ -4,6 +4,8 @@
     Author     : matheus
 --%>
 
+<%@page import="livraria.core.util.LivroUtils"%>
+<%@page import="ecommerce.dominio.livro.Livro"%>
 <%@page import="ecommerce.dominio.cliente.Cliente"%>
 <%@page import="ecommerce.dominio.pedido.ItemPedido"%>
 <%@page import="ecommerce.dominio.pedido.Pedido"%>
@@ -18,7 +20,9 @@
     </head>
     <body>
 <%          
+        Livro livro = new Livro();
         int id_cliente = 0;
+        int papel = 0;
                 if(session.getAttribute("usuarioLogado") == null){
                     response.sendRedirect("../login.jsp");
                 }else if(session.getAttribute("usuarioLogado") != null){
@@ -31,6 +35,7 @@
                                    for (Cliente cliente : clientes) {         
                                      id_cliente = cliente.getId();
                                      out.println(cliente.getNome());
+                                     papel = cliente.getPapel().getId();
                                    }
                                  }
                             }
@@ -61,10 +66,13 @@
                 for(ItemPedido itemPedido: itens){
 %>
             <tbody>
-            <td><img src="../imagens/<%=itemPedido.getLivro().getImagem()%>"></td>
+            <td><img width="70" src="../imagens/<%=itemPedido.getLivro().getImagem()%>"></td>
             <td><%=itemPedido.getLivro().getTitulo()%></td>
             <td><%=itemPedido.getLivro().getAutor()%></td>
-            <td><%=itemPedido.getLivro().getPreco()%></td>
+            <%livro.setPreco(itemPedido.getLivro().getPreco());
+              livro.getGrupoLivro().setMargemLucro(itemPedido.getLivro().getGrupoLivro().getMargemLucro());
+            %>
+            <td><%=LivroUtils.formatarPreco(LivroUtils.calcularPrecoLivro(livro))%></td>
             
 
 
@@ -75,7 +83,19 @@
             </tbody>     
         </table>
 <br><br>
+<%
+    if(papel == 1){
+%>
 <a href="../Clientes/listar_meusPedidos.jsp">Voltar</a>
+<%    
+   }
+    else if(papel == 2){
+    %>
+    <a href="../adm/listar_pedidos.jsp">Voltar</a>
+
+<%
+    }
+%>
 
     </body>
 </html>

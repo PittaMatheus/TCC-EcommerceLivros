@@ -38,41 +38,42 @@
                 
                 <br>
                 
-                <label>Titulo do livro:</label> 
-                <select name="idLivro" id="cbTitulo">
-                <option value="">Selecione um livro...</option>
-                    <%  if(!estoques.isEmpty()){
-                            List<Livro> livros1 = new ArrayList<Livro>();
-                            Livro livro = new Livro();
-                            Estoque estoque = new Estoque();
-                            
-                            for(EntidadeDominio entEstoque : estoques){
-                                estoque = (Estoque) entEstoque;
-                                for(EntidadeDominio entLivro : livros){
-                                    livro = (Livro) entLivro;
-                                    if(estoque.getItem().getLivro().getId().equals(livro.getId())){
-                                        livros1.add((Livro)entLivro);
+                
+                        <%  if(!estoques.isEmpty()){
+                                List<Livro> livros1 = new ArrayList<Livro>();
+                                Livro livro = new Livro();
+                                Estoque estoque = new Estoque();
+
+                                for(EntidadeDominio entEstoque : estoques){
+                                    estoque = (Estoque) entEstoque;
+                                    for(EntidadeDominio entLivro : livros){
+                                        livro = (Livro) entLivro;
+                                        if(estoque.getItem().getLivro().getId().equals(livro.getId())){
+                                            livros1.add((Livro)entLivro);
+                                        }
                                     }
                                 }
-                            }
-                            livros.removeAll(livros1);
-                            
-                            for(EntidadeDominio li : livros){
-                                Livro liv = (Livro) li; %>
-                               <option id ="cbTitulo<%=liv.getId()%>"value="<%=liv.getId()%>"><%=liv.getTitulo()%></option>
-                               <input type="hidden" value="<%=livro.getPreco()%>" id="txtValorCusto" name="txtValorCusto" />
-                            <%}
-                        }else{
-                            for(EntidadeDominio edLivro:livros){
-                                Livro livro = (Livro)edLivro;
-                    %>
-                                <option id ="cbTitulo<%=livro.getId()%>"value="<%=livro.getId()%>"><%=livro.getTitulo()%></option>
-                                <input type="hidden" value="<%=livro.getPreco()%>" id="txtValorCusto" name="txtValorCusto" />
-                    <%  
-                            }
-                        }    
-                    %>	
-                </select>
+                                livros.removeAll(livros1); %>
+                                <label>Titulo do livro:</label> 
+                                <select name="idLivro" id="cbTitulo">
+                                    <option value="">Selecione um livro...</option> 
+                                    <%for(EntidadeDominio li : livros){
+                                        Livro liv = (Livro) li; %>
+                                       <option id ="cbTitulo<%=liv.getId()%>"value="<%=liv.getId()%>"><%=liv.getTitulo()%></option>
+                                    <%}%>
+                                </select>
+                            <%}else{%>
+                                <label>Titulo do livro:</label> 
+                                <select name="idLivro" id="cbTitulo">
+                                    <option value="">Selecione um livro...</option> 
+                                    <%for(EntidadeDominio edLivro:livros){
+                                        Livro livro = (Livro)edLivro; %>
+                                        <option id ="cbTitulo<%=livro.getId()%>"value="<%=livro.getId()%>"><%=livro.getTitulo()%></option>
+                            <%  
+                                    }%>
+                                </select>
+                            <%}%>	
+                
 
                  <br>
                  

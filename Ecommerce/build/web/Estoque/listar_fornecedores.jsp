@@ -26,7 +26,7 @@
          
          
          if(fornecedores.size() == 0) {
-            out.print("<br><br>Nenhum fornecdor foi cadastrado");
+            out.print("<br><br>Nenhum fornecedor foi cadastrado");
          }else {
         %> 
         <table border="1" style ="width: 100%">

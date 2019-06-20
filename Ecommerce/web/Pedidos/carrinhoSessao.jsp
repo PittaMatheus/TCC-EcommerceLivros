@@ -74,22 +74,24 @@
                        <td>ANO</td>
                        <td>EDIÇÃO</td>
                        <td>PREÇO</td>
+                       <td>Imagem</td>
                        <td>AÇÃO</td>
                   </tr>   
                       <%
                        for(Livro livro : carrinho.getLivs()){
                            %>
                <tr>
-               <input type="hidden" name="livros" value="<%=livro.getId()%>"
+               <input type="hidden" name="livros" value="<%=livro.getId()%>">
                    <td><%=livro.getTitulo()%></td>
                    <td><%=livro.getAutor()%></td>
                    <td><%=livro.getAno()%></td>
                    <td><%=livro.getEdicao()%></td>
-                   <td><%=livro.getPreco()%></td>
+                   <td><%=LivroUtils.formatarPrecoLivro(livro)%></td>
+                   <td><img width="70"src="../imagens/<%=livro.getImagem()%>"></td>
                    <td><a href="">Remover</a></td>
                </tr>
 <%                      
-                        valorTotal += livro.getPreco();
+                        valorTotal += LivroUtils.calcularPrecoLivro(livro);
                              }
                         
 %>

@@ -12,8 +12,7 @@ A16     - Gerenciar trocas(alterar status das trocas)
 A18     - Esconder dados na tela: - Confirmar cartão de compra
 A20     - Listar ranking de pontos (cliente)
 A22     - Incluir a possiblidade de utilizar um cupom de troca no pagamento
-A40	 -Inativar livro de forma automática. O sistema deve inativar livros sem estoque que possuam venda com valor inferior a
-parâmetro predefinido no sistema.
+
 
 
 

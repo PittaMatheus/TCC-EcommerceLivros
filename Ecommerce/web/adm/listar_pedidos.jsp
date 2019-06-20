@@ -44,7 +44,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th><th>Id do pedido</th><th>Email</th><th>Nome</th><th>data do pedido</th><th>Status do pedido</th><th>Endereco de entrega</th>
-                                        <th>Valor total</th><th>Pagamento</th>
+                                        <th>Valor total</th><th>Itens</th><th>Pagamento</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -80,10 +80,8 @@
                                 out.println("<td>" + dataFormatPedido+ "</td>");
                                 out.println("<td>" + stPedido + "</td>");
                                 out.println("<td><a href=../adm/listar_enderecoEntrega.jsp?id_end=" + pedido.getEndereco().getId()+ "&id_ped=" + pedido.getId() + ">Ver</a></td>");
-                                double valorTotal= pedido.getPagamento().getValorTotal();
-                                DecimalFormat formatoDouble = new DecimalFormat("#.##");      
-                                valorTotal = Double.valueOf(formatoDouble.format(valorTotal));
-                                out.println("<td> R$ " + valorTotal + "</td>");
+                                out.println("<td> " + LivroUtils.formatarPreco(pedido.getPagamento().getValorTotal()) + "</td>");
+                                out.println("<td><a href=../Clientes/itensPedido.jsp?p="+pedido.getId()+">Livros</a></td>");
                                 out.println("<td><a href=listar_pagamento.jsp?id_ped=" + pedido.getId() + ">detalhar</a>");
                                 out.println("</tr>");
                             }

@@ -1,3 +1,4 @@
+<%@page import="livraria.core.util.LivroUtils"%>
 <%@page import="livraria.core.util.FormatadorData"%>
 <%@page import="ecommerce.dominio.estoque.Fornecedor"%>
 <%@page import="ecommerce.dominio.livro.Livro"%>
@@ -19,7 +20,7 @@
         List<Livro> livros = (List<Livro>) getServletContext().getAttribute("livros");
         List<Fornecedor> fornecedores = (List<Fornecedor>) getServletContext().getAttribute("fornecedor");
         
-        if(resultado == null || livros.size() == 0 || fornecedores.size() == 0) {
+        if(resultado == null) {
             response.sendRedirect(request.getContextPath() + "/Estoque/ListarEstoqueLivros?acao=listar");
             return;
         }
@@ -30,7 +31,7 @@
          
          List<Estoque> estoques = (List) resultado.getEntidades();
          
-         if(estoques.size() == 0) {
+         if(estoques.size() == 0 || livros.size() == 0 || fornecedores.size() == 0) {
             out.print("<br><br>Nenhum estoque de livro foi cadastrado");
          }else {
         %> 
@@ -60,7 +61,7 @@
                 <td><%=fornecedores.get(j-1).getNome()%></td>
                 <td><%=fornecedores.get(j-1).getCnpj()%></td>
                 <td><%=fornecedores.get(j-1).getRazaoSocial()%></td>
-                <td><%=estoque.getItem().getCusto()%></td>
+                <td><%=LivroUtils.formatarPreco(estoque.getItem().getCusto())%></td>
                 <td><%out.print(FormatadorData.formatarData(estoque.getDataCadastro()));%></td>
                 <%if(estoque.getItem().getQuantidade() == 0){%>
                     <td bgcolor="RED"><%=estoque.getItem().getQuantidade()%></td>

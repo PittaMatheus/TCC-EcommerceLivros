@@ -127,7 +127,7 @@ public class LivroDAO extends AbstractDAO{
         resultado.setAcao("inserir");
         
         return resultado;
-    
+   
     }
 
     @Override
@@ -353,7 +353,7 @@ public class LivroDAO extends AbstractDAO{
                 PreparedStatement declaracao = conexao.prepareStatement("SELECT " +
         "livro.id as id_livro, livro.codigo_barras as cod_barras, livro.autor as autor, livro.ano as ano, " +
         "livro.edicao as edicao, livro.titulo as titulo,livro.numero_paginas as numero_paginas, livro.sinopse as sinopse, livro.ativo as status, " +
-        "livro.preco as preco, editora.id as id_editora, editora.nome_editora as nome_editora,  " +
+        "livro.preco as preco, livro.imagem as imagem, editora.id as id_editora, editora.nome_editora as nome_editora,  " +
         "dimensoes.id as id_dimensoes, dimensoes.altura as altura, " +
         "dimensoes.profundidade as profundidade, dimensoes.largura as largura, dimensoes.peso as peso,  " +
         "isbn.id as id_isbn, isbn.cod_barras as ISBN, grupolivro.id as id_grupolivro,  " +
@@ -380,6 +380,7 @@ public class LivroDAO extends AbstractDAO{
                 liv.setNumeroPaginas(rs.getString("numero_paginas"));
                 liv.setSinopse(rs.getString("sinopse"));
                 liv.setPreco(rs.getDouble("preco"));
+                liv.setImagem(rs.getString("imagem"));
                 liv.getEditora().setId(rs.getInt("id_editora"));
                 liv.getEditora().setNome(rs.getString("nome_editora"));
                 liv.getDimensoes().setId(rs.getInt("id_dimensoes"));

@@ -1,4 +1,6 @@
 
+<%@page import="livraria.core.util.LivroUtils"%>
+<%@page import="livraria.core.util.FormatadorData"%>
 <%-- 
     Document   : listar_meusPedidos
     Created on : May 13, 2019, 6:37:42 PM
@@ -16,7 +18,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Meus Pedidos</title>
     </head>
     <body>
         <%
@@ -58,7 +60,7 @@
                      %>
                        
                 <div class ="container">
-                    <h3>Pedidos registrados</h3>
+                    <h3>Meus pedidos registrados</h3>
                     <form action="SolicitarTroca" method="POST">
                         
                         
@@ -105,10 +107,7 @@
                                 out.println("<td>" + dataFormatPedido+ "</td>");
                                 out.println("<td>" + stPedido + "</td>");
                                 out.println("<td><a href=../adm/listar_enderecoEntrega.jsp?id_end=" + pedido.getEndereco().getId()+ "&id_ped=" + pedido.getId() + ">Ver</a></td>");
-                                double valorTotal= pedido.getPagamento().getValorTotal();
-                                DecimalFormat formatoDouble = new DecimalFormat("#.##");      
-                                valorTotal = Double.valueOf(formatoDouble.format(valorTotal));
-                                out.println("<td> R$ " + valorTotal + "</td>");
+                                out.println("<td> " + LivroUtils.formatarPreco(pedido.getPagamento().getValorTotal()) + "</td>");
                                 out.println("<td><a href=itensPedido.jsp?u="+id_usuario+"&p="+pedido.getId()+">Livros</a></td>");
                                 out.println("<td><a href=../adm/listar_pagamento.jsp?id_ped=" + pedido.getId() +"&u="+id_usuario + ">detalhar</a>");
                                 
