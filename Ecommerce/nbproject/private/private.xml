@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/bocao/Documentos/6_sem/Lab%20Rodrigo/TrabalhoRodrigo4/livros/Ecommerce/src/java/livraria/web/controle/Control.java</file>
-            <file>file:/home/bocao/Documentos/6_sem/Lab%20Rodrigo/TrabalhoRodrigo4/livros/Ecommerce/web/Clientes/home.jsp</file>
+            <file>file:/home/matheus/NetBeansProjects/livros/Ecommerce/web/Pedidos/carrinhoSessao.jsp</file>
+            <file>file:/home/matheus/NetBeansProjects/livros/Ecommerce/src/java/livraria/web/controle/Control.java</file>
+            <file>file:/home/matheus/NetBeansProjects/livros/Ecommerce/src/java/livraria/web/view/pedido/ViewCarrinho.java</file>
+            <file>file:/home/matheus/NetBeansProjects/livros/Ecommerce/web/Pedidos/carrinho.jsp</file>
         </group>
     </open-files>
 </project-private>

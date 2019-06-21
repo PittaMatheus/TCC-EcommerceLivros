@@ -16,6 +16,8 @@ public class Carrinho extends EntidadeDominio{
     private int qt_itens;
     private List<Livro> livros;
     private ArrayList<Livro> liv = new ArrayList<Livro>();
+    private ArrayList<ItemPedido> itens = new ArrayList<ItemPedido>();
+
     private Livro livro;
     private Cliente cliente;
     
@@ -25,6 +27,18 @@ public class Carrinho extends EntidadeDominio{
          cliente = new Cliente();
     }
 
+    public ArrayList<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(ArrayList<ItemPedido> itens) {
+        this.itens = itens;
+    }
+    public void addItens(ItemPedido item){
+        itens.add(item);
+    }
+
+    
     public void addLivro(Livro livro){
         liv.add(livro);
     }
@@ -35,6 +49,7 @@ public class Carrinho extends EntidadeDominio{
     public ArrayList<Livro> getLivs() {
         return liv;
     }
+
     
     
     public Carrinho(Integer id, int qt_itens,  List<Livro> livros){

@@ -29,7 +29,14 @@ public class ViewCarrinho implements IViewHelper {
         String id_livro = request.getParameter("l");
         String id_cliente = request.getParameter("u");
         String sessao = request.getParameter("sessao");
-
+        String a = request.getParameter("a");
+        
+        if(null != a && a.equals("a")){
+            carrinho.setAcao("adicionar");
+        }else if(null != a && a.equals("r"))
+            carrinho.setAcao("remover");
+            
+     
         if(id_livro != null){
             objLivro.setId(Integer.parseInt(id_livro));
         }
@@ -56,6 +63,7 @@ public class ViewCarrinho implements IViewHelper {
         try {
             if(resultado != null && !resultado.getMensagem().isEmpty()) {
                 request.setAttribute("resultado", resultado);
+                Carrinho carrinho = new Carrinho();
                 HttpSession session = request.getSession();
                 if(resultado.getAcao() != null) {
                     if(resultado.getAcao().equals("inserir")){
@@ -75,7 +83,11 @@ public class ViewCarrinho implements IViewHelper {
                         String msg = resultado.getMensagem();
                         request.removeAttribute("resultado");
                         session.setAttribute("mensagem", "O livro esta em falta no estoque!");
-                       request.getRequestDispatcher("../Clientes/home.jsp").forward(request, response);
+                        request.getRequestDispatcher("../Clientes/home.jsp").forward(request, response);
+                    }else if(resultado.getAcao().equals("alterar")){
+                        
+                        session.setAttribute("carrinho", carrinho);
+                        response.sendRedirect("carrinho.jsp");
                     }
                 }
             }

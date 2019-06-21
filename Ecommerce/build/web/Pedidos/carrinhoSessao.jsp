@@ -4,6 +4,7 @@
     Author     : matheus
 --%>
 
+<%@page import="ecommerce.dominio.pedido.Item"%>
 <%@page import="livraria.core.util.LivroUtils"%>
 <%@page import="ecommerce.dominio.livro.Livro"%>
 <%@page import="java.util.List"%>
@@ -28,7 +29,7 @@
             double valorTotal = 0;
             String precoFormatado="";
             Carrinho carrinho = (Carrinho) session.getAttribute("carrinho");
-            if(carrinho == null){
+            if(carrinho == null || carrinho.getItens().isEmpty()){
         %>
         <!-- NAV FIXO DO TOPO-->
         <div class="navbar-fixed indigo darken-4">
@@ -55,7 +56,7 @@
         <div class="navbar-fixed indigo darken-4">
             <nav>
                 <div class="nav-wrapper indigo darken-4">
-                  <a href="#" class="brand-logo center">CARRINHO DA SESSÃO</a>
+                  <a href="#" class="brand-logo center">CARRINHO</a>
                   <ul id="nav-mobile" class="right hide-on-med-and-down">
                       <li><button type="submit" class="btn-border" value="Realizar pedido"><i class="material-icons left">done</i>Finalizar pedido</button></li>
                   </ul>
@@ -75,23 +76,34 @@
                        <td>EDIÇÃO</td>
                        <td>PREÇO</td>
                        <td>Imagem</td>
+                       <td>Quantidade</td>
                        <td>AÇÃO</td>
                   </tr>   
                       <%
-                       for(Livro livro : carrinho.getLivs()){
+                       for(Item item : carrinho.getItens()){
                            %>
                <tr>
-               <input type="hidden" name="livros" value="<%=livro.getId()%>">
-                   <td><%=livro.getTitulo()%></td>
-                   <td><%=livro.getAutor()%></td>
-                   <td><%=livro.getAno()%></td>
-                   <td><%=livro.getEdicao()%></td>
-                   <td><%=LivroUtils.formatarPrecoLivro(livro)%></td>
-                   <td><img width="70"src="../imagens/<%=livro.getImagem()%>"></td>
-                   <td><a href="">Remover</a></td>
+               <input type="hidden" name="livros" value="<%=item.getLivro().getId()%>">
+                   <td><%=item.getLivro().getTitulo()%></td>
+                   <td><%=item.getLivro().getAutor()%></td>
+                   <td><%=item.getLivro().getAno()%></td>
+                   <td><%=item.getLivro().getEdicao()%></td>
+                   <td name="quantidade"><%=LivroUtils.formatarPreco(LivroUtils.calcularPrecoLivro(item.getLivro(), item.getQuantidade()))%></td>
+                   <td><img width="70"src="../imagens/<%=item.getLivro().getImagem()%>"></td>
+                   <td><button class="material-icons grey" formaction="AumentaUmItem?l=<%=item.getLivro().getId()%>&a=a" >keyboard_arrow_up</button> <%=item.getQuantidade()%>
+<%
+                    String valido = "";
+                    if(item.getQuantidade() == 1){
+                         valido = "disabled";
+                    }else{
+                        valido = "";
+                    }
+%>
+                       <button <%=valido%> formaction="RetiraUmItem?l=<%=item.getLivro().getId()%>&a=r"class="material-icons grey">keyboard_arrow_down</button> </td>
+                   <td><a href="RemoverLivroCarrinho?l=<%=item.getLivro().getId()%>&a=l">Remover</a></td>
                </tr>
 <%                      
-                        valorTotal += LivroUtils.calcularPrecoLivro(livro);
+                        valorTotal += LivroUtils.calcularPrecoLivro(item.getLivro(), item.getQuantidade());
                              }
                         
 %>
@@ -133,8 +145,8 @@
             
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="js/materialize.js"></script>
-        <script src="../js/Custom.js"></script>
+        <script type="text/javascript" src="../js/materialize.js"></script>
+        <script type="text/javascript" src="../js/Custom.js"></script>
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
         <!-- Compiled and minified JavaScript -->

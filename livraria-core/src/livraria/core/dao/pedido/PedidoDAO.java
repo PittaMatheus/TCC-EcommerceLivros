@@ -11,6 +11,7 @@ import ecommerce.dominio.estoque.Estoque;
 import ecommerce.dominio.livro.Livro;
 import ecommerce.dominio.pedido.Carrinho;
 import ecommerce.dominio.pedido.Cupom;
+import ecommerce.dominio.pedido.ItemPedido;
 import ecommerce.dominio.pedido.Pagamento;
 import ecommerce.dominio.pedido.PagamentoCartaoCredito;
 import ecommerce.dominio.pedido.Pedido;
@@ -56,6 +57,24 @@ public class PedidoDAO extends AbstractDAO{
             }else{
                 houveCupom = 1;
             }
+            if(pedido.getItems().isEmpty()){
+                // Recuperar itens do carrinho
+                CarrinhoDAO carrinhoDAO = new CarrinhoDAO();
+                Carrinho carrinho = new Carrinho();
+                
+                carrinho.getCliente().setId(pedido.getCliente().getId());
+                resultado = carrinhoDAO.consultar(carrinho);
+                List<Carrinho> itens = (List) resultado.getEntidades();
+                List<ItemPedido> itensPedidos = new ArrayList();
+                
+                for(Carrinho item: itens){
+                    ItemPedido itemPedido = new ItemPedido();
+                    itemPedido.getLivro().setId(item.getLivro().getId());
+                    itemPedido.setQuantidade(item.getQt_itens());
+                    itensPedidos.add(itemPedido);
+                }
+                    pedido.setItems(itensPedidos);
+                }
             
             // Verificar se tem livro no estoque
             EstoqueDAO estoqueDAO = new EstoqueDAO();
@@ -64,10 +83,13 @@ public class PedidoDAO extends AbstractDAO{
             resultado = estoqueDAO.consultarLivros(pedido);
             List<Estoque> estoques = (List) resultado.getEntidades();
             //loop para alterar o estoque no banco para cada livro
+            int i = 0;
             for(Estoque est: estoques){
                 estoque.setId(est.getItem().getLivro().getId());
                 estoque.getItem().setQuantidade(est.getItem().getQuantidade());
+                estoque.setAcao(String.valueOf(pedido.getItems().get(i).getQuantidade()));
                 estoqueDAO.baixaLivro(estoque);
+                i++;
             }
 
             

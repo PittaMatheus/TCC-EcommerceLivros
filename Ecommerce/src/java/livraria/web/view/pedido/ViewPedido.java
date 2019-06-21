@@ -9,6 +9,7 @@ import ecommerce.dominio.EntidadeDominio;
 import ecommerce.dominio.cliente.Cartao;
 import ecommerce.dominio.cliente.Cliente;
 import ecommerce.dominio.livro.Livro;
+import ecommerce.dominio.pedido.Carrinho;
 import ecommerce.dominio.pedido.ItemPedido;
 import ecommerce.dominio.pedido.PagamentoCartaoCredito;
 import ecommerce.dominio.pedido.Pedido;
@@ -17,7 +18,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.crypto.spec.IvParameterSpec;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,6 +39,7 @@ public class ViewPedido implements IViewHelper {
         
             HttpSession session = request.getSession();
             Pedido pedido = new Pedido();
+           
             if(null != session.getAttribute("pedido")){
                 pedido = (Pedido)session.getAttribute("pedido");
             }
@@ -43,7 +47,7 @@ public class ViewPedido implements IViewHelper {
             Livro objLivro = new Livro();
             Cliente objCliente = new Cliente();
 
-            List<ItemPedido> item = new ArrayList<>();
+            List <ItemPedido> item = new ArrayList<>();
             String id = request.getParameter("id_pedido");
             String id_cliente = request.getParameter("u");
             String tipoUsuario = request.getParameter("tipoUsuario");        
@@ -52,11 +56,13 @@ public class ViewPedido implements IViewHelper {
             String[] valoresCartao = request.getParameterValues("valorCartao");
             String[] datasValidade = request.getParameterValues("dataValidade");
             String [] idsLivro = request.getParameterValues("livros");
+            String [] qtItem = request.getParameterValues("qt");
+
+            
             DateFormat formatadorData = new SimpleDateFormat("dd/MM/yyyy");
             String cupomDesconto = request.getParameter("cupomDesconto");
             String valorTotal =request.getParameter("valorTotal");
             String status = request.getParameter("status");
-
             List<PagamentoCartaoCredito> idsCartoes = new ArrayList<>();
             if(tipoUsuario != null){
                 pedido.setTipo(tipoUsuario);
@@ -114,39 +120,28 @@ public class ViewPedido implements IViewHelper {
             boolean flgHouveAcrescimo;
             int idLivroAtual;
             int idLivroLista;
-            // Recuperando os sIDS dos livros escolhidos pelo cliente
-            if(idsLivro != null && idsLivro.length > 0){
-                for(String idLivro: idsLivro){
-                    flgHouveAcrescimo = false;
-                    ItemPedido itemPedido = new ItemPedido();
-                    itemPedido.getLivro().setId(Integer.parseInt(idLivro));
-                    idLivroAtual = itemPedido.getLivro().getId();
-                    // Lista de item preenchida com o livro/id/qt
-                    // Varrer a lista para descobrir se há algum repetido e incrementar a qtde
-                    if(item.size() == 0){
-                        itemPedido.setQuantidade(qt);
-                    }else{
-                        for(ItemPedido itemPed: item){
-                            idLivroLista = itemPed.getLivro().getId();
-                            if(idLivroLista == itemPedido.getLivro().getId()){
-                                qt = itemPed.getQuantidade();
-                                itemPedido.setQuantidade(qt + 1);
-                                itemPed.setQuantidade(qt + 1);
-                                flgHouveAcrescimo = true;
-                            }else if(idLivroLista != itemPedido.getLivro().getId()){
-                                itemPedido.setQuantidade(qt);
-                            }
-                        }
-                    }
-                    if(!flgHouveAcrescimo){
-                        item.add(itemPedido);
-                    }
-                }                            
-                pedido.setItems(item); 
-            }
-                
 
+                     if(session.getAttribute("carrinho") != null){
+                        Carrinho carrinho = (Carrinho)session.getAttribute("carrinho");
+                        item = carrinho.getItens();
+                        pedido.setItems(item);
+                    }else{
+                        pedido.setItems(item); 
+  
+                     }
+                                          
+           
+                
+        if(session.getAttribute("carrinho") != null){
+                        Carrinho carrinho = (Carrinho)session.getAttribute("carrinho");
+                        item = carrinho.getItens();
+                        pedido.setItems(item);
+        }else{
+            
+            
+        }
         pedido.getPagamento().setPagamentosCartao(idsCartoes);
+        
         
        
         session.setAttribute("pedido", pedido);

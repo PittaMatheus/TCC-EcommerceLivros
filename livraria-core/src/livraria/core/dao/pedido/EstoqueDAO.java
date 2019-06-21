@@ -215,7 +215,7 @@ public class EstoqueDAO extends AbstractDAO{
             Connection conexao = BancoDadosOracle.getConexao();
             Estoque estoque = (Estoque) entidade;
             PreparedStatement declaracao = conexao.prepareStatement("UPDATE estoque set quantidade = ? where id = ?");
-            declaracao.setInt(1, (estoque.getItem().getQuantidade()) - 1);
+            declaracao.setInt(1, (estoque.getItem().getQuantidade()) - Integer.parseInt(estoque.getAcao()));
             declaracao.setInt(2, estoque.getId());
             declaracao.execute();
             resultado.setStatus(true);

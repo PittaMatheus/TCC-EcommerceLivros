@@ -125,6 +125,13 @@ public class Control extends HttpServlet {
         
         // ViewCarrinho
         viewHelper.put("/Ecommerce/Pedidos/AdicionarCarrinhoSessao", new ViewCarrinhoSessao());
+        viewHelper.put("/Ecommerce/Pedidos/AumentaUmItem", new ViewCarrinhoSessao());
+        viewHelper.put("/Ecommerce/Pedidos/RetiraUmItem", new ViewCarrinhoSessao());
+        viewHelper.put("/Ecommerce/Pedidos/RemoverLivroCarrinho", new ViewCarrinhoSessao());
+        viewHelper.put("/Ecommerce/Pedidos/AddItem", new ViewCarrinho());
+        viewHelper.put("/Ecommerce/Pedidos/RemItem", new ViewCarrinho());
+        
+
         viewHelper.put("/Ecommerce/Pedidos/AdicionarCarrinho", new ViewCarrinho());
         viewHelper.put("/Ecommerce/Pedidos/VerCarrinho", new ViewCarrinho());
         viewHelper.put("/Ecommerce/Pedidos/RemoverCarrinho", new ViewCarrinho());

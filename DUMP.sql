@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.16, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: ecommerce_livros
 -- ------------------------------------------------------
--- Server version	8.0.16
+-- Server version	5.7.24-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 ;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `bandeira`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bandeira` (
   `id_bandeira` int(11) NOT NULL AUTO_INCREMENT,
   `nome_bandeira` varchar(45) DEFAULT NULL,
@@ -45,10 +45,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `carrinho`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `carrinho` (
   `id_livro` int(11) DEFAULT NULL,
   `id_cliente` int(11) DEFAULT NULL,
+  `quantidade` int(11) DEFAULT '1',
   KEY `fk_carrinho_cliente_idx` (`id_cliente`),
   KEY `fk_carrinho_livro_idx` (`id_livro`),
   CONSTRAINT `fk_carrinho_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`),
@@ -71,7 +72,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cartao`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cartao` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(155) NOT NULL,
@@ -105,7 +106,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `categoria`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `categoria` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(155) NOT NULL,
@@ -129,7 +130,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cliente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cliente` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(155) NOT NULL,
@@ -164,7 +165,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cupomDesconto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cupomDesconto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(155) NOT NULL,
@@ -192,7 +193,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cupomTroca`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cupomTroca` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_cliente` int(11) NOT NULL,
@@ -219,7 +220,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `dimensoes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `dimensoes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `altura` decimal(5,2) DEFAULT NULL,
@@ -246,7 +247,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `editora`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `editora` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome_editora` varchar(155) NOT NULL,
@@ -270,7 +271,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `endereco`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `endereco` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `logradouro` varchar(155) NOT NULL,
@@ -307,7 +308,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `estoque`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `estoque` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_livro` int(11) NOT NULL,
@@ -328,7 +329,7 @@ CREATE TABLE `estoque` (
 
 LOCK TABLES `estoque` WRITE;
 /*!40000 ALTER TABLE `estoque` DISABLE KEYS */;
-INSERT INTO `estoque` VALUES (1,1,1,20,30.09,'2019-01-20 02:50:25'),(2,2,2,20,35.90,'2019-01-20 02:51:15'),(3,3,3,20,97.90,'2019-01-20 02:52:11'),(4,4,4,20,95.68,'2019-01-20 02:52:27'),(5,5,5,20,88.44,'2019-01-20 02:53:01'),(6,6,6,20,78.09,'2019-01-20 02:53:37'),(7,7,7,20,78.37,'2019-01-20 02:54:12'),(8,8,8,20,80.45,'2019-01-20 02:54:35'),(9,9,9,20,31.71,'2019-01-20 02:54:53'),(10,10,10,20,34.67,'2019-01-20 02:55:11'),(11,11,11,20,35.63,'2019-02-20 04:00:59'),(12,12,12,20,63.20,'2019-02-20 04:01:35'),(13,13,13,20,90.24,'2019-02-20 04:03:44'),(14,14,14,20,45.10,'2019-02-20 04:04:07'),(15,15,15,20,31.04,'2019-02-20 04:04:19'),(16,16,16,20,42.34,'2019-02-20 04:04:33'),(17,17,17,20,35.85,'2019-02-20 04:04:47'),(18,18,18,20,43.36,'2019-02-20 04:05:10'),(19,19,19,20,92.17,'2019-02-20 04:05:26'),(20,20,20,20,31.25,'2019-02-20 04:05:44'),(21,21,21,20,70.92,'2019-03-20 04:06:39'),(22,22,22,20,52.56,'2019-03-20 04:07:39'),(23,23,23,20,49.00,'2019-03-20 04:08:23'),(24,24,24,20,52.85,'2019-03-20 04:08:34'),(25,25,25,20,95.98,'2019-03-20 04:08:44'),(26,26,26,20,33.45,'2019-03-20 04:08:54'),(27,27,27,20,32.38,'2019-03-20 04:09:44'),(28,28,28,20,70.17,'2019-03-20 04:09:52'),(29,29,29,20,82.02,'2019-03-20 04:10:01'),(30,30,30,20,64.10,'2019-03-20 04:10:16'),(31,31,31,20,49.98,'2019-04-20 04:10:51'),(32,32,32,20,67.97,'2019-04-20 04:10:59'),(33,33,33,20,90.07,'2019-04-20 04:11:08'),(34,34,34,20,80.68,'2019-04-20 04:11:16'),(35,35,35,20,63.51,'2019-04-20 04:11:25'),(36,36,36,20,31.57,'2019-04-20 04:11:34'),(37,37,37,20,82.30,'2019-04-20 04:11:41'),(38,38,38,20,44.90,'2019-04-20 04:12:22'),(39,39,39,20,71.50,'2019-04-20 04:12:32'),(40,40,40,20,87.21,'2019-04-20 04:12:40'),(41,41,41,20,33.02,'2019-05-20 04:13:22'),(42,42,42,20,60.13,'2019-05-20 04:13:33'),(43,43,43,20,99.43,'2019-05-20 04:13:44'),(44,44,44,20,80.98,'2019-05-20 04:13:52'),(45,45,45,20,39.07,'2019-05-20 04:14:00'),(46,46,46,20,90.30,'2019-05-20 04:14:11'),(47,47,47,20,94.21,'2019-05-20 04:14:30'),(48,48,48,20,33.74,'2019-05-20 04:16:40'),(49,49,49,20,83.28,'2019-05-20 04:16:48'),(50,50,50,20,37.22,'2019-05-20 04:17:12'),(51,51,51,20,78.46,'2019-06-20 04:18:04'),(52,52,52,20,38.21,'2019-06-20 04:18:13'),(53,53,53,20,81.95,'2019-06-20 04:18:23'),(54,54,54,20,57.74,'2019-06-20 04:18:39'),(55,55,55,20,93.33,'2019-06-20 04:18:48'),(56,56,56,20,60.15,'2019-06-20 04:18:56'),(57,57,57,20,73.18,'2019-06-20 04:19:07'),(58,58,58,20,54.56,'2019-06-20 04:19:14'),(59,59,59,20,47.79,'2019-06-20 04:19:23'),(60,60,60,20,79.18,'2019-06-20 04:19:33');
+INSERT INTO `estoque` VALUES (1,1,1,20,30.09,'2019-01-20 04:50:25'),(2,2,2,20,35.90,'2019-01-20 04:51:15'),(3,3,3,18,97.90,'2019-01-20 04:52:11'),(4,4,4,15,95.68,'2019-01-20 04:52:27'),(5,5,5,20,88.44,'2019-01-20 04:53:01'),(6,6,6,20,78.09,'2019-01-20 04:53:37'),(7,7,7,20,78.37,'2019-01-20 04:54:12'),(8,8,8,20,80.45,'2019-01-20 04:54:35'),(9,9,9,20,31.71,'2019-01-20 04:54:53'),(10,10,10,20,34.67,'2019-01-20 04:55:11'),(11,11,11,20,35.63,'2019-02-20 07:00:59'),(12,12,12,20,63.20,'2019-02-20 07:01:35'),(13,13,13,20,90.24,'2019-02-20 07:03:44'),(14,14,14,20,45.10,'2019-02-20 07:04:07'),(15,15,15,20,31.04,'2019-02-20 07:04:19'),(16,16,16,20,42.34,'2019-02-20 07:04:33'),(17,17,17,20,35.85,'2019-02-20 07:04:47'),(18,18,18,20,43.36,'2019-02-20 07:05:10'),(19,19,19,20,92.17,'2019-02-20 07:05:26'),(20,20,20,20,31.25,'2019-02-20 07:05:44'),(21,21,21,20,70.92,'2019-03-20 07:06:39'),(22,22,22,20,52.56,'2019-03-20 07:07:39'),(23,23,23,20,49.00,'2019-03-20 07:08:23'),(24,24,24,20,52.85,'2019-03-20 07:08:34'),(25,25,25,20,95.98,'2019-03-20 07:08:44'),(26,26,26,20,33.45,'2019-03-20 07:08:54'),(27,27,27,20,32.38,'2019-03-20 07:09:44'),(28,28,28,20,70.17,'2019-03-20 07:09:52'),(29,29,29,20,82.02,'2019-03-20 07:10:01'),(30,30,30,20,64.10,'2019-03-20 07:10:16'),(31,31,31,20,49.98,'2019-04-20 07:10:51'),(32,32,32,20,67.97,'2019-04-20 07:10:59'),(33,33,33,20,90.07,'2019-04-20 07:11:08'),(34,34,34,20,80.68,'2019-04-20 07:11:16'),(35,35,35,20,63.51,'2019-04-20 07:11:25'),(36,36,36,20,31.57,'2019-04-20 07:11:34'),(37,37,37,20,82.30,'2019-04-20 07:11:41'),(38,38,38,20,44.90,'2019-04-20 07:12:22'),(39,39,39,20,71.50,'2019-04-20 07:12:32'),(40,40,40,20,87.21,'2019-04-20 07:12:40'),(41,41,41,20,33.02,'2019-05-20 07:13:22'),(42,42,42,20,60.13,'2019-05-20 07:13:33'),(43,43,43,20,99.43,'2019-05-20 07:13:44'),(44,44,44,20,80.98,'2019-05-20 07:13:52'),(45,45,45,20,39.07,'2019-05-20 07:14:00'),(46,46,46,20,90.30,'2019-05-20 07:14:11'),(47,47,47,20,94.21,'2019-05-20 07:14:30'),(48,48,48,20,33.74,'2019-05-20 07:16:40'),(49,49,49,20,83.28,'2019-05-20 07:16:48'),(50,50,50,20,37.22,'2019-05-20 07:17:12'),(51,51,51,20,78.46,'2019-06-20 07:18:04'),(52,52,52,20,38.21,'2019-06-20 07:18:13'),(53,53,53,20,81.95,'2019-06-20 07:18:23'),(54,54,54,20,57.74,'2019-06-20 07:18:39'),(55,55,55,20,93.33,'2019-06-20 07:18:48'),(56,56,56,20,60.15,'2019-06-20 07:18:56'),(57,57,57,20,73.18,'2019-06-20 07:19:07'),(58,58,58,20,54.56,'2019-06-20 07:19:14'),(59,59,59,20,47.79,'2019-06-20 07:19:23'),(60,60,60,20,79.18,'2019-06-20 07:19:33');
 /*!40000 ALTER TABLE `estoque` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -338,14 +339,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `fornecedor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `fornecedor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome_fornecedor` varchar(45) DEFAULT NULL,
   `cnpj` varchar(45) DEFAULT NULL,
   `razao_social` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -364,7 +365,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `grupolivro`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `grupolivro` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome_grupolivro` varchar(155) DEFAULT NULL,
@@ -389,7 +390,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `isbn`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `isbn` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cod_barras` varchar(155) NOT NULL,
@@ -413,7 +414,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `item`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `item` (
   `id_livro` int(11) NOT NULL,
   `qt_livros` int(11) NOT NULL,
@@ -437,7 +438,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `itemPedido`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `itemPedido` (
   `quantidade` int(11) NOT NULL,
   `id_livro` int(11) NOT NULL,
@@ -455,6 +456,7 @@ CREATE TABLE `itemPedido` (
 
 LOCK TABLES `itemPedido` WRITE;
 /*!40000 ALTER TABLE `itemPedido` DISABLE KEYS */;
+INSERT INTO `itemPedido` VALUES (5,4,1),(2,3,1);
 /*!40000 ALTER TABLE `itemPedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -464,7 +466,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `livro`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `livro` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `codigo_barras` varchar(155) NOT NULL,
@@ -509,7 +511,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `livro_categoria`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `livro_categoria` (
   `id_livro` int(11) NOT NULL,
   `id_categoria` int(11) NOT NULL,
@@ -536,7 +538,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `pagamentoCartao`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pagamentoCartao` (
   `id_pedido` int(11) NOT NULL,
   `id_cartao` int(11) NOT NULL,
@@ -554,6 +556,7 @@ CREATE TABLE `pagamentoCartao` (
 
 LOCK TABLES `pagamentoCartao` WRITE;
 /*!40000 ALTER TABLE `pagamentoCartao` DISABLE KEYS */;
+INSERT INTO `pagamentoCartao` VALUES (1,2,890.07);
 /*!40000 ALTER TABLE `pagamentoCartao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -563,7 +566,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `pedido`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pedido` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_cliente` int(11) NOT NULL,
@@ -573,7 +576,7 @@ CREATE TABLE `pedido` (
   `valorTotal` double NOT NULL,
   `cupomDesconto` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -582,6 +585,7 @@ CREATE TABLE `pedido` (
 
 LOCK TABLES `pedido` WRITE;
 /*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
+INSERT INTO `pedido` VALUES (1,1,1,6,'2019-06-21 01:54:49',890.0695000000001,0);
 /*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -591,7 +595,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `pgtoCupomDesconto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pgtoCupomDesconto` (
   `id_pedido` int(11) NOT NULL,
   `id_cupom` int(11) NOT NULL,
@@ -617,7 +621,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `solicitacaoTroca`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `solicitacaoTroca` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_cliente` int(11) NOT NULL,
@@ -647,7 +651,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `statusPedido`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `statusPedido` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `status` varchar(155) NOT NULL,
@@ -671,7 +675,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `papel` varchar(155) DEFAULT NULL,
@@ -690,6 +694,10 @@ INSERT INTO `usuario` VALUES (1,'comum'),(2,'adm'),(3,'root');
 UNLOCK TABLES;
 
 --
+-- Dumping events for database 'ecommerce_livros'
+--
+
+--
 -- Dumping routines for database 'ecommerce_livros'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -702,4 +710,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-20  2:14:13
+-- Dump completed on 2019-06-20 22:56:09

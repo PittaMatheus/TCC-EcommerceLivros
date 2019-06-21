@@ -289,7 +289,32 @@
     <servlet-mapping>
         <servlet-name>Control</servlet-name>
         <url-pattern>/adm/ListarTrocas</url-pattern>
-    </servlet-mapping>                                                                                                                                                                                                                                                                      
+    </servlet-mapping>    
+     
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Pedidos/RetiraUmItem</url-pattern>
+    </servlet-mapping>                                                                                                                                                                                                                                                                  
+         
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Pedidos/AumentaUmItem</url-pattern>
+    </servlet-mapping>    
+    
+      <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Pedidos/RemoverLivroCarrinho</url-pattern>
+    </servlet-mapping>        
+                
+       <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Pedidos/AddItem</url-pattern>
+    </servlet-mapping>  
+    
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Pedidos/RemItem</url-pattern>
+    </servlet-mapping>                             
          
     <session-config>
         <session-timeout>
