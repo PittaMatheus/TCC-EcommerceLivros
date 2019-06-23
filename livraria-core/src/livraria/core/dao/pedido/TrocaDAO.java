@@ -38,6 +38,13 @@ public class TrocaDAO extends AbstractDAO{
             resultado.setAcao("solicitacaoTroca");
             resultado.setMensagem("solicitou ");
             resultado.setStatus(true);
+            PedidoDAO pDAO = new PedidoDAO();
+            Pedido pedido = new Pedido();
+            pedido.setId(troca.getPedido().getId());
+            pedido.getStatusPedido().setId(3);
+            pDAO.alterar(pedido);
+            
+            
             // Fecha a conexao.
             conexao.close();
             declaracao.close();

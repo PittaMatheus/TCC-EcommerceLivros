@@ -217,8 +217,13 @@ public class PedidoDAO extends AbstractDAO{
             Connection conexao = BancoDadosOracle.getConexao();
             Pedido pedido = (Pedido) entidade;
             PreparedStatement declaracao = conexao.prepareStatement("update pedido set id_statusPedido = ? where id = ? " );
-
-            pedido.getStatusPedido().setId(pedido.getStatusPedido().getId() + 1);
+            
+                if(null != pedido.getAcao()){
+                   if(pedido.getAcao().equals("reprovar") || pedido.getAcao().equals("finalizar")){
+                        pedido.getStatusPedido().setId(pedido.getStatusPedido().getId() + 2);
+                }}else{
+                pedido.getStatusPedido().setId(pedido.getStatusPedido().getId() + 1);
+                }
             declaracao.setInt(1, pedido.getStatusPedido().getId());
             declaracao.setInt(2, pedido.getId());
             

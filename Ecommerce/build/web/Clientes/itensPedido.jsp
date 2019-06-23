@@ -58,7 +58,7 @@
         <table border="1" class="highlight striped centered responsive-table">
             <thead>
                 <tr>
-                    <th>Imagem</th><th>Titulo do livro</th><th>Autor</th><th>Valor</th>
+                    <th>Imagem</th><th>Titulo do livro</th><th>Autor</th><th>Quantidade</th><th>Valor</th>
                 </tr>
             </thead>
 <%
@@ -69,6 +69,7 @@
             <td><img width="70" src="../imagens/<%=itemPedido.getLivro().getImagem()%>"></td>
             <td><%=itemPedido.getLivro().getTitulo()%></td>
             <td><%=itemPedido.getLivro().getAutor()%></td>
+            <td><%=itemPedido.getQuantidade()%></td>
             <%livro.setPreco(itemPedido.getLivro().getPreco());
               livro.getGrupoLivro().setMargemLucro(itemPedido.getLivro().getGrupoLivro().getMargemLucro());
             %>

@@ -31,7 +31,13 @@ public class ViewCupomTroca implements IViewHelper {
         String id_cliente = request.getParameter("u");
         String id_pedido = request.getParameter("id_pedido");
         String id_solicitacao = request.getParameter("id");
+        String acao = request.getParameter("ac");
         
+        if(acao != null && acao.equals("aprovar")){
+            cTroca.setAcao("aprovar");
+        }else if(acao != null && acao.equals("reprovar")){
+            cTroca.setAcao("reprovar");
+        }
         if(id_solicitacao != null){
             cTroca.setId(Integer.parseInt(id_pedido));
         }
@@ -56,6 +62,8 @@ public class ViewCupomTroca implements IViewHelper {
                             request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
                           }else if(resultado.getAcao().equals("listar")){
                               request.getRequestDispatcher("../Clientes/ListarCupomTroca.jsp").forward(request, response);
+                          }else if(resultado.getAcao().equals("desativar")){
+                              request.getRequestDispatcher("../sucesso.jsp").forward(request, response);
                           }
                         
                         

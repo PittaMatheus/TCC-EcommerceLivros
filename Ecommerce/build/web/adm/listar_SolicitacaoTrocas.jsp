@@ -50,7 +50,7 @@
                                     <div class ="container">
                                         <form action="AutorizarTroca" method="POST">
                                             <input type='hidden' name='u' value='<%=troca.getCliente().getId()%>'>
-                                            <input type='hidden' name='id_pedido' value='<%=troca.getId()%>'>
+                                            <input type='hidden' name='id_pedido' value='<%=troca.getPedido().getId()%>'>
 
                         
                             

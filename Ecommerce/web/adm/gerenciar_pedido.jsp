@@ -22,6 +22,7 @@
         List<Pedido> pedidos = (List) resultado.getEntidades();
          
         int id_pedido = Integer.parseInt(request.getParameter("id"));
+        String troca = request.getParameter("troca");
         
          for (Pedido pedido : pedidos) {
                         if(pedido.getId() == id_pedido){
@@ -40,18 +41,24 @@
                        <br>  <%
                             
                            
-                            if(pedido.getStatusPedido().getId() >= 3){
-                                out.println("menu -> gerenciar Trocas");
-                            }else{
                                  out.println("Status do pedido:<br>");
-                                        if(pedido.getStatusPedido().getId() == 1){
-                                       out.println("EM PROGRESSO");
+                                   if(pedido.getStatusPedido().getId() == 1){
+                                        out.println("EM PROGRESSO");
                                    }else if(pedido.getStatusPedido().getId() == 2){
                                        out.println("EM_TRANSPORTE");
                                    }else if(pedido.getStatusPedido().getId() == 3){
                                        out.println("ENTREGUE");
-
+                                   }else if(pedido.getStatusPedido().getId() == 4){
+                                        out.println("EM TROCA");
+                                   }else if(pedido.getStatusPedido().getId() == 5){
+                                        out.println("TROCA APROVADA");
+                                   }else if(pedido.getStatusPedido().getId() == 6){
+                                        out.println("REPROVADA");
+                                   }else if(pedido.getStatusPedido().getId() == 7){
+                                        out.println("TROCADO");
                                    }
+
+                                  
 %>
 <br><br>
                         <form action="GerenciarPedido">
@@ -62,7 +69,7 @@
                             <button name="acao" value="alterar">Alterar status do pedido</button>
                         </form>
        <%
-           }
+           
        }
 }
 }

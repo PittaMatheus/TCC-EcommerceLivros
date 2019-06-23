@@ -91,7 +91,36 @@ public class CupomTrocaDAO extends AbstractDAO {
 
     @Override
     public Resultado desativar(EntidadeDominio entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            // Abre uma conexao com o banco.
+            Connection conexao = BancoDadosOracle.getConexao();
+            CupomTroca cTroca = (CupomTroca) entidade;
+            Pedido pedido = new Pedido();
+            PedidoDAO pDAO = new PedidoDAO();
+            TrocaDAO trocaDAO = new TrocaDAO();
+            Troca objTroca = new Troca();
+
+            pedido.setId(cTroca.getPedido().getId());
+            pedido.getStatusPedido().setId(4);
+            pedido.setAcao("reprovar");
+            resultado = pDAO.alterar(pedido);
+            
+            
+           // objTroca.set
+            objTroca.setId(cTroca.getId());
+            resultado = trocaDAO.alterar(objTroca);
+            
+            
+            // Fecha a conexao.
+            conexao.close();
+        } catch (ClassNotFoundException erro) {
+            erro.printStackTrace();
+            resultado.setStatus(false);
+            resultado.setMensagem("Ocorreu um erro ao solicitar a troca ");
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+        return resultado;
     }
 
     @Override

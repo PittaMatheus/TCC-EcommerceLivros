@@ -48,8 +48,7 @@
             <input type="hidden" name="uf" id="uf"value="<%= cliente.getEndereco().getUf()%>">
             <input type="hidden" name="logradouro" id="logradouro" value="<%= cliente.getEndereco().getLogradouro()%>">
             <input type="hidden" name="numero" id="numero" value="<%= cliente.getEndereco().getNumero()%>">
-            <input type="hidden" name="senha" id="senha" value="<%=cliente.getSenha()%>">
-            <input type="hidden" name="senhaConfirmada" id="senhaConfirmada" value="<%=cliente.getSenha()%>">                       
+                
             
             <label for="nome" data-error="Informe o nome!">Nome</label>
             <input type="text" name="nome" id="nome" value="<%= cliente.getNome()%>" class="validate" required>
@@ -84,6 +83,11 @@
             <label for="email" data-error="Informe o email!" >Email</label>
             <input type="email" name="email" id="email" value="<%= cliente.getEmail()%>" class="validate" required>
             <br><br>
+            
+            <label for="senha" data-error="informe a senha">Senha</label>
+            <input type="password" name="senha" id="senha">
+            <label for="senhaConfirmada" data-error="informe a senha">Confirme a senha</label>            
+            <input type="password" name="senhaConfirmada" id="senhaConfirmada">       
             
             <input type="submit" name="acao" value="alterar" class="btn btn-success">                                  
         </form>

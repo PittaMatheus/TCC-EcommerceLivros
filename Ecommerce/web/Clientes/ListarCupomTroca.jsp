@@ -4,6 +4,7 @@
     Author     : matheus
 --%>
 
+<%@page import="livraria.core.util.PrecoUtils"%>
 <%@page import="livraria.core.util.Random"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
@@ -74,7 +75,7 @@
 
                                 out.println("<tr>");
                                 out.println("<td>" + cuponsTroca.getPedido().getId()+ "</td>");
-                                out.println("<td>" + cuponsTroca.getPedido().getPagamento().getValorTotal( )+ "</td>");
+                                out.println("<td>" + PrecoUtils.arredondarPreco(cuponsTroca.getPedido().getPagamento().getValorTotal( ))+ "</td>");
                                 Date validade =  new java.sql.Date(cuponsTroca.getDataTroca().getTime());
                                 Calendar cal = Calendar.getInstance();
                                 cal.setTime(validade);
