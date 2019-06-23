@@ -15,6 +15,13 @@
 <!DOCTYPE html>
 <html>
     <head>
+         <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="../css/Custom.css"  media="screen,projection"/>
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Itens do meu pedido</title>
     </head>
@@ -34,7 +41,6 @@
                                 } else {
                                    for (Cliente cliente : clientes) {         
                                      id_cliente = cliente.getId();
-                                     out.println(cliente.getNome());
                                      papel = cliente.getPapel().getId();
                                    }
                                  }
@@ -49,7 +55,48 @@
 			return;
 		}
 %>
-            
+    <!-- NAV FIXO DO TOPO-->
+    
+                            <div class="navbar-fixed indigo darken-4">
+                                <nav>
+                                    <div class="nav-wrapper indigo darken-4">
+                                      <a href="#" class="brand-logo center maiusculo">Itens do pedido</a>
+                                      <ul class="left">
+                                          
+                                          <%
+    if(papel == 1){
+%>
+        <li><a href="../Clientes/listar_meusPedidos.jsp"><i class="material-icons">arrow_back</i></a></li>
+<%    
+   }
+    else if(papel == 2){
+    %>
+    
+        <li><a href="../adm/listar_pedidos.jsp"><i class="material-icons">arrow_back</i></a></li>
+<%
+    }
+%>
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                      </ul>
+                                    </div>
+                                  </nav>
+                            </div>        
         <ul>
             <li>Pedido: <%=id_pedido%>  </li>
 
@@ -84,19 +131,7 @@
             </tbody>     
         </table>
 <br><br>
-<%
-    if(papel == 1){
-%>
-<a href="../Clientes/listar_meusPedidos.jsp">Voltar</a>
-<%    
-   }
-    else if(papel == 2){
-    %>
-    <a href="../adm/listar_pedidos.jsp">Voltar</a>
 
-<%
-    }
-%>
 
     </body>
 </html>

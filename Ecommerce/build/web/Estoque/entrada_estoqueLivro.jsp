@@ -14,6 +14,16 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!-- Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="../css/Custom.css"  media="screen,projection"/>
+        <!-- CSS CAROUSEL-->
+        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick-theme.css" media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick.css" media="screen,projection"/>
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Entrada estoque livro</title>
     </head>
@@ -24,7 +34,7 @@
         Resultado resul = (Resultado) request.getAttribute("resultado");
         if(!livros.isEmpty()){
         %>
-        
+        <div class="conteiner">
         <form action="InserirEstoque" method="POST">
                  <h2>Entrada estoque Livro</h2>
                  <% 
@@ -99,5 +109,6 @@
                 <h1>volte ao menu principal!</h1>
                 <a href='${pageContext.request.contextPath}/Clientes/home.jsp'>Voltar</a>
             <%}%>
+            </div>
     </body>
 </html>

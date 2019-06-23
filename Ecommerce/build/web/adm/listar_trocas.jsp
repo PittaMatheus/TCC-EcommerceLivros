@@ -15,8 +15,18 @@
 <!DOCTYPE html>
 <html>
     <head>
+         <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="../css/Custom.css"  media="screen,projection"/>
+         <!-- CSS CAROUSEL-->
+         <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick-theme.css" media="screen,projection"/>
+         <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick.css" media="screen,projection"/>
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Listagem de trocas</title>
     </head>
     <body>
         <%
@@ -33,7 +43,19 @@
                         session.setAttribute("resultado",  resultado);        
                          
 %>
-                        <h3>Trocas Registradas</h3>
+
+                            <!-- NAV FIXO DO TOPO-->
+                            <div class="navbar-fixed indigo darken-4">
+                                <nav>
+                                    <div class="nav-wrapper indigo darken-4">
+                                      <a href="#" class="brand-logo center maiusculo">Trocas registradas</a>
+                                      <ul class="left">
+                                          <li><a href="../Clientes/home.jsp"><i class="material-icons">arrow_back</i></a></li>
+                                      </ul>
+                                    </div>
+                                  </nav>
+                            </div>
+                            <br>
                         <table border="1" class="highlight striped centered responsive-table">
                             <thead>
                                 <tr>
@@ -62,7 +84,9 @@
                                        stPedido = "TROCA FINALIZADA";
                                     }
                                     out.println("<tr>");
-                                    out.println("<td><input type='radio' required name='id' value=" + pedido.getId() + " /></td>");
+%>
+                                     <td><input type='radio' required name='id' value="<%=pedido.getId() %>" id="<%=pedido.getId() %>" /><label for="<%=pedido.getId() %>"></label></td>
+<%
                                     out.println("<td>" + pedido.getId() + "</td>"); 
                                     out.println("<td>" + pedido.getCliente().getEmail()+ "</td>");
                                     out.println("<td>" + pedido.getCliente().getNome()+ "</td>"); 
@@ -81,7 +105,7 @@
                             </tbody>
                         </table>
                 <br><br>
-        <a href='../Clientes/home.jsp'>Voltar</a>
+        
         
         
     </body>

@@ -11,10 +11,34 @@
 <!DOCTYPE html>
 <html>
     <head>
+               <!-- Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="../css/Custom.css"  media="screen,projection"/>
+        <!-- CSS CAROUSEL-->
+        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick-theme.css" media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick.css" media="screen,projection"/>
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Solicitaçẽos de trocas</title>
     </head>
     <body>
+         <!-- NAV FIXO DO TOPO-->
+        <div class="navbar-fixed indigo darken-4">
+            <nav>
+                <div class="nav-wrapper indigo darken-4">
+                  <a href="#" class="brand-logo center maiusculo">Solicitações de troca</a>
+                  <ul id="nav-mobile" class="right">      
+                      <li><button type="submit" name="acao" value="inserir" placeholder="SALVAR" id="btSalvar" class="btn-border"><i class='material-icons left'>done</i>Cadastrar grupo</button></li>
+                  </ul>
+                  <ul class="left">
+                      <li><a href="${pageContext.request.contextPath}/Clientes/home.jsp"><i class="material-icons">arrow_back</i></a></li>
+                  </ul>
+                </div>
+              </nav>
+        </div>
 <%
 		Resultado resultado = (Resultado) request.getAttribute("resultado");
 		if(resultado == null) {
@@ -32,7 +56,7 @@
                              String stPedido = "";
                                         session.setAttribute("resultado",  resultado); 
 %>
-                            <h3>Solicitações de trocas</h3>
+<br>
         
 <%
                             for (Troca troca : trocas) {
@@ -41,6 +65,7 @@
                                 }else {
                                 
 %>
+<div class="container center">
                                     <table border="1" class="highlight striped centered responsive-table">
                                     <thead>
                                         <tr>
@@ -56,8 +81,9 @@
                             
                                     <tbody>
 <%
-                                    out.println("<tr>");
-                                    out.println("<td><input type='radio' required name='id' value=" + troca.getId() + " /></td>");
+                                    out.println("<tr>");%>
+                                     <td><input type='radio' required name='id' value="<%=troca.getId() %>" id="<%=troca.getId() %>" /><label for="<%=troca.getId() %>"></label></td>
+                                   <% 
                                     out.println("<td>" + troca.getId() + "</td>"); 
                                     out.println("<td>" + troca.getCliente().getId()+ "</td>");
                                     out.println("<td>" + troca.getPedido().getId() + "</td>");                                                              
@@ -67,8 +93,9 @@
                                     </tbody>
                                 </table>
                             <br>
-                            <button name='acao' value='inserir'>Autorizar</button>
-                            <button name='acao' value='desativar'>Reprovar</button>
+                            <button type="submit" name="acao" value="inserir" class="btn-border green darken-3"><i class='material-icons left'>done</i>Aprovar</button>
+                            <button type="submit" name="acao" value="desativar" class="btn-border red darken-3"><i class='material-icons left'>clear</i>Reprovar</button>
+
 
                             <br>
                                 
@@ -82,7 +109,7 @@
         <a href='../Clientes/home.jsp'>Voltar</a>
         
         
-        
+        </div>
         
         
         

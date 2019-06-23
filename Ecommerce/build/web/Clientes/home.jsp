@@ -156,7 +156,7 @@
                           <li><a class="" href='../adm/listar_pedidos.jsp'><i class="material-icons">fullscreen</i>Ver pedidos</a></li>
                           <li><a class="" href='../adm/listar_pedidos.jsp'><i class="material-icons">fullscreen</i>Gerenciar pedidos</a></li>
                           <li><a class="" href='../adm/listar_SolicitacaoTrocas.jsp'><i class="material-icons">fullscreen</i>Ver Solicitações de trocas </a></li>
-                          <li><a class="" href='../adm/listar_trocas.jsp'><i class="material-icons">fullscreen</i>Gerenciar trocas</a></li>
+                          <li><a class="" href='../adm/listar_trocas.jsp'><i class="material-icons">fullscreen</i>Ver trocas</a></li>
                           <li><div class="divider"></div></li>
                         </ul>
                       </div>
