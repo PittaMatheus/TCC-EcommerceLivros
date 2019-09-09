@@ -55,7 +55,7 @@
                     %>
  
 <%
-                        if(tipoCliente == 1){
+                        if(tipoCliente == 0){
 %>
                             <li><a href="../Clientes/listar_meusPedidos.jsp"><i class="material-icons">arrow_back</i></a></li>
 <%

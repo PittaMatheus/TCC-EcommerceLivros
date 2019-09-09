@@ -67,7 +67,7 @@
              <form action="gerenciar_pedido.jsp" method="POST">
                 <nav>
                     <div class="nav-wrapper indigo darken-4">
-                      <a href="#" class="brand-logo center maiusculo">Endereço de entrega do pedido</a>
+                      <a href="#" class="brand-logo center maiusculo">Pagamento do pedido</a>
                       <ul class="left">
                 
 

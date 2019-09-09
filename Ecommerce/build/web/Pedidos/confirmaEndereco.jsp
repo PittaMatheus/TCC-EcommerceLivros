@@ -15,11 +15,28 @@
 <!DOCTYPE html>
 <html>
     <head>
+                <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="../css/Custom.css"  media="screen,projection"/>
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Confirme seus dados para realizar a compra</h1>
+                                        <!-- NAV FIXO DO TOPO-->
+                                <div class="navbar-fixed indigo darken-4">
+                                    <nav>
+                                        <div class="nav-wrapper indigo darken-4">
+                                          <a href="#" class="brand-logo center maiusculo">Confirme o endereço</a>
+                                          <ul class="left">
+                                              <li><a href="../Clientes/home.jsp"><i class="material-icons">arrow_back</i></a></li>
+                                          </ul>
+                                        </div>
+                                      </nav>
+                                </div>
         <%
             int usuario_id = 0;
             int id =0;
@@ -49,7 +66,8 @@
                             for (Endereco endereco : enderecos) {
   
                                 %>
-            <form action="AdicionarPedido" method="POST">
+                                <br><br>
+                                <form action="AdicionarPedido" method="POST">
                 <table border='1'>
                     <thead>
                         <%
@@ -65,8 +83,9 @@
                     <tbody>
                         <%
                                 out.println("<tr>");
-                                out.println("<td><input type='radio' required name='id_endereco' value=" + endereco.getId() + " /></td>");
-                                out.println("<td>" + endereco.getLogradouro()+ "</td>");
+                                %>
+                                <td><input type='radio' required name='id_endereco' value="<%=endereco.getId() %>" id="<%=endereco.getId() %>" /><label for="<%=endereco.getId() %>"></label></td>
+                    <%            out.println("<td>" + endereco.getLogradouro()+ "</td>");
                                 out.println("<td>" + endereco.getBairro()+ "</td>");
                                 out.println("<td>" + endereco.getCep()+ "</td>");
                                 out.println("<td>" + endereco.getNumero()+ "</td>");

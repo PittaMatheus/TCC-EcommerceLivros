@@ -12,10 +12,35 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!-- Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="../css/Custom.css"  media="screen,projection"/>
+        <!-- CSS CAROUSEL-->
+        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick-theme.css" media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick.css" media="screen,projection"/>
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Analise de custo-venda-lucro</title>
     </head>
     <body>
+        <form action="Analisar" method="post">
+         <!-- NAV FIXO DO TOPO-->
+        <div class="navbar-fixed indigo darken-4">
+            <form action='InserirGrupoLivro' method='POST'>
+            <nav>
+                <div class="nav-wrapper indigo darken-4">
+                  <a href="#" class="brand-logo center maiusculo">Análise de custo-venda-lucro</a>
+                  <ul class="left">
+                      <li><a href="../Clientes/home.jsp"><i class="material-icons">arrow_back</i></a></li>
+                  </ul>
+                </div>
+              </nav>
+        </div>
+         <br><br>
+         <div class="container center">
         
         <%
         List<AnaliseCustoReceitaLucroMes> analises = (List<AnaliseCustoReceitaLucroMes>) getServletContext().getAttribute("analise");
@@ -29,7 +54,6 @@
 
         }
         if(analise.getDatasCusto().size() != 0 || analise.getDatasPedido().size() != 0){%>
-        <h1>Análise de custo, venda e lucro por mês.</h1>
         
         <div id="chartCategorias1"></div>
         
@@ -61,7 +85,7 @@
               hAxis: {
                   titleTextStyle: {color: '#2F4F4F', fontName: 'Roboto', fontSize: '16'}
               },
-//              width: 1000,
+              width: 1100,
               height: 500,
               colors: ['#1b9e77', '#d95f02', '#7570b3'],
               axes: {
@@ -79,6 +103,6 @@
             out.print("<h1>O sistema não encontrou nenhuma análise!");
         }}%>
         <br><br>
-        <a href='../Clientes/home.jsp'>Voltar</a> 
+        
     </body>
 </html>

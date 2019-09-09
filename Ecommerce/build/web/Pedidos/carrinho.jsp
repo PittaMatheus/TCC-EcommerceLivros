@@ -120,7 +120,7 @@
                         <td><%=carrinho.getLivro().getAno()%></td>
                         <td><%=carrinho.getLivro().getEdicao()%></td>
                         <% livro.setPreco(carrinho.getLivro().getPreco()); %>
-                        <td><%=LivroUtils.formatarPreco(LivroUtils.calcularPrecoLivro(carrinho.getLivro(), carrinho.getQt_itens()))%></td>
+                        <td><%=LivroUtils.formatarPreco(carrinho.getLivro().getPreco())%></td>
                         <td><img width="70" src="../imagens/<%=carrinho.getLivro().getImagem()%>"></td> 
                         
                         <td><button class="material-icons grey" formaction="AddItem?l=<%=carrinho.getLivro().getId()%>&acao=alterar&a=a" >keyboard_arrow_up</button>
@@ -138,7 +138,7 @@
                         <td><a href="RemoverCarrinho?l=<%=carrinho.getLivro().getId()%>&u=<%=carrinho.getCliente().getId()%>&acao=desativar">Remover</a></td>
                      </tr>
 <%                      
-                        preco += LivroUtils.calcularPrecoLivro(carrinho.getLivro(), carrinho.getQt_itens());
+                        preco += carrinho.getLivro().getPreco();
                         i++;
                              }
                          

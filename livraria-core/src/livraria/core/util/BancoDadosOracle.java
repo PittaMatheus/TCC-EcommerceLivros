@@ -18,7 +18,7 @@ public class BancoDadosOracle {
         //Edner
         //return DriverManager.getConnection("jdbc:mysql://localhost:3306/Ecommerce","root","admin123");
 
-            return DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce_livros","root","root");
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce_livros","root","admin123");
 
     }
 
